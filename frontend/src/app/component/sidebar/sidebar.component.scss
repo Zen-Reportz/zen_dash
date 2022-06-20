@@ -1,0 +1,22 @@
+// :host {
+//   position: absolute;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+//   top: 0;
+//   width: 100%;
+// }
+.mat-icon {
+  vertical-align: middle;
+}
+
+@import '~@angular/material/theming';
+
+.mat-list-option[aria-selected="true"] {
+  background: mat-color($mat-light-theme-background, hover, 0.12);
+}
+
+.mat-list-option{
+  padding-bottom: 5px;
+  padding-top: 5px;
+}

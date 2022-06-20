@@ -1,0 +1,38 @@
+<div *ngIf="page">
+  <div *ngFor="let row_data of page?.rows" style="padding: 10px;">
+    <mat-card >
+      <mat-card-content>
+        <div
+          fxLayout="row wrap"
+          fxLayout.lt-sm="column"
+          fxLayoutGap="row_data.layoutGap"
+          fxLayoutAlign="space-around center"
+          fxLayoutAlign.lt-sm="space-around stretch"
+          fxFlexFill
+        >
+          <div
+            [fxFlex]="instance.fxFlex"
+            [fxFlex.md]="instance.fxFlex_md"
+            [fxFlex.sm]="instance.fxFlex_sm"
+            [fxFlex.xs]="instance.fxFlex_xs"
+            class="padding"
+            *ngFor="let instance of row_data.data"
+          >
+            <span *ngIf="instance.type === 'box'" style="width: 100%">
+              <app-box [url]="instance.url"></app-box>
+            </span>
+            <span *ngIf="instance.type === 'date'">
+              <app-datetime [url]="instance.url"></app-datetime>
+            </span>
+            <span *ngIf="instance.type === 'table'">
+              <app-table [url]="instance.url"></app-table>
+            </span>
+            <span *ngIf="instance.type === 'chart'">
+              <app-plot [url]="instance.url"></app-plot>
+            </span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

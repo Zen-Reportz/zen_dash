@@ -1,0 +1,58 @@
+<!-- export declare type MatFormFieldAppearance = 'legacy' | 'standard' | 'fill' | 'outline';
+/** Possible values for the "floatLabel" form-field input. */
+export declare type FloatLabelType = 'always' | 'never' | 'auto';
+/** -->
+
+<mat-card>
+  <mat-card-content>
+    <mat-grid-list cols="4" rowHeight="1:1">
+      <mat-grid-tile tile [colspan]="4" [rowspan]="1">
+        <div *ngIf="dataPresent() && !isSingle()">
+          <mat-form-field class="example-form-field" appearance="standard" floatLabel="always">
+            <mat-label>{{ getLabel() }}</mat-label>
+            <mat-date-range-input
+              [formGroup]="getForm()"
+              [rangePicker]="campaignOnePicker"
+              [comparisonStart]="form_data.value.start"
+              [comparisonEnd]="form_data.value.end"
+            >
+              <input
+                matStartDate
+                placeholder="Start date"
+                formControlName="start"
+                (dateChange)="changeValue($event)"
+              />
+              <input
+                matEndDate
+                placeholder="End date"
+                formControlName="end"
+                (dateChange)="changeValue($event)"
+              />
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="campaignOnePicker"
+            ></mat-datepicker-toggle>
+            <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="dataPresent() && isSingle()">
+          <mat-form-field appearance="standard" floatLabel="always">
+            <mat-label>{{ getLabel() }}</mat-label>
+            <input
+              matInput
+              [matDatepicker]="dp"
+              [formControl]="form_control"
+              (dateChange)="changeValue($event)"
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>

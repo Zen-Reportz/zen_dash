@@ -1,0 +1,30 @@
+.column {
+  float: left;
+  // width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@mixin md-icon-size($size: 50px) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+  line-height: $size;
+}
+
+/* 2. Then use it like this in you component scss */
+
+mat-icon {
+  @include md-icon-size(50px);
+}
+
+// .border {
+//   border-style: none none none solid !important;
+//   display:inline-block;
+// }
+

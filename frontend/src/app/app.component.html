@@ -1,0 +1,33 @@
+<mat-toolbar color="primary" layout="row">
+  <button mat-icon-button (click)="snav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>{{title}}</span>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #snav [mode]="'over'">
+    <mat-nav-list>
+      <app-sidebar></app-sidebar>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div layout="row" ng-cloak>
+      <div layout="row" style="width: 100%;">
+        <div flex>
+          <div style="float: right">
+            <button mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon" (click)="refresh_data()" style="z-index: 3 !important;">
+              <mat-icon>refresh</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <router-outlet></router-outlet>
+
+  </mat-sidenav-content>
+
+
+</mat-sidenav-container>

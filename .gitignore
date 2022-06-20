@@ -1,0 +1,6 @@
+**/.vscode/**
+*.pyc
+frontend/node_modules/**
+.venv/*
+static/**
+frontend/.vscode/**

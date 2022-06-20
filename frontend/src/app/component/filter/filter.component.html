@@ -1,0 +1,48 @@
+<span *ngIf="single">
+  <span *ngIf="!grouped">
+    <mat-form-field appearance="fill">
+      <mat-label>{{label}}</mat-label>
+      <mat-select [formControl]="dataForm" (selectionChange)="detectChange($event)">
+        <mat-option *ngFor="let value of data" [value]="value">{{value}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </span>
+  <span *ngIf="grouped">
+    <mat-form-field appearance="fill">
+      <mat-label>{{label}}</mat-label>
+      <mat-select [formControl]="dataForm" (selectionChange)="detectChange($event)">
+        <mat-optgroup *ngFor="let group of data" [label]="group.name"
+                  [disabled]="group.disabled">
+          <mat-option *ngFor="let value of group.group_data" [value]="value">
+            {{value}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+  </span>
+</span>
+
+<span *ngIf="!single">
+  <span *ngIf="!grouped">
+    <mat-form-field appearance="fill">
+      <mat-label>{{label}}</mat-label>
+      <mat-select [formControl]="dataForm" multiple (selectionChange)="detectChange($event)">
+        <mat-option *ngFor="let value of data" [value]="value">{{value}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </span>
+  <span *ngIf="grouped">
+    <mat-form-field appearance="fill">
+      <mat-label>{{label}}</mat-label>
+      <mat-select [formControl]="dataForm" multiple (selectionChange)="detectChange($event)">
+        <mat-optgroup *ngFor="let group of data" [label]="group.name"
+                  [disabled]="group.disabled">
+          <mat-option *ngFor="let value of group.group_data" [value]="value">
+            {{value}}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+  </span>
+</span>
+

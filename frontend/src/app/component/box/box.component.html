@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-content>
+    <mat-grid-list cols="2" rowHeight="3:1">
+      <mat-grid-tile [colspan]="1" [rowspan]="2"
+        ><mat-icon>
+          {{ getIcon() }}
+        </mat-icon></mat-grid-tile
+      >
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <div style="font-size: 30px; text-align: right">
+          {{ getValue() }}
+        </div></mat-grid-tile
+      >
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <div style="font-size: 20px; text-align: right">
+          {{ getName() }}
+        </div></mat-grid-tile
+      >
+    </mat-grid-list>
+  </mat-card-content>
+
+  <mat-card-footer style="text-align: center">
+    {{ getAdditionalInfo() }}
+  </mat-card-footer>
+</mat-card>
