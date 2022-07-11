@@ -9,3 +9,8 @@ Simple yet scable and production ready under high load.
 - boxed data
 - table
 - echart
+
+# 0.1.1
+Reorganizated UI to reuse component 
+- radio 
+- checkbox
