@@ -1,11 +1,10 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
+import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import {MatSort} from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DataService } from 'src/app/shared/data.service';
-import {  TableColumn, TableData } from '../application_data';
+import {  TableColumn } from '../../shared/application_data';
 
 
 @Component({
@@ -14,40 +13,35 @@ import {  TableColumn, TableData } from '../application_data';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-  @Input() url!: string
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort!: MatSort;
+  @Input() uuid!: string
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  // @ViewChild(MatPaginator, { static: false }) set matPaginator(paginator: MatPaginator) {
+  //   this.dataSource.paginator = paginator;
+  //  }
+  // @ViewChild(MatSort, { static: false }) set matSortorer(sort: MatSort) {
+  //   this.dataSource.sort = sort;
+  // }
   dataSource!: MatTableDataSource<any>;
   selection = new SelectionModel<any>(true, []);
   displayedColumns: string[] = [];
   value!: string;
   columns!: Array<TableColumn>;
-  dataset: Array<any> = [];
-  pulled = false
-  constructor(private http: HttpClient, private dataService: DataService) { }
+  constructor(private dataService: DataService) { }
 
 
   ngOnInit() {
-    this.http.post<TableData>(location.origin + this.url, this.dataService.data ).subscribe((t) => {
-      console.log(t)
-      this.columns = t.columns
-      this.dataset = t.data
-        // set checkbox column
-      // this.displayedColumns.push("select");
+      this.columns = this.dataService.table_data.get(this.uuid)?.columns as TableColumn[]
+      this.dataSource = new MatTableDataSource<any>(this.dataService.table_data.get(this.uuid)?.data as any);
+      this.dataService.table_data.delete(this.uuid)
 
-      // set table columns
       this.displayedColumns = this.displayedColumns.concat(this.columns.map(x => x.columnDef));    // pre-fix static
 
+  }
+  ngAfterViewInit(){
 
-      this.dataSource = new MatTableDataSource<any>(this.dataset);
-
-      // set pagination
-      this.dataSource.paginator = this.paginator;
+     this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-
-      this.pulled =true
-    })
-
   }
 
   /** Whether the number of selected elements matches the total number of rows. */

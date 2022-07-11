@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
     "admin-lte": "^3.2.0",
+    "angular2-uuid": "^1.1.1",
     "echarts": "^5.3.3",
     "ngx-echarts": "^8.0.1",
     "rxjs": "~7.5.0",

@@ -1,13 +1,15 @@
 from pydantic import BaseModel
 from typing import Optional, List
 
-from zen_dash.filter import Filter
 
 class SidebarTab(BaseModel):
-    name: str
+    label: str
     icon: Optional[str] = 'Home'
-    url: str
+    fragment: str
 
+class FilterInfo(BaseModel):
+    url: str
+    
 class Sidebar(BaseModel):
     tabs: List[SidebarTab]
-    filters: List[Filter]
+    filters: List[FilterInfo]

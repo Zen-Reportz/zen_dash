@@ -1,10 +1,25 @@
+from enum import Enum
 import optparse
 from pydantic import BaseModel
 from typing import List, Tuple, Optional
 
 
+class InstanceType(Enum):
+    DATE= "date"
+    BOX = "box"
+    TABLE = "table"
+    CHART = "chart"
+    CHECKBOX = "checkbox"
+    RADIO = "radio"
+    MIXED = "mixed"
+    FILTER = "filter"
+    FILTER_GROUP = "filter_group"
+    MULTI_FILTER = "multi_filter"
+    MULTI_FILTER_GROUP = "multi_filter_group"
+    SLIDER = "slider"
+    BUTTON_TOGGLE = "button_toggle"
+
 class Instance(BaseModel):
-    type: str
     url: str
     fxFlex: Optional[str] = "20%" 
     fxFlex_md: Optional[str] = "33%"

@@ -1,9 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Page } from '../component/application_data';
-import { DataService } from '../shared/data.service';
+import { ActivatedRoute } from '@angular/router';
+import { Page } from '../shared/application_data';
 import { SetTitleService } from '../shared/set-title.service';
 
 @Component({
@@ -18,7 +17,6 @@ export class PageComponent implements OnInit {
     private http: HttpClient,
     private titleService: Title,
     private aRoute: ActivatedRoute,
-    private data_service: DataService
   ) {}
 
   ngOnInit(): void {

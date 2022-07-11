@@ -1,0 +1,19 @@
+
+
+    <section *ngIf="get_style() === 'Horizontal'" class="example-section">
+      <div *ngFor="let d of my_data()">
+        <mat-checkbox [(ngModel)]="d.selected" (ngModelChange)="update()" class="example-margin">
+          {{ d.name }}
+        </mat-checkbox>
+      </div>
+    </section>
+    <section *ngIf="get_style() === 'Vertical'" >
+      <ul>
+        <li *ngFor="let d of my_data()">
+          <mat-checkbox [(ngModel)]="d.selected" (ngModelChange)="update()" class="example-margin-top">
+            {{ d.name }}
+          </mat-checkbox>
+        </li>
+      </ul>
+    </section>
+

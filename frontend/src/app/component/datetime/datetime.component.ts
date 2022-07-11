@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { MEData } from 'src/app/shared/data';
 import { DataService } from 'src/app/shared/data.service';
-import { DateData } from '../application_data';
+import { DateData, MEData } from '../../shared/application_data';
 
 @Component({
   selector: 'app-datetime',
@@ -11,66 +9,55 @@ import { DateData } from '../application_data';
   styleUrls: ['./datetime.component.scss'],
 })
 export class DatetimeComponent implements OnInit {
-  @Input() url!: string;
+  @Input() uuid!: string;
+
   single!: boolean;
-  data!: DateData;
   form_data!: FormGroup;
   form_control!: FormControl;
 
-  constructor(private http: HttpClient, private dataService: DataService) {}
+  data!: DateData;
+
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.getData();
+    this.getData()
   }
 
   getData() {
-    this.http
-      .post<DateData>(location.origin + this.url, this.dataService.data)
-      .subscribe((t) => {
-        this.data = t;
-        if (this.data.second_date !== null) {
+    if (this.dataService.date_data.has(this.uuid) ){
+      this.data = this.dataService.date_data.get(this.uuid) as DateData
+      if (this.data.second_date as string) {
+        this.single = false;
+        this.form_data = new FormGroup({
+          start: new FormControl(new Date(this.data.first_date + "T00:00:00")),
+          end: new FormControl(new Date(this.data.second_date + "T00:00:00")),
+        });
 
-          this.single = false;
-          this.form_data = new FormGroup({
-            start: new FormControl(new Date(this.data.first_date+ "T00:00:00")),
-            end: new FormControl(new Date(this.data.second_date+ "T00:00:00")),
-          });
+      } else {
+        this.single = true;
+        this.form_control = new FormControl(new Date(this.data.first_date+ "T00:00:00"));
+      }
+    }
 
-        } else {
-          this.single = true;
-          this.form_control = new FormControl(new Date(this.data.first_date+ "T00:00:00"));
-        }
-      });
-  }
-
-  getLabel() {
-    return this.data && this.data.label ? this.data.label : 'Loading';
   }
 
   getForm() {
-    if (this.data) {
-      return this.form_data;
-    } else {
-      return new FormGroup({});
-    }
-  }
+    return this.form_data;
 
-  dataPresent() {
-    if (this.data) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   isSingle() {
     return this.single;
   }
 
+  getLabel(){
+    return this.dataService.date_data.get(this.uuid)?.label as string
+  }
+
   changeValue(value:any){
     let m = new MEData();
     let push =true
-    m.key = this.data.name
+    m.key = this.dataService.date_data.get(this.uuid)?.name as string
 
     if (this.single) {
 

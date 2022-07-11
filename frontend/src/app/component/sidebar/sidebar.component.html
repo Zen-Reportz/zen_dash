@@ -1,12 +1,12 @@
 <span *ngIf="side_data !== undefined">
   <mat-selection-list [multiple]="false">
-    <mat-list-option *ngFor="let tab of side_data.tabs" [value]="tab.name" [selected]="tab.url === page">
-      <a [routerLink]="'.'" [fragment]="tab.url">      <mat-icon>{{tab.icon}}  </mat-icon>  {{tab.name}}</a>
+    <mat-list-option *ngFor="let tab of side_data.tabs" [value]="tab.label" [selected]="tab.fragment === page">
+      <a [routerLink]="'.'" [fragment]="tab.fragment">      <mat-icon>{{tab.icon}}  </mat-icon>  {{tab.label}}</a>
     </mat-list-option>
 
   </mat-selection-list>
   <ng-container *ngFor="let f of side_data.filters">
-    <app-filter [label]="f.label" [url]="f.url" [single]="f.single" [grouped]="f.grouped" [name]="f.name"></app-filter> <br>
+    <app-filter [url]="f.url" ></app-filter> <br>
   </ng-container>
 
 </span>

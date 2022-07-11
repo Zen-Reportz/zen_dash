@@ -1,0 +1,40 @@
+<mat-card *ngIf="pulled; else progessorbar">
+  <mat-card-header *ngIf="getTitle()">
+    <h4>{{ getTitle() }}</h4>
+  </mat-card-header>
+  <mat-card-content>
+    <span *ngIf="type === 'box'" style="width: 100%">
+      <app-box [uuid]="uuid"></app-box>
+    </span>
+    <span *ngIf="type === 'date'">
+      <app-datetime [uuid]="uuid"></app-datetime>
+    </span>
+    <span *ngIf="type === 'table'">
+      <app-table [uuid]="uuid"></app-table>
+    </span>
+    <span *ngIf="type === 'chart'">
+      <app-plot [uuid]="uuid"></app-plot>
+    </span>
+    <span *ngIf="type === 'checkbox'">
+      <app-checkbox [uuid]="uuid"></app-checkbox>
+    </span>
+    <span *ngIf="type === 'radio'">
+      <app-radio [uuid]="uuid"></app-radio>
+    </span>
+    <span *ngIf="type === 'slider'">
+      <app-slider [uuid]="uuid"></app-slider>
+    </span>
+    <span *ngIf="type === 'button_toggle'">
+      <app-button-toggle [uuid]="uuid"></app-button-toggle>
+    </span>
+  </mat-card-content>
+
+  <mat-card-footer style="text-align: center" *ngIf="getFooter()">
+    {{ getFooter() }}
+  </mat-card-footer>
+</mat-card>
+<ng-template #progessorbar>
+  <mat-card>
+    <mat-progress-bar mode="query"></mat-progress-bar>
+  </mat-card>
+</ng-template>

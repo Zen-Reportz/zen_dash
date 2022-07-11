@@ -1,0 +1,22 @@
+
+    <section *ngIf="getStyle() === 'Horizontal'" class="example-section">
+      <mat-radio-group [(ngModel)]="selected" (change)="update()">
+        <mat-radio-button
+          class="example-radio-button"
+          *ngFor="let d of getData()"
+          [value]="d"
+          >{{ d }}</mat-radio-button
+        >
+      </mat-radio-group>
+    </section>
+    <section *ngIf="getStyle() === 'Vertical'">
+      <mat-radio-group [(ngModel)]="selected" (change)="update()">
+        <ul>
+          <li *ngFor="let d of getData()">
+            <mat-radio-button [value]="d" class="example-radio-button-bottom">{{
+              d
+            }}</mat-radio-button>
+          </li>
+        </ul>
+      </mat-radio-group>
+    </section>

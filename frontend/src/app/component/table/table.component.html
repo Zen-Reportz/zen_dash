@@ -1,49 +1,45 @@
-<mat-card>
-  <mat-card-content>
-    <div class="table-actionbar">
-      <div class="search-box">
-        <mat-form-field class="example-form-field" appearance="outline">
-          <mat-icon matPrefix>search</mat-icon>
-          <mat-label>Search</mat-label>
-          <input
-            matInput
-            type="text"
-            [(ngModel)]="value"
-            (keyup)="applyFilter($event)"
-          />
-          <button
-            *ngIf="value"
-            matSuffix
-            mat-icon-button
-            aria-label="Clear"
-            (click)="value = ''"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="table-responsive">
-      <mat-table #table [dataSource]="dataSource" matSort>
-        <ng-container
-          *ngFor="let column of columns"
-          [matColumnDef]="column.columnDef"
-        >
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{
-            column.header
-          }}</mat-header-cell>
-          <mat-cell *cdkCellDef="let row">{{ row[column.columnDef] }}</mat-cell>
-        </ng-container>
+<div class="table-actionbar">
+  <div class="search-box">
+    <mat-form-field class="example-form-field" appearance="outline">
+      <mat-icon matPrefix>search</mat-icon>
+      <mat-label>Search</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="value"
+        (keyup)="applyFilter($event)"
+      />
+      <button
+        *ngIf="value"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="value = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</div>
+<div class="table-responsive">
+  <mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container
+      *ngFor="let column of columns"
+      [matColumnDef]="column.columnDef"
+    >
+      <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{
+        column.header
+      }}</mat-header-cell>
+      <mat-cell *cdkCellDef="let row">{{ row[column.columnDef] }}</mat-cell>
+    </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-      </mat-table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
 
-      <!-- table pagination -->
-      <mat-paginator
-        [pageSizeOptions]="[5, 10, 20]"
-        showFirstLastButtons
-      ></mat-paginator>
-    </div>
-  </mat-card-content>
-</mat-card>
+  <!-- table pagination -->
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

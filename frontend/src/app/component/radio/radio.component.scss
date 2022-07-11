@@ -1,0 +1,23 @@
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.example-radio-button-bottom{
+  margin-bottom: 5px;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}

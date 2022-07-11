@@ -1,1 +1,1 @@
-ng build --output-path ../static --watch
+ng build --output-path ../static --base-href ./ --watch

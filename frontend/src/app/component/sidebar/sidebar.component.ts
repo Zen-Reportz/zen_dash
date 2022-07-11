@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SidebarData } from 'src/app/shared/data';
+import { SidebarData } from 'src/app/shared/application_data';
 
 @Component({
   selector: 'app-sidebar',

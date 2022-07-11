@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
   }
 
   refresh_data(){
-    this.data_service.refresh.emit(undefined)
+    this.data_service.refresh.emit('')
     this._snackBar.openFromComponent(LoadingComponent, {
       duration: this.durationInSeconds * 1000,
     });

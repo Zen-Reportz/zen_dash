@@ -1,0 +1,9 @@
+<mat-button-toggle-group
+  [value]="selected_data"
+  (change)="onChange($event)"
+  [multiple]="isMultiple()"
+>
+  <mat-button-toggle *ngFor="let d of get_data()" [value]="d.name">
+    {{ d.label }}</mat-button-toggle
+  >
+</mat-button-toggle-group>

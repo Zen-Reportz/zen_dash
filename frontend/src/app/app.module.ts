@@ -61,6 +61,11 @@ import { DatetimeComponent } from './component/datetime/datetime.component';
 import { TableComponent } from './component/table/table.component';
 import { PlotComponent } from './component/plot/plot.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { CheckboxComponent } from './component/checkbox/checkbox.component';
+import { RadioComponent } from './component/radio/radio.component';
+import { EnteryPointComponent } from './component/entery-point/entery-point.component';
+import { SliderComponent } from './component/slider/slider.component';
+import { ButtonToggleComponent } from './component/button-toggle/button-toggle.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,6 +77,11 @@ import { NgxEchartsModule } from 'ngx-echarts';
     DatetimeComponent,
     TableComponent,
     PlotComponent,
+    CheckboxComponent,
+    RadioComponent,
+    EnteryPointComponent,
+    SliderComponent,
+    ButtonToggleComponent,
   ],
   imports: [
     FlexLayoutModule,
