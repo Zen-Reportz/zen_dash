@@ -2,6 +2,9 @@
 
 Simple yet scable and production ready under high load.
 
+# 0.1.2
+- toggle
+
 # 0.1.1
 Reorganizated UI to reuse component 
 - radio 

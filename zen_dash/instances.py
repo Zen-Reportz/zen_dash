@@ -12,7 +12,6 @@ class BoxData(BaseModel):
 
 
 class DateTimeData(BaseModel):
-    label: str
     name: str
     first_date: str
     second_date: Optional[str]
@@ -59,7 +58,6 @@ class SliderData(BaseModel):
     vertical: bool = False
 
 class ButtonToggleInstance(BaseModel):
-    label: str
     name: str
     selected: bool = False
 
@@ -68,25 +66,25 @@ class ButtonToggleData(BaseModel):
     multiple: bool = False
     data: List[ButtonToggleInstance]
 
-class FilterDataInstance(BaseModel):
-    name: str
-    label: str
 
 class GroupedFilterDataInstance(BaseModel):
-    group_label: str
+    group_name: str
     group_data: List[str]
 
 
 class GroupedFilterData(BaseModel):
     name: str
-    label: str
     data: List[GroupedFilterDataInstance]
 
 
 class SimpleFilterData(BaseModel):
     name: str
-    label: str
     data: List[str]
+
+
+class ToggleData(BaseModel):
+    data: bool
+    name: str
 
 class ReturnData(BaseModel):
     type:InstanceType
@@ -100,5 +98,6 @@ class ReturnData(BaseModel):
     slider_data: Optional[SliderData]
     button_toggle_data: Optional[ButtonToggleData]
     table_data: Optional[TableData]
+    toggle_data: Optional[ToggleData]
     footer: Optional[str]
 

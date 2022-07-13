@@ -13,7 +13,7 @@ router = APIRouter(
 async def d3():
     t =  i.ReturnData(type=i.InstanceType.BUTTON_TOGGLE,
                         title="Button Toggle",
-                        button_toggle_data=i.ButtonToggleData(name="toggle_data",
+                        button_toggle_data=i.ButtonToggleData(name="single_toggle_data",
                                                 multiple=False,
                                                 data=[i.ButtonToggleInstance(label="Red", name="red", selected=True),
                                                       i.ButtonToggleInstance(label="Blue", name="blue"),
@@ -25,8 +25,15 @@ async def d3():
 async def d3():
     return i.ReturnData(type=i.InstanceType.BUTTON_TOGGLE,
                         title="Button Toggle multiple",
-                        button_toggle_data=i.ButtonToggleData(name="toggle_data",
+                        button_toggle_data=i.ButtonToggleData(name="multi_toggle_data",
                                                 multiple=True,
                                                 data=[i.ButtonToggleInstance(label="Red", name="red", selected=True),
                                                       i.ButtonToggleInstance(label="Blue", name="blue"),
                                                       i.ButtonToggleInstance(label="Black", name="black")]))
+
+
+@router.post("/toggle", response_model=i.ReturnData)
+async def d3():
+    return i.ReturnData(type=i.InstanceType.TOGGLE,
+                        title="Toggle Example",
+                        toggle_data=i.ToggleData(name="toggle_data",  data=True))

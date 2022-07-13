@@ -66,6 +66,7 @@ import { RadioComponent } from './component/radio/radio.component';
 import { EnteryPointComponent } from './component/entery-point/entery-point.component';
 import { SliderComponent } from './component/slider/slider.component';
 import { ButtonToggleComponent } from './component/button-toggle/button-toggle.component';
+import { ToggleComponent } from './component/toggle/toggle.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +83,7 @@ import { ButtonToggleComponent } from './component/button-toggle/button-toggle.c
     EnteryPointComponent,
     SliderComponent,
     ButtonToggleComponent,
+    ToggleComponent,
   ],
   imports: [
     FlexLayoutModule,

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/shared/data.service';
 import { UUID } from 'angular2-uuid';
-import { BoxData, ButtonToggleData, ChartData, CheckboxData, DateData, RadioData, ResponseData, SliderData, TableData } from '../../shared/application_data';
+import { BoxData, ButtonToggleData, ChartData, CheckboxData, DateData, RadioData, ResponseData, SliderData, TableData, ToggleData } from '../../shared/application_data';
 
 @Component({
   selector: 'app-entery-point',
@@ -67,6 +67,10 @@ export class EnteryPointComponent implements OnInit {
             this.dataService.button_toggle_data.set(this.uuid, t.button_toggle_data as ButtonToggleData)
             this.name = t.button_toggle_data?.name as string
             break
+        case "toggle":
+          this.dataService.toggle_data.set(this.uuid, t.toggle_data as ToggleData)
+          this.name = t.button_toggle_data?.name as string
+          break
         default:
           console.log(t.type)
       }

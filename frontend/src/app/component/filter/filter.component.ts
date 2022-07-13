@@ -64,7 +64,7 @@ export class FilterComponent implements OnInit {
   }
 
   getLabel(){
-    return this.data.filter_data?.label
+    return this.data.filter_data?.name
   }
 
 }

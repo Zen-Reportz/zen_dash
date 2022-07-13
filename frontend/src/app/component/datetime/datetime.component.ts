@@ -51,7 +51,7 @@ export class DatetimeComponent implements OnInit {
   }
 
   getLabel(){
-    return this.dataService.date_data.get(this.uuid)?.label as string
+    return this.dataService.date_data.get(this.uuid)?.name as string
   }
 
   changeValue(value:any){

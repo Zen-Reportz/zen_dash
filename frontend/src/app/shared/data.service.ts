@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { BoxData, ButtonToggleData, ChartData, CheckboxData, DateData, MEData, RadioData, SidebarData, SliderData, TableData } from './application_data';
+import { BoxData, ButtonToggleData, ChartData, CheckboxData, DateData, MEData, RadioData, SidebarData, SliderData, TableData, ToggleData } from './application_data';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,7 @@ export class DataService {
   chart_data = new Map<string, ChartData>();
   slider_data = new Map<string, SliderData>();
   button_toggle_data = new Map<string, ButtonToggleData>();
+  toggle_data = new Map<string, ToggleData>();
 
   data = new Map<string, any >();
 

@@ -6,7 +6,6 @@ export class MEData {
 
 
 export class SidebarTab {
-  label!: string
   name!: string;
   icon!: string;
   fragment!: string;
@@ -50,7 +49,6 @@ export class BoxData{
 
 export class DateData{
   name!: string
-  label!: string
   first_date!: string
   second_date!: string | null
 }
@@ -94,12 +92,18 @@ export class  ChartData{
 }
 
 export class ButtonToggleInstance {
-  label!: string
   name!: string
   selected!: boolean
 }
 export class ButtonToggleData{
   data!: ButtonToggleInstance[]
+  name!: string
+  multiple!: boolean
+
+}
+
+export class ToggleData{
+  data!: boolean
   name!: string
   multiple!: boolean
 
@@ -115,28 +119,21 @@ export class SliderData{
   vertical!: boolean
 }
 
-export class FilterDataInstance{
-    name!: string
-    label!: string
-
-}
 
 
 export class GroupedFilterDataInstance{
-  group_label!: string
+  group_name!: string
   group_data!: string[]
 
 }
 
 export class GroupFilterData{
   name!: string
-  label!: string
   data!: GroupedFilterDataInstance[]
 }
 
 export class SimpleFilterData{
   name!: string
-  label!: string
   data!: string[]
 
 }
@@ -154,6 +151,7 @@ export class ResponseData{
   slider_data: SliderData | undefined
   button_toggle_data: ButtonToggleData | undefined
   table_data: TableData | undefined
+  toggle_data: ToggleData | undefined
   footer: string | undefined
 
 }

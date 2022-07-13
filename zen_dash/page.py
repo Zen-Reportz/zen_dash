@@ -18,6 +18,7 @@ class InstanceType(Enum):
     MULTI_FILTER_GROUP = "multi_filter_group"
     SLIDER = "slider"
     BUTTON_TOGGLE = "button_toggle"
+    TOGGLE = "toggle"
 
 class Instance(BaseModel):
     url: str

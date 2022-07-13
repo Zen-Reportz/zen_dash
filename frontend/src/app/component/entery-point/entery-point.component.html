@@ -27,6 +27,9 @@
     <span *ngIf="type === 'button_toggle'">
       <app-button-toggle [uuid]="uuid"></app-button-toggle>
     </span>
+    <span *ngIf="type === 'toggle'">
+      <app-toggle [uuid]="uuid"></app-toggle>
+    </span>
   </mat-card-content>
 
   <mat-card-footer style="text-align: center" *ngIf="getFooter()">
