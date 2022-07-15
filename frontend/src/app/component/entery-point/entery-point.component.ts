@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/shared/data.service';
 import { UUID } from 'angular2-uuid';
 import { BoxData, ButtonToggleData, ChartData, CheckboxData, DateData, RadioData, ResponseData, SliderData, TableData, ToggleData } from '../../shared/application_data';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-entery-point',
@@ -14,26 +15,93 @@ export class EnteryPointComponent implements OnInit {
   pulled = false
   uuid = UUID.UUID()
   title: string | undefined
-  type!: string
+  type: string | undefined
   footer: string | undefined
-  name!: string
+  name: string | undefined
+  reactive: boolean | undefined  = false
+  d: Subscription | undefined
+
+  data_type = ["box", "table", 'chart']
+
   constructor(private http: HttpClient, private dataService: DataService) {
-    this.dataService.refresh.subscribe(t => {
-      if (t !== this.name){
-        this.getData()
-      }
-    })
+
+
   }
 
   ngOnInit(): void {
     this.getData()
+
   }
 
+  subscribe(){
+    if (this.name !== undefined){
+      if (this.data_type.indexOf(this.type as string) >= 0 ){
+        this.d = this.dataService.refresh.subscribe(t => {
+            this.getData()
+        })
+      } else {
+        if (this.reactive){
+          this.d = this.dataService.refresh.subscribe(t => {
+            if (t !== this.name){
+              this.getData()
+            }
+        })
+        }
+      }
+    }
+  }
+
+  deleteData(){
+    if (this.d !== undefined){
+      this.d.unsubscribe()
+    }
+
+    this.reactive = undefined
+    switch(this.type){
+      case "box":
+        this.dataService.box_data.delete(this.uuid)
+        break
+      case "date":
+        this.dataService.date_data.delete(this.uuid)
+        break
+      case "table":
+        this.dataService.table_data.delete(this.uuid)
+        break
+      case "chart":
+        this.dataService.chart_data.delete(this.uuid)
+        break
+      case "radio":
+        this.dataService.radio_data.delete(this.uuid)
+        break
+      case "checkbox":
+        this.dataService.checkbox_data.delete(this.uuid)
+        break
+      case "slider":
+          this.dataService.slider_data.delete(this.uuid)
+          break
+      case "button_toggle":
+          this.dataService.button_toggle_data.delete(this.uuid)
+          break
+      case "toggle":
+        this.dataService.toggle_data.delete(this.uuid)
+        break
+
+    }
+    this.pulled=false
+    this.title = "Loading"
+    this.type = undefined
+    this.footer = undefined
+
+
+  }
 
   getData(){
-    this.pulled=false
-    this.http.post<ResponseData>(location.origin + this.url, this.dataService.data).subscribe((t) => {
+    if (this.type !== undefined){
+      this.deleteData()
+    }
 
+    this.http.post<ResponseData>(location.origin + this.url, this.dataService.data).subscribe((t) => {
+      this.reactive = t.reactive
       switch(t.type){
         case "box":
           this.dataService.box_data.set(this.uuid, t.box_data as BoxData)
@@ -79,6 +147,8 @@ export class EnteryPointComponent implements OnInit {
       this.title = t.title
       this.type = t.type
       this.footer = t.footer
+
+      this.subscribe()
     })
   }
 

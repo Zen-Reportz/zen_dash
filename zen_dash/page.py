@@ -20,6 +20,12 @@ class InstanceType(Enum):
     BUTTON_TOGGLE = "button_toggle"
     TOGGLE = "toggle"
 
+
+class SubInstanceType(Enum):
+    LIST = "list"
+    TAB = "tab"
+    PANEL = "pannel"
+
 class Instance(BaseModel):
     url: str
     fxFlex: Optional[str] = "20%" 

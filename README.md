@@ -2,6 +2,9 @@
 
 Simple yet scable and production ready under high load.
 
+# 0.1.3
+- added reactivity
+
 # 0.1.2
 - toggle
 

@@ -108,6 +108,7 @@ async def page_detail(fragment: str):
                 p.Instance(url="/backend/page_one/row_five/button_toggle"),
                 p.Instance(url="/backend/page_one/row_five/button_toggle_multiple"),
                 p.Instance(url="/backend/page_one/row_five/toggle"),
+                p.Instance(url="/backend/page_one/row_five/multi_records"),
 
             ])
         ])

@@ -1,7 +1,7 @@
 from enum import Enum
 from pydantic import BaseConfig, BaseModel
 from typing import List, Optional, Dict, Union
-from zen_dash.page import InstanceType
+from zen_dash.page import InstanceType, SubInstanceType
 
 BaseConfig.arbitrary_types_allowed = True  # change #1
 
@@ -86,9 +86,16 @@ class ToggleData(BaseModel):
     data: bool
     name: str
 
+class MultiData(BaseModel):
+    data: bool
+    type: SubInstanceType
+    urls: List[str]
+
+
 class ReturnData(BaseModel):
     type:InstanceType
     title: Optional[str]
+    reactive: Optional[bool] = False
     chart_data: Optional[ChartData]
     filter_data: Optional[Union[GroupedFilterData, SimpleFilterData]]
     box_data: Optional[BoxData]
@@ -99,5 +106,6 @@ class ReturnData(BaseModel):
     button_toggle_data: Optional[ButtonToggleData]
     table_data: Optional[TableData]
     toggle_data: Optional[ToggleData]
+    # multi_data: Optional[MultiData]
     footer: Optional[str]
 

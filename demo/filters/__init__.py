@@ -33,9 +33,9 @@ async def single_filter_group(request: Request):
     return i.ReturnData(type=i.InstanceType.FILTER_GROUP,
                         filter_data=i.GroupedFilterData(label="Group Simple Filter",
                                                  name="simple_group_filter", data=[
-                                                     i.GroupedFilterDataInstance(group_label="Group", group_data=["Option 1", "Option 2"]),
-                                                     i.GroupedFilterDataInstance(group_label="Group 2", group_data=["Option 3", "Option 4"]),
-                                                     i.GroupedFilterDataInstance(group_label="Group 3", group_data=["Option 5""Option 6"])]))
+                                                     i.GroupedFilterDataInstance(group_name="Group", group_data=["Option 1", "Option 2"]),
+                                                     i.GroupedFilterDataInstance(group_name="Group 2", group_data=["Option 3", "Option 4"]),
+                                                     i.GroupedFilterDataInstance(group_name="Group 3", group_data=["Option 5""Option 6"])]))
 
 
 @router.get("/multi_filter_group", response_model=i.ReturnData)
@@ -43,7 +43,7 @@ async def multi_filter_group(request: Request):
     return i.ReturnData(type=i.InstanceType.MULTI_FILTER_GROUP,
                         filter_data=i.GroupedFilterData(label="Group Simple Filter",
                                                  name="simple_group_filter", data=[
-                                                     i.GroupedFilterDataInstance(group_label="Group", group_data=["Option 1", "Option 2"]),
-                                                     i.GroupedFilterDataInstance(group_label="Group 2", group_data=["Option 3", "Option 4"]),
-                                                     i.GroupedFilterDataInstance(group_label="Group 3", group_data=["Option 5""Option 6"])]))
+                                                     i.GroupedFilterDataInstance(group_name="Group", group_data=["Option 1", "Option 2"]),
+                                                     i.GroupedFilterDataInstance(group_name="Group 2", group_data=["Option 3", "Option 4"]),
+                                                     i.GroupedFilterDataInstance(group_name="Group 3", group_data=["Option 5""Option 6"])]))
 # fxFlex: Optional[str] = "20%"

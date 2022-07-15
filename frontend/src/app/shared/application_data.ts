@@ -141,6 +141,7 @@ export class SimpleFilterData{
 
 export class ResponseData{
   type!: string
+  reactive: boolean | undefined
   title: string | undefined
   chart_data:  ChartData |   undefined
   filter_data: SimpleFilterData | GroupFilterData | undefined
