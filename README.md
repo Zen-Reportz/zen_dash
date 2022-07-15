@@ -2,6 +2,12 @@
 
 Simple yet scable and production ready under high load.
 
+# 0.1.4
+added
+- multi list
+- multi tabs
+- multi expand 
+
 # 0.1.3
 - added reactivity
 

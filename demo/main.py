@@ -12,6 +12,7 @@ from pages.page_one import row_three as prt
 from pages.page_one import row_four as prf
 from pages.page_one import row_five as prfi
 from pages.page_one import row_two as prtw
+from pages.page_one import row_six as prs
 import filters as f
 
 BaseConfig.arbitrary_types_allowed = True  # change #1
@@ -24,6 +25,7 @@ app.include_router(prt.router)
 app.include_router(prf.router)
 app.include_router(prfi.router)
 app.include_router(prtw.router)
+app.include_router(prs.router)
 
 
 app.add_middleware(GZipMiddleware, minimum_size=1000)
@@ -110,7 +112,13 @@ async def page_detail(fragment: str):
                 p.Instance(url="/backend/page_one/row_five/toggle"),
                 p.Instance(url="/backend/page_one/row_five/multi_records"),
 
-            ])
+            ]),
+            p.Row(data=[
+                p.Instance(url="/backend/page_one/row_five/multi_records"),
+                p.Instance(url="/backend/page_one/row_six/multi_records_tabs",  fxFlex="33%", fxFlex_md="33%", fxFlex_sm="110%", fxFlex_xs="110%"),
+                p.Instance(url="/backend/page_one/row_six/multi_records_expanded",  fxFlex="33%", fxFlex_md="33%", fxFlex_sm="110%", fxFlex_xs="110%"),
+
+            ]),
         ])
         return p1
 

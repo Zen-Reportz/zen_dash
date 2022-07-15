@@ -86,11 +86,13 @@ class ToggleData(BaseModel):
     data: bool
     name: str
 
-class MultiData(BaseModel):
-    data: bool
-    type: SubInstanceType
-    urls: List[str]
 
+class MultiURLInfo(BaseModel):
+    name: Optional[str]
+    url: str
+
+class MultiData(BaseModel):
+    urls: List[MultiURLInfo]
 
 class ReturnData(BaseModel):
     type:InstanceType
@@ -106,6 +108,6 @@ class ReturnData(BaseModel):
     button_toggle_data: Optional[ButtonToggleData]
     table_data: Optional[TableData]
     toggle_data: Optional[ToggleData]
-    # multi_data: Optional[MultiData]
+    multi_data: Optional[MultiData]
     footer: Optional[str]
 

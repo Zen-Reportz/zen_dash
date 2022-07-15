@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from zen_dash import instances as i
+from zen_dash.page import SubInstanceType
 
 
 router = APIRouter(
@@ -39,8 +40,10 @@ async def d3():
                         toggle_data=i.ToggleData(name="toggle_data",  data=True))
 
 
-# @router.post("/multi_records", response_model=i.ReturnData)
-# async def d3():
-#     return i.ReturnData(type=i.InstanceType.TOGGLE,
-#                         title="Toggle Example",
-#                         multi_data=i.MultiData())
+@router.post("/multi_records", response_model=i.ReturnData)
+async def d3():
+    return i.ReturnData(type=i.InstanceType.MULTI_LIST,
+                        title="Multi List",
+                        multi_data=i.MultiData(urls=[i.MultiURLInfo(url="/backend/page_one/row_five/button_toggle"), 
+                                                     i.MultiURLInfo(url="/backend/page_one/row_five/button_toggle_multiple"),
+                                                     i.MultiURLInfo(url="/backend/page_one/row_five/toggle")]))

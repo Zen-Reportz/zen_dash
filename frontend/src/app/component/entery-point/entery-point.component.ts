@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/shared/data.service';
 import { UUID } from 'angular2-uuid';
-import { BoxData, ButtonToggleData, ChartData, CheckboxData, DateData, RadioData, ResponseData, SliderData, TableData, ToggleData } from '../../shared/application_data';
+import { BoxData, ButtonToggleData, ChartData, CheckboxData, DateData, MultiURLInfo, RadioData, ResponseData, SliderData, TableData, ToggleData } from '../../shared/application_data';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -20,8 +20,10 @@ export class EnteryPointComponent implements OnInit {
   name: string | undefined
   reactive: boolean | undefined  = false
   d: Subscription | undefined
+  urls!: MultiURLInfo[]
 
   data_type = ["box", "table", 'chart']
+  no_supported = ["multi_list"]
 
   constructor(private http: HttpClient, private dataService: DataService) {
 
@@ -35,6 +37,10 @@ export class EnteryPointComponent implements OnInit {
 
   subscribe(){
     if (this.name !== undefined){
+      if (this.no_supported.indexOf(this.type as string) >= 0){
+        return
+      }
+
       if (this.data_type.indexOf(this.type as string) >= 0 ){
         this.d = this.dataService.refresh.subscribe(t => {
             this.getData()
@@ -99,6 +105,7 @@ export class EnteryPointComponent implements OnInit {
     if (this.type !== undefined){
       this.deleteData()
     }
+    this.urls = []
 
     this.http.post<ResponseData>(location.origin + this.url, this.dataService.data).subscribe((t) => {
       this.reactive = t.reactive
@@ -139,6 +146,15 @@ export class EnteryPointComponent implements OnInit {
           this.dataService.toggle_data.set(this.uuid, t.toggle_data as ToggleData)
           this.name = t.button_toggle_data?.name as string
           break
+        case "multi_list":
+          this.urls = t.multi_data?.urls as MultiURLInfo[]
+          break
+        case "multi_tabs":
+            this.urls = t.multi_data?.urls as MultiURLInfo[]
+            break
+        case "multi_expand":
+          this.urls = t.multi_data?.urls as MultiURLInfo[]
+          break
         default:
           console.log(t.type)
       }
@@ -160,6 +176,19 @@ export class EnteryPointComponent implements OnInit {
   getFooter(){
     return (this.footer) ? this.footer : undefined
 
+  }
+
+  getURLs(){
+    return this.urls
+  }
+
+  getName(name: string |undefined){
+    console.log(name)
+    if (! name){
+      return 'Loading'
+    }else {
+      return name
+    }
   }
 
 }

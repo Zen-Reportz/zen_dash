@@ -19,6 +19,9 @@ class InstanceType(Enum):
     SLIDER = "slider"
     BUTTON_TOGGLE = "button_toggle"
     TOGGLE = "toggle"
+    MULTI_LIST = "multi_list"
+    MULTI_TABS = "multi_tabs"
+    MULTI_EXPAND = "multi_expand"
 
 
 class SubInstanceType(Enum):

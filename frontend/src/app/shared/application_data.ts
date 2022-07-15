@@ -138,7 +138,13 @@ export class SimpleFilterData{
 
 }
 
-
+export class MultiURLInfo{
+  name: string | undefined
+  url!: string
+}
+export class MultiData {
+  urls!: MultiURLInfo[]
+}
 export class ResponseData{
   type!: string
   reactive: boolean | undefined
@@ -153,6 +159,7 @@ export class ResponseData{
   button_toggle_data: ButtonToggleData | undefined
   table_data: TableData | undefined
   toggle_data: ToggleData | undefined
+  multi_data: MultiData | undefined
   footer: string | undefined
 
 }
