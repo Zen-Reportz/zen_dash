@@ -6,7 +6,7 @@ export class MEData {
 
 
 export class SidebarTab {
-  name!: string;
+  label!: string;
   icon!: string;
   fragment!: string;
 }
@@ -128,11 +128,13 @@ export class GroupedFilterDataInstance{
 }
 
 export class GroupFilterData{
+  multi!: boolean
   name!: string
   data!: GroupedFilterDataInstance[]
 }
 
 export class SimpleFilterData{
+  multi!: boolean
   name!: string
   data!: string[]
 
@@ -150,7 +152,8 @@ export class ResponseData{
   reactive: boolean | undefined
   title: string | undefined
   chart_data:  ChartData |   undefined
-  filter_data: SimpleFilterData | GroupFilterData | undefined
+  simple_filter_data: SimpleFilterData | undefined
+  group_filter_data:  GroupFilterData | undefined
   box_data: BoxData | undefined
   date_data: DateData | undefined
   checkbox_data: CheckboxData | undefined

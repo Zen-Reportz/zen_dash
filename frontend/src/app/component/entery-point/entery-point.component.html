@@ -59,6 +59,17 @@
       </mat-accordion>
 
     </span>
+
+    <span *ngIf="type == 'simple_filter'">
+      <app-simple-filter [uuid]="uuid"></app-simple-filter>
+
+    </span>
+
+
+    <span *ngIf="type == 'group_filter'">
+      <app-group-filter [uuid]="uuid"></app-group-filter>
+
+    </span>
   </mat-card-content>
 
   <mat-card-footer style="text-align: center" *ngIf="getFooter()">

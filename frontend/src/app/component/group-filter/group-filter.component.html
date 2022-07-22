@@ -1,0 +1,21 @@
+<mat-form-field appearance="fill">
+  <mat-label>{{ getLabel() }}</mat-label>
+  <mat-select
+    [formControl]="dataForm"
+    (selectionChange)="detectChange($event)"
+    [multiple]="multi"
+  >
+
+    <mat-optgroup
+      *ngFor="let group of myData()"
+      [label]="group.group_name"
+    >
+      <mat-option
+        *ngFor="let value of group.group_data"
+        [value]="value"
+      >
+        {{ value }}
+      </mat-option>
+    </mat-optgroup>
+  </mat-select>
+</mat-form-field>

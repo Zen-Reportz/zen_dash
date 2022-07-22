@@ -52,7 +52,6 @@ import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { FilterComponent } from './component/filter/filter.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BoxComponent } from './component/box/box.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -67,12 +66,14 @@ import { EnteryPointComponent } from './component/entery-point/entery-point.comp
 import { SliderComponent } from './component/slider/slider.component';
 import { ButtonToggleComponent } from './component/button-toggle/button-toggle.component';
 import { ToggleComponent } from './component/toggle/toggle.component';
+import { SimpleFilterComponent } from './component/simple-filter/simple-filter.component';
+import { GroupFilterComponent } from './component/group-filter/group-filter.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     PageComponent,
     SidebarComponent,
-    FilterComponent,
     BoxComponent,
     LoadingComponent,
     DatetimeComponent,
@@ -84,6 +85,8 @@ import { ToggleComponent } from './component/toggle/toggle.component';
     SliderComponent,
     ButtonToggleComponent,
     ToggleComponent,
+    SimpleFilterComponent,
+    GroupFilterComponent
   ],
   imports: [
     FlexLayoutModule,

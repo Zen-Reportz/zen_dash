@@ -1,0 +1,13 @@
+<mat-form-field appearance="fill">
+  <mat-label>{{ getLabel() }}</mat-label>
+  <mat-select
+    [formControl]="dataForm"
+    (selectionChange)="detectChange($event)"
+    [multiple]="multi"
+
+  >
+    <mat-option *ngFor="let value of myData()" [value]="value">{{
+      value
+    }}</mat-option>
+  </mat-select>
+</mat-form-field>

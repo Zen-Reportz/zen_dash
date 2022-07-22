@@ -2,6 +2,9 @@
 
 Simple yet scable and production ready under high load.
 
+# 0.1.5
+Slider can support Multi List , tab, expand
+
 # 0.1.4
 added
 - multi list

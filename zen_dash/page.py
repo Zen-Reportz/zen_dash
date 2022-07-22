@@ -12,17 +12,14 @@ class InstanceType(Enum):
     CHECKBOX = "checkbox"
     RADIO = "radio"
     MIXED = "mixed"
-    FILTER = "filter"
-    FILTER_GROUP = "filter_group"
-    MULTI_FILTER = "multi_filter"
-    MULTI_FILTER_GROUP = "multi_filter_group"
+    SIMPLE_FILTER = "simple_filter"
+    GROUP_FILTER = "group_filter"
     SLIDER = "slider"
     BUTTON_TOGGLE = "button_toggle"
     TOGGLE = "toggle"
     MULTI_LIST = "multi_list"
     MULTI_TABS = "multi_tabs"
     MULTI_EXPAND = "multi_expand"
-
 
 class SubInstanceType(Enum):
     LIST = "list"

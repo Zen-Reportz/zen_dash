@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/shared/data.service';
 import { UUID } from 'angular2-uuid';
-import { BoxData, ButtonToggleData, ChartData, CheckboxData, DateData, MultiURLInfo, RadioData, ResponseData, SliderData, TableData, ToggleData } from '../../shared/application_data';
+import { BoxData, ButtonToggleData, ChartData, CheckboxData, DateData, GroupFilterData, MultiURLInfo, RadioData, ResponseData, SimpleFilterData, SliderData, TableData, ToggleData } from '../../shared/application_data';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -24,6 +24,7 @@ export class EnteryPointComponent implements OnInit {
 
   data_type = ["box", "table", 'chart']
   no_supported = ["multi_list"]
+
 
   constructor(private http: HttpClient, private dataService: DataService) {
 
@@ -91,6 +92,12 @@ export class EnteryPointComponent implements OnInit {
       case "toggle":
         this.dataService.toggle_data.delete(this.uuid)
         break
+      case "filter":
+        this.dataService.simple_filter_data.delete(this.uuid)
+        break
+      case 'filter_group':
+        this.dataService.group_filter_data.delete(this.uuid)
+        break
 
     }
     this.pulled=false
@@ -155,6 +162,12 @@ export class EnteryPointComponent implements OnInit {
         case "multi_expand":
           this.urls = t.multi_data?.urls as MultiURLInfo[]
           break
+        case "simple_filter":
+          this.dataService.simple_filter_data.set(this.uuid, t.simple_filter_data as SimpleFilterData)
+          break
+        case 'group_filter':
+          this.dataService.group_filter_data.set(this.uuid, t.group_filter_data as GroupFilterData)
+          break
         default:
           console.log(t.type)
       }
@@ -183,7 +196,6 @@ export class EnteryPointComponent implements OnInit {
   }
 
   getName(name: string |undefined){
-    console.log(name)
     if (! name){
       return 'Loading'
     }else {

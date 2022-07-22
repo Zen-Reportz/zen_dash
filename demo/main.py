@@ -57,7 +57,8 @@ async def sidebar(request: Request):
                      filters=[s.FilterInfo(url="/backend/filters/single_filter"),
                               s.FilterInfo(url="/backend/filters/multi_filter"),
                               s.FilterInfo(url="/backend/filters/single_filter_group"),
-                                s.FilterInfo(url="/backend/filters/multi_filter_group")
+                                s.FilterInfo(url="/backend/filters/multi_filter_group"),
+                                s.FilterInfo(url="/backend/page_one/row_six/multi_records_expanded")
                               ]
                      )
 
@@ -119,6 +120,12 @@ async def page_detail(fragment: str):
                 p.Instance(url="/backend/page_one/row_six/multi_records_expanded",  fxFlex="33%", fxFlex_md="33%", fxFlex_sm="110%", fxFlex_xs="110%"),
 
             ]),
+            p.Row(data=[
+                p.Instance(url="/backend/filters/single_filter"),
+                p.Instance(url="/backend/filters/multi_filter"),
+                p.Instance(url="/backend/filters/single_filter_group"),
+                p.Instance(url="/backend/filters/multi_filter_group"),
+            ])
         ])
         return p1
 

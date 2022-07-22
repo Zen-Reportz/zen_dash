@@ -73,11 +73,13 @@ class GroupedFilterDataInstance(BaseModel):
 
 
 class GroupedFilterData(BaseModel):
+    multi: bool = False
     name: str
     data: List[GroupedFilterDataInstance]
 
 
 class SimpleFilterData(BaseModel):
+    multi: bool = False
     name: str
     data: List[str]
 
@@ -99,7 +101,6 @@ class ReturnData(BaseModel):
     title: Optional[str]
     reactive: Optional[bool] = False
     chart_data: Optional[ChartData]
-    filter_data: Optional[Union[GroupedFilterData, SimpleFilterData]]
     box_data: Optional[BoxData]
     date_data: Optional[DateTimeData]
     checkbox_data: Optional[CheckBoxData]
@@ -109,5 +110,8 @@ class ReturnData(BaseModel):
     table_data: Optional[TableData]
     toggle_data: Optional[ToggleData]
     multi_data: Optional[MultiData]
+    simple_filter_data: Optional[SimpleFilterData] 
+    group_filter_data: Optional[GroupedFilterData ]
+
     footer: Optional[str]
 
