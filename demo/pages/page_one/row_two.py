@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from zen_dash import instances as i
 
 
@@ -13,7 +13,8 @@ router = APIRouter(
 
 
 @router.post("/table", response_model=i.ReturnData)
-async def prf():
+async def prf(request: Request):
+    print(await request.body())
     return i.ReturnData(type=i.InstanceType.TABLE,
                         table_data=i.TableData(name="table_1",
                                          columns=[i.TableColumn(columnDef="name", header="Name"),

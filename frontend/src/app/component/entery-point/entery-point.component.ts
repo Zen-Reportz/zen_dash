@@ -113,8 +113,11 @@ export class EnteryPointComponent implements OnInit {
       this.deleteData()
     }
     this.urls = []
-
-    this.http.post<ResponseData>(location.origin + this.url, this.dataService.data).subscribe((t) => {
+    let convMap: any = {};
+    this.dataService.data.forEach((val: string, key: string) => {
+      convMap[key] = val;
+    });
+    this.http.post<ResponseData>(location.origin + this.url, convMap).subscribe((t) => {
       this.reactive = t.reactive
       switch(t.type){
         case "box":

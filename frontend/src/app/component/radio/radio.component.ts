@@ -28,7 +28,7 @@ export class RadioComponent implements OnInit {
   update(){
     let m = new MEData();
     m.key = this.dataService.radio_data.get(this.uuid)?.name as string
-    m.value =  [this.selected]
+    m.value =  this.selected
     this.dataService.data_setter.emit(m)
   }
 

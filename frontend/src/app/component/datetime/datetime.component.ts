@@ -61,7 +61,7 @@ export class DatetimeComponent implements OnInit {
 
     if (this.single) {
 
-      m.value = [this.form_control.value.toISOString()]
+      m.value = this.form_control.value.toISOString()
     } else {
       if ((this.form_data.value.end) && (this.form_data.value.start)){
         m.value = [this.form_data.value.start.toISOString(), this.form_data.value.end.toISOString() ]

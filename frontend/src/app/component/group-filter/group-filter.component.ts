@@ -38,13 +38,7 @@ export class GroupFilterComponent implements OnInit {
   detectChange(value:any){
     let m = new MEData();
     m.key = this.dataService.group_filter_data.get(this.uuid)?.name as string
-
-    if (this.multi){
-      m.value = [value.value]
-
-    } else {
-      m.value = value.value
-    }
+    m.value = value.value
 
 
     this.dataService.data_setter.emit(m)

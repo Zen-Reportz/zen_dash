@@ -2,6 +2,9 @@
 
 Simple yet scable and production ready under high load.
 
+# 0.1.6
+- fix angular material icon issue
+
 # 0.1.5
 Slider can support Multi List , tab, expand
 
