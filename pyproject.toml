@@ -1,9 +1,17 @@
 [tool.poetry]
 name = "zen_dash"
-version = "0.1.6"
+version = "0.1.7"
 description = ""
 authors = ["Zen <zenreportz@pm.me>"]
-include = ["static/*"]
+include = [
+    { path = 'zen_dash/static/*.html', format = 'sdist' },
+    { path = 'zen_dash/static/*.js', format = 'sdist' },
+    { path = 'zen_dash/static/*.css', format = 'sdist' },
+    { path = 'zen_dash/static/*.ico', format = 'sdist' },
+    { path = 'zen_dash/static/*.woff2', format = 'sdist' },
+    { path = 'zen_dash/static/*.woff', format = 'sdist' },
+
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -15,6 +23,8 @@ pytest = "^5.2"
 ipython = "^8.2.0"
 uvicorn = "^0.17.6"
 autopep8 = "^1.6.0"
+
+
 
 [build-system]
 requires = ["poetry-core @ git+https://github.com/python-poetry/poetry-core.git@master"]

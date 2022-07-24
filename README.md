@@ -1,6 +1,9 @@
 # zen_dash
 
-Simple yet scable and production ready under high load.
+Simple yet scable and production admin angular material dashboard can be used under high load
+
+# 0.1.7
+- Integrated static folder with package
 
 # 0.1.6
 - fix angular material icon issue

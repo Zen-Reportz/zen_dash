@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+import pkg_resources
 from zen_dash import instances as i
 from zen_dash import sidebar as s
 from zen_dash import page as p
@@ -36,8 +37,8 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 # resource_path = '/'.join(('templates', 'temp_file'))  # Do not use os.path.join()
 # template = pkg_resources.resource_string(resource_package, resource_path)
 
-
-templates = Jinja2Templates(directory="../static")
+folder = pkg_resources.resource_filename('zen_dash', 'static/')
+templates = Jinja2Templates(directory=folder)
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -131,4 +132,4 @@ async def page_detail(fragment: str):
 
 
 
-app.mount("/", StaticFiles(directory="../static"), name="static")
+app.mount("/", StaticFiles(directory=folder), name="static")

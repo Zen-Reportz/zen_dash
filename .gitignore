@@ -4,3 +4,6 @@ frontend/node_modules/**
 .venv/*
 static/**
 frontend/.vscode/**
+*.whl
+*.gz
+**/dist/**
