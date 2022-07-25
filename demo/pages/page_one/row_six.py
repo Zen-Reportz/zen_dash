@@ -1,6 +1,5 @@
 from fastapi import APIRouter
 from zen_dash import instances as i
-from zen_dash.page import SubInstanceType
 
 
 router = APIRouter(
