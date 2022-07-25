@@ -5,6 +5,13 @@ from typing import List, Tuple, Optional
 
 
 class InstanceType(Enum):
+    """ Docstring for class InstanceType
+    Instance Type required for ReturnData
+
+    :return: Instance Type for Enum
+    :rtype: Enum
+
+    """
     DATE= "date"
     BOX = "box"
     TABLE = "table"
@@ -21,10 +28,6 @@ class InstanceType(Enum):
     MULTI_TABS = "multi_tabs"
     MULTI_EXPAND = "multi_expand"
 
-class SubInstanceType(Enum):
-    LIST = "list"
-    TAB = "tab"
-    PANEL = "pannel"
 
 class Instance(BaseModel):
     url: str

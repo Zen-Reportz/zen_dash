@@ -1,7 +1,7 @@
 from enum import Enum
 from pydantic import BaseConfig, BaseModel
-from typing import List, Optional, Dict, Union
-from zen_dash.page import InstanceType, SubInstanceType
+from typing import List, Optional, Dict
+from zen_dash.page import InstanceType
 
 BaseConfig.arbitrary_types_allowed = True  # change #1
 
