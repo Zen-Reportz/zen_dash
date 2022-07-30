@@ -1,4 +1,7 @@
 
+# 0.1.8
+- No Card in side card for multi_list, multi_tabs, multi_expand
+
 # 0.1.7
 - Integrated static folder with package
 

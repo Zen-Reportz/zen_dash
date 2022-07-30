@@ -68,6 +68,7 @@ import { ButtonToggleComponent } from './component/button-toggle/button-toggle.c
 import { ToggleComponent } from './component/toggle/toggle.component';
 import { SimpleFilterComponent } from './component/simple-filter/simple-filter.component';
 import { GroupFilterComponent } from './component/group-filter/group-filter.component';
+import { SubEntryPointComponent } from './component/sub-entry-point/sub-entry-point.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { GroupFilterComponent } from './component/group-filter/group-filter.comp
     ButtonToggleComponent,
     ToggleComponent,
     SimpleFilterComponent,
-    GroupFilterComponent
+    GroupFilterComponent,
+    SubEntryPointComponent
   ],
   imports: [
     FlexLayoutModule,
