@@ -1,0 +1,69 @@
+<br>
+<span *ngIf="type === 'box'" style="width: 100%">
+  <app-box [uuid]="uuid"></app-box>
+</span>
+<span *ngIf="type === 'date'">
+  <app-datetime [uuid]="uuid"></app-datetime>
+</span>
+<span *ngIf="type === 'table'">
+  <app-table [uuid]="uuid"></app-table>
+</span>
+<span *ngIf="type === 'chart'">
+  <app-plot [uuid]="uuid"></app-plot>
+</span>
+<span *ngIf="type === 'checkbox'">
+  <app-checkbox [uuid]="uuid"></app-checkbox>
+</span>
+<span *ngIf="type === 'radio'">
+  <app-radio [uuid]="uuid"></app-radio>
+</span>
+<span *ngIf="type === 'slider'">
+  <app-slider [uuid]="uuid"></app-slider>
+</span>
+<span *ngIf="type === 'button_toggle'">
+  <app-button-toggle [uuid]="uuid"></app-button-toggle>
+</span>
+<span *ngIf="type === 'toggle'">
+  <app-toggle [uuid]="uuid"></app-toggle>
+</span>
+<span *ngIf="type === 'multi_list'">
+  <span *ngFor="let url_info of getURLs()">
+    <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point><br>
+  </span>
+</span>
+<span *ngIf="type === 'multi_tabs'">
+  <mat-tab-group >
+    <mat-tab  *ngFor="let url_info of getURLs()" [label]="url_info.name || ''">
+      <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point>
+    </mat-tab>
+  </mat-tab-group>
+</span>
+
+<span *ngIf="type === 'multi_expand'">
+  <mat-accordion>
+    <span  *ngFor="let url_info of getURLs()">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{url_info.name}}
+        </mat-panel-title>
+
+      </mat-expansion-panel-header>
+      <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point>
+    </mat-expansion-panel>
+  </span>
+  </mat-accordion>
+
+</span>
+
+<span *ngIf="type == 'simple_filter'">
+  <app-simple-filter [uuid]="uuid"></app-simple-filter>
+
+</span>
+
+
+<span *ngIf="type == 'group_filter'">
+  <app-group-filter [uuid]="uuid"></app-group-filter>
+
+</span>
+
