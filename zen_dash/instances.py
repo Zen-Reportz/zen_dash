@@ -105,6 +105,10 @@ class ReturnData(BaseModel):
     for example, if you select BOX as input, you have to choose box_data as one of  input.
 
     Example: i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="attach_money", name="User Spent", value="$5000"), footer="10% increase compare to last week ")
+
+    :param type: InstanceType this will dectate what type of output will be render
+    :param title: Optional[str] tile of mat box in which output will be render
+    
     """
 
     type:InstanceType
