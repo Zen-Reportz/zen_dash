@@ -73,6 +73,7 @@
 <span class="n">BaseConfig</span><span class="o">.</span><span class="n">arbitrary_types_allowed</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># change #1</span>
 
 <div class="viewcode-block" id="BoxData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.BoxData">[docs]</a><span class="k">class</span> <span class="nc">BoxData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    
     <span class="n">icon</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">value</span><span class="p">:</span> <span class="nb">str</span></div>
@@ -164,6 +165,15 @@
     <span class="n">urls</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MultiURLInfo</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="ReturnData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.ReturnData">[docs]</a><span class="k">class</span> <span class="nc">ReturnData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main return object use for everything except /backend/page_detail, /backend/sidebar, and /backend/title</span>
+<span class="sd">    depdning upon which type (InstanceType) you select, you have to select corsponding return value </span>
+
+<span class="sd">    for example, if you select BOX as input, you have to choose box_data as one of  input.</span>
+
+<span class="sd">    Example: i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon=&quot;attach_money&quot;, name=&quot;User Spent&quot;, value=&quot;$5000&quot;), footer=&quot;10% increase compare to last week &quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="nb">type</span><span class="p">:</span><span class="n">InstanceType</span>
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="n">reactive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>

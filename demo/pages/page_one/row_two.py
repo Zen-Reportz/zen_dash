@@ -9,12 +9,8 @@ router = APIRouter(
 )
 
 
-
-
-
 @router.post("/table", response_model=i.ReturnData)
 async def prf(request: Request):
-    print(await request.body())
     return i.ReturnData(type=i.InstanceType.TABLE,
                         table_data=i.TableData(name="table_1",
                                          columns=[i.TableColumn(columnDef="name", header="Name"),

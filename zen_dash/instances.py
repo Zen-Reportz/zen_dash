@@ -6,6 +6,7 @@ from zen_dash.page import InstanceType
 BaseConfig.arbitrary_types_allowed = True  # change #1
 
 class BoxData(BaseModel):
+    
     icon: str
     name: str
     value: str
@@ -97,6 +98,15 @@ class MultiData(BaseModel):
     urls: List[MultiURLInfo]
 
 class ReturnData(BaseModel):
+    """
+    Main return object use for everything except /backend/page_detail, /backend/sidebar, and /backend/title
+    depdning upon which type (InstanceType) you select, you have to select corsponding return value 
+
+    for example, if you select BOX as input, you have to choose box_data as one of  input.
+
+    Example: i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="attach_money", name="User Spent", value="$5000"), footer="10% increase compare to last week ")
+    """
+
     type:InstanceType
     title: Optional[str]
     reactive: Optional[bool] = False
