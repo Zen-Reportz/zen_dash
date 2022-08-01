@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "zen_dash"
-version = "0.1.8"
+version = "0.1.9"
 description = "Simple yet scable and production ready python dashboard that is better than shiny application for business."
 readme = "README.md"
 authors = ["Zen <zenreportz@pm.me>"]
