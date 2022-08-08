@@ -147,6 +147,13 @@ export class MultiURLInfo{
 export class MultiData {
   urls!: MultiURLInfo[]
 }
+
+export class FlexData{
+  fxFlex!: string
+  fxFlex_md!: string
+  fxFlex_sm!: string
+  fxFlex_xs!: string
+}
 export class ResponseData{
   type!: string
   reactive: boolean | undefined
@@ -164,5 +171,6 @@ export class ResponseData{
   toggle_data: ToggleData | undefined
   multi_data: MultiData | undefined
   footer: string | undefined
+  flex: FlexData | undefined
 
 }

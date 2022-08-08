@@ -1,4 +1,5 @@
 from enum import Enum
+from re import T
 from pydantic import BaseConfig, BaseModel
 from typing import List, Optional, Dict
 from zen_dash.page import InstanceType
@@ -97,6 +98,12 @@ class MultiURLInfo(BaseModel):
 class MultiData(BaseModel):
     urls: List[MultiURLInfo]
 
+
+class FlexData(BaseModel):
+    fxFlex: Optional[str] = "25%" 
+    fxFlex_md: Optional[str] = "33%"
+    fxFlex_sm: Optional[str] = "50%" 
+    fxFlex_xs: Optional[str] = "100%" 
 class ReturnData(BaseModel):
     """
     Main return object use for everything except /backend/page_detail, /backend/sidebar, and /backend/title
@@ -128,4 +135,5 @@ class ReturnData(BaseModel):
     group_filter_data: Optional[GroupedFilterData ]
 
     footer: Optional[str]
+    flex: Optional[FlexData]
 

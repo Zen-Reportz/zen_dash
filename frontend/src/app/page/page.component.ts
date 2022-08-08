@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { Page } from '../shared/application_data';
+import { FlexData, Page } from '../shared/application_data';
 import { SetTitleService } from '../shared/set-title.service';
 
 @Component({
@@ -11,27 +11,61 @@ import { SetTitleService } from '../shared/set-title.service';
   styleUrls: ['./page.component.scss'],
 })
 export class PageComponent implements OnInit {
-  page: Page | undefined = undefined
+  page: Page | undefined = undefined;
+
+  size_data = new Map<string, FlexData>();
 
   constructor(
     private http: HttpClient,
     private titleService: Title,
-    private aRoute: ActivatedRoute,
+    private aRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    new SetTitleService().set_title(this.aRoute, this.titleService, this.http)
+    new SetTitleService().set_title(this.aRoute, this.titleService, this.http);
     this.aRoute.fragment.subscribe((fragment) => {
-      if (fragment === null ){
-        fragment = "/"
+      if (fragment === null) {
+        fragment = '/';
       }
-      let params = new HttpParams().set("fragment", fragment);
+      let params = new HttpParams().set('fragment', fragment);
 
-      this.http.get<Page>(location.origin+"/backend/page_detail", { params: params }).subscribe((data) => {
-        this.page = data
-      })
+      this.http
+        .get<Page>(location.origin + '/backend/page_detail', { params: params })
+        .subscribe((data) => {
+          this.page = data;
+        });
+    });
+  }
 
-    })
+  setFlex(flex: FlexData, url: string) {
+
+    if (flex !== null){
+      this.size_data.set(url, flex);
+    }
+
+  }
+
+  getFlex(original: string, type: string, url: string) {
+    if (this.size_data.get(url)?.fxFlex !== undefined) {
+      if (this.size_data.get(url)?.fxFlex !== null) {
+        if (type == 'flex') {
+          return this.size_data.get(url)?.fxFlex;
+        } else if (type == 'flex_md') {
+          return this.size_data.get(url)?.fxFlex_md;
+        } else if (type == 'flex_sm') {
+          return this.size_data.get(url)?.fxFlex_sm;
+        } else if (type == 'flex_xs') {
+          return this.size_data.get(url)?.fxFlex_xs;
+        } else {
+          console.log(' issue with type for ' + url + ' ' + type);
+          return original;
+        }
+      } else {
+        console.log(" issue with type for " + url + " " + type)
+        return original
+      }
+    } else {
+      return original;
+    }
   }
 }
-
