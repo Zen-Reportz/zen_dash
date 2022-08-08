@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DataService } from 'src/app/shared/data.service';
 import { UUID } from 'angular2-uuid';
-import { BoxData, ButtonToggleData, ChartData, CheckboxData, DateData, GroupFilterData, MultiURLInfo, RadioData, ResponseData, SimpleFilterData, SliderData, TableData, ToggleData } from '../../shared/application_data';
+import { BoxData, ButtonToggleData, ChartData, CheckboxData, DateData, FlexData, GroupFilterData, MultiURLInfo, RadioData, ResponseData, SimpleFilterData, SliderData, TableData, ToggleData } from '../../shared/application_data';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -15,6 +15,8 @@ export class SubEntryPointComponent implements OnInit {
   @Output() pulled = new EventEmitter<boolean>();
   @Output() footer = new EventEmitter<string>();
   @Output() title = new EventEmitter<string>();
+
+  @Output() fxFlex = new EventEmitter<FlexData>();
 
   uuid = UUID.UUID()
   // title: string | undefined
@@ -178,6 +180,11 @@ export class SubEntryPointComponent implements OnInit {
 
       this.pulled.emit(true)
       this.title.emit(t.title)
+      if (t.flex !== undefined){
+        this.fxFlex.emit(t.flex)
+      }
+
+
       this.type = t.type
       this.footer.emit( t.footer)
 

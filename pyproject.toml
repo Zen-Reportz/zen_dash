@@ -1,9 +1,11 @@
 [tool.poetry]
 name = "zen_dash"
-version = "0.1.9"
+version = "0.1.10"
 description = "Simple yet scable and production ready python dashboard that is better than shiny application for business."
 readme = "README.md"
 authors = ["Zen <zenreportz@pm.me>"]
+homepage = "https://github.com/Zen-Reportz/zen_dash"
+repository = "https://github.com/Zen-Reportz/zen_dash"
 include = [
     { path = 'zen_dash/static/*.html', format = 'sdist' },
     { path = 'zen_dash/static/*.js', format = 'sdist' },

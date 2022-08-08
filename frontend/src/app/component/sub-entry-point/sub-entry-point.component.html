@@ -1,5 +1,4 @@
-<br>
-<span *ngIf="type === 'box'" style="width: 100%">
+<span *ngIf="type === 'box'" >
   <app-box [uuid]="uuid"></app-box>
 </span>
 <span *ngIf="type === 'date'">
@@ -28,7 +27,7 @@
 </span>
 <span *ngIf="type === 'multi_list'">
   <span *ngFor="let url_info of getURLs()">
-    <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point><br>
+    <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point> <br> <br>
   </span>
 </span>
 <span *ngIf="type === 'multi_tabs'">

@@ -10,17 +10,18 @@
           fxLayoutAlign.lt-sm="space-around stretch"
           fxFlexFill
         >
-          <div
-            [fxFlex]="instance.fxFlex"
-            [fxFlex.md]="instance.fxFlex_md"
-            [fxFlex.sm]="instance.fxFlex_sm"
-            [fxFlex.xs]="instance.fxFlex_xs"
-            class="padding"
+          <app-entry-point
+            [url]="instance.url"
             *ngFor="let instance of row_data.data"
+            [fxFlex]="getFlex(instance.fxFlex, 'flex', instance.url)"
+            [fxFlex.md]="getFlex(instance.fxFlex, 'flex_md', instance.url)"
+            [fxFlex.sm]="getFlex(instance.fxFlex, 'flex_sm', instance.url)"
+            [fxFlex.xs]="getFlex(instance.fxFlex, 'flex_xs', instance.url)"
+
+            (fxFlex)="setFlex($event, instance.url)"
+            class="padding"
           >
-            <app-entery-point [url]="instance.url">
-            </app-entery-point>
-          </div>
+          </app-entry-point>
         </div>
       </mat-card-content>
     </mat-card>

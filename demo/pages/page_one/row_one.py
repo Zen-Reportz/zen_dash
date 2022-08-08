@@ -10,11 +10,12 @@ router = APIRouter(
 )
 
 
-
 @router.post("/first_box", response_model=i.ReturnData)
 async def prf():
-    return random.choice([i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="person", name="Users", value="5,000"), footer="10% increase compare to last week "),
-                         i.ReturnData(type=i.InstanceType.DATE, reactive=True, date_data=i.DateTimeData(label="Select Date Range", name="multi_date", first_date="2020-11-24", second_date="2022-11-24"))])
+    d = random.choice([i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="person", name="Users", value="5,000"), footer="10% increase compare to last week ", flex=i.FlexData(fxFlex="25%")),
+                       i.ReturnData(type=i.InstanceType.DATE, reactive=True, date_data=i.DateTimeData(label="Select Date Range", name="multi_date", first_date="2020-11-24", second_date="2022-11-24"), flex=i.FlexData(fxFlex="20%"))])
+    print(d)
+    return d
 
 
 @router.post("/second_box", response_model=i.ReturnData)

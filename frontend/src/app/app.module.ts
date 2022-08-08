@@ -62,7 +62,7 @@ import { PlotComponent } from './component/plot/plot.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CheckboxComponent } from './component/checkbox/checkbox.component';
 import { RadioComponent } from './component/radio/radio.component';
-import { EnteryPointComponent } from './component/entery-point/entery-point.component';
+import { EntryPointComponent } from './component/entry-point/entry-point.component';
 import { SliderComponent } from './component/slider/slider.component';
 import { ButtonToggleComponent } from './component/button-toggle/button-toggle.component';
 import { ToggleComponent } from './component/toggle/toggle.component';
@@ -82,7 +82,7 @@ import { SubEntryPointComponent } from './component/sub-entry-point/sub-entry-po
     PlotComponent,
     CheckboxComponent,
     RadioComponent,
-    EnteryPointComponent,
+    EntryPointComponent,
     SliderComponent,
     ButtonToggleComponent,
     ToggleComponent,
