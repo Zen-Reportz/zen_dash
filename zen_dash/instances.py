@@ -2,12 +2,41 @@ from enum import Enum
 from re import T
 from pydantic import BaseConfig, BaseModel
 from typing import List, Optional, Dict
+from zen_dash.flex_data import FlexData
 from zen_dash.page import InstanceType
 
 BaseConfig.arbitrary_types_allowed = True  # change #1
 
+
+
+class InstanceType(Enum):
+    """ Docstring for class InstanceType
+    Instance Type required for ReturnData
+
+    :return: Instance Type for Enum
+    :rtype: Enum
+
+    """
+    DATE= "date"
+    BOX = "box"
+    TABLE = "table"
+    CHART = "chart"
+    CHECKBOX = "checkbox"
+    RADIO = "radio"
+    MIXED = "mixed"
+    SIMPLE_FILTER = "simple_filter"
+    GROUP_FILTER = "group_filter"
+    SLIDER = "slider"
+    BUTTON_TOGGLE = "button_toggle"
+    TOGGLE = "toggle"
+    MULTI_LIST = "multi_list"
+    MULTI_TABS = "multi_tabs"
+    MULTI_EXPAND = "multi_expand"
+
+
+
+
 class BoxData(BaseModel):
-    
     icon: str
     name: str
     value: str
@@ -93,17 +122,18 @@ class ToggleData(BaseModel):
 
 class MultiURLInfo(BaseModel):
     name: Optional[str]
+    with_card: bool = False
     url: str
 
 class MultiData(BaseModel):
     urls: List[MultiURLInfo]
 
 
-class FlexData(BaseModel):
-    fxFlex: Optional[str] = "25%" 
-    fxFlex_md: Optional[str] = "33%"
-    fxFlex_sm: Optional[str] = "50%" 
-    fxFlex_xs: Optional[str] = "100%" 
+
+class ReactiveData(BaseModel):
+    full_rective: Optional[bool] = False
+    ids: Optional[List[str]] = []
+
 class ReturnData(BaseModel):
     """
     Main return object use for everything except /backend/page_detail, /backend/sidebar, and /backend/title
@@ -120,7 +150,7 @@ class ReturnData(BaseModel):
 
     type:InstanceType
     title: Optional[str]
-    reactive: Optional[bool] = False
+    reactive: Optional[ReactiveData] = ReactiveData()
     chart_data: Optional[ChartData]
     box_data: Optional[BoxData]
     date_data: Optional[DateTimeData]
@@ -136,4 +166,5 @@ class ReturnData(BaseModel):
 
     footer: Optional[str]
     flex: Optional[FlexData]
+
 

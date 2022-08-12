@@ -69,12 +69,41 @@
 <span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="n">T</span>
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseConfig</span><span class="p">,</span> <span class="n">BaseModel</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">zen_dash.flex_data</span> <span class="kn">import</span> <span class="n">FlexData</span>
 <span class="kn">from</span> <span class="nn">zen_dash.page</span> <span class="kn">import</span> <span class="n">InstanceType</span>
 
 <span class="n">BaseConfig</span><span class="o">.</span><span class="n">arbitrary_types_allowed</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># change #1</span>
 
+
+
+<div class="viewcode-block" id="InstanceType"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.InstanceType">[docs]</a><span class="k">class</span> <span class="nc">InstanceType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Docstring for class InstanceType</span>
+<span class="sd">    Instance Type required for ReturnData</span>
+
+<span class="sd">    :return: Instance Type for Enum</span>
+<span class="sd">    :rtype: Enum</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">DATE</span><span class="o">=</span> <span class="s2">&quot;date&quot;</span>
+    <span class="n">BOX</span> <span class="o">=</span> <span class="s2">&quot;box&quot;</span>
+    <span class="n">TABLE</span> <span class="o">=</span> <span class="s2">&quot;table&quot;</span>
+    <span class="n">CHART</span> <span class="o">=</span> <span class="s2">&quot;chart&quot;</span>
+    <span class="n">CHECKBOX</span> <span class="o">=</span> <span class="s2">&quot;checkbox&quot;</span>
+    <span class="n">RADIO</span> <span class="o">=</span> <span class="s2">&quot;radio&quot;</span>
+    <span class="n">MIXED</span> <span class="o">=</span> <span class="s2">&quot;mixed&quot;</span>
+    <span class="n">SIMPLE_FILTER</span> <span class="o">=</span> <span class="s2">&quot;simple_filter&quot;</span>
+    <span class="n">GROUP_FILTER</span> <span class="o">=</span> <span class="s2">&quot;group_filter&quot;</span>
+    <span class="n">SLIDER</span> <span class="o">=</span> <span class="s2">&quot;slider&quot;</span>
+    <span class="n">BUTTON_TOGGLE</span> <span class="o">=</span> <span class="s2">&quot;button_toggle&quot;</span>
+    <span class="n">TOGGLE</span> <span class="o">=</span> <span class="s2">&quot;toggle&quot;</span>
+    <span class="n">MULTI_LIST</span> <span class="o">=</span> <span class="s2">&quot;multi_list&quot;</span>
+    <span class="n">MULTI_TABS</span> <span class="o">=</span> <span class="s2">&quot;multi_tabs&quot;</span>
+    <span class="n">MULTI_EXPAND</span> <span class="o">=</span> <span class="s2">&quot;multi_expand&quot;</span></div>
+
+
+
+
 <div class="viewcode-block" id="BoxData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.BoxData">[docs]</a><span class="k">class</span> <span class="nc">BoxData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-    
     <span class="n">icon</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">value</span><span class="p">:</span> <span class="nb">str</span></div>
@@ -160,17 +189,18 @@
 
 <div class="viewcode-block" id="MultiURLInfo"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.MultiURLInfo">[docs]</a><span class="k">class</span> <span class="nc">MultiURLInfo</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">with_card</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span></div>
 
 <div class="viewcode-block" id="MultiData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.MultiData">[docs]</a><span class="k">class</span> <span class="nc">MultiData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">urls</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MultiURLInfo</span><span class="p">]</span></div>
 
 
-<div class="viewcode-block" id="FlexData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.FlexData">[docs]</a><span class="k">class</span> <span class="nc">FlexData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-    <span class="n">fxFlex</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;25%&quot;</span> 
-    <span class="n">fxFlex_md</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;33%&quot;</span>
-    <span class="n">fxFlex_sm</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;50%&quot;</span> 
-    <span class="n">fxFlex_xs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;100%&quot;</span> </div>
+
+<div class="viewcode-block" id="ReactiveData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.ReactiveData">[docs]</a><span class="k">class</span> <span class="nc">ReactiveData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">full_rective</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span></div>
+
 <div class="viewcode-block" id="ReturnData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.ReturnData">[docs]</a><span class="k">class</span> <span class="nc">ReturnData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main return object use for everything except /backend/page_detail, /backend/sidebar, and /backend/title</span>
@@ -187,7 +217,7 @@
 
     <span class="nb">type</span><span class="p">:</span><span class="n">InstanceType</span>
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-    <span class="n">reactive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">reactive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReactiveData</span><span class="p">]</span> <span class="o">=</span> <span class="n">ReactiveData</span><span class="p">()</span>
     <span class="n">chart_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ChartData</span><span class="p">]</span>
     <span class="n">box_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BoxData</span><span class="p">]</span>
     <span class="n">date_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DateTimeData</span><span class="p">]</span>
@@ -203,6 +233,7 @@
 
     <span class="n">footer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="n">flex</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FlexData</span><span class="p">]</span></div>
+
 
 </pre></div>
 

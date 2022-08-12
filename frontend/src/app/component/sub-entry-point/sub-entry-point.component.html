@@ -27,7 +27,24 @@
 </span>
 <span *ngIf="type === 'multi_list'">
   <span *ngFor="let url_info of getURLs()">
-    <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point> <br> <br>
+    <!-- <ng-container *ngIf="url_info.with_card; else mulit_list"> -->
+
+      <!-- <app-entry-point
+      [url]="instance.url"
+      [fxFlex]="getFlex(instance.fxFlex, 'flex', instance.url)"
+      [fxFlex.md]="getFlex(instance.fxFlex, 'flex_md', instance.url)"
+      [fxFlex.sm]="getFlex(instance.fxFlex, 'flex_sm', instance.url)"
+      [fxFlex.xs]="getFlex(instance.fxFlex, 'flex_xs', instance.url)"
+
+      (fxFlex)="setFlex($event, instance.url)"
+      class="padding"
+    >
+    </app-entry-point> -->
+    <!-- </ng-container> -->
+    <!-- <ng-template #mulit_list> -->
+      <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point> <br> <br>
+    <!-- </ng-template> -->
+
   </span>
 </span>
 <span *ngIf="type === 'multi_tabs'">

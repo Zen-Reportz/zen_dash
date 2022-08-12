@@ -13,10 +13,10 @@
           <app-entry-point
             [url]="instance.url"
             *ngFor="let instance of row_data.data"
-            [fxFlex]="getFlex(instance.fxFlex, 'flex', instance.url)"
-            [fxFlex.md]="getFlex(instance.fxFlex, 'flex_md', instance.url)"
-            [fxFlex.sm]="getFlex(instance.fxFlex, 'flex_sm', instance.url)"
-            [fxFlex.xs]="getFlex(instance.fxFlex, 'flex_xs', instance.url)"
+            [fxFlex]="getFlex(instance.flex.fxFlex, 'flex', instance.url)"
+            [fxFlex.md]="getFlex(instance.flex.fxFlex_md, 'flex_md', instance.url)"
+            [fxFlex.sm]="getFlex(instance.flex.fxFlex_sm, 'flex_sm', instance.url)"
+            [fxFlex.xs]="getFlex(instance.flex.fxFlex_xs, 'flex_xs', instance.url)"
 
             (fxFlex)="setFlex($event, instance.url)"
             class="padding"

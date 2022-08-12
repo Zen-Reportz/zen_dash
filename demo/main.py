@@ -8,13 +8,14 @@ from zen_dash import sidebar as s
 from zen_dash import page as p
 from pydantic import BaseConfig
 from fastapi.middleware.gzip import GZipMiddleware
-from pages.page_one import row_one as pro
+from pages.page_one import row_one as pro 
 from pages.page_one import row_three as prt
 from pages.page_one import row_four as prf
 from pages.page_one import row_five as prfi
 from pages.page_one import row_two as prtw
 from pages.page_one import row_six as prs
 import filters as f
+from zen_dash.flex_data import FlexData
 
 BaseConfig.arbitrary_types_allowed = True  # change #1
 
@@ -87,9 +88,9 @@ async def page_detail(fragment: str):
             ]),
             p.Row(data=[
                 p.Instance(url="/backend/page_one/row_two/table",
-                           fxFlex="50%", fxFlex_md="50%", fxFlex_sm="110%", fxFlex_xs="110%"),
+                           flex=FlexData(fxFlex="50%", fxFlex_md="50%", fxFlex_sm="110%", fxFlex_xs="110%")),
                 p.Instance(url="/backend/page_one/row_two/chart",
-                           fxFlex="50%", fxFlex_md="50%", fxFlex_sm="110%", fxFlex_xs="110%"),
+                           flex=FlexData(fxFlex="50%", fxFlex_md="50%", fxFlex_sm="110%", fxFlex_xs="110%")),
 
             ]),
             p.Row(data=[
@@ -116,8 +117,8 @@ async def page_detail(fragment: str):
             ]),
             p.Row(data=[
                 p.Instance(url="/backend/page_one/row_five/multi_records"),
-                p.Instance(url="/backend/page_one/row_six/multi_records_tabs",  fxFlex="33%", fxFlex_md="33%", fxFlex_sm="110%", fxFlex_xs="110%"),
-                p.Instance(url="/backend/page_one/row_six/multi_records_expanded",  fxFlex="33%", fxFlex_md="33%", fxFlex_sm="110%", fxFlex_xs="110%"),
+                p.Instance(url="/backend/page_one/row_six/multi_records_tabs", flex=FlexData(fxFlex="33%", fxFlex_md="33%", fxFlex_sm="110%", fxFlex_xs="110%")),
+                p.Instance(url="/backend/page_one/row_six/multi_records_expanded",  flex=FlexData(fxFlex="33%", fxFlex_md="33%", fxFlex_sm="110%", fxFlex_xs="110%")),
 
             ]),
             p.Row(data=[
