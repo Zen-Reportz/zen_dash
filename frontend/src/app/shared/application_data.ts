@@ -5,6 +5,13 @@ export class MEData {
 
 
 
+export class FlexData{
+  fxFlex!: string
+  fxFlex_md!: string
+  fxFlex_sm!: string
+  fxFlex_xs!: string
+}
+
 export class SidebarTab {
   label!: string;
   icon!: string;
@@ -22,12 +29,10 @@ export class SidebarData{
 }
 
 
+
 export class Instance{
   url!: string
-  fxFlex!: string
-  fxFlex_md!: string
-  fxFlex_sm!: string
-  fxFlex_xs!: string
+  flex!: FlexData
 
 }
 
@@ -142,21 +147,21 @@ export class SimpleFilterData{
 
 export class MultiURLInfo{
   name: string | undefined
+  with_card!: boolean
   url!: string
 }
 export class MultiData {
   urls!: MultiURLInfo[]
 }
 
-export class FlexData{
-  fxFlex!: string
-  fxFlex_md!: string
-  fxFlex_sm!: string
-  fxFlex_xs!: string
+export class ReactiveData {
+  full_reactive!: boolean
+  ids!: string[]
 }
+
 export class ResponseData{
   type!: string
-  reactive: boolean | undefined
+  reactive!: ReactiveData
   title: string | undefined
   chart_data:  ChartData |   undefined
   simple_filter_data: SimpleFilterData | undefined

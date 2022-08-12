@@ -3,6 +3,9 @@ import optparse
 from pydantic import BaseModel
 from typing import List, Tuple, Optional
 
+from zen_dash.flex_data import FlexData
+
+
 
 class InstanceType(Enum):
     """ Docstring for class InstanceType
@@ -31,11 +34,8 @@ class InstanceType(Enum):
 
 class Instance(BaseModel):
     url: str
-    fxFlex: Optional[str] = "25%" 
-    fxFlex_md: Optional[str] = "33%"
-    fxFlex_sm: Optional[str] = "50%" 
-    fxFlex_xs: Optional[str] = "100%" 
-
+    flex: Optional[FlexData ] = FlexData()
+    
 
 class Row(BaseModel):
     data: List[Instance]

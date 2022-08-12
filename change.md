@@ -1,3 +1,6 @@
+# 0.1.11
+- updated reactivity to be full_reactive and on specific ids 
+- flex as its own date
 
 # 0.1.8
 - No Card in side card for multi_list, multi_tabs, multi_expand

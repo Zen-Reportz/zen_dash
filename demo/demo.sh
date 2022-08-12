@@ -1,0 +1,1 @@
+uvicorn main:app --reload --reload-dir ../. --workers 10

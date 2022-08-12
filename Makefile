@@ -5,4 +5,4 @@ publish:
 	sh publish.sh
 
 run_demo:
-	sh demo.sh
+	cd demo && sh demo.sh
