@@ -69,6 +69,9 @@ import { ToggleComponent } from './component/toggle/toggle.component';
 import { SimpleFilterComponent } from './component/simple-filter/simple-filter.component';
 import { GroupFilterComponent } from './component/group-filter/group-filter.component';
 import { SubEntryPointComponent } from './component/sub-entry-point/sub-entry-point.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+
+
 
 @NgModule({
   declarations: [
@@ -148,7 +151,8 @@ import { SubEntryPointComponent } from './component/sub-entry-point/sub-entry-po
     LayoutModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
-    })
+    }),
+    NgxMatSelectSearchModule
   ],
   providers: [],
   bootstrap: [AppComponent],
