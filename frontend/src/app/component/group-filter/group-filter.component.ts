@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { GroupFilterData, MEData } from 'src/app/shared/application_data';
 import { DataService } from 'src/app/shared/data.service';
 
@@ -10,7 +10,7 @@ import { DataService } from 'src/app/shared/data.service';
 })
 export class GroupFilterComponent implements OnInit {
   @Input() uuid!: string
-  dataForm = new FormControl();
+  dataForm = new UntypedFormControl();
   multi!: boolean
 
   constructor(private dataService: DataService) { }

@@ -17,7 +17,7 @@ import { take, takeUntil } from 'rxjs/operators';
 })
 export class SimpleFilterComponent implements OnInit {
   @Input() uuid!: string
-  dataForm = new FormControl();
+  dataForm = new UntypedFormControl();
   multi!: boolean
 
 
@@ -26,7 +26,7 @@ export class SimpleFilterComponent implements OnInit {
   protected banks: Bank[] = BANKS;
 
   /** control for the selected bank for multi-selection */
-  public bankMultiCtrl: UntypedFormControl = new FormControl<any>;
+  public bankMultiCtrl: UntypedFormControl = new UntypedFormControl<any>;
 
   /** control for the MatSelect filter keyword multi-selection */
   public bankMultiFilterCtrl: UntypedFormControl = new UntypedFormControl();
