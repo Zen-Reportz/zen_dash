@@ -13,7 +13,7 @@ async def single_filter(request: Request):
     s = i.ReturnData(type=i.InstanceType.SIMPLE_FILTER,
                      simple_filter_data=i.SimpleFilterData(
                          name="simple_filter",
-                         data=["Option 1","Option 2"])
+                         data=["Test 1","My 2"])
                      )
 
     return s

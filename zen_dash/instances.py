@@ -94,7 +94,7 @@ class ButtonToggleInstance(BaseModel):
 
 class ButtonToggleData(BaseModel):
     name: str
-    multiple: bool = False
+    multi: bool = False
     data: List[ButtonToggleInstance]
 
 

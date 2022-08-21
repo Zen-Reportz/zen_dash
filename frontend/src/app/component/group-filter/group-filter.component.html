@@ -1,6 +1,7 @@
 <mat-form-field appearance="fill">
   <mat-label>{{ getLabel() }}</mat-label>
   <mat-select
+  ngxMatSelect
     [formControl]="dataForm"
     (selectionChange)="detectChange($event)"
     [multiple]="multi"

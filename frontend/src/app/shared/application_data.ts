@@ -103,14 +103,13 @@ export class ButtonToggleInstance {
 export class ButtonToggleData{
   data!: ButtonToggleInstance[]
   name!: string
-  multiple!: boolean
+  multi!: boolean
 
 }
 
 export class ToggleData{
   data!: boolean
   name!: string
-  multiple!: boolean
 
 }
 
