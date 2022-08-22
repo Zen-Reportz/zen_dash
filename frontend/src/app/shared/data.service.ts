@@ -5,7 +5,9 @@ import {
   ChartData,
   CheckboxData,
   DateData,
+  DownloadData,
   GroupFilterData,
+  InputData,
   MEData,
   RadioData,
   SidebarData,
@@ -31,6 +33,9 @@ export class DataService {
   toggle_data = new Map<string, ToggleData>();
   simple_filter_data = new Map<string, SimpleFilterData>();
   group_filter_data = new Map<string, GroupFilterData>();
+  input_filter_data = new Map<string, InputData>();
+  download_filter_data = new Map<string, DownloadData>();
+
 
   data = new Map<string, any>();
 

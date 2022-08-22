@@ -33,7 +33,7 @@ async def single_filter_group(request: Request):
                         group_filter_data=i.GroupedFilterData(name="Group Simple Filter", 
                             data=[i.GroupedFilterDataInstance(group_name="Group", group_data=["Option 1", "Option 2"]),
                                   i.GroupedFilterDataInstance(group_name="Group 2", group_data=["Option 3", "Option 4"]),
-                                  i.GroupedFilterDataInstance(group_name="Group 3", group_data=["Option 5""Option 6"])]))
+                                  i.GroupedFilterDataInstance(group_name="Group 3", group_data=["Option 5", "Option 6"])]))
 
 
 @router.post("/multi_filter_group", response_model=i.ReturnData)
@@ -44,5 +44,5 @@ async def multi_filter_group(request: Request):
                             multi=True,
                             data=[i.GroupedFilterDataInstance(group_name="Group", group_data=["Option 1", "Option 2"]),
                                   i.GroupedFilterDataInstance(group_name="Group 2", group_data=["Option 3", "Option 4"]),
-                                  i.GroupedFilterDataInstance(group_name="Group 3", group_data=["Option 5""Option 6"])]))
+                                  i.GroupedFilterDataInstance(group_name="Group 3", group_data=["Option 5","Option 6"])]))
     # fxFlex: Optional[str] = "20%"

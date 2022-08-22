@@ -1,0 +1,7 @@
+<mat-form-field class="example-form-field" appearance="fill">
+  <mat-label> {{getLabel()}}</mat-label>
+  <input matInput type="text" [(ngModel)]="data" (ngModelChange)="saveData()">
+  <button *ngIf="data" matSuffix mat-icon-button aria-label="Clear" (click)="clearData()" >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
