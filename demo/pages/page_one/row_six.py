@@ -4,7 +4,7 @@ from zen_dash import instances as i
 
 router = APIRouter(
     prefix="/backend/page_one/row_six",
-    tags=["row_five"],
+    tags=["row_six"],
     responses={404: {"description": "Not found"}},
 )
 

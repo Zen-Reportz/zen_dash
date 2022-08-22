@@ -14,7 +14,7 @@ export class ButtonToggleComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    if (this.dataService.button_toggle_data.get(this.uuid)?.multiple) {
+    if (this.dataService.button_toggle_data.get(this.uuid)?.multi) {
       this.selected_data = [];
     } else {
       this.selected_data = '';
@@ -25,7 +25,7 @@ export class ButtonToggleComponent implements OnInit {
       for (let d of this.dataService.button_toggle_data.get(this.uuid)
         ?.data as ButtonToggleInstance[]) {
         if (d.selected) {
-          if (this.dataService.button_toggle_data.get(this.uuid)?.multiple) {
+          if (this.dataService.button_toggle_data.get(this.uuid)?.multi) {
             names.push(d.name);
           } else {
             this.selected_data = d.name;
@@ -45,7 +45,7 @@ export class ButtonToggleComponent implements OnInit {
 
   isMultiple() {
     return this.dataService.button_toggle_data.get(this.uuid)
-      ?.multiple as boolean;
+      ?.multi as boolean;
   }
 
   get_data() {

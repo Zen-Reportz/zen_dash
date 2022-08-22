@@ -32,8 +32,8 @@ class InstanceType(Enum):
     MULTI_LIST = "multi_list"
     MULTI_TABS = "multi_tabs"
     MULTI_EXPAND = "multi_expand"
-
-
+    INPUT = "input"
+    DOWNLOAD = "download"
 
 
 class BoxData(BaseModel):
@@ -94,13 +94,17 @@ class ButtonToggleInstance(BaseModel):
 
 class ButtonToggleData(BaseModel):
     name: str
-    multiple: bool = False
+    multi: bool = False
     data: List[ButtonToggleInstance]
 
 
 class GroupedFilterDataInstance(BaseModel):
     group_name: str
     group_data: List[str]
+
+class InputData(BaseModel):
+    label: Optional[str]
+    name: str
 
 
 class GroupedFilterData(BaseModel):
@@ -134,6 +138,11 @@ class ReactiveData(BaseModel):
     full_rective: Optional[bool] = False
     ids: Optional[List[str]] = []
 
+class DownloadData(BaseModel):
+    file_name: str
+    url: str
+
+
 class ReturnData(BaseModel):
     """
     Main return object use for everything except /backend/page_detail, /backend/sidebar, and /backend/title
@@ -163,6 +172,8 @@ class ReturnData(BaseModel):
     multi_data: Optional[MultiData]
     simple_filter_data: Optional[SimpleFilterData] 
     group_filter_data: Optional[GroupedFilterData ]
+    input_data: Optional[InputData]
+    download_data: Optional[DownloadData]
 
     footer: Optional[str]
     flex: Optional[FlexData]

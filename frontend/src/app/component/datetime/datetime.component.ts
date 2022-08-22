@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { DataService } from 'src/app/shared/data.service';
 import { DateData, MEData } from '../../shared/application_data';
 
@@ -12,8 +12,8 @@ export class DatetimeComponent implements OnInit {
   @Input() uuid!: string;
 
   single!: boolean;
-  form_data!: FormGroup;
-  form_control!: FormControl;
+  form_data!: UntypedFormGroup;
+  form_control!: UntypedFormControl;
 
   data!: DateData;
 
@@ -28,14 +28,14 @@ export class DatetimeComponent implements OnInit {
       this.data = this.dataService.date_data.get(this.uuid) as DateData
       if (this.data.second_date as string) {
         this.single = false;
-        this.form_data = new FormGroup({
-          start: new FormControl(new Date(this.data.first_date + "T00:00:00")),
-          end: new FormControl(new Date(this.data.second_date + "T00:00:00")),
+        this.form_data = new UntypedFormGroup({
+          start: new UntypedFormControl(new Date(this.data.first_date + "T00:00:00")),
+          end: new UntypedFormControl(new Date(this.data.second_date + "T00:00:00")),
         });
 
       } else {
         this.single = true;
-        this.form_control = new FormControl(new Date(this.data.first_date+ "T00:00:00"));
+        this.form_control = new UntypedFormControl(new Date(this.data.first_date+ "T00:00:00"));
       }
     }
 
