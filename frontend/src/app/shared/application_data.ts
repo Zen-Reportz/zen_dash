@@ -103,14 +103,13 @@ export class ButtonToggleInstance {
 export class ButtonToggleData{
   data!: ButtonToggleInstance[]
   name!: string
-  multiple!: boolean
+  multi!: boolean
 
 }
 
 export class ToggleData{
   data!: boolean
   name!: string
-  multiple!: boolean
 
 }
 
@@ -159,6 +158,20 @@ export class ReactiveData {
   ids!: string[]
 }
 
+export class InputData {
+  label: string | undefined
+  name!: string
+
+}
+
+export class DownloadData{
+  file_name!: string
+    url!: string
+
+}
+
+
+
 export class ResponseData{
   type!: string
   reactive!: ReactiveData
@@ -175,6 +188,8 @@ export class ResponseData{
   table_data: TableData | undefined
   toggle_data: ToggleData | undefined
   multi_data: MultiData | undefined
+  input_data: InputData | undefined
+  download_data: DownloadData | undefined
   footer: string | undefined
   flex: FlexData | undefined
 

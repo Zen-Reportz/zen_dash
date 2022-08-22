@@ -20,6 +20,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "file-saver"
+           ],
             "outputPath": "dist/frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -34,8 +37,7 @@
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/theme.scss",
               "src/styles.scss",
-              "node_modules/material-design-icons/iconfont/material-icons.css"
-            ],
+              "node_modules/material-design-icons/iconfont/material-icons.css"            ],
             "scripts": []
           },
           "configurations": {
@@ -113,5 +115,7 @@
       }
     }
   },
-  "defaultProject": "frontend"
+  "cli": {
+    "analytics": false
+  }
 }
