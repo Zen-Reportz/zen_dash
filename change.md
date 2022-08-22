@@ -1,3 +1,8 @@
+# 0.1.12
+- updated angular to 14
+- added search select rather than just select
+- added sending file functionality
+
 # 0.1.11
 - updated reactivity to be full_reactive and on specific ids 
 - flex as its own date

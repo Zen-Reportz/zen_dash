@@ -1,21 +1,23 @@
 <mat-form-field appearance="fill">
   <mat-label>{{ getLabel() }}</mat-label>
   <mat-select
-  ngxMatSelect
-    [formControl]="dataForm"
+    [formControl]="data_select_control"
+    placeholder="getLabel()"
     (selectionChange)="detectChange($event)"
     [multiple]="multi"
+    #dataSelect
   >
-
+    <mat-option>
+      <ngx-mat-select-search
+        [formControl]="data_search_control"
+      ></ngx-mat-select-search>
+    </mat-option>
     <mat-optgroup
-      *ngFor="let group of myData()"
+      *ngFor="let group of data_search | async"
       [label]="group.group_name"
     >
-      <mat-option
-        *ngFor="let value of group.group_data"
-        [value]="value"
-      >
-        {{ value }}
+      <mat-option *ngFor="let g of group.group_data" [value]="g">
+        {{ g }}
       </mat-option>
     </mat-optgroup>
   </mat-select>

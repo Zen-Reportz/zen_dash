@@ -70,7 +70,9 @@ import { SimpleFilterComponent } from './component/simple-filter/simple-filter.c
 import { GroupFilterComponent } from './component/group-filter/group-filter.component';
 import { SubEntryPointComponent } from './component/sub-entry-point/sub-entry-point.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-
+import { InputComponent } from './component/input/input.component';
+import { DownloadComponent } from './component/download/download.component';
+import { FileSaverModule } from 'ngx-filesaver';
 
 
 @NgModule({
@@ -91,7 +93,9 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     ToggleComponent,
     SimpleFilterComponent,
     GroupFilterComponent,
-    SubEntryPointComponent
+    SubEntryPointComponent,
+    InputComponent,
+    DownloadComponent
   ],
   imports: [
     FlexLayoutModule,
@@ -152,7 +156,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    FileSaverModule
   ],
   providers: [],
   bootstrap: [AppComponent],

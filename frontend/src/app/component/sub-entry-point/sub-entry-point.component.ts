@@ -1,3 +1,4 @@
+import { InputData, DownloadData } from './../../shared/application_data';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DataService } from 'src/app/shared/data.service';
 import { UUID } from 'angular2-uuid';
@@ -120,6 +121,8 @@ export class SubEntryPointComponent implements OnInit {
       case 'filter_group':
         this.dataService.group_filter_data.delete(this.uuid);
         break;
+      case 'input':
+        this.dataService.input_filter_data.delete(this.uuid);
     }
     this.pulled.emit(false);
     this.title.emit('Loading');
@@ -217,6 +220,18 @@ export class SubEntryPointComponent implements OnInit {
             this.dataService.group_filter_data.set(
               this.uuid,
               t.group_filter_data as GroupFilterData
+            );
+            break;
+          case 'input':
+            this.dataService.input_filter_data.set(
+              this.uuid,
+              t.input_data as InputData
+            );
+            break;
+          case 'download':
+            this.dataService.download_filter_data.set(
+              this.uuid,
+              t.download_data as DownloadData
             );
             break;
           default:
