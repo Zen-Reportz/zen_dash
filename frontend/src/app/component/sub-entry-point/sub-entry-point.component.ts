@@ -1,4 +1,3 @@
-import { InputData, DownloadData } from './../../shared/application_data';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DataService } from 'src/app/shared/data.service';
 import { UUID } from 'angular2-uuid';
@@ -18,6 +17,10 @@ import {
   SliderData,
   TableData,
   ToggleData,
+  InputData,
+  DownloadData,
+  UploadData,
+  DataImage,
 } from '../../shared/application_data';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -123,6 +126,16 @@ export class SubEntryPointComponent implements OnInit {
         break;
       case 'input':
         this.dataService.input_filter_data.delete(this.uuid);
+        break;
+      case 'download':
+        this.dataService.download_data.delete(this.uuid);
+        break;
+      case 'upload':
+        this.dataService.upload_data.delete(this.uuid);
+        break;
+      case 'image':
+        this.dataService.image_data.delete(this.uuid);
+        break;
     }
     this.pulled.emit(false);
     this.title.emit('Loading');
@@ -229,9 +242,21 @@ export class SubEntryPointComponent implements OnInit {
             );
             break;
           case 'download':
-            this.dataService.download_filter_data.set(
+            this.dataService.download_data.set(
               this.uuid,
               t.download_data as DownloadData
+            );
+            break;
+          case 'upload':
+            this.dataService.upload_data.set(
+              this.uuid,
+              t.upload_data as UploadData
+            );
+            break;
+          case 'image':
+            this.dataService.image_data.set(
+              this.uuid,
+              t.image_data as DataImage
             );
             break;
           default:

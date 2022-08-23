@@ -15,6 +15,8 @@ from pages.page_one import row_five as prfi
 from pages.page_one import row_two as prtw
 from pages.page_one import row_six as prs
 from pages.page_one import row_seven as pors
+from pages.page_one import row_eight as pre
+
 import filters as f
 from zen_dash.flex_data import FlexData
 
@@ -30,6 +32,7 @@ app.include_router(prfi.router)
 app.include_router(prtw.router)
 app.include_router(prs.router)
 app.include_router(pors.router)
+app.include_router(pre.router)
 
 
 app.add_middleware(GZipMiddleware, minimum_size=1000)
@@ -132,8 +135,12 @@ async def page_detail(fragment: str):
             p.Row(data=[
                 p.Instance(url="/backend/page_one/row_seven/input"),
                 p.Instance(url="/backend/page_one/row_seven/file_download"),
+                p.Instance(url="/backend/page_one/row_seven/upload"),
+
 
             ]),
+            p.Row(data=[p.Instance(url="/backend/page_one/row_eight/image"),
+])
 
         ])
         return p1

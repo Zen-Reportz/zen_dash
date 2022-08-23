@@ -71,8 +71,10 @@ import { GroupFilterComponent } from './component/group-filter/group-filter.comp
 import { SubEntryPointComponent } from './component/sub-entry-point/sub-entry-point.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { InputComponent } from './component/input/input.component';
-import { DownloadComponent } from './component/download/download.component';
 import { FileSaverModule } from 'ngx-filesaver';
+import { AppDownloadComponent } from './component/app-download/app-download.component';
+import { AppUploadComponent } from './component/app-upload/app-upload.component';
+import { AppImageComponent } from './component/app-image/app-image.component';
 
 
 @NgModule({
@@ -95,7 +97,9 @@ import { FileSaverModule } from 'ngx-filesaver';
     GroupFilterComponent,
     SubEntryPointComponent,
     InputComponent,
-    DownloadComponent
+    AppDownloadComponent,
+    AppUploadComponent,
+    AppImageComponent,
   ],
   imports: [
     FlexLayoutModule,

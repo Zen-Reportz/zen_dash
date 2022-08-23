@@ -1,16 +1,16 @@
-import { DownloadData } from './../../shared/application_data';
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FileSaverService } from 'ngx-filesaver';
+import { DownloadData } from 'src/app/shared/application_data';
 import { DataService } from 'src/app/shared/data.service';
-import { HttpClient } from '@angular/common/http';
-import { InputData } from 'src/app/shared/application_data';
 
 @Component({
-  selector: 'app-download',
-  templateUrl: './download.component.html',
-  styleUrls: ['./download.component.scss']
+  selector: 'app-app-download',
+  templateUrl: './app-download.component.html',
+  styleUrls: ['./app-download.component.scss']
 })
-export class DownloadComponent implements OnInit {
+export class AppDownloadComponent implements OnInit {
+
   @Input() uuid!: string
   data:   DownloadData | undefined
 
@@ -24,7 +24,6 @@ export class DownloadComponent implements OnInit {
       convMap[key] = val;
     })
 
-    console.log(location.origin + this.data?.url)
     this.http.post(location.origin + this.data?.url, convMap , {responseType:"blob", observe:"response"} ).subscribe(res=> {
       this.fileSaverService.save(res.body, this.data?.file_name);
     });
@@ -32,7 +31,7 @@ export class DownloadComponent implements OnInit {
 }
 
   ngOnInit() {
-    this.data = this.dataService.download_filter_data.get(this.uuid)
+    this.data = this.dataService.download_data.get(this.uuid)
 
   }
 
@@ -41,11 +40,9 @@ export class DownloadComponent implements OnInit {
   }
 
   onSuc(event:any){
-    console.log(event)
   }
 
   onErr(event: any){
-    console.log(event)
   }
 
 }

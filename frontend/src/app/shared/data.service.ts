@@ -15,6 +15,8 @@ import {
   SliderData,
   TableData,
   ToggleData,
+  UploadData,
+  DataImage
 } from './application_data';
 
 @Injectable({
@@ -34,8 +36,9 @@ export class DataService {
   simple_filter_data = new Map<string, SimpleFilterData>();
   group_filter_data = new Map<string, GroupFilterData>();
   input_filter_data = new Map<string, InputData>();
-  download_filter_data = new Map<string, DownloadData>();
-
+  download_data = new Map<string, DownloadData>();
+  upload_data = new Map<string, UploadData>();
+  image_data = new Map<string,  DataImage>();
 
   data = new Map<string, any>();
 
