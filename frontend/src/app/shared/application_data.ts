@@ -170,6 +170,17 @@ export class DownloadData{
 
 }
 
+export class DataImage{
+    url!: string
+    height!: string
+    width!: string
+}
+
+export class UploadData{
+    url!: string
+    multi!: boolean
+    name!: string
+}
 
 
 export class ResponseData{
@@ -190,6 +201,8 @@ export class ResponseData{
   multi_data: MultiData | undefined
   input_data: InputData | undefined
   download_data: DownloadData | undefined
+  upload_data: UploadData | undefined
+  image_data: DataImage | undefined
   footer: string | undefined
   flex: FlexData | undefined
 

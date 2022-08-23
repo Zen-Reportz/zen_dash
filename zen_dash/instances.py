@@ -3,7 +3,6 @@ from re import T
 from pydantic import BaseConfig, BaseModel
 from typing import List, Optional, Dict
 from zen_dash.flex_data import FlexData
-from zen_dash.page import InstanceType
 
 BaseConfig.arbitrary_types_allowed = True  # change #1
 
@@ -34,7 +33,8 @@ class InstanceType(Enum):
     MULTI_EXPAND = "multi_expand"
     INPUT = "input"
     DOWNLOAD = "download"
-
+    UPLOAD = "upload"
+    IMAGE = "image"
 
 class BoxData(BaseModel):
     icon: str
@@ -142,6 +142,16 @@ class DownloadData(BaseModel):
     file_name: str
     url: str
 
+class ImageData(BaseModel):
+    url: str
+    height: str
+    width: str
+
+class UploadData(BaseModel):
+    url: str
+    multi: bool=  False
+    name: str
+
 
 class ReturnData(BaseModel):
     """
@@ -174,6 +184,8 @@ class ReturnData(BaseModel):
     group_filter_data: Optional[GroupedFilterData ]
     input_data: Optional[InputData]
     download_data: Optional[DownloadData]
+    upload_data: Optional[UploadData]
+    image_data: Optional[ImageData]
 
     footer: Optional[str]
     flex: Optional[FlexData]

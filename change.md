@@ -1,3 +1,7 @@
+# 0.1.13
+- send file to server
+- render image 
+
 # 0.1.12
 - updated angular to 14
 - added search select rather than just select

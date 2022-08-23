@@ -91,7 +91,18 @@
 
 
 <span *ngIf="type == 'download'">
-  <app-download [uuid]="uuid"></app-download>
+  <app-app-download [uuid]="uuid"></app-app-download>
+
+</span>
+
+
+<span *ngIf="type == 'upload'">
+  <app-app-upload [uuid]="uuid"></app-app-upload>
+
+</span>
+
+<span *ngIf="type == 'image'">
+  <app-app-image [uuid]="uuid"></app-app-image>
 
 </span>
 

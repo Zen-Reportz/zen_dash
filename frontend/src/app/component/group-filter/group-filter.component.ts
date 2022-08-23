@@ -69,7 +69,6 @@ export class GroupFilterComponent implements OnInit {
     let search = this.data_search_control.value;
     const GroupsCopy = this.copyGroups(this.data);
 
-    console.log(search)
     if (!search) {
       this.data_search.next(this.data.slice());
       return;
