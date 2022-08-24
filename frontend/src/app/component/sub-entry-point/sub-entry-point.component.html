@@ -1,4 +1,4 @@
-<span *ngIf="type === 'box'" >
+<span *ngIf="type === 'box'">
   <app-box [uuid]="uuid"></app-box>
 </span>
 <span *ngIf="type === 'date'">
@@ -29,7 +29,7 @@
   <span *ngFor="let url_info of getURLs()">
     <!-- <ng-container *ngIf="url_info.with_card; else mulit_list"> -->
 
-      <!-- <app-entry-point
+    <!-- <app-entry-point
       [url]="instance.url"
       [fxFlex]="getFlex(instance.fxFlex, 'flex', instance.url)"
       [fxFlex.md]="getFlex(instance.fxFlex, 'flex_md', instance.url)"
@@ -42,14 +42,14 @@
     </app-entry-point> -->
     <!-- </ng-container> -->
     <!-- <ng-template #mulit_list> -->
-      <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point> <br> <br>
+    <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point> <br />
+    <br />
     <!-- </ng-template> -->
-
   </span>
 </span>
 <span *ngIf="type === 'multi_tabs'">
-  <mat-tab-group >
-    <mat-tab  *ngFor="let url_info of getURLs()" [label]="url_info.name || ''">
+  <mat-tab-group>
+    <mat-tab *ngFor="let url_info of getURLs()" [label]="url_info.name || ''">
       <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point>
     </mat-tab>
   </mat-tab-group>
@@ -57,53 +57,44 @@
 
 <span *ngIf="type === 'multi_expand'">
   <mat-accordion>
-    <span  *ngFor="let url_info of getURLs()">
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{url_info.name}}
-        </mat-panel-title>
-
-      </mat-expansion-panel-header>
-      <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point>
-    </mat-expansion-panel>
-  </span>
+    <span *ngFor="let url_info of getURLs()">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ url_info.name }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point>
+      </mat-expansion-panel>
+    </span>
   </mat-accordion>
-
 </span>
 
 <span *ngIf="type == 'simple_filter'">
   <app-simple-filter [uuid]="uuid"></app-simple-filter>
-
 </span>
-
 
 <span *ngIf="type == 'group_filter'">
   <app-group-filter [uuid]="uuid"></app-group-filter>
-
 </span>
-
 
 <span *ngIf="type == 'input'">
   <app-input [uuid]="uuid"></app-input>
-
 </span>
-
 
 <span *ngIf="type == 'download'">
   <app-app-download [uuid]="uuid"></app-app-download>
-
 </span>
-
 
 <span *ngIf="type == 'upload'">
   <app-app-upload [uuid]="uuid"></app-app-upload>
-
 </span>
 
 <span *ngIf="type == 'image'">
   <app-app-image [uuid]="uuid"></app-app-image>
-
 </span>
 
 
+<span *ngIf="type == 'highchart'">
+  <app-highchart [uuid]="uuid"></app-highchart>
+</span>

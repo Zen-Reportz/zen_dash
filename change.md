@@ -1,3 +1,5 @@
+# 0.1.14
+- High Chart included
 # 0.1.13
 - send file to server
 - render image 

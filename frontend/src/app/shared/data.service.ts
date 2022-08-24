@@ -16,7 +16,8 @@ import {
   TableData,
   ToggleData,
   UploadData,
-  DataImage
+  DataImage,
+  HighChartData
 } from './application_data';
 
 @Injectable({
@@ -39,6 +40,7 @@ export class DataService {
   download_data = new Map<string, DownloadData>();
   upload_data = new Map<string, UploadData>();
   image_data = new Map<string,  DataImage>();
+  highchart_data = new Map<string, HighChartData>();
 
   data = new Map<string, any>();
 

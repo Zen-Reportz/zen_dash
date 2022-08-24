@@ -35,6 +35,7 @@ class InstanceType(Enum):
     DOWNLOAD = "download"
     UPLOAD = "upload"
     IMAGE = "image"
+    HIGHCHART = "highchart"
 
 class BoxData(BaseModel):
     icon: str
@@ -152,6 +153,9 @@ class UploadData(BaseModel):
     multi: bool=  False
     name: str
 
+class HighChartData(BaseModel):
+    config: dict
+
 
 class ReturnData(BaseModel):
     """
@@ -186,6 +190,7 @@ class ReturnData(BaseModel):
     download_data: Optional[DownloadData]
     upload_data: Optional[UploadData]
     image_data: Optional[ImageData]
+    highchart_data: Optional[HighChartData]
 
     footer: Optional[str]
     flex: Optional[FlexData]
