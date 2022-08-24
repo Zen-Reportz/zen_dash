@@ -140,6 +140,8 @@ async def page_detail(fragment: str):
 
             ]),
             p.Row(data=[p.Instance(url="/backend/page_one/row_eight/image"),
+            p.Instance(url="/backend/page_one/row_eight/highchart"),
+            
 ])
 
         ])

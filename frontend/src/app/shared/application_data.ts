@@ -182,6 +182,9 @@ export class UploadData{
     name!: string
 }
 
+export class HighChartData {
+  config!: string
+}
 
 export class ResponseData{
   type!: string
@@ -203,6 +206,7 @@ export class ResponseData{
   download_data: DownloadData | undefined
   upload_data: UploadData | undefined
   image_data: DataImage | undefined
+  highchart_data: HighChartData | undefined
   footer: string | undefined
   flex: FlexData | undefined
 

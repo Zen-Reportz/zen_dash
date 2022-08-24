@@ -1,3 +1,4 @@
+import { HighChartData } from './../../shared/application_data';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DataService } from 'src/app/shared/data.service';
 import { UUID } from 'angular2-uuid';
@@ -258,6 +259,9 @@ export class SubEntryPointComponent implements OnInit {
               this.uuid,
               t.image_data as DataImage
             );
+            break;
+          case 'highchart':
+            this.dataService.highchart_data.set(this.uuid, t.highchart_data as HighChartData)
             break;
           default:
             console.log(t.type);

@@ -21,3 +21,28 @@ async def d3():
 async def d3():
     file_path = "files/AuroraPillars_Correia_960.jpg"
     return FileResponse(path=file_path, filename=file_path)
+
+
+
+@router.post("/highchart", response_model=i.ReturnData)
+async def d3():
+    return i.ReturnData(
+        type=i.InstanceType.HIGHCHART,
+        highchart_data=i.HighChartData(config={
+    "chart": {
+      "type": 'line'
+    },
+    "title": {
+      "text": 'Linechart'
+    },
+    "credits": {
+      "enabled": False
+    },
+    "series": [
+      {
+        "name": 'Line 1',
+        "data": [1, 2, 3, 5, 6, 7]
+      }
+    ]
+  }), flex=i.FlexData(fxFlex="50%", fxFlex_md="50%", fxFlex_sm="100%", fxFlex_xs="100%")
+    )

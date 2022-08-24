@@ -75,7 +75,8 @@ import { FileSaverModule } from 'ngx-filesaver';
 import { AppDownloadComponent } from './component/app-download/app-download.component';
 import { AppUploadComponent } from './component/app-upload/app-upload.component';
 import { AppImageComponent } from './component/app-image/app-image.component';
-
+import { HighchartComponent } from './component/highchart/highchart.component';
+import { ChartModule } from 'angular-highcharts';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { AppImageComponent } from './component/app-image/app-image.component';
     AppDownloadComponent,
     AppUploadComponent,
     AppImageComponent,
+    HighchartComponent,
   ],
   imports: [
     FlexLayoutModule,
@@ -161,7 +163,8 @@ import { AppImageComponent } from './component/app-image/app-image.component';
       echarts: () => import('echarts')
     }),
     NgxMatSelectSearchModule,
-    FileSaverModule
+    FileSaverModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent],
