@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from zen_dash import instances as i
+from zen_dash.flex_data import FlexData
 
 
 router = APIRouter(
@@ -14,7 +15,7 @@ async def d3():
                         title="Multi Tabs",
                        multi_data=i.MultiData(urls=[i.MultiURLInfo(name="button toggle", url="/backend/page_one/row_five/button_toggle"), 
                                                      i.MultiURLInfo(name="button toggle multiple", url="/backend/page_one/row_five/button_toggle_multiple"),
-                                                     i.MultiURLInfo(name = "toggle", url="/backend/page_one/row_five/toggle")]))
+                                                     i.MultiURLInfo(name = "toggle", url="/backend/page_one/row_five/toggle")]), flex=FlexData(fxFlex="27%"))
 
 
 @router.post("/multi_records_expanded", response_model=i.ReturnData)

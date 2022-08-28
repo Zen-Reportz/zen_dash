@@ -193,6 +193,6 @@ class ReturnData(BaseModel):
     highchart_data: Optional[HighChartData]
 
     footer: Optional[str]
-    flex: Optional[FlexData]
+    flex: Optional[FlexData] = FlexData()
 
 

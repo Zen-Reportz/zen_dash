@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Request
 from zen_dash import instances as i
+from zen_dash.flex_data import FlexData
 
 
 router = APIRouter(
@@ -8,6 +9,7 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
+flex=FlexData(fxFlex="50%", fxFlex_md="50%", fxFlex_sm="110%", fxFlex_xs="110%")
 
 @router.post("/table", response_model=i.ReturnData)
 async def prf(request: Request):
@@ -118,7 +120,7 @@ async def prf(request: Request):
                                                 "company": "Erat Volutpat Corp.",
                                                 "country": "Chile",
                                                 "city": "Niterói",
-                                                "phone": "1-678-156-9674"}]))
+                                                "phone": "1-678-156-9674"}]), flex=flex)
 
 
 @router.post("/chart", response_model=i.ReturnData)
@@ -179,4 +181,4 @@ async def prf():
                                     ]
                                 }
                             ]
-                        }))
+                        }), flex=flex)

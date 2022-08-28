@@ -1,5 +1,9 @@
+# 0.1.15
+- Removed Flex from Instance. Now only it will supported from ReturnData
+
 # 0.1.14
 - High Chart included
+
 # 0.1.13
 - send file to server
 - render image 
