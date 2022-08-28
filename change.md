@@ -1,3 +1,6 @@
+# 0.1.17
+- Rrefresh button at bottom 
+
 # 0.1.16
 - fix issue with auto refresh
 
