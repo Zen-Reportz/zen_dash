@@ -1,3 +1,6 @@
+# 0.1.16
+- fix issue with auto refresh
+
 # 0.1.15
 - Removed Flex from Instance. Now only it will supported from ReturnData
 
