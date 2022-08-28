@@ -83,19 +83,15 @@ async def page_detail(fragment: str):
             p.Instance(url="/backend/page_one/row_one/single_date"),
             p.Instance(url="/backend/page_one/row_one/first_box"),
             p.Instance(url="/backend/page_one/row_one/second_box"),
+              p.Instance(url="/backend/page_one/row_one/third_box"),
             
         ]),
-            p.Row(data=[
-                p.Instance(url="/backend/page_one/row_one/single_date"),
-                p.Instance(url="/backend/page_one/row_one/second_box"),
-                p.Instance(url="/backend/page_one/row_one/third_box"),
-                p.Instance(url="/backend/page_one/row_one/forth_box"),
-            ]),
+        
             p.Row(data=[
                 p.Instance(url="/backend/page_one/row_two/table",
-                           flex=FlexData(fxFlex="50%", fxFlex_md="50%", fxFlex_sm="110%", fxFlex_xs="110%")),
+                           ),
                 p.Instance(url="/backend/page_one/row_two/chart",
-                           flex=FlexData(fxFlex="50%", fxFlex_md="50%", fxFlex_sm="110%", fxFlex_xs="110%")),
+                           ),
 
             ]),
             p.Row(data=[

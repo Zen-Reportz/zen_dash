@@ -32,7 +32,6 @@ export class SidebarData{
 
 export class Instance{
   url!: string
-  flex!: FlexData
 
 }
 

@@ -38,7 +38,6 @@ export class PageComponent implements OnInit {
   }
 
   setFlex(flex: FlexData, url: string) {
-
     if (flex !== null){
       this.size_data.set(url, flex);
     }
@@ -46,26 +45,30 @@ export class PageComponent implements OnInit {
   }
 
   getFlex(original: string, type: string, url: string) {
+    let response : any
     if (this.size_data.get(url)?.fxFlex !== undefined) {
       if (this.size_data.get(url)?.fxFlex !== null) {
         if (type == 'flex') {
-          return this.size_data.get(url)?.fxFlex;
+          response =  this.size_data.get(url)?.fxFlex;
         } else if (type == 'flex_md') {
-          return this.size_data.get(url)?.fxFlex_md;
+          response = this.size_data.get(url)?.fxFlex_md;
         } else if (type == 'flex_sm') {
-          return this.size_data.get(url)?.fxFlex_sm;
+          response = this.size_data.get(url)?.fxFlex_sm;
         } else if (type == 'flex_xs') {
-          return this.size_data.get(url)?.fxFlex_xs;
+          response = this.size_data.get(url)?.fxFlex_xs;
         } else {
           console.log(' issue with type for ' + url + ' ' + type);
-          return original;
+          response = original;
         }
       } else {
         console.log(" issue with type for " + url + " " + type)
-        return original
+        response = original
       }
     } else {
-      return original;
+      // console.log("No data so returning original")
+      response = original;
     }
+
+   return response
   }
 }
