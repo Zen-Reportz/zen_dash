@@ -1,47 +1,52 @@
-import { DataImage } from './../../shared/application_data';
+import { DataImage, ResponseData } from './../../shared/application_data';
 import { Component, Input, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { DataService } from 'src/app/shared/data.service';
+import { HttpClient, HttpEvent, HttpResponse } from '@angular/common/http';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { DataService } from 'src/app/services/data.service';
+import { CallServiceService } from 'src/app/services/call-service.service';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-app-image',
   templateUrl: './app-image.component.html',
-  styleUrls: ['./app-image.component.scss']
+  styleUrls: ['./app-image.component.scss'],
 })
 export class AppImageComponent implements OnInit {
-  @Input() uuid!: string
-  data: DataImage | undefined
-  image: Blob | undefined | null
-  imageURL!: SafeUrl
-  height!: string
-  width!: string
+  @Input() uuid!: string;
+  data: DataImage | undefined;
+  image: Blob | undefined | null;
+  imageURL!: SafeUrl;
+  height!: string;
+  width!: string;
+  imageCall: Subscription | undefined;
 
-  constructor(private http: HttpClient, private dataService: DataService , private sanitizer: DomSanitizer  ) {}
+  constructor(
+    private http: HttpClient,
+    private dataService: DataService,
+    private sanitizer: DomSanitizer,
+    private callService: CallServiceService
+  ) {}
 
   ngOnInit(): void {
-    let convMap: any = {};
-    this.dataService.data.forEach((val: string, key: string) => {
-      convMap[key] = val;
-    })
+    this.data = this.dataService.image_data.get(this.uuid);
+    this.height = this.data?.height as string;
+    this.width = this.data?.width as string;
+    if (this.imageCall !== undefined) {
+      this.imageCall.unsubscribe();
+    }
 
-    this.data = this.dataService.image_data.get(this.uuid)
-    this.height = this.data?.height as string
-    this.width = this.data?.width as string
+    let p = this.callService.call_response(location.origin + this.data?.url, {
+      responseType: 'blob',
+      observe: 'response',
+    }, undefined) as Observable<HttpResponse<Blob>>;
 
-
-    this.http.post(location.origin + this.data?.url, convMap ,  {responseType:"blob", observe:"response"})
-    .subscribe(res => {
-      this.image = res.body
-      if (this.image !== null){
-        this.imageURL = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(this.image))
+    this.imageCall = p.subscribe((res) => {
+      this.image = res.body;
+      if (this.image !== null) {
+        this.imageURL = this.sanitizer.bypassSecurityTrustUrl(
+          URL.createObjectURL(this.image)
+        );
       }
-
-    })
-
+    });
   }
-
-
-
-
 }

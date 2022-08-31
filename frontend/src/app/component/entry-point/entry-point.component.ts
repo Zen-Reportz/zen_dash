@@ -1,49 +1,44 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FlexData } from 'src/app/shared/application_data';
 
-
 @Component({
   selector: 'app-entry-point',
   templateUrl: './entry-point.component.html',
-  styleUrls: ['./entry-point.component.scss']
+  styleUrls: ['./entry-point.component.scss'],
 })
 export class EntryPointComponent implements OnInit {
-  @Input() url!: string
+  @Input() url!: string;
   @Output() fxFlex = new EventEmitter<FlexData>();
 
-  pulled: boolean = false
-  footer!: string
-  title!: string
+  pulled: boolean = false;
+  footer!: string;
+  title!: string;
 
-  constructor(){
+  constructor() {}
 
+  ngOnInit(): void {}
+
+  setPulled(result: boolean) {
+    this.pulled = result;
   }
 
-  ngOnInit(): void {
+  setFooter(result: string) {
+    this.footer = result;
   }
 
-  setPulled(result:boolean){
-    this.pulled = result
+  getFooter() {
+    return this.footer;
   }
 
-  setFooter(result:string){
-    this.footer = result
+  setTitle(result: string) {
+    this.title = result;
   }
 
-  getFooter(){
-    return this.footer
+  getTitle() {
+    return this.title;
   }
 
-  setTitle(result:string){
-    this.title = result
+  setFlex(event: FlexData) {
+    this.fxFlex.emit(event);
   }
-
-  getTitle(){
-    return this.title
-  }
-
-  setFlex(event: FlexData){
-    this.fxFlex.emit(event)
-  }
-
 }

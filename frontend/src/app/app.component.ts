@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { DataService } from './shared/data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingComponent } from './component/loading/loading.component';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',

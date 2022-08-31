@@ -1,11 +1,10 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, Input, OnInit, ViewChild } from '@angular/core'
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DataService } from 'src/app/shared/data.service';
-import {  TableColumn } from '../../shared/application_data';
-
+import { DataService } from 'src/app/services/data.service';
+import { TableColumn } from '../../shared/application_data';
 
 @Component({
   selector: 'app-table',
@@ -13,7 +12,7 @@ import {  TableColumn } from '../../shared/application_data';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-  @Input() uuid!: string
+  @Input() uuid!: string;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   // @ViewChild(MatPaginator, { static: false }) set matPaginator(paginator: MatPaginator) {
@@ -27,21 +26,23 @@ export class TableComponent implements OnInit {
   displayedColumns: string[] = [];
   value!: string;
   columns!: Array<TableColumn>;
-  constructor(private dataService: DataService) { }
-
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
-      this.columns = this.dataService.table_data.get(this.uuid)?.columns as TableColumn[]
-      this.dataSource = new MatTableDataSource<any>(this.dataService.table_data.get(this.uuid)?.data as any);
-      this.dataService.table_data.delete(this.uuid)
+    this.columns = this.dataService.table_data.get(this.uuid)
+      ?.columns as TableColumn[];
+    this.dataSource = new MatTableDataSource<any>(
+      this.dataService.table_data.get(this.uuid)?.data as any
+    );
+    this.dataService.table_data.delete(this.uuid);
 
-      this.displayedColumns = this.displayedColumns.concat(this.columns.map(x => x.columnDef));    // pre-fix static
-
+    this.displayedColumns = this.displayedColumns.concat(
+      this.columns.map((x) => x.columnDef)
+    ); // pre-fix static
   }
-  ngAfterViewInit(){
-
-     this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -53,9 +54,9 @@ export class TableComponent implements OnInit {
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.dataSource.data.forEach((row) => this.selection.select(row));
   }
   // ngAfterViewInit() {
   // }
@@ -64,5 +65,3 @@ export class TableComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
-
-

@@ -1,26 +1,19 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { DataService } from 'src/app/shared/data.service';
-
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-plot',
   templateUrl: './plot.component.html',
-  styleUrls: ['./plot.component.scss']
+  styleUrls: ['./plot.component.scss'],
 })
 export class PlotComponent implements OnInit {
-  @Input() uuid!: string
+  @Input() uuid!: string;
 
   constructor(private dataService: DataService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-
+  get_options() {
+    return this.dataService.chart_data.get(this.uuid)?.data as any;
   }
-
-
-  get_options(){
-    return this.dataService.chart_data.get(this.uuid)?.data as any
-  }
-
 }
