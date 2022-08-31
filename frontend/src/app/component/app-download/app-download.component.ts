@@ -1,48 +1,51 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FileSaverService } from 'ngx-filesaver';
+import { Observable, Subscription } from 'rxjs';
+import { CallServiceService } from 'src/app/services/call-service.service';
+import { DataService } from 'src/app/services/data.service';
 import { DownloadData } from 'src/app/shared/application_data';
-import { DataService } from 'src/app/shared/data.service';
 
 @Component({
   selector: 'app-app-download',
   templateUrl: './app-download.component.html',
-  styleUrls: ['./app-download.component.scss']
+  styleUrls: ['./app-download.component.scss'],
 })
 export class AppDownloadComponent implements OnInit {
+  @Input() uuid!: string;
+  data: DownloadData | undefined;
+  downloadCall: Subscription | undefined;
 
-  @Input() uuid!: string
-  data:   DownloadData | undefined
-
-  constructor(private http: HttpClient, private dataService: DataService,     private fileSaverService: FileSaverService    ) {
-
-  }
+  constructor(
+    private http: HttpClient,
+    private dataService: DataService,
+    private fileSaverService: FileSaverService,
+    private callService: CallServiceService
+  ) {}
 
   onSave() {
-    let convMap: any = {};
-    this.dataService.data.forEach((val: string, key: string) => {
-      convMap[key] = val;
-    })
+    if (this.downloadCall !== undefined) {
+      this.downloadCall.unsubscribe();
+    }
+    let p = this.callService.call_response(location.origin + this.data?.url, {
+      responseType: 'blob',
+      observe: 'response',
+    }, undefined) as Observable<HttpResponse<Blob>>;
 
-    this.http.post(location.origin + this.data?.url, convMap , {responseType:"blob", observe:"response"} ).subscribe(res=> {
+    this.downloadCall = p.subscribe((res) => {
       this.fileSaverService.save(res.body, this.data?.file_name);
     });
-
-}
+  }
 
   ngOnInit() {
-    this.data = this.dataService.download_data.get(this.uuid)
-
+    this.data = this.dataService.download_data.get(this.uuid);
   }
 
-  fileName(){
-    return this.data?.file_name
+  fileName() {
+    return this.data?.file_name;
   }
 
-  onSuc(event:any){
-  }
+  onSuc(event: any) {}
 
-  onErr(event: any){
-  }
-
+  onErr(event: any) {}
 }

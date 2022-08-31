@@ -1,3 +1,7 @@
+# 0.1.18
+- simplified http call
+- unsubscribe if we make new call and old call is not yet responded
+
 # 0.1.17
 - Rrefresh button at bottom 
 

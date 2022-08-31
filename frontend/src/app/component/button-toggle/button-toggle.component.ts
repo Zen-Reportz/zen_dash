@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DataService } from 'src/app/shared/data.service';
+import { DataService } from 'src/app/services/data.service';
 import { ButtonToggleInstance } from '../../shared/application_data';
 
 @Component({
@@ -44,8 +44,7 @@ export class ButtonToggleComponent implements OnInit {
   }
 
   isMultiple() {
-    return this.dataService.button_toggle_data.get(this.uuid)
-      ?.multi as boolean;
+    return this.dataService.button_toggle_data.get(this.uuid)?.multi as boolean;
   }
 
   get_data() {

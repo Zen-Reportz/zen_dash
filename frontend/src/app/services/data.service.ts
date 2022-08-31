@@ -17,8 +17,8 @@ import {
   ToggleData,
   UploadData,
   DataImage,
-  HighChartData
-} from './application_data';
+  HighChartData,
+} from '../shared/application_data';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +39,7 @@ export class DataService {
   input_filter_data = new Map<string, InputData>();
   download_data = new Map<string, DownloadData>();
   upload_data = new Map<string, UploadData>();
-  image_data = new Map<string,  DataImage>();
+  image_data = new Map<string, DataImage>();
   highchart_data = new Map<string, HighChartData>();
 
   data = new Map<string, any>();
