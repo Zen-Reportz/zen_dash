@@ -111,11 +111,13 @@ class InputData(BaseModel):
 class GroupedFilterData(BaseModel):
     multi: bool = False
     name: str
+    url: Optional[str]
     data: List[GroupedFilterDataInstance]
 
 
 class SimpleFilterData(BaseModel):
     multi: bool = False
+    url: Optional[str]
     name: str
     data: List[str]
 
@@ -196,3 +198,20 @@ class ReturnData(BaseModel):
     flex: Optional[FlexData] = FlexData()
 
 
+class UpdateInstanceType(Enum):
+    """ Docstring for class UpdateInstanceType
+    Instance Type required for UpdateReturnData
+
+    :return: Update Instance Type for Enum
+    :rtype: Enum
+
+    """
+    SIMPLE_FILTER = "simple_filter"
+
+
+
+
+class UpdateReturnData(BaseModel):
+    type: UpdateInstanceType
+    simple_fitler_data: Optional[List[str]]
+    

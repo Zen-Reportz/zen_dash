@@ -124,17 +124,22 @@ async def page_detail(fragment: str):
             ]),
             p.Row(data=[
                 p.Instance(url="/backend/filters/single_filter"),
+                p.Instance(url="/backend/filters/single_filter_server"),
+
                 p.Instance(url="/backend/filters/multi_filter"),
-                p.Instance(url="/backend/filters/single_filter_group"),
-                p.Instance(url="/backend/filters/multi_filter_group"),
+                p.Instance(url="/backend/filters/multi_filter_server"),
+                
             ]),
             p.Row(data=[
+                p.Instance(url="/backend/filters/single_filter_group"),
+                p.Instance(url="/backend/filters/multi_filter_group"),
                 p.Instance(url="/backend/page_one/row_seven/input"),
-                p.Instance(url="/backend/page_one/row_seven/file_download"),
-                p.Instance(url="/backend/page_one/row_seven/upload"),
+                
 
 
             ]),
+            p.Row(data=[p.Instance(url="/backend/page_one/row_seven/file_download"),
+                p.Instance(url="/backend/page_one/row_seven/upload"),]),
             p.Row(data=[p.Instance(url="/backend/page_one/row_eight/image"),
             p.Instance(url="/backend/page_one/row_eight/highchart"),
             

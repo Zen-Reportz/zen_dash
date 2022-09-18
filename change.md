@@ -1,3 +1,7 @@
+# 0.1.19
+- added server side filtering for single select and multi select for simple filteres
+- fix issue with refresh button 
+
 # 0.1.18
 - simplified http call
 - unsubscribe if we make new call and old call is not yet responded

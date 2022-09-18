@@ -133,11 +133,13 @@ export class GroupedFilterDataInstance{
 export class GroupFilterData{
   multi!: boolean
   name!: string
+  url: string | undefined
   data!: GroupedFilterDataInstance[]
 }
 
 export class SimpleFilterData{
   multi!: boolean
+  url: string | undefined
   name!: string
   data!: string[]
 
@@ -208,5 +210,12 @@ export class ResponseData{
   highchart_data: HighChartData | undefined
   footer: string | undefined
   flex: FlexData | undefined
+
+}
+
+
+export class UpdateReturnData{
+  type!: string
+  simple_fitler_data: string[] | undefined
 
 }
