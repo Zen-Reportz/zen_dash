@@ -53,4 +53,8 @@ export class DataService {
       // this.refresh.emit(t.key)
     });
   }
+
+  get_data(key:string) {
+    return this.data.get(key)
+  }
 }

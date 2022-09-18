@@ -10,7 +10,7 @@ router = APIRouter(
 )
 
 
-@router.post("/first_box", response_model=i.ReturnData)
+@router.post("/first_box", response_model=i.ReturnData, response_model_exclude_none=True)
 async def prf():
     return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="person", name="Users", value="5000"), footer="5% increase compare to last week ")
 
