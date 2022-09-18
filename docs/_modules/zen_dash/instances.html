@@ -178,11 +178,13 @@
 <div class="viewcode-block" id="GroupedFilterData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.GroupedFilterData">[docs]</a><span class="k">class</span> <span class="nc">GroupedFilterData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">multi</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">GroupedFilterDataInstance</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="SimpleFilterData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.SimpleFilterData">[docs]</a><span class="k">class</span> <span class="nc">SimpleFilterData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">multi</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
 
@@ -263,6 +265,23 @@
     <span class="n">flex</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FlexData</span><span class="p">]</span> <span class="o">=</span> <span class="n">FlexData</span><span class="p">()</span></div>
 
 
+<div class="viewcode-block" id="UpdateInstanceType"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.UpdateInstanceType">[docs]</a><span class="k">class</span> <span class="nc">UpdateInstanceType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Docstring for class UpdateInstanceType</span>
+<span class="sd">    Instance Type required for UpdateReturnData</span>
+
+<span class="sd">    :return: Update Instance Type for Enum</span>
+<span class="sd">    :rtype: Enum</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">SIMPLE_FILTER</span> <span class="o">=</span> <span class="s2">&quot;simple_filter&quot;</span></div>
+
+
+
+
+<div class="viewcode-block" id="UpdateReturnData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.UpdateReturnData">[docs]</a><span class="k">class</span> <span class="nc">UpdateReturnData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">UpdateInstanceType</span>
+    <span class="n">simple_fitler_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span></div>
+    
 </pre></div>
 
            </div>
