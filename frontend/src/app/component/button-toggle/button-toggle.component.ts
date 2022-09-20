@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
-import { ButtonToggleInstance } from '../../shared/application_data';
+import { ButtonToggleInstance, MEData } from '../../shared/application_data';
 
 @Component({
   selector: 'app-button-toggle',
@@ -40,7 +40,11 @@ export class ButtonToggleComponent implements OnInit {
   }
 
   onChange($event: any) {
-    this.selected_data = $event.value;
+    let m = new MEData();
+    m.key = this.dataService.button_toggle_data.get(this.uuid)?.name as string;
+    m.value = $event.value;
+    this.dataService.data_setter.emit(m);
+
   }
 
   isMultiple() {

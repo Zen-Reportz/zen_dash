@@ -33,6 +33,7 @@ async def d3():
 
 @router.post("/upload", response_model=i.ReturnData)
 async def d3():
+
     return i.ReturnData(type=i.InstanceType.UPLOAD, title="upload file", upload_data=i.UploadData(url="/backend/page_one/row_seven/upload_data", multi=True, name="download_data"))
 
 

@@ -1,3 +1,6 @@
+# 0.2.0
+- fix issue with button, group filter, simple server filter, slider
+
 # 0.1.20
 - fixed issue with server side filter
 - update http method 

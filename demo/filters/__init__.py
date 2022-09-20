@@ -12,7 +12,7 @@ router = APIRouter(
 
 
 @router.post("/single_filter", response_model=i.ReturnData)
-async def single_filter(request: Request):
+async def single_filter():
     s = i.ReturnData(
                     title = "Simple Filter",
                     type=i.InstanceType.SIMPLE_FILTER,
@@ -25,7 +25,7 @@ async def single_filter(request: Request):
 
 
 @router.post("/single_filter_server", response_model=i.ReturnData)
-async def single_filter(request: Request):
+async def single_filter():
     s = i.ReturnData(
                      title = "Simple Filter Server side",
                      type=i.InstanceType.SIMPLE_SERVER_FILTER,
@@ -51,7 +51,7 @@ async def single_filter(request: Request):
 
 
 @router.post("/multi_filter", response_model=i.ReturnData)
-async def multi_filter(request: Request):
+async def multi_filter():
     return i.ReturnData(
                         title = "Multi Filter",
                         type=i.InstanceType.SIMPLE_FILTER,
@@ -60,7 +60,7 @@ async def multi_filter(request: Request):
                                                        data=["Option 1","Option 2"]))
 
 @router.post("/multi_filter_server", response_model=i.ReturnData)
-async def multi_filter(request: Request):
+async def multi_filter():
     return i.ReturnData(
                         title = "Multi Filter Server",
                         type=i.InstanceType.SIMPLE_SERVER_FILTER,
@@ -71,7 +71,7 @@ async def multi_filter(request: Request):
 
 
 @router.post("/single_filter_group", response_model=i.ReturnData)
-async def single_filter_group(request: Request):
+async def single_filter_group():
     return i.ReturnData(
                         title = "Single Filter Group",
                         type=i.InstanceType.GROUP_FILTER,
@@ -82,7 +82,7 @@ async def single_filter_group(request: Request):
 
 
 @router.post("/multi_filter_group", response_model=i.ReturnData)
-async def multi_filter_group(request: Request):
+async def multi_filter_group():
     return i.ReturnData(
                         title = "Multi Filter Group",
                         type=i.InstanceType.GROUP_FILTER,

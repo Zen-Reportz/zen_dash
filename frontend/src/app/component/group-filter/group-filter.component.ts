@@ -109,12 +109,12 @@ export class GroupFilterComponent implements OnInit {
   }
 
   getLabel() {
-    return this.dataService.simple_filter_data.get(this.uuid)?.name;
+    return this.dataService.group_filter_data.get(this.uuid)?.name;
   }
 
   detectChange(value: any) {
     let m = new MEData();
-    m.key = this.dataService.simple_filter_data.get(this.uuid)?.name as string;
+    m.key = this.dataService.group_filter_data.get(this.uuid)?.name as string;
     m.value = value.value;
 
     this.dataService.data_setter.emit(m);
