@@ -8,6 +8,7 @@
   [(ngModel)]="value"
   [vertical]="isVertical()"
   aria-labelledby="example-name-label"
+  (change)="detectChange()"
 >
 </mat-slider>
 

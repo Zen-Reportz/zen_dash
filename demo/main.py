@@ -53,12 +53,12 @@ async def root(request: Request):
 
 
 @app.get("/backend/title")
-async def title(request: Request):
+async def title():
     return 'Demo'
 
 
 @app.get("/backend/sidebar", response_model=s.Sidebar)
-async def sidebar(request: Request):
+async def sidebar():
     return s.Sidebar(tabs=[s.SidebarTab(label="First Page", icon='delete', fragment="/backend/first_page"),
                            s.SidebarTab(label="Last Page", icon='home', fragment="/backend/last_page")],
                      filters=[s.FilterInfo(url="/backend/filters/single_filter"),

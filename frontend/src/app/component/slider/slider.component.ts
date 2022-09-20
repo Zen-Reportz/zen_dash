@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
+import { MEData } from 'src/app/shared/application_data';
 
 @Component({
   selector: 'app-slider',
@@ -36,5 +37,13 @@ export class SliderComponent implements OnInit {
 
   isVertical() {
     return this.dataService.slider_data.get(this.uuid)?.vertical as boolean;
+  }
+
+
+  detectChange() {
+    let m = new MEData();
+    m.key = this.dataService.slider_data.get(this.uuid)?.name as string;
+    m.value = this.value;
+    this.dataService.data_setter.emit(m);
   }
 }

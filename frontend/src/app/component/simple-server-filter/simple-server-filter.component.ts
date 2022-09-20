@@ -127,7 +127,7 @@ export class SimpleServerFilterComponent implements OnInit {
 
   detectChange(value: any) {
     let m = new MEData();
-    m.key = this.dataService.simple_filter_data.get(this.uuid)?.name as string;
+    m.key = this.dataService.simple_server_filter_data.get(this.uuid)?.name as string;
     m.value = value.value;
 
     this.dataService.data_setter.emit(m);
