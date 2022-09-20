@@ -1,3 +1,4 @@
+import { SimpleServerFilterData } from './../shared/application_data';
 import { Injectable, EventEmitter } from '@angular/core';
 import {
   BoxData,
@@ -35,6 +36,7 @@ export class DataService {
   button_toggle_data = new Map<string, ButtonToggleData>();
   toggle_data = new Map<string, ToggleData>();
   simple_filter_data = new Map<string, SimpleFilterData>();
+  simple_server_filter_data = new Map<string, SimpleServerFilterData>();
   group_filter_data = new Map<string, GroupFilterData>();
   input_filter_data = new Map<string, InputData>();
   download_data = new Map<string, DownloadData>();

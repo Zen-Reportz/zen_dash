@@ -1,1 +1,7 @@
+
+<span *ngIf="loading">
+  <mat-progress-bar mode="query"></mat-progress-bar>
+</span>
+<span *ngIf="!loading">
 <img mat-card-sm-image [src]="imageURL"  [style.height]="height" [style.width]="width"/>
+</span>

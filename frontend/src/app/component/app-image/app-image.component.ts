@@ -19,6 +19,7 @@ export class AppImageComponent implements OnInit {
   height!: string;
   width!: string;
   imageCall: Subscription | undefined;
+  loading= true
 
   constructor(
     private http: HttpClient,
@@ -35,12 +36,13 @@ export class AppImageComponent implements OnInit {
       this.imageCall.unsubscribe();
     }
 
-    let p = this.callService.call_response(location.origin + this.data?.url, {
+    let p = this.callService.call_response(this.data?.url as string, {
       responseType: 'blob',
       observe: 'response',
     }, undefined) as Observable<HttpResponse<Blob>>;
 
     this.imageCall = p.subscribe((res) => {
+      this.loading=false
       this.image = res.body;
       if (this.image !== null) {
         this.imageURL = this.sanitizer.bypassSecurityTrustUrl(

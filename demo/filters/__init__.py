@@ -28,8 +28,8 @@ async def single_filter(request: Request):
 async def single_filter(request: Request):
     s = i.ReturnData(
                      title = "Simple Filter Server side",
-                     type=i.InstanceType.SIMPLE_FILTER,
-                     simple_filter_data=i.SimpleFilterData(
+                     type=i.InstanceType.SIMPLE_SERVER_FILTER,
+                     simple_server_filter_data=i.SimpleServerSideFilterData(
                          name="simple_filter_server",
                          data=["Test 1","My 2"],
                          url = "/backend/filters/my_data_filter"
@@ -40,8 +40,11 @@ async def single_filter(request: Request):
 
 @router.post("/my_data_filter", response_model=i.UpdateReturnData)
 async def single_filter(request: Request):
+    dd = await request.json()
+    key = list(dd.keys())[0]
+    
     s = i.UpdateReturnData(type=i.UpdateInstanceType.SIMPLE_FILTER, 
-                           simple_fitler_data=[''.join(random.choices(string.ascii_uppercase + string.digits, k=10)) for _ in range(20)]
+                           simple_fitler_data=[dd.get(key) + "_" + ''.join(random.choices(string.ascii_uppercase + string.digits, k=10)) for _ in range(20)]
                      )
     return s
 
@@ -60,8 +63,8 @@ async def multi_filter(request: Request):
 async def multi_filter(request: Request):
     return i.ReturnData(
                         title = "Multi Filter Server",
-                        type=i.InstanceType.SIMPLE_FILTER,
-                        simple_filter_data=i.SimpleFilterData(name="Simple Multi Filter",
+                        type=i.InstanceType.SIMPLE_SERVER_FILTER,
+                        simple_server_filter_data=i.SimpleServerSideFilterData(name="Simple Multi Filter",
                                                        multi=True,
                                                        data=["Option 1","Option 2"],
                                                        url = "/backend/filters/my_data_filter"))

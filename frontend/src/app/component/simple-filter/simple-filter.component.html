@@ -1,39 +1,7 @@
 <mat-form-field appearance="fill">
   <mat-label>{{ getLabel() }}</mat-label>
 
-  <div *ngIf="isServerSide(); else local">
-    <mat-select
-      [formControl]="data_select_control"
-      placeholder="getLabel()"
-      (selectionChange)="detectChange($event)"
-      [multiple]="multi"
-      [compareWith]="compareFn"
-      #dataSelect
-    >
-      <mat-option>
-        <ngx-mat-select-search
-          [formControl]="data_search_control"
-        ></ngx-mat-select-search>
-      </mat-option>
-      <mat-option
-        *ngFor="let data_value of data_search | async"
-        [value]="data_value"
-      >
-        {{ data_value }}
-      </mat-option>
-      <ng-container *ngIf="!data_search_control.value">
-        <mat-option
-          *ngFor="let value of data_select_control.value"
-          [value]="value"
-          style="display: none"
-        >
-          {{ value }}
-        </mat-option>
-      </ng-container>
-    </mat-select>
-  </div>
 
-  <ng-template #local>
     <mat-select
       [formControl]="data_select_control"
       placeholder="getLabel()"
@@ -53,5 +21,4 @@
         {{ data_value }}
       </mat-option>
     </mat-select>
-  </ng-template>
 </mat-form-field>

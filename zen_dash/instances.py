@@ -24,6 +24,7 @@ class InstanceType(Enum):
     RADIO = "radio"
     MIXED = "mixed"
     SIMPLE_FILTER = "simple_filter"
+    SIMPLE_SERVER_FILTER = "simple_server_filter"
     GROUP_FILTER = "group_filter"
     SLIDER = "slider"
     BUTTON_TOGGLE = "button_toggle"
@@ -117,9 +118,11 @@ class GroupedFilterData(BaseModel):
 
 class SimpleFilterData(BaseModel):
     multi: bool = False
-    url: Optional[str]
     name: str
     data: List[str]
+
+class SimpleServerSideFilterData(SimpleFilterData):
+    url: Optional[str]
 
 
 class ToggleData(BaseModel):
@@ -187,6 +190,7 @@ class ReturnData(BaseModel):
     toggle_data: Optional[ToggleData]
     multi_data: Optional[MultiData]
     simple_filter_data: Optional[SimpleFilterData] 
+    simple_server_filter_data: Optional[SimpleServerSideFilterData] 
     group_filter_data: Optional[GroupedFilterData ]
     input_data: Optional[InputData]
     download_data: Optional[DownloadData]

@@ -30,16 +30,16 @@
     <!-- <ng-container *ngIf="url_info.with_card; else mulit_list"> -->
 
     <!-- <app-entry-point
-      [url]="instance.url"
-      [fxFlex]="getFlex(instance.fxFlex, 'flex', instance.url)"
-      [fxFlex.md]="getFlex(instance.fxFlex, 'flex_md', instance.url)"
-      [fxFlex.sm]="getFlex(instance.fxFlex, 'flex_sm', instance.url)"
-      [fxFlex.xs]="getFlex(instance.fxFlex, 'flex_xs', instance.url)"
+        [url]="instance.url"
+        [fxFlex]="getFlex(instance.fxFlex, 'flex', instance.url)"
+        [fxFlex.md]="getFlex(instance.fxFlex, 'flex_md', instance.url)"
+        [fxFlex.sm]="getFlex(instance.fxFlex, 'flex_sm', instance.url)"
+        [fxFlex.xs]="getFlex(instance.fxFlex, 'flex_xs', instance.url)"
 
-      (fxFlex)="setFlex($event, instance.url)"
-      class="padding"
-    >
-    </app-entry-point> -->
+        (fxFlex)="setFlex($event, instance.url)"
+        class="padding"
+      >
+      </app-entry-point> -->
     <!-- </ng-container> -->
     <!-- <ng-template #mulit_list> -->
     <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point> <br />
@@ -50,7 +50,7 @@
 <span *ngIf="type === 'multi_tabs'">
   <mat-tab-group>
     <mat-tab *ngFor="let url_info of getURLs()" [label]="url_info.name || ''">
-      <br>
+      <br />
       <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point>
     </mat-tab>
   </mat-tab-group>
@@ -58,7 +58,7 @@
 
 <span *ngIf="type === 'multi_expand'">
   <mat-accordion>
-    <br><br>
+    <br /><br />
     <span *ngFor="let url_info of getURLs()">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -74,6 +74,11 @@
 
 <span *ngIf="type == 'simple_filter'">
   <app-simple-filter [uuid]="uuid"></app-simple-filter>
+</span>
+
+
+<span *ngIf="type == 'simple_server_filter'">
+  <app-simple-server-filter [uuid]="uuid"></app-simple-server-filter>
 </span>
 
 <span *ngIf="type == 'group_filter'">
@@ -96,7 +101,11 @@
   <app-app-image [uuid]="uuid"></app-app-image>
 </span>
 
-
 <span *ngIf="type == 'highchart'">
   <app-highchart [uuid]="uuid"></app-highchart>
 </span>
+
+<span *ngIf="loading">
+  <mat-progress-bar mode="query"></mat-progress-bar>
+</span>
+

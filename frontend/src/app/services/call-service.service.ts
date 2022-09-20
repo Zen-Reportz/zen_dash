@@ -11,6 +11,13 @@ export class CallServiceService {
   constructor(private http: HttpClient, private dataService: DataService) {}
 
   call_response(url: string, parameters: any | undefined, formdata: FormData | undefined) {
+    let url_: string
+    if (url.includes('http')){
+      url_ = url
+    } else {
+      url_ = location.origin + url
+    }
+
     let convMap: any = {};
     if (formdata !== undefined){
       convMap = formdata
@@ -29,15 +36,22 @@ export class CallServiceService {
       | Observable<HttpResponse<Blob>>
       | Observable<Object>;
     if (parameters === undefined) {
-      p = this.http.post<ResponseData>(url, convMap);
+      p = this.http.post<ResponseData>(url_, convMap);
     } else {
-      p = this.http.post<ResponseData>(url, convMap, parameters);
+      p = this.http.post<ResponseData>(url_, convMap, parameters);
     }
 
     return p;
   }
 
   second_call_response(url: string, search_key: string, search_value: string ) {
+    let url_: string
+    if (url.includes('http')){
+      url_ = url
+    } else {
+      url_ = location.origin + url
+    }
+
     let convMap: any = {};
     this.dataService.data.forEach((val: string, key: string) => {
         convMap[key] = val;

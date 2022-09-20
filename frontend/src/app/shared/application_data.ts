@@ -139,10 +139,17 @@ export class GroupFilterData{
 
 export class SimpleFilterData{
   multi!: boolean
-  url: string | undefined
   name!: string
   data!: string[]
 
+}
+
+
+export class SimpleServerFilterData{
+  multi!: boolean
+  name!: string
+  data!: string[]
+  url!: string
 }
 
 export class MultiURLInfo{
@@ -193,6 +200,7 @@ export class ResponseData{
   title: string | undefined
   chart_data:  ChartData |   undefined
   simple_filter_data: SimpleFilterData | undefined
+  simple_server_filter_data: SimpleServerFilterData | undefined
   group_filter_data:  GroupFilterData | undefined
   box_data: BoxData | undefined
   date_data: DateData | undefined
