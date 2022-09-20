@@ -45,7 +45,7 @@ export class AppUploadComponent implements OnInit {
       this.uploadCall.unsubscribe();
     }
 
-    let p = this.callService.call_response(location.origin + this.data?.url,undefined, formData) as Observable<Object>;
+    let p = this.callService.call_response(this.data?.url as string,undefined, formData) as Observable<Object>;
 
     this.uploadCall = p.subscribe((res) => {
       alert('Uploaded Successfully.');

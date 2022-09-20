@@ -1,5 +1,5 @@
 import { CallServiceService } from './../../services/call-service.service';
-import { HighChartData } from './../../shared/application_data';
+import { HighChartData, SimpleServerFilterData } from './../../shared/application_data';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UUID } from 'angular2-uuid';
 import {
@@ -48,6 +48,7 @@ export class SubEntryPointComponent implements OnInit {
   multi_url!: MultiURLInfo[];
   pageCall: Subscription | undefined;
   data_type = ['box', 'table', 'chart', 'image', 'highchart'];
+  loading = true;
 
   constructor(
     private dataService: DataService,
@@ -153,6 +154,7 @@ export class SubEntryPointComponent implements OnInit {
   }
 
   getData() {
+    this.loading = true
     if (this.type !== undefined) {
       this.deleteData();
     }
@@ -162,12 +164,13 @@ export class SubEntryPointComponent implements OnInit {
     }
 
     let p = this.callService.call_response(
-      location.origin + this.url,
+      this.url,
       undefined, undefined
     ) as Observable<ResponseData>;
 
     this.pageCall = p.subscribe({
       next: (t: ResponseData) => {
+        this.loading = false
         this.reactive = t.reactive;
         switch (t.type) {
           case 'box':
@@ -240,6 +243,12 @@ export class SubEntryPointComponent implements OnInit {
             this.dataService.simple_filter_data.set(
               this.uuid,
               t.simple_filter_data as SimpleFilterData
+            );
+            break;
+          case 'simple_server_filter':
+            this.dataService.simple_server_filter_data.set(
+              this.uuid,
+              t.simple_server_filter_data as SimpleServerFilterData
             );
             break;
           case 'group_filter':

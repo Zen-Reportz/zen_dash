@@ -77,6 +77,7 @@ import { AppUploadComponent } from './component/app-upload/app-upload.component'
 import { AppImageComponent } from './component/app-image/app-image.component';
 import { HighchartComponent } from './component/highchart/highchart.component';
 import { ChartModule } from 'angular-highcharts';
+import { SimpleServerFilterComponent } from './component/simple-server-filter/simple-server-filter.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import { ChartModule } from 'angular-highcharts';
     AppUploadComponent,
     AppImageComponent,
     HighchartComponent,
+    SimpleServerFilterComponent,
   ],
   imports: [
     FlexLayoutModule,

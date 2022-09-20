@@ -50,16 +50,11 @@ export class SimpleFilterComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private callService: CallServiceService
   ) {}
 
   ngOnInit(): void {
     this.originalData();
-    this.searchOrPullData();
-
-    if (this.dataService.simple_filter_data.get(this.uuid)?.url !== undefined) {
-      this.pullData();
-    }
+    this.searchData();
   }
 
   ngAfterViewInit() {}
@@ -94,7 +89,6 @@ export class SimpleFilterComponent implements OnInit {
   }
 
   originalData() {
-    this.dataUrl = this.dataService.simple_filter_data.get(this.uuid)?.url;
     this.multi = this.dataService.simple_filter_data.get(this.uuid)
       ?.multi as boolean;
 
@@ -118,41 +112,6 @@ export class SimpleFilterComponent implements OnInit {
     this.setInitialValue();
   }
 
-  pullData() {
-    if (this.dataCall !== undefined) {
-      this.dataCall.unsubscribe();
-    }
-
-    this.data_search_control.valueChanges.subscribe((search) => {
-      if (search === '') {
-        return;
-      }
-      let p = this.callService.second_call_response(
-        location.origin + this.dataUrl,
-        (this.dataService.simple_filter_data.get(this.uuid)?.name as string) +
-          '_search',
-        search as string
-      );
-
-      this.dataCall = p.subscribe((data) => {
-        let fi = data.simple_fitler_data as string[];
-        this.searching = false;
-        this.data_search.next(fi);
-      });
-
-
-    });
-
-  }
-
-  searchOrPullData() {
-    // listen for search field value changes
-    if (this.dataService.simple_filter_data.get(this.uuid)?.url !== undefined) {
-      // this.pullData();
-    } else {
-      this.searchData();
-    }
-  }
 
   getLabel() {
     return this.dataService.simple_filter_data.get(this.uuid)?.name;
@@ -167,6 +126,7 @@ export class SimpleFilterComponent implements OnInit {
   }
 
   isServerSide(){
-    return this.dataUrl !== undefined
+
+    return this.dataUrl !== null
   }
 }

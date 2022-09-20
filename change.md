@@ -1,3 +1,7 @@
+# 0.1.20
+- fixed issue with server side filter
+- update http method 
+
 # 0.1.19
 - added server side filtering for single select and multi select for simple filteres
 - fix issue with refresh button 

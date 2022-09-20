@@ -14,7 +14,7 @@ async def d3():
     t =  i.ReturnData(type=i.InstanceType.BUTTON_TOGGLE,
                         title="Button Toggle",
                         button_toggle_data=i.ButtonToggleData(name="single_toggle_data",
-                                                multiple=False,
+                                                multi=False,
                                                 data=[i.ButtonToggleInstance(label="Red", name="red", selected=True),
                                                       i.ButtonToggleInstance(label="Blue", name="blue"),
                                                       i.ButtonToggleInstance(label="Black", name="black")]))
@@ -26,7 +26,7 @@ async def d3():
     return i.ReturnData(type=i.InstanceType.BUTTON_TOGGLE,
                         title="Button Toggle multiple",
                         button_toggle_data=i.ButtonToggleData(name="multi_toggle_data",
-                                                multiple=True,
+                                                multi=True,
                                                 data=[i.ButtonToggleInstance(label="Red", name="red", selected=True),
                                                       i.ButtonToggleInstance(label="Blue", name="blue"),
                                                       i.ButtonToggleInstance(label="Black", name="black")]))
