@@ -91,6 +91,7 @@
     <span class="n">RADIO</span> <span class="o">=</span> <span class="s2">&quot;radio&quot;</span>
     <span class="n">MIXED</span> <span class="o">=</span> <span class="s2">&quot;mixed&quot;</span>
     <span class="n">SIMPLE_FILTER</span> <span class="o">=</span> <span class="s2">&quot;simple_filter&quot;</span>
+    <span class="n">SIMPLE_SERVER_FILTER</span> <span class="o">=</span> <span class="s2">&quot;simple_server_filter&quot;</span>
     <span class="n">GROUP_FILTER</span> <span class="o">=</span> <span class="s2">&quot;group_filter&quot;</span>
     <span class="n">SLIDER</span> <span class="o">=</span> <span class="s2">&quot;slider&quot;</span>
     <span class="n">BUTTON_TOGGLE</span> <span class="o">=</span> <span class="s2">&quot;button_toggle&quot;</span>
@@ -184,9 +185,11 @@
 
 <div class="viewcode-block" id="SimpleFilterData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.SimpleFilterData">[docs]</a><span class="k">class</span> <span class="nc">SimpleFilterData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">multi</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SimpleServerSideFilterData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.SimpleServerSideFilterData">[docs]</a><span class="k">class</span> <span class="nc">SimpleServerSideFilterData</span><span class="p">(</span><span class="n">SimpleFilterData</span><span class="p">):</span>
+    <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="ToggleData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.ToggleData">[docs]</a><span class="k">class</span> <span class="nc">ToggleData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -254,6 +257,7 @@
     <span class="n">toggle_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ToggleData</span><span class="p">]</span>
     <span class="n">multi_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MultiData</span><span class="p">]</span>
     <span class="n">simple_filter_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SimpleFilterData</span><span class="p">]</span> 
+    <span class="n">simple_server_filter_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SimpleServerSideFilterData</span><span class="p">]</span> 
     <span class="n">group_filter_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">GroupedFilterData</span> <span class="p">]</span>
     <span class="n">input_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">InputData</span><span class="p">]</span>
     <span class="n">download_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DownloadData</span><span class="p">]</span>
