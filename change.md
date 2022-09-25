@@ -1,3 +1,6 @@
+# 0.2.1
+- added divider in sidebar
+
 # 0.2.0
 - fix issue with button, group filter, simple server filter, slider
 
