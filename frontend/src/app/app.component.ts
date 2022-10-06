@@ -21,8 +21,7 @@ export class AppComponent implements OnInit {
               media: MediaMatcher,
               private http: HttpClient,
               private data_service:DataService,
-              private _snackBar: MatSnackBar,
-              private router: Router){
+              private _snackBar: MatSnackBar){
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -35,9 +34,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
-    let href = this.router.url;
-    console.log(href)
-    this.http.get<string>(href + "backend/title").subscribe(data => {this.title = data})
+
+    this.http.get<string>(window.location.href.split("#")[0] + "backend/title").subscribe(data => {this.title = data})
   }
 
   refresh_data(){

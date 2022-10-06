@@ -1,3 +1,6 @@
+# 0.2.3
+- remove fix path requirements.
+
 # 0.2.2
 - fixed url issue in frontend
 - using entry point in list option.
