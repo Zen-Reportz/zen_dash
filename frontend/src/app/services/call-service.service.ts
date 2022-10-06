@@ -3,19 +3,20 @@ import { DataService } from './data.service';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ResponseData, UpdateReturnData } from '../shared/application_data';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CallServiceService {
-  constructor(private http: HttpClient, private dataService: DataService) {}
+  constructor(private http: HttpClient, private dataService: DataService, private router: Router) {}
 
   call_response(url: string, parameters: any | undefined, formdata: FormData | undefined) {
     let url_: string
     if (url.includes('http')){
       url_ = url
     } else {
-      url_ = location.origin + url
+      url_ = this.router.url + url
     }
 
     let convMap: any = {};
@@ -49,7 +50,7 @@ export class CallServiceService {
     if (url.includes('http')){
       url_ = url
     } else {
-      url_ = location.origin + url
+      url_ =  this.router.url  + url
     }
 
     let convMap: any = {};
@@ -61,7 +62,7 @@ export class CallServiceService {
 
     let p: Observable<UpdateReturnData>
 
-    p = this.http.post<UpdateReturnData>(url, convMap);
+    p = this.http.post<UpdateReturnData>(url_, convMap);
 
     return p;
   }

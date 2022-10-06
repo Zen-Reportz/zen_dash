@@ -4,6 +4,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingComponent } from './component/loading/loading.component';
 import { DataService } from './services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,9 @@ export class AppComponent implements OnInit {
               media: MediaMatcher,
               private http: HttpClient,
               private data_service:DataService,
-              private _snackBar: MatSnackBar){
+              private _snackBar: MatSnackBar,
+              private router: Router){
+
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -32,7 +35,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.http.get<string>("backend/title").subscribe(data => {this.title = data})
+    let href = this.router.url;
+    console.log(href)
+    this.http.get<string>(href + "backend/title").subscribe(data => {this.title = data})
   }
 
   refresh_data(){
