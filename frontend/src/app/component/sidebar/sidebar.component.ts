@@ -12,16 +12,15 @@ export class SidebarComponent implements OnInit {
   side_data: SidebarData | undefined;
   page: string | null | undefined = null;
 
-  constructor(private http: HttpClient, private aRoute: ActivatedRoute, private router: Router) {
+  constructor(private http: HttpClient, private aRoute: ActivatedRoute) {
     this.aRoute.fragment.subscribe((fragment) => {
       this.page = fragment;
     });
   }
 
   ngOnInit(): void {
-    let href = this.router.url;
 
-    this.http.get<SidebarData>(href+'/backend/sidebar').subscribe((data) => {
+    this.http.get<SidebarData>(window.location.href.split("#")[0]  + 'backend/sidebar').subscribe((data) => {
       this.side_data = data;
     });
   }

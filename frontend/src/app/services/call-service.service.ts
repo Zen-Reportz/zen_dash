@@ -9,14 +9,19 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class CallServiceService {
-  constructor(private http: HttpClient, private dataService: DataService, private router: Router) {}
+  constructor(private http: HttpClient, private dataService: DataService) {}
 
   call_response(url: string, parameters: any | undefined, formdata: FormData | undefined) {
+
     let url_: string
     if (url.includes('http')){
       url_ = url
     } else {
-      url_ = this.router.url + url
+      let first = window.location.href.split("#")[0]
+      if (url[0] === "/"){
+        url = url.substring(1)
+      }
+      url_ = first + url
     }
 
     let convMap: any = {};
@@ -50,7 +55,11 @@ export class CallServiceService {
     if (url.includes('http')){
       url_ = url
     } else {
-      url_ =  this.router.url  + url
+      let first = window.location.href.split("#")[0]
+      if (url[0] === "/"){
+        url = url.substring(1)
+      }
+      url_ = first + url
     }
 
     let convMap: any = {};

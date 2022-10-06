@@ -19,11 +19,9 @@ export class PageComponent implements OnInit {
     private http: HttpClient,
     private titleService: Title,
     private aRoute: ActivatedRoute,
-    private router: Router
   ) {}
 
   ngOnInit(): void {
-    let href = this.router.url;
 
     new SetTitleService().set_title(this.aRoute, this.titleService, this.http);
     this.aRoute.fragment.subscribe((fragment) => {
@@ -33,7 +31,7 @@ export class PageComponent implements OnInit {
       let params = new HttpParams().set('fragment', fragment);
 
       this.http
-        .get<Page>(href+'/backend/page_detail', { params: params })
+        .get<Page>(window.location.href.split("#")[0]  +'backend/page_detail', { params: params })
         .subscribe((data) => {
           this.page = data;
         });
