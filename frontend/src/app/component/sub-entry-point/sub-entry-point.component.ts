@@ -49,7 +49,7 @@ export class SubEntryPointComponent implements OnInit {
   pageCall: Subscription | undefined;
   data_type = ['box', 'table', 'chart', 'image', 'highchart'];
   loading = true;
-
+  size_data = new Map<string, FlexData>();
   constructor(
     private dataService: DataService,
     private callService: CallServiceService
@@ -328,4 +328,42 @@ export class SubEntryPointComponent implements OnInit {
       return name;
     }
   }
+
+
+  setFlex(flex: FlexData, url: string) {
+    if (flex !== null) {
+      this.size_data.set(url, flex);
+    }
+  }
+
+  getFlex(original: string, type: string, url: string) {
+    let response: any;
+    if (this.size_data.get(url)?.fxFlex !== undefined) {
+      if (this.size_data.get(url)?.fxFlex !== null) {
+        if (type == 'flex') {
+          response = this.size_data.get(url)?.fxFlex;
+        } else if (type == 'flex_md') {
+          response = this.size_data.get(url)?.fxFlex_md;
+        } else if (type == 'flex_sm') {
+          response = this.size_data.get(url)?.fxFlex_sm;
+        } else if (type == 'flex_xs') {
+          response = this.size_data.get(url)?.fxFlex_xs;
+        } else {
+          console.log(' issue with type for ' + url + ' ' + type);
+          response = original;
+        }
+      } else {
+        console.log(' issue with type for ' + url + ' ' + type);
+        response = original;
+      }
+    } else {
+      // console.log("No data so returning original")
+      response = original;
+    }
+
+    return response;
+  }
+
+
+
 }

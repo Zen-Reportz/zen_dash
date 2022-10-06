@@ -1,3 +1,7 @@
+# 0.2.2
+- fixed url issue in frontend
+- using entry point in list option.
+
 # 0.2.1
 - added divider in sidebar
 

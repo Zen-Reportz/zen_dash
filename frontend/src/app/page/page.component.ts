@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FlexData, Page } from '../shared/application_data';
 import { SetTitleService } from '../shared/set-title.service';
 
@@ -18,10 +18,13 @@ export class PageComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private titleService: Title,
-    private aRoute: ActivatedRoute
+    private aRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    let href = this.router.url;
+
     new SetTitleService().set_title(this.aRoute, this.titleService, this.http);
     this.aRoute.fragment.subscribe((fragment) => {
       if (fragment === null) {
@@ -30,7 +33,7 @@ export class PageComponent implements OnInit {
       let params = new HttpParams().set('fragment', fragment);
 
       this.http
-        .get<Page>(location.origin + '/backend/page_detail', { params: params })
+        .get<Page>(href+'/backend/page_detail', { params: params })
         .subscribe((data) => {
           this.page = data;
         });
@@ -43,6 +46,9 @@ export class PageComponent implements OnInit {
     }
   }
 
+  getScripts(){
+
+  }
   getFlex(original: string, type: string, url: string) {
     let response: any;
     if (this.size_data.get(url)?.fxFlex !== undefined) {

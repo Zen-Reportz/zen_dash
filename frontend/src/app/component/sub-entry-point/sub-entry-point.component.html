@@ -29,20 +29,20 @@
   <span *ngFor="let url_info of getURLs()">
     <!-- <ng-container *ngIf="url_info.with_card; else mulit_list"> -->
 
-    <!-- <app-entry-point
-        [url]="instance.url"
-        [fxFlex]="getFlex(instance.fxFlex, 'flex', instance.url)"
-        [fxFlex.md]="getFlex(instance.fxFlex, 'flex_md', instance.url)"
-        [fxFlex.sm]="getFlex(instance.fxFlex, 'flex_sm', instance.url)"
-        [fxFlex.xs]="getFlex(instance.fxFlex, 'flex_xs', instance.url)"
-
-        (fxFlex)="setFlex($event, instance.url)"
+    <app-entry-point
+        [url]="url_info.url"
+        [fxFlex]="getFlex('100%', 'flex', '100%')"
+        [fxFlex.md]="getFlex('100%', 'flex_md', url_info.url)"
+        [fxFlex.sm]="getFlex('100%', 'flex_sm', url_info.url)"
+        [fxFlex.xs]="getFlex('100%', 'flex_xs', url_info.url)"
+        url_info
+        (fxFlex)="setFlex($event, url_info.url)"
         class="padding"
       >
-      </app-entry-point> -->
+      </app-entry-point>
     <!-- </ng-container> -->
     <!-- <ng-template #mulit_list> -->
-    <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point> <br />
+    <!-- <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point> <br /> -->
     <br />
     <!-- </ng-template> -->
   </span>
