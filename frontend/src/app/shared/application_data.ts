@@ -3,6 +3,15 @@ export class MEData {
   value!: any
 }
 
+export class CustomScript{
+  url: string | undefined
+  text: string | undefined
+  type!: string
+}
+
+export class CustomScripts {
+  scripts!: CustomScript[]
+}
 
 
 export class FlexData{

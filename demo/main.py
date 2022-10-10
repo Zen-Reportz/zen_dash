@@ -1,3 +1,4 @@
+from cgitb import reset
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -6,6 +7,7 @@ import pkg_resources
 from zen_dash import instances as i
 from zen_dash import sidebar as s
 from zen_dash import page as p
+from zen_dash import scripts as sc
 from pydantic import BaseConfig
 from fastapi.middleware.gzip import GZipMiddleware
 from pages.page_one import row_one as pro
@@ -55,6 +57,16 @@ async def root(request: Request):
 @app.get("/backend/title")
 async def title():
     return 'Demo'
+
+@app.post("/backend/scripts", response_model=sc.CustomScripts)
+async def scripts(request: Request):
+    print(await request.json())
+    return sc.CustomScripts(scripts=[
+        sc.CustomScript(url="https://code.jquery.com/jquery-3.6.1.min.js", type=sc.Style.JS),
+        sc.CustomScript(url="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js", type=sc.Style.JS)
+    ])
+
+     
 
 
 @app.get("/backend/sidebar", response_model=s.Sidebar)

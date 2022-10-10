@@ -12,12 +12,11 @@ export class CallServiceService {
   constructor(private http: HttpClient, private dataService: DataService) {}
 
   call_response(url: string, parameters: any | undefined, formdata: FormData | undefined) {
-
     let url_: string
     if (url.includes('http')){
       url_ = url
     } else {
-      let first = window.location.href.split("#")[0]
+      let first = this.my_url()
       if (url[0] === "/"){
         url = url.substring(1)
       }
@@ -31,10 +30,8 @@ export class CallServiceService {
         convMap.append(key, val);
       })
     } else {
+      convMap = this.dataService.get_all()
 
-      this.dataService.data.forEach((val: string, key: string) => {
-      convMap[key] = val;
-    });
     }
 
     let p:
@@ -51,21 +48,19 @@ export class CallServiceService {
   }
 
   second_call_response(url: string, search_key: string, search_value: string ) {
+
     let url_: string
     if (url.includes('http')){
       url_ = url
     } else {
-      let first = window.location.href.split("#")[0]
+      let first = this.my_url()
       if (url[0] === "/"){
         url = url.substring(1)
       }
       url_ = first + url
     }
 
-    let convMap: any = {};
-    this.dataService.data.forEach((val: string, key: string) => {
-        convMap[key] = val;
-    })
+    let convMap = this.dataService.get_all()
 
     convMap[search_key] = search_value
 
@@ -74,5 +69,9 @@ export class CallServiceService {
     p = this.http.post<UpdateReturnData>(url_, convMap);
 
     return p;
+  }
+
+  my_url(){
+    return window.location.href.split("#")[0]
   }
 }
