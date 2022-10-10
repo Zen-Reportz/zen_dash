@@ -1,3 +1,10 @@
+# 0.2.4
+- fixed title service
+- ability to upload custom js and style
+- unified get url 
+- unified get inputs
+
+
 # 0.2.3
 - remove fix path requirements.
 

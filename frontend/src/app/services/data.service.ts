@@ -59,4 +59,18 @@ export class DataService {
   get_data(key:string) {
     return this.data.get(key)
   }
+
+  reset_data(){
+    this.data = new Map<string, any>();
+  }
+
+  get_all(){
+    let convMap: any = {};
+    this.data.forEach((val: string, key: string) => {
+        convMap[key] = val;
+    })
+
+    return convMap
+  }
+
 }
