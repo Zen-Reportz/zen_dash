@@ -4,6 +4,14 @@ zen\_dash package
 Submodules
 ----------
 
+zen\_dash.flex\_data module
+---------------------------
+
+.. automodule:: zen_dash.flex_data
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 zen\_dash.instances module
 --------------------------
 
@@ -16,6 +24,14 @@ zen\_dash.page module
 ---------------------
 
 .. automodule:: zen_dash.page
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zen\_dash.scripts module
+------------------------
+
+.. automodule:: zen_dash.scripts
    :members:
    :undoc-members:
    :show-inheritance:
