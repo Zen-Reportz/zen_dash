@@ -1,3 +1,7 @@
+# 0.2.5
+- reduce optimization bailouts from 3 mb to 1kb
+
+
 # 0.2.4
 - fixed title service
 - ability to upload custom js and style

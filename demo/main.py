@@ -60,10 +60,11 @@ async def title():
 
 @app.post("/backend/scripts", response_model=sc.CustomScripts)
 async def scripts(request: Request):
-    print(await request.json())
     return sc.CustomScripts(scripts=[
         sc.CustomScript(url="https://code.jquery.com/jquery-3.6.1.min.js", type=sc.Style.JS),
-        sc.CustomScript(url="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js", type=sc.Style.JS)
+        sc.CustomScript(url="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js", type=sc.Style.JS),
+        sc.CustomScript(url="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css", type=sc.Style.STYLE),
+        sc.CustomScript(url="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js", type=sc.Style.JS),
     ])
 
      

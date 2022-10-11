@@ -3,7 +3,6 @@ import { DataService } from './data.service';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ResponseData, UpdateReturnData } from '../shared/application_data';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
