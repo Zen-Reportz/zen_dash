@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
+import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({

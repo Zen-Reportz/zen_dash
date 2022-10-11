@@ -7,7 +7,7 @@ from typing import Optional, List
 
 class Style(Enum):
   JS= "javascript"
-  style ="css"
+  STYLE ="css"
 
 class CustomScript(BaseModel):
   url: Optional[str]
