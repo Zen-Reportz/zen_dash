@@ -62,7 +62,6 @@ export class AppComponent implements OnInit {
   }
 
   loadExternalScript(url: string| undefined, text: string | undefined, type: string) {
-    console.log(type)
     const body = <HTMLBodyElement> document.body;
 
     if (type == "css"){
@@ -98,7 +97,6 @@ export class AppComponent implements OnInit {
 
       script.async = true;
       script.defer = true;
-      console.log(script)
       body.appendChild(script);
 
     }

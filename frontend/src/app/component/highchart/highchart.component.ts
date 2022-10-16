@@ -12,9 +12,34 @@ export class HighchartComponent implements OnInit {
   data: any;
   constructor(private dataService: DataService) {}
 
+  checkFunction(object:any) {
+    Object.keys(object).forEach(k => {
+        if (object[k] && typeof object[k] === 'object') {
+            this.checkFunction(object[k]);
+        }
+        if (typeof object[k] === 'string' || object[k] instanceof String) {
+          if (object[k].includes("new Date")) {
+            object[k] = eval(object[k])
+          }
+
+          else if (object[k].includes("function")) {
+            object[k] = eval(object[k])
+          }
+
+        }
+
+    });
+}
+
+
+
   ngOnInit(): void {
+    console.log(this.dataService.highchart_data.get(this.uuid)?.config)
+    this.checkFunction(this.dataService.highchart_data.get(this.uuid)?.config)
+    console.log(this.dataService.highchart_data.get(this.uuid)?.config)
+
     this.data = new Chart(
-      this.dataService.highchart_data.get(this.uuid)?.config as any
+      this.dataService.highchart_data.get(this.uuid)?.config
     );
   }
 }
