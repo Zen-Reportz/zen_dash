@@ -37,6 +37,7 @@ class InstanceType(Enum):
     UPLOAD = "upload"
     IMAGE = "image"
     HIGHCHART = "highchart"
+    DATATABLE = "data_table"
 
 class BoxData(BaseModel):
     icon: str
@@ -159,7 +160,7 @@ class UploadData(BaseModel):
     name: str
 
 class HighChartData(BaseModel):
-    config: dict
+    config: Dict
 
 
 class ReturnData(BaseModel):

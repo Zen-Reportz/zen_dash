@@ -200,7 +200,7 @@ export class UploadData{
 }
 
 export class HighChartData {
-  config!: string
+  config!:  any
 }
 
 export class ResponseData{

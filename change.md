@@ -1,6 +1,9 @@
+# 0.2.6
+- allowing functions to be passed in highchart
+- allowing date object to be passed in highchart
+
 # 0.2.5
 - reduce optimization bailouts from 3 mb to 1kb
-
 
 # 0.2.4
 - fixed title service
