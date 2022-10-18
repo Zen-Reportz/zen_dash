@@ -159,8 +159,10 @@ class UploadData(BaseModel):
     multi: bool=  False
     name: str
 
+
 class HighChartData(BaseModel):
     config: Dict
+
 
 
 class ReturnData(BaseModel):

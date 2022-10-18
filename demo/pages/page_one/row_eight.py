@@ -1,11 +1,7 @@
-from typing import List
 from fastapi import APIRouter
 from zen_dash import instances as i
 from fastapi.responses import FileResponse
-import asyncio
 
-from fastapi import UploadFile
-import time
 
 router = APIRouter(
     prefix="/backend/page_one/row_eight",
@@ -95,7 +91,8 @@ async def d3():
             10685, 10577, 10526, 10457, 10027, 8570, 8360, 7853, 5709, 5273,
             5113, 5066, 4897, 4881, 4804, 4717, 4571, 4018, 3822, 3785, 3805,
             3750, 3708, 3708
-        ]
+        ],
+        
     }, {
         "name": 'USSR/Russia',
         "data": [None, None, None, None, None, None, None, None, None,
@@ -121,26 +118,71 @@ async def d3():
     return i.ReturnData(
         type=i.InstanceType.HIGHCHART,
         highchart_data=i.HighChartData(config={
-       "xAxis": {
-            "type": 'datetime',
-            "dateTimeLabelFormats": {
-                "day": '%e %b %y',
-            },
-            "min":"new Date(2010, 0, 1).getTime()",
-            "max":"new Date(2010, 0, 10).getTime()"
-        },
-        "series": [{
-            "data": [
-                ["new Date(2010, 0, 1).getTime()", 29.9],
-                ["new Date(2010, 0, 2).getTime()", 71.5],
-                ["new Date(2010, 0, 3).getTime()", 106.4],
-                ["new Date(2010, 0, 7).getTime()", 129.2],
-                ["new Date(2010, 0, 8).getTime()", 144.0],
-                ["new Date(2010, 0, 9).getTime()", 176.0]
-             ]
-        }]
-
-    })
+        "chart" : {
+            "type": 'scatter',
+            "margin": [70, 50, 60, 80], 
+            "marginRight": 10,
+            "events": {
+                "click": """ ( function (e) {
+                    // find the clicked values and the series
+                    var x = e.xAxis[0].value,
+                    y = e.yAxis[0].value,
+                    series = this.series[0];
+                            
+                    // Add it
+                    series.addPoint([x, y]);
+                } ) """
+        }
+      },
+      "title" : {
+         "text": 'User supplied data'   
+      },   
+      "subtitle" : {
+         "text": 'Click the plot area to add a point. Click a point to remove it.'
+      },
+      "xAxis" : {
+         "gridLineWidth": 1,
+         "minPadding": 0.2,
+         "maxPadding": 0.2,
+         "maxZoom": 60
+      },
+      "yAxis" : {
+         "title": {
+            "text": 'Value'
+         },
+         "minPadding": 0.2,
+         "maxPadding": 0.2,
+         "maxZoom": 60,
+         "plotLines": [{
+            "value": 0,
+            "width": 1,
+            "color": '#808080'
+         }]
+      },
+      "plotOptions": {
+         "series": {
+            "lineWidth": 1,
+            "point": {
+               "events": {
+                  'click': """ (function () {
+                     if (this.series.data.length > 1) {
+                        this.remove();
+                     }
+                  }) """
+               }
+            }
+         }
+      },
+      "legend": {
+         "enabled": "false"
+      },
+      "exporting" : {
+         "enabled": "false"
+      },
+      "series" : [{
+         "data": [[20, 20], [80, 80]]
+      }]
+   })
  
   , flex=i.FlexData(fxFlex="50%", fxFlex_md="50%", fxFlex_sm="100%", fxFlex_xs="100%")
     )

@@ -34,9 +34,9 @@ export class HighchartComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.dataService.highchart_data.get(this.uuid)?.config)
+
     this.checkFunction(this.dataService.highchart_data.get(this.uuid)?.config)
-    console.log(this.dataService.highchart_data.get(this.uuid)?.config)
+
 
     this.data = new Chart(
       this.dataService.highchart_data.get(this.uuid)?.config
