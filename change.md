@@ -1,3 +1,6 @@
+# 0.2.8
+- added support for events in highchart
+
 # 0.2.7
 - fixed index.html issue
 
