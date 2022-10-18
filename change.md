@@ -1,3 +1,6 @@
+# 0.2.7
+- fixed index.html issue
+
 # 0.2.6
 - allowing functions to be passed in highchart
 - allowing date object to be passed in highchart
