@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   title: string | undefined;
   mobileQuery: MediaQueryList;
   durationInSeconds = 5;
+  mySize = '500px'
   private _mobileQueryListener: () => void;
 
   constructor(changeDetectorRef: ChangeDetectorRef,
@@ -114,6 +115,11 @@ export class AppComponent implements OnInit {
       }
     });
 
+  }
+
+  set_size(event:string){
+    console.log(event)
+    this.mySize  = event
   }
 
 

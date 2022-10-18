@@ -13,3 +13,4 @@ class FilterInfo(BaseModel):
 class Sidebar(BaseModel):
     tabs: List[SidebarTab]
     filters: List[FilterInfo]
+    size: str = '300px'

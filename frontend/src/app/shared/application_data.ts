@@ -35,6 +35,7 @@ export class Filter {
 export class SidebarData{
   tabs!: SidebarTab[]
   filters!: Filter[]
+  size!: string
 }
 
 
