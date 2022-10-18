@@ -1,3 +1,6 @@
+# 0.2.9
+- adjustable size of sizebar
+
 # 0.2.8
 - added support for events in highchart
 

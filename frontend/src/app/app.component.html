@@ -6,9 +6,9 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav #snav [mode]="'over'">
+  <mat-sidenav #snav [mode]="'over'"       [style.width]="mySize"  >
     <mat-nav-list>
-      <app-sidebar></app-sidebar>
+      <app-sidebar (size)="set_size($event)"></app-sidebar>
     </mat-nav-list>
   </mat-sidenav>
 
