@@ -140,10 +140,15 @@ class MultiData(BaseModel):
     urls: List[MultiURLInfo]
 
 
+class HiddenData(BaseModel):
+    id: str
+    condition: str 
+
 
 class ReactiveData(BaseModel):
     full_rective: Optional[bool] = False
-    ids: Optional[List[str]] = []
+    reactive_ids: Optional[List[str]] = []
+    hidden: bool = False
 
 class DownloadData(BaseModel):
     file_name: str
@@ -181,7 +186,6 @@ class ReturnData(BaseModel):
 
     type:InstanceType
     title: Optional[str]
-    reactive: Optional[ReactiveData] = ReactiveData()
     chart_data: Optional[ChartData]
     box_data: Optional[BoxData]
     date_data: Optional[DateTimeData]
@@ -203,7 +207,7 @@ class ReturnData(BaseModel):
 
     footer: Optional[str]
     flex: Optional[FlexData] = FlexData()
-
+    reactive: Optional[ReactiveData] = ReactiveData()
 
 class UpdateInstanceType(Enum):
     """ Docstring for class UpdateInstanceType

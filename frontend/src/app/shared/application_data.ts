@@ -171,9 +171,15 @@ export class MultiData {
   urls!: MultiURLInfo[]
 }
 
+export class HiddenData {
+  id!: string
+  condition!: string
+}
+
 export class ReactiveData {
   full_reactive!: boolean
-  ids!: string[]
+  reactive_ids!: string[]
+  hidden!: boolean
 }
 
 export class InputData {

@@ -11,7 +11,10 @@
           fxFlexFill
         >
           <app-entry-point
+            [hidden]="isHiddenFunction(instance.url)"
             [url]="instance.url"
+            [isSidebar]=false
+            (isHidden)="setHidden($event, instance.url)"
             *ngFor="let instance of row_data.data"
             [fxFlex]="getFlex('25%', 'flex', instance.url)"
             [fxFlex.md]="getFlex('33%', 'flex_md', instance.url)"

@@ -43,6 +43,7 @@ export class DataService {
   upload_data = new Map<string, UploadData>();
   image_data = new Map<string, DataImage>();
   highchart_data = new Map<string, HighChartData>();
+  sidebar_ids: any[] = ['page']
 
   data = new Map<string, any>();
 
@@ -61,7 +62,12 @@ export class DataService {
   }
 
   reset_data(){
-    this.data = new Map<string, any>();
+    this.data.forEach((value: any, key: string) => {
+      if (this.sidebar_ids.indexOf(key) < 0){
+        this.data.delete(key)
+      }
+    })
+
   }
 
   get_all(){

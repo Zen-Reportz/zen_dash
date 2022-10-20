@@ -11,7 +11,7 @@
   <br>
   <ng-container *ngFor="let f of side_data.filters">
     <mat-divider></mat-divider> <br>
-    <app-entry-point [url]="f.url" ></app-entry-point> <br>
+    <app-entry-point [url]="f.url" [isSidebar]=true></app-entry-point> <br>
   </ng-container>
  <br>
 

@@ -16,6 +16,7 @@ export class PageComponent implements OnInit {
   page: Page | undefined = undefined;
 
   size_data = new Map<string, FlexData>();
+  myHidden = new Map<string, boolean>();
 
   constructor(
     private http: HttpClient,
@@ -26,7 +27,6 @@ export class PageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     new SetTitleService().set_title(this.aRoute, this.titleService, this.http);
     this.aRoute.fragment.subscribe((fragment) => {
       if (fragment === null) {
@@ -75,5 +75,13 @@ export class PageComponent implements OnInit {
     }
 
     return response;
+  }
+
+  setHidden(event:boolean, url:string){
+    this.myHidden.set(url, event)
+  }
+
+  isHiddenFunction(url:string){
+    return this.myHidden.get(url)
   }
 }

@@ -22,7 +22,6 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.http.get<SidebarData>(this.call.my_url()  + 'backend/sidebar').subscribe((data) => {
       this.side_data = data;
       this.size.emit(this.side_data.size)
