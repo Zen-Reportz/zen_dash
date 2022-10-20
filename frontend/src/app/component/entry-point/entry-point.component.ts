@@ -8,7 +8,9 @@ import { FlexData } from 'src/app/shared/application_data';
 })
 export class EntryPointComponent implements OnInit {
   @Input() url!: string;
+  @Input() isSidebar!: boolean
   @Output() fxFlex = new EventEmitter<FlexData>();
+  @Output() isHidden = new EventEmitter<boolean>();
 
   pulled: boolean = false;
   footer!: string;
@@ -16,7 +18,8 @@ export class EntryPointComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 
   setPulled(result: boolean) {
     this.pulled = result;
@@ -40,5 +43,9 @@ export class EntryPointComponent implements OnInit {
 
   setFlex(event: FlexData) {
     this.fxFlex.emit(event);
+  }
+
+  setHidden(event:boolean){
+    this.isHidden.emit(event)
   }
 }

@@ -118,7 +118,6 @@ export class AppComponent implements OnInit {
   }
 
   set_size(event:string){
-    console.log(event)
     this.mySize  = event
   }
 

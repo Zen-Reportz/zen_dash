@@ -1,5 +1,8 @@
 import { CallServiceService } from './../../services/call-service.service';
-import { HighChartData, SimpleServerFilterData } from './../../shared/application_data';
+import {
+  HighChartData,
+  SimpleServerFilterData,
+} from './../../shared/application_data';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UUID } from 'angular2-uuid';
 import {
@@ -33,11 +36,13 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class SubEntryPointComponent implements OnInit {
   @Input() url!: string;
+  @Input() isSidebar!: boolean;
   @Output() pulled = new EventEmitter<boolean>();
   @Output() footer = new EventEmitter<string>();
   @Output() title = new EventEmitter<string>();
 
   @Output() fxFlex = new EventEmitter<FlexData>();
+  @Output() hidden = new EventEmitter<boolean>();
 
   uuid = UUID.UUID();
   // title: string | undefined
@@ -78,16 +83,18 @@ export class SubEntryPointComponent implements OnInit {
           }
         })
       );
-    } else if (this.reactive.ids.length > 0) {
+    } else if (this.reactive.reactive_ids.length > 0) {
       this.d.set(
         'specific_reactive',
         this.dataService.data_setter.subscribe((t) => {
-          if (this.reactive.ids.indexOf(t.key) >= 0) {
+          if (this.reactive.reactive_ids.indexOf(t.key) >= 0) {
             this.getData();
           }
         })
       );
     }
+
+
   }
 
   unsubscribe() {
@@ -154,7 +161,7 @@ export class SubEntryPointComponent implements OnInit {
   }
 
   getData() {
-    this.loading = true
+    this.loading = true;
     if (this.type !== undefined) {
       this.deleteData();
     }
@@ -165,12 +172,13 @@ export class SubEntryPointComponent implements OnInit {
 
     let p = this.callService.call_response(
       this.url,
-      undefined, undefined
+      undefined,
+      undefined
     ) as Observable<ResponseData>;
 
     this.pageCall = p.subscribe({
       next: (t: ResponseData) => {
-        this.loading = false
+        this.loading = false;
         this.reactive = t.reactive;
         switch (t.type) {
           case 'box':
@@ -244,24 +252,31 @@ export class SubEntryPointComponent implements OnInit {
               this.uuid,
               t.simple_filter_data as SimpleFilterData
             );
+            this.name = t.simple_filter_data?.name;
             break;
           case 'simple_server_filter':
             this.dataService.simple_server_filter_data.set(
               this.uuid,
               t.simple_server_filter_data as SimpleServerFilterData
             );
+            this.name = t.simple_filter_data?.name;
+
             break;
           case 'group_filter':
             this.dataService.group_filter_data.set(
               this.uuid,
               t.group_filter_data as GroupFilterData
             );
+            this.name = t.group_filter_data?.name;
+
             break;
           case 'input':
             this.dataService.input_filter_data.set(
               this.uuid,
               t.input_data as InputData
             );
+            this.name = t.input_data?.name;
+
             break;
           case 'download':
             this.dataService.download_data.set(
@@ -290,6 +305,9 @@ export class SubEntryPointComponent implements OnInit {
           default:
             console.log(t.type);
         }
+        if (this.isSidebar) {
+          this.dataService.sidebar_ids.push(this.name);
+        }
 
         this.pulled.emit(true);
         this.title.emit(t.title);
@@ -299,6 +317,8 @@ export class SubEntryPointComponent implements OnInit {
 
         this.type = t.type;
         this.footer.emit(t.footer);
+        this.hidden.emit(this.reactive.hidden)
+
         this.unsubscribe();
         this.subscribe();
       },
@@ -328,7 +348,6 @@ export class SubEntryPointComponent implements OnInit {
       return name;
     }
   }
-
 
   setFlex(flex: FlexData, url: string) {
     if (flex !== null) {
@@ -363,7 +382,4 @@ export class SubEntryPointComponent implements OnInit {
 
     return response;
   }
-
-
-
 }
