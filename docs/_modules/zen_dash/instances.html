@@ -207,10 +207,15 @@
     <span class="n">urls</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MultiURLInfo</span><span class="p">]</span></div>
 
 
+<div class="viewcode-block" id="HiddenData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.HiddenData">[docs]</a><span class="k">class</span> <span class="nc">HiddenData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">condition</span><span class="p">:</span> <span class="nb">str</span> </div>
+
 
 <div class="viewcode-block" id="ReactiveData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.ReactiveData">[docs]</a><span class="k">class</span> <span class="nc">ReactiveData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">full_rective</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span></div>
+    <span class="n">reactive_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">hidden</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="DownloadData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.DownloadData">[docs]</a><span class="k">class</span> <span class="nc">DownloadData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span>
@@ -248,7 +253,6 @@
 
     <span class="nb">type</span><span class="p">:</span><span class="n">InstanceType</span>
     <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-    <span class="n">reactive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReactiveData</span><span class="p">]</span> <span class="o">=</span> <span class="n">ReactiveData</span><span class="p">()</span>
     <span class="n">chart_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ChartData</span><span class="p">]</span>
     <span class="n">box_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BoxData</span><span class="p">]</span>
     <span class="n">date_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DateTimeData</span><span class="p">]</span>
@@ -269,8 +273,8 @@
     <span class="n">highchart_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">HighChartData</span><span class="p">]</span>
 
     <span class="n">footer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-    <span class="n">flex</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FlexData</span><span class="p">]</span> <span class="o">=</span> <span class="n">FlexData</span><span class="p">()</span></div>
-
+    <span class="n">flex</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FlexData</span><span class="p">]</span> <span class="o">=</span> <span class="n">FlexData</span><span class="p">()</span>
+    <span class="n">reactive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReactiveData</span><span class="p">]</span> <span class="o">=</span> <span class="n">ReactiveData</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="UpdateInstanceType"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.UpdateInstanceType">[docs]</a><span class="k">class</span> <span class="nc">UpdateInstanceType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Docstring for class UpdateInstanceType</span>
