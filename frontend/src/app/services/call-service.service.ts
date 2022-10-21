@@ -71,6 +71,6 @@ export class CallServiceService {
   }
 
   my_url(){
-    return window.location.href.split("#")[0]
+    return window.location.href.split("?")[0]
   }
 }

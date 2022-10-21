@@ -1,3 +1,4 @@
+import { MEData } from 'src/app/shared/application_data';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MediaMatcher } from '@angular/cdk/layout';
@@ -29,15 +30,20 @@ export class AppComponent implements OnInit {
               private _snackBar: MatSnackBar,
               private aRoute: ActivatedRoute,
               private call: CallServiceService,
-              private titleService:Title
+              private titleService:Title,
+              private _router: Router
               ){
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    this.aRoute.fragment.subscribe((fragment) => {
-      this.data_service.data.set('page', fragment)
+    this.aRoute.queryParamMap.subscribe((fragment) => {
+      let page = fragment.get('page')
+      if (page === null){
+        page = '/'
+      }
+      this.data_service.data.set('page', page)
       this.data_service.reset_data()
       this.getScripts()
     })
@@ -56,6 +62,20 @@ export class AppComponent implements OnInit {
   }
 
   refresh_data(){
+    let document_id   = UUID.UUID();
+    let m = new MEData();
+    m.key = "document_id"
+    m.value = document_id
+    this.data_service.data_setter.emit(m)
+    // this._router.navigate(["."], {
+    //   queryParams: {
+    //     'ase': 123,
+    //     "document_id": document_id
+    //   },
+    //   queryParamsHandling: 'merge',
+
+    // }
+    // );
     this.data_service.refresh.emit('')
     this._snackBar.openFromComponent(LoadingComponent, {
       duration: this.durationInSeconds * 1000,
