@@ -1,8 +1,9 @@
 from enum import Enum
 from re import T
-from pydantic import BaseConfig, BaseModel
+from pydantic import BaseConfig
 from typing import List, Optional, Dict
 from zen_dash.flex_data import FlexData
+from zen_dash.support import BaseUpdate
 
 BaseConfig.arbitrary_types_allowed = True  # change #1
 
@@ -39,31 +40,31 @@ class InstanceType(Enum):
     HIGHCHART = "highchart"
     DATATABLE = "data_table"
 
-class BoxData(BaseModel):
+class BoxData(BaseUpdate):
     icon: str
     name: str
     value: str
 
 
-class DateTimeData(BaseModel):
+class DateTimeData(BaseUpdate):
     name: str
     first_date: str
     second_date: Optional[str]
 
-class TableColumn(BaseModel):
+class TableColumn(BaseUpdate):
     columnDef: str
     header: str
 
-class TableData(BaseModel):
+class TableData(BaseUpdate):
     columns: List[TableColumn]
     data: List[Dict]
     name: str
     
-class ChartData(BaseModel):
+class ChartData(BaseUpdate):
     name: str
     data: Dict
 
-class CheckBoxInstance(BaseModel):
+class CheckBoxInstance(BaseUpdate):
     name: str
     selected: bool
     
@@ -71,18 +72,18 @@ class Style(Enum):
     horizontal = "Horizontal"
     vertical = "Vertical"
 
-class CheckBoxData(BaseModel):
+class CheckBoxData(BaseUpdate):
     data: List[CheckBoxInstance]
     style: Style = Style.horizontal
     name: str
 
-class RadioData(BaseModel):
+class RadioData(BaseUpdate):
     data: List[str]
     style: Style = Style.horizontal
     name: str
     selected: Optional[str] = ""
 
-class SliderData(BaseModel):
+class SliderData(BaseUpdate):
     name: str
     max: int
     min: int
@@ -91,33 +92,33 @@ class SliderData(BaseModel):
     invert: bool = False
     vertical: bool = False
 
-class ButtonToggleInstance(BaseModel):
+class ButtonToggleInstance(BaseUpdate):
     name: str
     selected: bool = False
 
-class ButtonToggleData(BaseModel):
+class ButtonToggleData(BaseUpdate):
     name: str
     multi: bool = False
     data: List[ButtonToggleInstance]
 
 
-class GroupedFilterDataInstance(BaseModel):
+class GroupedFilterDataInstance(BaseUpdate):
     group_name: str
     group_data: List[str]
 
-class InputData(BaseModel):
+class InputData(BaseUpdate):
     label: Optional[str]
     name: str
 
 
-class GroupedFilterData(BaseModel):
+class GroupedFilterData(BaseUpdate):
     multi: bool = False
     name: str
     url: Optional[str]
     data: List[GroupedFilterDataInstance]
 
 
-class SimpleFilterData(BaseModel):
+class SimpleFilterData(BaseUpdate):
     multi: bool = False
     name: str
     data: List[str]
@@ -126,51 +127,51 @@ class SimpleServerSideFilterData(SimpleFilterData):
     url: Optional[str]
 
 
-class ToggleData(BaseModel):
+class ToggleData(BaseUpdate):
     data: bool
     name: str
 
 
-class MultiURLInfo(BaseModel):
+class MultiURLInfo(BaseUpdate):
     name: Optional[str]
     with_card: bool = False
     url: str
 
-class MultiData(BaseModel):
+class MultiData(BaseUpdate):
     urls: List[MultiURLInfo]
 
 
-class HiddenData(BaseModel):
+class HiddenData(BaseUpdate):
     id: str
     condition: str 
 
 
-class ReactiveData(BaseModel):
+class ReactiveData(BaseUpdate):
     full_rective: Optional[bool] = False
     reactive_ids: Optional[List[str]] = []
     hidden: bool = False
 
-class DownloadData(BaseModel):
+class DownloadData(BaseUpdate):
     file_name: str
     url: str
 
-class ImageData(BaseModel):
+class ImageData(BaseUpdate):
     url: str
     height: str
     width: str
 
-class UploadData(BaseModel):
+class UploadData(BaseUpdate):
     url: str
     multi: bool=  False
     name: str
 
 
-class HighChartData(BaseModel):
+class HighChartData(BaseUpdate):
     config: Dict
 
 
 
-class ReturnData(BaseModel):
+class ReturnData(BaseUpdate):
     """
     Main return object use for everything except /backend/page_detail, /backend/sidebar, and /backend/title
     depdning upon which type (InstanceType) you select, you have to select corsponding return value 
@@ -222,7 +223,7 @@ class UpdateInstanceType(Enum):
 
 
 
-class UpdateReturnData(BaseModel):
+class UpdateReturnData(BaseUpdate):
     type: UpdateInstanceType
     simple_fitler_data: Optional[List[str]]
     

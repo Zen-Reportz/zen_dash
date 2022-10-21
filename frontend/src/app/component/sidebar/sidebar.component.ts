@@ -16,8 +16,8 @@ export class SidebarComponent implements OnInit {
 
 
   constructor(private http: HttpClient, private aRoute: ActivatedRoute, private call: CallServiceService) {
-    this.aRoute.fragment.subscribe((fragment) => {
-      this.page = fragment;
+    this.aRoute.queryParamMap.subscribe((fragment) => {
+      this.page = fragment.get('page');
     });
   }
 

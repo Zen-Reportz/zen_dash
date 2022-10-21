@@ -1,16 +1,17 @@
-from pydantic import BaseModel
 from typing import Optional, List
 
+from zen_dash.support import BaseUpdate
 
-class SidebarTab(BaseModel):
+
+class SidebarTab(BaseUpdate):
     label: str
     icon: Optional[str] = 'Home'
     fragment: str
 
-class FilterInfo(BaseModel):
+class FilterInfo(BaseUpdate):
     url: str
     
-class Sidebar(BaseModel):
+class Sidebar(BaseUpdate):
     tabs: List[SidebarTab]
     filters: List[FilterInfo]
     size: str = '300px'

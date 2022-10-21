@@ -2,11 +2,14 @@
   <button mat-icon-button (click)="snav.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>{{title}}</span>
+  <span>{{ title }}</span>
+  <div fxFlex fxLayoutAlign="center center">
+    <button mat-button>Basic</button>
+  </div>
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav #snav [mode]="'over'"       [style.width]="mySize"  >
+  <mat-sidenav #snav [mode]="'over'" [style.width]="mySize">
     <mat-nav-list>
       <app-sidebar (size)="set_size($event)"></app-sidebar>
     </mat-nav-list>
@@ -14,10 +17,16 @@
 
   <mat-sidenav-content>
     <div layout="row" ng-cloak>
-      <div layout="row" style="width: 100%;  z-index: 5;">
+      <div layout="row" style="width: 100%; z-index: 5">
         <div flex>
           <div style="float: right">
-            <button class="float" mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon" (click)="refresh_data()" >
+            <button
+              class="float"
+              mat-mini-fab
+              color="warn"
+              aria-label="Example icon button with a filter list icon"
+              (click)="refresh_data()"
+            >
               <mat-icon>refresh</mat-icon>
             </button>
           </div>
@@ -26,8 +35,5 @@
     </div>
 
     <router-outlet></router-outlet>
-
   </mat-sidenav-content>
-
-
 </mat-sidenav-container>
