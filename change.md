@@ -1,3 +1,6 @@
+# 0.2.12
+- moved document id as seperate options
+
 # 0.2.11
 - added input selected value
 - added toggle selected value

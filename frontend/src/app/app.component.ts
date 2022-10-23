@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   mobileQuery: MediaQueryList;
   durationInSeconds = 5;
   mySize = '500px'
+  document_id: any
   private _mobileQueryListener: () => void;
 
   constructor(changeDetectorRef: ChangeDetectorRef,
@@ -65,25 +66,8 @@ export class AppComponent implements OnInit {
   }
 
   refresh_data(){
-    let document_id   = UUID.UUID();
-    let m = new MEData();
-    m.key = "document_id"
-    m.value = document_id
-    this.data_service.data_setter.emit(m)
+
     this.data_service.refresh.emit('')
-    this.call.call_response(this.call.my_url() + "backend/document",  undefined,
-    undefined).subscribe((data) => {
-      const myUrl = new URL(window.location.href);
-      myUrl.searchParams.set('document_id', document_id);
-      this.clipboard.copy(myUrl.href)
-
-      this._snackBar.openFromComponent(LoadingComponent, {
-        duration: this.durationInSeconds * 1000,
-        data: true
-      });
-    }, (error) =>{
-
-    })
 
     this._snackBar.openFromComponent(LoadingComponent, {
       duration: this.durationInSeconds * 1000,
@@ -149,6 +133,30 @@ export class AppComponent implements OnInit {
 
   set_size(event:string){
     this.mySize  = event
+  }
+
+  saveReport(){
+    this.document_id   = UUID.UUID();
+    let m = new MEData();
+    m.key = "document_id"
+    m.value = this.document_id
+    this.data_service.data_setter.emit(m)
+    this.refresh_data()
+
+    this.call.call_response(this.call.my_url() + "backend/document",  undefined,
+    undefined).subscribe((data) => {
+      const myUrl = new URL(window.location.href);
+      myUrl.searchParams.set('document_id', this.document_id);
+      this.clipboard.copy(myUrl.href)
+
+      this._snackBar.openFromComponent(LoadingComponent, {
+        duration: this.durationInSeconds * 1000,
+        data: true
+      });
+    }, (error) =>{
+
+    })
+
   }
 
 

@@ -3,6 +3,18 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span>{{ title }}</span>
+  <div fxFlex fxLayoutAlign="end end">
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="saveReport()">
+      <mat-icon>saved_search</mat-icon>
+      <span>Save Report</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>
 
 <mat-sidenav-container>
