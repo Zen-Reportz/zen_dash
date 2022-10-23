@@ -1,6 +1,14 @@
 zen\_dash package
 =================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   zen_dash.support
+
 Submodules
 ----------
 

@@ -66,8 +66,9 @@
              
   <h1>Source code for zen_dash.scripts</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
-<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">from</span> <span class="nn">zen_dash.support</span> <span class="kn">import</span> <span class="n">BaseUpdate</span>
 
 
 
@@ -76,13 +77,13 @@
   <span class="n">JS</span><span class="o">=</span> <span class="s2">&quot;javascript&quot;</span>
   <span class="n">STYLE</span> <span class="o">=</span><span class="s2">&quot;css&quot;</span></div>
 
-<div class="viewcode-block" id="CustomScript"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.scripts.CustomScript">[docs]</a><span class="k">class</span> <span class="nc">CustomScript</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="viewcode-block" id="CustomScript"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.scripts.CustomScript">[docs]</a><span class="k">class</span> <span class="nc">CustomScript</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
   <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
   <span class="n">text</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
   <span class="nb">type</span><span class="p">:</span> <span class="n">Style</span></div>
 
 
-<div class="viewcode-block" id="CustomScripts"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.scripts.CustomScripts">[docs]</a><span class="k">class</span> <span class="nc">CustomScripts</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<div class="viewcode-block" id="CustomScripts"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.scripts.CustomScripts">[docs]</a><span class="k">class</span> <span class="nc">CustomScripts</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
   <span class="n">scripts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CustomScript</span><span class="p">]</span></div>
 </pre></div>
 
