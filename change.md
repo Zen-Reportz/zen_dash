@@ -1,3 +1,11 @@
+# 0.2.11
+- added input selected value
+- added toggle selected value
+- added slider selected value
+- added simple filter selected value
+- added grouped filter selected value
+- added ability to create document id when you refresh data
+
 # 0.2.10
 - fix bug with reacitve id
 - added hidden functionality with reacitivity

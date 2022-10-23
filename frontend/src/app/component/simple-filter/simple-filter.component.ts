@@ -5,17 +5,12 @@ import { MEData, ResponseData } from 'src/app/shared/application_data';
 import { ViewChild } from '@angular/core';
 
 import { MatSelect } from '@angular/material/select';
-import { Observable, ReplaySubject, Subject, Subscription } from 'rxjs';
+import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import {
-  debounceTime,
-  filter,
-  map,
   take,
   takeUntil,
-  tap,
 } from 'rxjs/operators';
 import { DataService } from 'src/app/services/data.service';
-import { CallServiceService } from 'src/app/services/call-service.service';
 
 @Component({
   selector: 'app-simple-filter',
@@ -96,7 +91,16 @@ export class SimpleFilterComponent implements OnInit {
       ?.data as string[];
 
     // set initial selection
-    this.data_select_control.setValue([]);
+    let selected = this.dataService.simple_filter_data.get(this.uuid)?.selected
+    if ((selected !== undefined) && (selected.length > 0)){
+      if (this.dataService.simple_filter_data.get(this.uuid)?.multi){
+        this.data_select_control.setValue(selected);
+      } else {
+        this.data_select_control.setValue(selected[0]);
+      }
+
+    }
+
 
     // load the initial bank list
     this.data_search.next(this.data.slice());

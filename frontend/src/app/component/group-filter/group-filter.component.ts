@@ -93,7 +93,15 @@ export class GroupFilterComponent implements OnInit {
       ?.data as GroupedFilterDataInstance[];
 
     // set initial selection
-    this.data_select_control.setValue([]);
+    let selected = this.dataService.group_filter_data.get(this.uuid)?.selected
+    if ((selected !== undefined) && (selected.length > 0)){
+      if (this.dataService.group_filter_data.get(this.uuid)?.multi){
+        this.data_select_control.setValue(selected);
+      } else {
+        this.data_select_control.setValue(selected[0]);
+      }
+
+    }
 
     // load the initial bank list
     this.data_search.next(this.data.slice());

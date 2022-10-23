@@ -61,6 +61,12 @@ async def root(request: Request):
 async def title():
     return 'Demo'
 
+@app.post("/backend/document")
+async def save_doc(request: Request):
+    print(await request.json())
+    return "yes"
+
+
 @app.post("/backend/scripts", response_model=sc.CustomScripts)
 async def scripts(request: Request):
     return sc.CustomScripts(scripts=[
