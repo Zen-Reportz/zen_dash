@@ -1,7 +1,7 @@
 from enum import Enum
 from re import T
 from pydantic import BaseConfig
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Union
 from zen_dash.flex_data import FlexData
 from zen_dash.support import BaseUpdate
 
@@ -85,12 +85,13 @@ class RadioData(BaseUpdate):
 
 class SliderData(BaseUpdate):
     name: str
-    max: int
-    min: int
-    step: int
+    max: float
+    min: float
+    step: float
     thumbLabel: bool = True
     invert: bool = False
     vertical: bool = False
+    value: Optional[float]
 
 class ButtonToggleInstance(BaseUpdate):
     name: str
@@ -109,6 +110,7 @@ class GroupedFilterDataInstance(BaseUpdate):
 class InputData(BaseUpdate):
     label: Optional[str]
     name: str
+    value: Optional[str]
 
 
 class GroupedFilterData(BaseUpdate):
@@ -116,20 +118,22 @@ class GroupedFilterData(BaseUpdate):
     name: str
     url: Optional[str]
     data: List[GroupedFilterDataInstance]
+    selected: List[str] = []
 
 
 class SimpleFilterData(BaseUpdate):
     multi: bool = False
     name: str
     data: List[str]
+    selected: List[str] = []
 
 class SimpleServerSideFilterData(SimpleFilterData):
     url: Optional[str]
 
 
 class ToggleData(BaseUpdate):
-    data: bool
     name: str
+    checked: bool = False
 
 
 class MultiURLInfo(BaseUpdate):
@@ -139,11 +143,6 @@ class MultiURLInfo(BaseUpdate):
 
 class MultiData(BaseUpdate):
     urls: List[MultiURLInfo]
-
-
-class HiddenData(BaseUpdate):
-    id: str
-    condition: str 
 
 
 class ReactiveData(BaseUpdate):

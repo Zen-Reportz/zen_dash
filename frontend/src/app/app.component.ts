@@ -5,11 +5,12 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingComponent } from './component/loading/loading.component';
 import { DataService } from './services/data.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlSerializer } from '@angular/router';
 import { CallServiceService } from './services/call-service.service';
 import {Title} from "@angular/platform-browser";
 import { CustomScripts } from './shared/application_data';
 import { UUID } from 'angular2-uuid';
+import {Clipboard} from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +32,9 @@ export class AppComponent implements OnInit {
               private aRoute: ActivatedRoute,
               private call: CallServiceService,
               private titleService:Title,
-              private _router: Router
+              private clipboard: Clipboard,
+              private _router: Router,
+              private serializer: UrlSerializer
               ){
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -67,19 +70,26 @@ export class AppComponent implements OnInit {
     m.key = "document_id"
     m.value = document_id
     this.data_service.data_setter.emit(m)
-    // this._router.navigate(["."], {
-    //   queryParams: {
-    //     'ase': 123,
-    //     "document_id": document_id
-    //   },
-    //   queryParamsHandling: 'merge',
-
-    // }
-    // );
     this.data_service.refresh.emit('')
+    this.call.call_response(this.call.my_url() + "backend/document",  undefined,
+    undefined).subscribe((data) => {
+      const myUrl = new URL(window.location.href);
+      myUrl.searchParams.set('document_id', document_id);
+      this.clipboard.copy(myUrl.href)
+
+      this._snackBar.openFromComponent(LoadingComponent, {
+        duration: this.durationInSeconds * 1000,
+        data: true
+      });
+    }, (error) =>{
+
+    })
+
     this._snackBar.openFromComponent(LoadingComponent, {
       duration: this.durationInSeconds * 1000,
+      data: false
     });
+
   }
 
   loadExternalScript(url: string| undefined, text: string | undefined, type: string) {

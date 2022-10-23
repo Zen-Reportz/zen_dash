@@ -36,7 +36,7 @@ async def d3():
 async def d3():
     return i.ReturnData(type=i.InstanceType.TOGGLE,
                         title="Toggle Example",
-                        toggle_data=i.ToggleData(name="toggle_data",  data=True))
+                        toggle_data=i.ToggleData(name="toggle_data",  checked=True))
 
 
 @router.post("/multi_records", response_model=i.ReturnData)
