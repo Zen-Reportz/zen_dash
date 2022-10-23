@@ -21,14 +21,6 @@ import { DataService } from 'src/app/services/data.service';
 export class SubEntryPointComponent implements OnInit {
   @Input() url!: string;
   @Input() isSidebar!: boolean;
-  // @Output() pulled = new EventEmitter<boolean>();
-  // @Output() footer = new EventEmitter<string>();
-  // @Output() title = new EventEmitter<string>();
-
-  // @Output() fxFlex = new EventEmitter<FlexData>();
-  // @Output() hidden = new EventEmitter<boolean>();
-
-  // title: string | undefined
   type: string | undefined;
   name: string | undefined;
   reactive: ReactiveData = new ReactiveData();
@@ -168,16 +160,7 @@ export class SubEntryPointComponent implements OnInit {
         let t = this.dataService.all_input.get(this.url)
         this.reactive = t.reactive;
         this.set_name(t)
-        // this.pulled.emit(true);
-        // this.title.emit(t.title);
-        // if (t.flex !== undefined) {
-        //   this.fxFlex.emit(t.flex);
-        // }
-
         this.type = t.type;
-        // this.footer.emit(t.footer);
-        // this.hidden.emit(this.reactive.hidden)
-
         this.unsubscribe();
         this.subscribe();
         return
@@ -196,33 +179,16 @@ export class SubEntryPointComponent implements OnInit {
           this.dataService.sidebar_ids.push(this.name);
         }
 
-        // this.pulled.emit(true);
-        // this.title.emit(t.title);
-        // if (t.flex !== undefined) {
-        //   this.fxFlex.emit(t.flex);
-        // }
-
         this.type = t.type;
-        // this.footer.emit(t.footer);
-        // this.hidden.emit(this.reactive.hidden)
-
         this.unsubscribe();
         this.subscribe();
       },
       error: (e: any) => {
         console.error(e);
-        // this.subscribe();
       },
     });
   }
 
-  // getTitle() {
-  //   return this.title ? this.title : undefined;
-  // }
-
-  // getFooter() {
-  //   return this.footer ? this.footer : undefined;
-  // }
 
   getURLs() {
     return this.multi_url;

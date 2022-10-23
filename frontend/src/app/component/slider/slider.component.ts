@@ -41,8 +41,6 @@ export class SliderComponent implements OnInit {
     return this.dataService.all_input.get(this.url).slider_data.vertical as boolean;
   }
 
-     // value: number| undefined
-    // tick_interval: number | string | undefined
 
   detectChange() {
     let m = new MEData();

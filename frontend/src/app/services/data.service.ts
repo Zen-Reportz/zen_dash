@@ -30,23 +30,6 @@ export class DataService {
 
   all_input= new Map<string, any>();
 
-  // radio_data = new Map<string, RadioData>();
-  // checkbox_data = new Map<string, CheckboxData>();
-  // table_data = new Map<string, TableData>();
-  // date_data = new Map<string, DateData>();
-  // box_data = new Map<string, BoxData>();
-  // chart_data = new Map<string, ChartData>();
-  // slider_data = new Map<string, SliderData>();
-  // button_toggle_data = new Map<string, ButtonToggleData>();
-  // toggle_data = new Map<string, ToggleData>();
-  // simple_filter_data = new Map<string, SimpleFilterData>();
-  // simple_server_filter_data = new Map<string, SimpleServerFilterData>();
-  // group_filter_data = new Map<string, GroupFilterData>();
-  // input_filter_data = new Map<string, InputData>();
-  // download_data = new Map<string, DownloadData>();
-  // upload_data = new Map<string, UploadData>();
-  // image_data = new Map<string, DataImage>();
-  // highchart_data = new Map<string, HighChartData>();
   sidebar_ids: any[] = ['page'];
 
   data = new Map<string, any>();
@@ -69,7 +52,6 @@ export class DataService {
       });
 
       this.data.set(t.key, t.value);
-      // this.refresh.emit(t.key)
     });
   }
 
