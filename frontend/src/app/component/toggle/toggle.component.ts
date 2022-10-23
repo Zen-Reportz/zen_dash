@@ -8,23 +8,27 @@ import { MEData } from 'src/app/shared/application_data';
   styleUrls: ['./toggle.component.scss'],
 })
 export class ToggleComponent implements OnInit {
-  @Input() uuid!: string;
+  @Input() url!: string;
   checked = false;
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.checked = this.dataService.toggle_data.get(this.uuid)?.checked as boolean;
+    this.checked = this.dataService.all_input.get(this.url).toggle_data.checked as boolean;
   }
 
-  update() {
+  saveData(event: any){
+    this.update(event.checked)
+  }
+
+  update(checked: any) {
     let m = new MEData();
-    m.key = this.dataService.toggle_data.get(this.uuid)?.name as string;
-    m.value = this.checked;
+    m.key = this.dataService.all_input.get(this.url).toggle_data.name as string;
+    m.value = checked;
 
     this.dataService.data_setter.emit(m);
   }
 
   get_name() {
-    return this.dataService.toggle_data.get(this.uuid)?.name;
+    return this.dataService.all_input.get(this.url).toggle_data.name;
   }
 }

@@ -11,7 +11,7 @@ import { CallServiceService } from 'src/app/services/call-service.service';
   styleUrls: ['./app-upload.component.scss'],
 })
 export class AppUploadComponent implements OnInit {
-  @Input() uuid!: string;
+  @Input() url!: string;
   data: UploadData | undefined;
   myFiles: File[] = [];
   uploadCall: Subscription | undefined;
@@ -23,7 +23,7 @@ export class AppUploadComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.data = this.dataService.upload_data.get(this.uuid);
+    this.data = this.dataService.all_input.get(this.url).upload_data;
   }
   getMultiple() {
     return this.data?.multi;

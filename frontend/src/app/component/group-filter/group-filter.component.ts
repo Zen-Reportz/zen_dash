@@ -1,3 +1,4 @@
+import { GroupFilterData } from './../../shared/application_data';
 import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import {
@@ -5,7 +6,7 @@ import {
   MEData
 } from 'src/app/shared/application_data';
 
-import { AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
+import { ViewChild } from '@angular/core';
 
 import { MatSelect } from '@angular/material/select';
 import { ReplaySubject, Subject } from 'rxjs';
@@ -18,11 +19,12 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./group-filter.component.scss'],
 })
 export class GroupFilterComponent implements OnInit {
-  @Input() uuid!: string;
+  @Input() url!: string;
   dataForm = new UntypedFormControl();
   multi!: boolean;
 
-  data: GroupedFilterDataInstance[] | undefined;
+  group_data: GroupedFilterDataInstance[] | undefined;
+  data!: GroupFilterData
 
   public data_select_control: UntypedFormControl = new UntypedFormControl();
 
@@ -57,16 +59,16 @@ export class GroupFilterComponent implements OnInit {
   }
 
   protected filterMulti() {
-    if (!this.data) {
+    if (!this.group_data) {
       return;
     }
 
     // get the search keyword
     let search = this.data_search_control.value;
-    const GroupsCopy = this.copyGroups(this.data);
+    const GroupsCopy = this.copyGroups(this.group_data);
 
     if (!search) {
-      this.data_search.next(this.data.slice());
+      this.data_search.next(this.group_data.slice());
       return;
     } else {
       search = search.toLowerCase();
@@ -86,16 +88,16 @@ export class GroupFilterComponent implements OnInit {
   }
 
   myData() {
-    this.multi = this.dataService.group_filter_data.get(this.uuid)
-      ?.multi as boolean;
+    this.data = this.dataService.all_input.get(this.url).group_filter_data
 
-    this.data = this.dataService.group_filter_data.get(this.uuid)
-      ?.data as GroupedFilterDataInstance[];
+    this.multi = this.dataService.all_input.get(this.url).group_filter_data.multi as boolean;
+
+    this.group_data = this.data.data as GroupedFilterDataInstance[];
 
     // set initial selection
-    let selected = this.dataService.group_filter_data.get(this.uuid)?.selected
+    let selected = this.dataService.all_input.get(this.url).group_filter_data.selected
     if ((selected !== undefined) && (selected.length > 0)){
-      if (this.dataService.group_filter_data.get(this.uuid)?.multi){
+      if (this.dataService.all_input.get(this.url).group_filter_data.multi){
         this.data_select_control.setValue(selected);
       } else {
         this.data_select_control.setValue(selected[0]);
@@ -104,7 +106,7 @@ export class GroupFilterComponent implements OnInit {
     }
 
     // load the initial bank list
-    this.data_search.next(this.data.slice());
+    this.data_search.next(this.group_data.slice());
 
     // listen for search field value changes
     this.data_search_control.valueChanges
@@ -117,12 +119,12 @@ export class GroupFilterComponent implements OnInit {
   }
 
   getLabel() {
-    return this.dataService.group_filter_data.get(this.uuid)?.name;
+    return this.dataService.all_input.get(this.url).group_filter_data.name;
   }
 
   detectChange(value: any) {
     let m = new MEData();
-    m.key = this.dataService.group_filter_data.get(this.uuid)?.name as string;
+    m.key = this.dataService.all_input.get(this.url).group_filter_data.name as string;
     m.value = value.value;
 
     this.dataService.data_setter.emit(m);

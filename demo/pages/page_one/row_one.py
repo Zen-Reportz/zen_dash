@@ -37,11 +37,14 @@ async def prf(req: Request):
         return i.ReturnData(type=i.InstanceType.DATE, 
                         date_data=i.DateTimeData(label="Select Date Range", name="multi_date", first_date="2020-11-24", second_date="2022-11-24"), 
                         reactive=i.ReactiveData(hidden=True, reactive_ids=['single_toggle_data']))
-
-    return i.ReturnData(type=i.InstanceType.DATE, 
+    
+    t = [i.ReturnData(type=i.InstanceType.DATE, 
                         date_data=i.DateTimeData(label="Select Date Range", name="multi_date", first_date="2020-11-24", second_date="2022-11-24"), 
-                        reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data']))
-
+                        reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data'])),
+        i.ReturnData(type=i.InstanceType.DATE, 
+                        date_data=i.DateTimeData(label="Select Date Range", name="multi_date", first_date="2020-11-10", second_date="2022-03-24"), 
+                        reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data']))]
+    return random.choice(t)
 
 @router.post("/single_date", response_model=i.ReturnData)
 async def prf():

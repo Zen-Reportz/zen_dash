@@ -8,15 +8,15 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./input.component.scss'],
 })
 export class InputComponent implements OnInit {
-  @Input() uuid!: string;
+  @Input() url!: string;
   data!: string;
   label: string | undefined;
 
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.label = this.dataService.input_filter_data.get(this.uuid)?.label;
-    let selected = this.dataService.input_filter_data.get(this.uuid)?.value
+    this.label = this.dataService.all_input.get(this.url).input_data.label;
+    let selected = this.dataService.all_input.get(this.url).input_data.value
     if (selected !== undefined){
       this.data = selected
     }
@@ -33,7 +33,7 @@ export class InputComponent implements OnInit {
 
   saveData() {
     let m = new MEData();
-    m.key = this.dataService.input_filter_data.get(this.uuid)?.name as string;
+    m.key = this.dataService.all_input.get(this.url).input_data.name as string;
     m.value = this.data;
     this.dataService.data_setter.emit(m);
   }
@@ -41,7 +41,7 @@ export class InputComponent implements OnInit {
   clearData() {
     this.data = '';
     let m = new MEData();
-    m.key = this.dataService.input_filter_data.get(this.uuid)?.name as string;
+    m.key = this.dataService.all_input.get(this.url).input_data.name as string;
     m.value = this.data;
     this.dataService.data_setter.emit(m);
   }

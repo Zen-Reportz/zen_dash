@@ -1,3 +1,4 @@
+import { ButtonToggleData } from './../../shared/application_data';
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { ButtonToggleInstance, MEData } from '../../shared/application_data';
@@ -8,24 +9,27 @@ import { ButtonToggleInstance, MEData } from '../../shared/application_data';
   styleUrls: ['./button-toggle.component.scss'],
 })
 export class ButtonToggleComponent implements OnInit {
-  @Input() uuid!: string;
+  @Input() url!: string;
   selected_data!: string | string[];
-
+  data!: ButtonToggleData
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    if (this.dataService.button_toggle_data.get(this.uuid)?.multi) {
+    this.data = this.dataService.all_input.get(this.url).button_toggle_data
+
+    if (this.data.multi) {
       this.selected_data = [];
     } else {
       this.selected_data = '';
     }
 
-    if (this.dataService.button_toggle_data.get(this.uuid)?.data) {
+
+
+    if (this.data) {
       let names = [];
-      for (let d of this.dataService.button_toggle_data.get(this.uuid)
-        ?.data as ButtonToggleInstance[]) {
+      for (let d of this.data.data as ButtonToggleInstance[]) {
         if (d.selected) {
-          if (this.dataService.button_toggle_data.get(this.uuid)?.multi) {
+          if (this.data.multi) {
             names.push(d.name);
           } else {
             this.selected_data = d.name;
@@ -37,22 +41,26 @@ export class ButtonToggleComponent implements OnInit {
         this.selected_data = names;
       }
     }
+
+  }
+
+  updateData(selected: any){
+    let m = new MEData();
+    m.key = this.data.name as string;
+    m.value = selected
+    this.dataService.data_setter.emit(m);
   }
 
   onChange($event: any) {
-    let m = new MEData();
-    m.key = this.dataService.button_toggle_data.get(this.uuid)?.name as string;
-    m.value = $event.value;
-    this.dataService.data_setter.emit(m);
+    this.updateData($event.value)
 
   }
 
   isMultiple() {
-    return this.dataService.button_toggle_data.get(this.uuid)?.multi as boolean;
+    return this.data.multi as boolean;
   }
 
   get_data() {
-    return this.dataService.button_toggle_data.get(this.uuid)
-      ?.data as ButtonToggleInstance[];
+    return this.data.data as ButtonToggleInstance[];
   }
 }

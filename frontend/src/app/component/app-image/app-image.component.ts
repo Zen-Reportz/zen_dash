@@ -1,6 +1,6 @@
-import { DataImage, ResponseData } from './../../shared/application_data';
+import { DataImage } from './../../shared/application_data';
 import { Component, Input, OnInit } from '@angular/core';
-import { HttpClient, HttpEvent, HttpResponse } from '@angular/common/http';
+import {  HttpResponse } from '@angular/common/http';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { DataService } from 'src/app/services/data.service';
 import { CallServiceService } from 'src/app/services/call-service.service';
@@ -12,8 +12,7 @@ import { Observable, Subscription } from 'rxjs';
   styleUrls: ['./app-image.component.scss'],
 })
 export class AppImageComponent implements OnInit {
-  @Input() uuid!: string;
-  data: DataImage | undefined;
+  @Input() url!: string;
   image: Blob | undefined | null;
   imageURL!: SafeUrl;
   height!: string;
@@ -21,22 +20,28 @@ export class AppImageComponent implements OnInit {
   imageCall: Subscription | undefined;
   loading= true
 
+  data!: DataImage
+
   constructor(
-    private http: HttpClient,
     private dataService: DataService,
     private sanitizer: DomSanitizer,
     private callService: CallServiceService
   ) {}
 
-  ngOnInit(): void {
-    this.data = this.dataService.image_data.get(this.uuid);
-    this.height = this.data?.height as string;
-    this.width = this.data?.width as string;
+  get_data(){
+    this.data = this.dataService.get_input_data(this.url).image_data
+  }
+
+
+  get_image(){
+    this.height = this.data.height
+    this.width = this.data.width
+
     if (this.imageCall !== undefined) {
       this.imageCall.unsubscribe();
     }
 
-    let p = this.callService.call_response(this.data?.url as string, {
+    let p = this.callService.call_response(this.data.url as string, {
       responseType: 'blob',
       observe: 'response',
     }, undefined) as Observable<HttpResponse<Blob>>;
@@ -50,5 +55,13 @@ export class AppImageComponent implements OnInit {
         );
       }
     });
+
   }
+
+  ngOnInit(): void {
+    this.get_data()
+    this.get_image()
+  }
+
+
 }

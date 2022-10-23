@@ -12,7 +12,7 @@ import { TableColumn } from '../../shared/application_data';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnInit {
-  @Input() uuid!: string;
+  @Input() url!: string;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   // @ViewChild(MatPaginator, { static: false }) set matPaginator(paginator: MatPaginator) {
@@ -29,12 +29,12 @@ export class TableComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.columns = this.dataService.table_data.get(this.uuid)
+    this.columns = this.dataService.all_input.get(this.url).table_data
       ?.columns as TableColumn[];
     this.dataSource = new MatTableDataSource<any>(
-      this.dataService.table_data.get(this.uuid)?.data as any
+      this.dataService.all_input.get(this.url).table_data.data as any
     );
-    this.dataService.table_data.delete(this.uuid);
+
 
     this.displayedColumns = this.displayedColumns.concat(
       this.columns.map((x) => x.columnDef)

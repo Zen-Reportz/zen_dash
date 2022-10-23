@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FileSaverService } from 'ngx-filesaver';
 import { Observable, Subscription } from 'rxjs';
@@ -12,12 +12,11 @@ import { DownloadData } from 'src/app/shared/application_data';
   styleUrls: ['./app-download.component.scss'],
 })
 export class AppDownloadComponent implements OnInit {
-  @Input() uuid!: string;
+  @Input() url!: string;
   data: DownloadData | undefined;
   downloadCall: Subscription | undefined;
 
   constructor(
-    private http: HttpClient,
     private dataService: DataService,
     private fileSaverService: FileSaverService,
     private callService: CallServiceService
@@ -38,7 +37,7 @@ export class AppDownloadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.data = this.dataService.download_data.get(this.uuid);
+    this.data = this.dataService.get_input_data(this.url).download_data;
   }
 
   fileName() {

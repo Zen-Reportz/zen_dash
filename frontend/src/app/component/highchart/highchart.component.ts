@@ -8,7 +8,7 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./highchart.component.scss'],
 })
 export class HighchartComponent implements OnInit {
-  @Input() uuid!: string;
+  @Input() url!: string;
   data: any;
   constructor(private dataService: DataService) {}
 
@@ -35,11 +35,11 @@ export class HighchartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.checkFunction(this.dataService.highchart_data.get(this.uuid)?.config)
+    this.checkFunction(this.dataService.all_input.get(this.url).highchart_data.config)
 
 
     this.data = new Chart(
-      this.dataService.highchart_data.get(this.uuid)?.config
+      this.dataService.all_input.get(this.url).highchart_data.config
     );
   }
 }

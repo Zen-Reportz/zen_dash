@@ -15,15 +15,12 @@ import { SetTitleService } from '../shared/set-title.service';
 export class PageComponent implements OnInit {
   page: Page | undefined = undefined;
 
-  size_data = new Map<string, FlexData>();
-  myHidden = new Map<string, boolean>();
-
   constructor(
     private http: HttpClient,
     private titleService: Title,
     private aRoute: ActivatedRoute,
     private call: CallServiceService,
-
+    private dataService: DataService
   ) {}
 
   ngOnInit(): void {
@@ -43,25 +40,20 @@ export class PageComponent implements OnInit {
     });
   }
 
-  setFlex(flex: FlexData, url: string) {
-    if (flex !== null) {
-      this.size_data.set(url, flex);
-    }
-  }
 
 
   getFlex(original: string, type: string, url: string) {
     let response: any;
-    if (this.size_data.get(url)?.fxFlex !== undefined) {
-      if (this.size_data.get(url)?.fxFlex !== null) {
+    if (this.dataService.all_input.get(url) !== undefined) {
+      if (this.dataService.all_input.get(url)?.fxFlex !== null) {
         if (type == 'flex') {
-          response = this.size_data.get(url)?.fxFlex;
+          response = this.dataService.all_input.get(url)?.flex.fxFlex;
         } else if (type == 'flex_md') {
-          response = this.size_data.get(url)?.fxFlex_md;
+          response = this.dataService.all_input.get(url)?.flex.fxFlex_md;
         } else if (type == 'flex_sm') {
-          response = this.size_data.get(url)?.fxFlex_sm;
+          response = this.dataService.all_input.get(url).flex.fxFlex_sm;
         } else if (type == 'flex_xs') {
-          response = this.size_data.get(url)?.fxFlex_xs;
+          response = this.dataService.all_input.get(url).flex.fxFlex_xs;
         } else {
           console.log(' issue with type for ' + url + ' ' + type);
           response = original;
@@ -78,11 +70,10 @@ export class PageComponent implements OnInit {
     return response;
   }
 
-  setHidden(event:boolean, url:string){
-    this.myHidden.set(url, event)
-  }
-
   isHiddenFunction(url:string){
-    return this.myHidden.get(url)
+    if (this.dataService.all_input.get(url) !== undefined) {
+
+      return this.dataService.all_input.get(url).reactive.hidden
+    }
   }
 }

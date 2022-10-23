@@ -7,13 +7,13 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./plot.component.scss'],
 })
 export class PlotComponent implements OnInit {
-  @Input() uuid!: string;
+  @Input() url!: string;
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {}
 
   get_options() {
-    return this.dataService.chart_data.get(this.uuid)?.data as any;
+    return this.dataService.all_input.get(this.url).chart_data.data as any;
   }
 }

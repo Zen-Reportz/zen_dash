@@ -18,7 +18,7 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./simple-filter.component.scss'],
 })
 export class SimpleFilterComponent implements OnInit {
-  @Input() uuid!: string;
+  @Input() url!: string;
   dataForm = new UntypedFormControl();
   multi!: boolean;
 
@@ -84,16 +84,14 @@ export class SimpleFilterComponent implements OnInit {
   }
 
   originalData() {
-    this.multi = this.dataService.simple_filter_data.get(this.uuid)
-      ?.multi as boolean;
+    this.multi = this.dataService.all_input.get(this.url).simple_filter_data.multi as boolean;
 
-    this.data = this.dataService.simple_filter_data.get(this.uuid)
-      ?.data as string[];
+    this.data = this.dataService.all_input.get(this.url).simple_filter_data.data as string[];
 
     // set initial selection
-    let selected = this.dataService.simple_filter_data.get(this.uuid)?.selected
+    let selected = this.dataService.all_input.get(this.url).simple_filter_data.selected
     if ((selected !== undefined) && (selected.length > 0)){
-      if (this.dataService.simple_filter_data.get(this.uuid)?.multi){
+      if (this.multi){
         this.data_select_control.setValue(selected);
       } else {
         this.data_select_control.setValue(selected[0]);
@@ -118,12 +116,12 @@ export class SimpleFilterComponent implements OnInit {
 
 
   getLabel() {
-    return this.dataService.simple_filter_data.get(this.uuid)?.name;
+    return this.dataService.all_input.get(this.url).simple_filter_data.name;
   }
 
   detectChange(value: any) {
     let m = new MEData();
-    m.key = this.dataService.simple_filter_data.get(this.uuid)?.name as string;
+    m.key = this.dataService.all_input.get(this.url).simple_filter_data.name as string;
     m.value = value.value;
 
     this.dataService.data_setter.emit(m);

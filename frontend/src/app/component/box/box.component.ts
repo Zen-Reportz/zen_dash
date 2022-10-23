@@ -1,3 +1,4 @@
+import { BoxData } from './../../shared/application_data';
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
@@ -7,21 +8,23 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./box.component.scss'],
 })
 export class BoxComponent implements OnInit {
-  @Input() uuid!: string;
-
+  @Input() url!: string;
   constructor(private dataService: DataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+
+
 
   getIcon() {
-    return this.dataService.box_data.get(this.uuid)?.icon;
+    return this.dataService.all_input.get(this.url).box_data.icon;
   }
 
   getValue() {
-    return this.dataService.box_data.get(this.uuid)?.value;
+    return this.dataService.all_input.get(this.url).box_data.value;
   }
 
   getName() {
-    return this.dataService.box_data.get(this.uuid)?.name;
+    return this.dataService.all_input.get(this.url).box_data.name;
   }
 }

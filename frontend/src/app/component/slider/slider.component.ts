@@ -8,37 +8,37 @@ import { MEData } from 'src/app/shared/application_data';
   styleUrls: ['./slider.component.scss'],
 })
 export class SliderComponent implements OnInit {
-  @Input() uuid!: string;
+  @Input() url!: string;
   value!: number;
 
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.value =  this.dataService.slider_data.get(this.uuid)?.value as number
+    this.value =  this.dataService.all_input.get(this.url).slider_data.value as number
   }
 
   isInverted() {
-    return this.dataService.slider_data.get(this.uuid)?.invert as boolean;
+    return this.dataService.all_input.get(this.url).slider_data.invert as boolean;
   }
 
   isMax() {
-    return this.dataService.slider_data.get(this.uuid)?.max as number;
+    return this.dataService.all_input.get(this.url).slider_data.max as number;
   }
 
   isMin() {
-    return this.dataService.slider_data.get(this.uuid)?.min as number;
+    return this.dataService.all_input.get(this.url).slider_data.min as number;
   }
 
   step() {
-    return this.dataService.slider_data.get(this.uuid)?.step as number;
+    return this.dataService.all_input.get(this.url).slider_data.step as number;
   }
 
   isThumbLabel() {
-    return this.dataService.slider_data.get(this.uuid)?.thumbLabel as boolean;
+    return this.dataService.all_input.get(this.url).slider_data.thumbLabel as boolean;
   }
 
   isVertical() {
-    return this.dataService.slider_data.get(this.uuid)?.vertical as boolean;
+    return this.dataService.all_input.get(this.url).slider_data.vertical as boolean;
   }
 
      // value: number| undefined
@@ -46,7 +46,7 @@ export class SliderComponent implements OnInit {
 
   detectChange() {
     let m = new MEData();
-    m.key = this.dataService.slider_data.get(this.uuid)?.name as string;
+    m.key = this.dataService.all_input.get(this.url).slider_data.name as string;
     m.value = this.value;
     this.dataService.data_setter.emit(m);
   }

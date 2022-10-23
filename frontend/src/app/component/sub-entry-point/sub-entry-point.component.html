@@ -1,34 +1,33 @@
 <span *ngIf="type === 'box'">
-  <app-box [uuid]="uuid"></app-box>
+  <app-box [url]="url"></app-box>
 </span>
 <span *ngIf="type === 'date'">
-  <app-datetime [uuid]="uuid"></app-datetime>
+  <app-datetime [url]="url"></app-datetime>
 </span>
 <span *ngIf="type === 'table'">
-  <app-table [uuid]="uuid"></app-table>
+  <app-table [url]="url"></app-table>
 </span>
 <span *ngIf="type === 'chart'">
-  <app-plot [uuid]="uuid"></app-plot>
+  <app-plot [url]="url"></app-plot>
 </span>
 <span *ngIf="type === 'checkbox'">
-  <app-checkbox [uuid]="uuid"></app-checkbox>
+  <app-checkbox [url]="url"></app-checkbox>
 </span>
 <span *ngIf="type === 'radio'">
-  <app-radio [uuid]="uuid"></app-radio>
+  <app-radio [url]="url"></app-radio>
 </span>
 <span *ngIf="type === 'slider'">
-  <app-slider [uuid]="uuid"></app-slider>
+  <app-slider [url]="url"></app-slider>
 </span>
 <span *ngIf="type === 'button_toggle'">
-  <app-button-toggle [uuid]="uuid"></app-button-toggle>
+  <app-button-toggle [url]="url"></app-button-toggle>
 </span>
 <span *ngIf="type === 'toggle'">
-  <app-toggle [uuid]="uuid"></app-toggle>
+  <app-toggle [url]="url"></app-toggle>
 </span>
 <span *ngIf="type === 'multi_list'">
   <span *ngFor="let url_info of getURLs()">
     <!-- <ng-container *ngIf="url_info.with_card; else mulit_list"> -->
-
     <app-entry-point
         [url]="url_info.url"
         [fxFlex]="getFlex('100%', 'flex', '100%')"
@@ -36,7 +35,6 @@
         [fxFlex.sm]="getFlex('100%', 'flex_sm', url_info.url)"
         [fxFlex.xs]="getFlex('100%', 'flex_xs', url_info.url)"
         url_info
-        (fxFlex)="setFlex($event, url_info.url)"
         class="padding"
       >
       </app-entry-point>
@@ -73,35 +71,35 @@
 </span>
 
 <span *ngIf="type == 'simple_filter'">
-  <app-simple-filter [uuid]="uuid"></app-simple-filter>
+  <app-simple-filter [url]="url"></app-simple-filter>
 </span>
 
 <span *ngIf="type == 'simple_server_filter'">
-  <app-simple-server-filter [uuid]="uuid"></app-simple-server-filter>
+  <app-simple-server-filter [url]="url"></app-simple-server-filter>
 </span>
 
 <span *ngIf="type == 'group_filter'">
-  <app-group-filter [uuid]="uuid"></app-group-filter>
+  <app-group-filter [url]="url"></app-group-filter>
 </span>
 
 <span *ngIf="type == 'input'">
-  <app-input [uuid]="uuid"></app-input>
+  <app-input [url]="url"></app-input>
 </span>
 
 <span *ngIf="type == 'download'">
-  <app-app-download [uuid]="uuid"></app-app-download>
+  <app-app-download [url]="url"></app-app-download>
 </span>
 
 <span *ngIf="type == 'upload'">
-  <app-app-upload [uuid]="uuid"></app-app-upload>
+  <app-app-upload [url]="url"></app-app-upload>
 </span>
 
 <span *ngIf="type == 'image'">
-  <app-app-image [uuid]="uuid"></app-app-image>
+  <app-app-image [url]="url"></app-app-image>
 </span>
 
 <span *ngIf="type == 'highchart'">
-  <app-highchart [uuid]="uuid"></app-highchart>
+  <app-highchart [url]="url"></app-highchart>
 </span>
 
 <span *ngIf="loading">

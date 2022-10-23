@@ -8,7 +8,7 @@ import { MEData } from 'src/app/shared/application_data';
   styleUrls: ['./radio.component.scss'],
 })
 export class RadioComponent implements OnInit {
-  @Input() uuid!: string;
+  @Input() url!: string;
 
   data!: string[];
   selected!: string;
@@ -16,22 +16,21 @@ export class RadioComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.selected = this.dataService.radio_data.get(this.uuid)
-      ?.selected as string;
+    this.selected = this.dataService.all_input.get(this.url).radio_data.selected as string;
   }
 
   getStyle() {
-    return this.dataService.radio_data.get(this.uuid)?.style as string;
+    return this.dataService.all_input.get(this.url).radio_data.style as string;
   }
 
   update() {
     let m = new MEData();
-    m.key = this.dataService.radio_data.get(this.uuid)?.name as string;
+    m.key = this.dataService.all_input.get(this.url).radio_data.name as string;
     m.value = this.selected;
     this.dataService.data_setter.emit(m);
   }
 
   getData() {
-    return this.dataService.radio_data.get(this.uuid)?.data;
+    return this.dataService.all_input.get(this.url).radio_data.data;
   }
 }

@@ -19,10 +19,10 @@ import { MEData } from 'src/app/shared/application_data';
   styleUrls: ['./simple-server-filter.component.scss'],
 })
 export class SimpleServerFilterComponent implements OnInit {
-  @Input() uuid!: string;
+  @Input() url!: string;
   multi: boolean = false;
   data!: string[];
-  url!: string;
+  server_url!: string;
   name!: string;
 
   compareFn = (a: any, b: any) => a && b && a.id === b.id;
@@ -101,17 +101,13 @@ export class SimpleServerFilterComponent implements OnInit {
   }
 
   originalData() {
-    this.multi = this.dataService.simple_server_filter_data.get(this.uuid)
-      ?.multi as boolean;
+    this.multi = this.dataService.all_input.get(this.url).simple_server_filter_data.multi as boolean;
 
-    this.data = this.dataService.simple_server_filter_data.get(this.uuid)
-      ?.data as string[];
+    this.data = this.dataService.all_input.get(this.url).simple_server_filter_data.data as string[];
 
-    this.name = this.dataService.simple_server_filter_data.get(this.uuid)
-      ?.name as string;
+    this.name = this.dataService.all_input.get(this.url).simple_server_filter_data.name as string;
 
-    this.url = this.dataService.simple_server_filter_data.get(this.uuid)
-      ?.url as string;
+    this.server_url = this.dataService.all_input.get(this.url).simple_server_filter_data.url as string;
 
     // set initial selection
     this.ServerSideCtrl.setValue([]);
@@ -121,13 +117,13 @@ export class SimpleServerFilterComponent implements OnInit {
   }
 
   pullData(value: string) {
-    let p = this.callService.second_call_response(this.url, this.name, value);
+    let p = this.callService.second_call_response(this.server_url, this.name, value);
     return p;
   }
 
   detectChange(value: any) {
     let m = new MEData();
-    m.key = this.dataService.simple_server_filter_data.get(this.uuid)?.name as string;
+    m.key = this.dataService.all_input.get(this.url).simple_server_filter_data.name as string;
     m.value = value.value;
 
     this.dataService.data_setter.emit(m);

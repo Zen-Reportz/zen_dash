@@ -1,3 +1,4 @@
+import { DataService } from 'src/app/services/data.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FlexData } from 'src/app/shared/application_data';
 
@@ -9,43 +10,34 @@ import { FlexData } from 'src/app/shared/application_data';
 export class EntryPointComponent implements OnInit {
   @Input() url!: string;
   @Input() isSidebar!: boolean
-  @Output() fxFlex = new EventEmitter<FlexData>();
-  @Output() isHidden = new EventEmitter<boolean>();
 
   pulled: boolean = false;
   footer!: string;
   title!: string;
 
-  constructor() {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
   }
 
-  setPulled(result: boolean) {
-    this.pulled = result;
-  }
 
-  setFooter(result: string) {
-    this.footer = result;
-  }
 
   getFooter() {
-    return this.footer;
+    if (this.dataService.all_input.get(this.url) !== undefined) {
+      return this.dataService.all_input.get(this.url).footer
+    }
+    return false
+
   }
 
-  setTitle(result: string) {
-    this.title = result;
-  }
 
   getTitle() {
-    return this.title;
+    if (this.dataService.all_input.get(this.url) !== undefined) {
+      return this.dataService.all_input.get(this.url).title
+    }
+    return false
+
   }
 
-  setFlex(event: FlexData) {
-    this.fxFlex.emit(event);
-  }
 
-  setHidden(event:boolean){
-    this.isHidden.emit(event)
-  }
 }

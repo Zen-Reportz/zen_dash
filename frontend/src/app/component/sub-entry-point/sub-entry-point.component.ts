@@ -4,27 +4,11 @@ import {
   SimpleServerFilterData,
 } from './../../shared/application_data';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UUID } from 'angular2-uuid';
 import {
-  BoxData,
-  ButtonToggleData,
-  ChartData,
-  CheckboxData,
-  DateData,
   FlexData,
-  GroupFilterData,
   MultiURLInfo,
-  RadioData,
   ReactiveData,
   ResponseData,
-  SimpleFilterData,
-  SliderData,
-  TableData,
-  ToggleData,
-  InputData,
-  DownloadData,
-  UploadData,
-  DataImage,
 } from '../../shared/application_data';
 import { Observable, Subscription } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
@@ -37,14 +21,13 @@ import { DataService } from 'src/app/services/data.service';
 export class SubEntryPointComponent implements OnInit {
   @Input() url!: string;
   @Input() isSidebar!: boolean;
-  @Output() pulled = new EventEmitter<boolean>();
-  @Output() footer = new EventEmitter<string>();
-  @Output() title = new EventEmitter<string>();
+  // @Output() pulled = new EventEmitter<boolean>();
+  // @Output() footer = new EventEmitter<string>();
+  // @Output() title = new EventEmitter<string>();
 
-  @Output() fxFlex = new EventEmitter<FlexData>();
-  @Output() hidden = new EventEmitter<boolean>();
+  // @Output() fxFlex = new EventEmitter<FlexData>();
+  // @Output() hidden = new EventEmitter<boolean>();
 
-  uuid = UUID.UUID();
   // title: string | undefined
   type: string | undefined;
   name: string | undefined;
@@ -61,7 +44,7 @@ export class SubEntryPointComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getData();
+    this.getData(true);
   }
 
   subscribe() {
@@ -69,7 +52,8 @@ export class SubEntryPointComponent implements OnInit {
       this.d.set(
         'refresh',
         this.dataService.refresh.subscribe((t) => {
-          this.getData();
+          console.log("refresh " + this.type)
+          this.getData(false);
         })
       );
     }
@@ -79,7 +63,7 @@ export class SubEntryPointComponent implements OnInit {
         'reactive',
         this.dataService.data_setter.subscribe((t) => {
           if (t.key !== this.name) {
-            this.getData();
+            this.getData(false);
           }
         })
       );
@@ -88,7 +72,7 @@ export class SubEntryPointComponent implements OnInit {
         'specific_reactive',
         this.dataService.data_setter.subscribe((t) => {
           if (this.reactive.reactive_ids.indexOf(t.key) >= 0) {
-            this.getData();
+            this.getData(false);
           }
         })
       );
@@ -103,68 +87,71 @@ export class SubEntryPointComponent implements OnInit {
     this.d.get('specific_reactive')?.unsubscribe();
   }
 
-  deleteData() {
-    switch (this.type) {
+  set_name(t: any) {
+    switch (t.type) {
       case 'box':
-        this.dataService.box_data.delete(this.uuid);
+        this.name = t.box_data?.name as string;
         break;
       case 'date':
-        this.dataService.date_data.delete(this.uuid);
+        this.name = t.date_data?.name as string;
         break;
       case 'table':
-        this.dataService.table_data.delete(this.uuid);
+        this.name = t.table_data?.name as string;
         break;
       case 'chart':
-        this.dataService.chart_data.delete(this.uuid);
+        this.name = t.chart_data?.name as string;
         break;
       case 'radio':
-        this.dataService.radio_data.delete(this.uuid);
+        this.name = t.radio_data?.name as string;
         break;
       case 'checkbox':
-        this.dataService.checkbox_data.delete(this.uuid);
+        this.name = t.checkbox_data?.name as string;
         break;
       case 'slider':
-        this.dataService.slider_data.delete(this.uuid);
+        this.name = t.slider_data?.name as string;
         break;
       case 'button_toggle':
-        this.dataService.button_toggle_data.delete(this.uuid);
+        this.name = t.button_toggle_data?.name as string;
         break;
       case 'toggle':
-        this.dataService.toggle_data.delete(this.uuid);
+        this.name = t.button_toggle_data?.name as string;
         break;
-      case 'filter':
-        this.dataService.simple_filter_data.delete(this.uuid);
+      case 'multi_list':
+        this.multi_url = t.multi_data?.urls as MultiURLInfo[];
         break;
-      case 'filter_group':
-        this.dataService.group_filter_data.delete(this.uuid);
+      case 'multi_tabs':
+        this.multi_url = t.multi_data?.urls as MultiURLInfo[];
+        break;
+      case 'multi_expand':
+        this.multi_url = t.multi_data?.urls as MultiURLInfo[];
+        break;
+      case 'simple_filter':
+        this.name = t.simple_filter_data?.name;
+        break;
+      case 'simple_server_filter':
+        this.name = t.simple_filter_data?.name;
+        break;
+      case 'group_filter':
+        this.name = t.group_filter_data?.name;
         break;
       case 'input':
-        this.dataService.input_filter_data.delete(this.uuid);
+        this.name = t.input_data?.name;
         break;
       case 'download':
-        this.dataService.download_data.delete(this.uuid);
         break;
       case 'upload':
-        this.dataService.upload_data.delete(this.uuid);
         break;
       case 'image':
-        this.dataService.image_data.delete(this.uuid);
         break;
       case 'highchart':
-        this.dataService.highchart_data.delete(this.uuid);
         break;
+      default:
+        console.log(t.type);
     }
-    this.pulled.emit(false);
-    this.title.emit('Loading');
-    this.type = undefined;
-    this.footer.emit('Loading');
   }
 
-  getData() {
+  getData(page_refreshed: boolean) {
     this.loading = true;
-    if (this.type !== undefined) {
-      this.deleteData();
-    }
     this.multi_url = [];
     if (this.pageCall !== undefined) {
       this.pageCall.unsubscribe();
@@ -176,148 +163,48 @@ export class SubEntryPointComponent implements OnInit {
       undefined
     ) as Observable<ResponseData>;
 
+    if ((page_refreshed) && (this.dataService.all_input.get(this.url)!== undefined)) {
+        this.loading = false;
+        let t = this.dataService.all_input.get(this.url)
+        this.reactive = t.reactive;
+        this.set_name(t)
+        // this.pulled.emit(true);
+        // this.title.emit(t.title);
+        // if (t.flex !== undefined) {
+        //   this.fxFlex.emit(t.flex);
+        // }
+
+        this.type = t.type;
+        // this.footer.emit(t.footer);
+        // this.hidden.emit(this.reactive.hidden)
+
+        this.unsubscribe();
+        this.subscribe();
+        return
+    }
+
+    this.type = undefined
+    this.dataService.all_input.delete(this.url)
     this.pageCall = p.subscribe({
       next: (t: ResponseData) => {
         this.loading = false;
         this.reactive = t.reactive;
-        switch (t.type) {
-          case 'box':
-            this.dataService.box_data.set(this.uuid, t.box_data as BoxData);
-            this.name = t.box_data?.name as string;
-            break;
-          case 'date':
-            this.dataService.date_data.set(this.uuid, t.date_data as DateData);
-            this.name = t.date_data?.name as string;
-            break;
-          case 'table':
-            this.dataService.table_data.set(
-              this.uuid,
-              t.table_data as TableData
-            );
-            this.name = t.table_data?.name as string;
-            break;
-          case 'chart':
-            this.dataService.chart_data.set(
-              this.uuid,
-              t.chart_data as ChartData
-            );
-            this.name = t.chart_data?.name as string;
-            break;
-          case 'radio':
-            this.dataService.radio_data.set(
-              this.uuid,
-              t.radio_data as RadioData
-            );
-            this.name = t.radio_data?.name as string;
-            break;
-          case 'checkbox':
-            this.dataService.checkbox_data.set(
-              this.uuid,
-              t.checkbox_data as CheckboxData
-            );
-            this.name = t.checkbox_data?.name as string;
-            break;
-          case 'slider':
-            this.dataService.slider_data.set(
-              this.uuid,
-              t.slider_data as SliderData
-            );
-            this.name = t.slider_data?.name as string;
-            break;
-          case 'button_toggle':
-            this.dataService.button_toggle_data.set(
-              this.uuid,
-              t.button_toggle_data as ButtonToggleData
-            );
-            this.name = t.button_toggle_data?.name as string;
-            break;
-          case 'toggle':
-            this.dataService.toggle_data.set(
-              this.uuid,
-              t.toggle_data as ToggleData
-            );
-            this.name = t.button_toggle_data?.name as string;
-            break;
-          case 'multi_list':
-            this.multi_url = t.multi_data?.urls as MultiURLInfo[];
-            break;
-          case 'multi_tabs':
-            this.multi_url = t.multi_data?.urls as MultiURLInfo[];
-            break;
-          case 'multi_expand':
-            this.multi_url = t.multi_data?.urls as MultiURLInfo[];
-            break;
-          case 'simple_filter':
-            this.dataService.simple_filter_data.set(
-              this.uuid,
-              t.simple_filter_data as SimpleFilterData
-            );
-            this.name = t.simple_filter_data?.name;
-            break;
-          case 'simple_server_filter':
-            this.dataService.simple_server_filter_data.set(
-              this.uuid,
-              t.simple_server_filter_data as SimpleServerFilterData
-            );
-            this.name = t.simple_filter_data?.name;
+        this.dataService.all_input.set(this.url, t);
+        this.set_name(t)
 
-            break;
-          case 'group_filter':
-            this.dataService.group_filter_data.set(
-              this.uuid,
-              t.group_filter_data as GroupFilterData
-            );
-            this.name = t.group_filter_data?.name;
-
-            break;
-          case 'input':
-            this.dataService.input_filter_data.set(
-              this.uuid,
-              t.input_data as InputData
-            );
-            this.name = t.input_data?.name;
-
-            break;
-          case 'download':
-            this.dataService.download_data.set(
-              this.uuid,
-              t.download_data as DownloadData
-            );
-            break;
-          case 'upload':
-            this.dataService.upload_data.set(
-              this.uuid,
-              t.upload_data as UploadData
-            );
-            break;
-          case 'image':
-            this.dataService.image_data.set(
-              this.uuid,
-              t.image_data as DataImage
-            );
-            break;
-          case 'highchart':
-            this.dataService.highchart_data.set(
-              this.uuid,
-              t.highchart_data as HighChartData
-            );
-            break;
-          default:
-            console.log(t.type);
-        }
         if (this.isSidebar) {
           this.dataService.sidebar_ids.push(this.name);
         }
 
-        this.pulled.emit(true);
-        this.title.emit(t.title);
-        if (t.flex !== undefined) {
-          this.fxFlex.emit(t.flex);
-        }
+        // this.pulled.emit(true);
+        // this.title.emit(t.title);
+        // if (t.flex !== undefined) {
+        //   this.fxFlex.emit(t.flex);
+        // }
 
         this.type = t.type;
-        this.footer.emit(t.footer);
-        this.hidden.emit(this.reactive.hidden)
+        // this.footer.emit(t.footer);
+        // this.hidden.emit(this.reactive.hidden)
 
         this.unsubscribe();
         this.subscribe();
@@ -329,13 +216,13 @@ export class SubEntryPointComponent implements OnInit {
     });
   }
 
-  getTitle() {
-    return this.title ? this.title : undefined;
-  }
+  // getTitle() {
+  //   return this.title ? this.title : undefined;
+  // }
 
-  getFooter() {
-    return this.footer ? this.footer : undefined;
-  }
+  // getFooter() {
+  //   return this.footer ? this.footer : undefined;
+  // }
 
   getURLs() {
     return this.multi_url;
