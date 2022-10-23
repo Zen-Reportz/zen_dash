@@ -1,16 +1,17 @@
 from enum import Enum
 import optparse
-from pydantic import BaseModel
-from typing import List, Tuple, Optional
+from typing import List, Optional
+
+from zen_dash.support import BaseUpdate
 
 
-class Instance(BaseModel):
+class Instance(BaseUpdate):
     url: str
     
 
-class Row(BaseModel):
+class Row(BaseUpdate):
     data: List[Instance]
     layoutGap: Optional[str] = "30px"
 
-class Page(BaseModel):
+class Page(BaseUpdate):
     rows: List[Row]

@@ -16,7 +16,7 @@ router = APIRouter(
 async def d3():
     return i.ReturnData(type=i.InstanceType.INPUT,
                         title="Input",
-                       input_data= i.InputData(label="Input Data", name="myInput"))
+                       input_data= i.InputData(label="Input Data", name="myInput", value='test'))
 
 
 

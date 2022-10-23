@@ -13,7 +13,9 @@ export class SliderComponent implements OnInit {
 
   constructor(private dataService: DataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.value =  this.dataService.slider_data.get(this.uuid)?.value as number
+  }
 
   isInverted() {
     return this.dataService.slider_data.get(this.uuid)?.invert as boolean;
@@ -39,6 +41,8 @@ export class SliderComponent implements OnInit {
     return this.dataService.slider_data.get(this.uuid)?.vertical as boolean;
   }
 
+     // value: number| undefined
+    // tick_interval: number | string | undefined
 
   detectChange() {
     let m = new MEData();

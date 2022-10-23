@@ -13,7 +13,7 @@ export class ToggleComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-    this.checked = this.dataService.toggle_data.get(this.uuid)?.data as boolean;
+    this.checked = this.dataService.toggle_data.get(this.uuid)?.checked as boolean;
   }
 
   update() {

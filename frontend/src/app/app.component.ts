@@ -1,14 +1,16 @@
+import { MEData } from 'src/app/shared/application_data';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingComponent } from './component/loading/loading.component';
 import { DataService } from './services/data.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlSerializer } from '@angular/router';
 import { CallServiceService } from './services/call-service.service';
 import {Title} from "@angular/platform-browser";
 import { CustomScripts } from './shared/application_data';
 import { UUID } from 'angular2-uuid';
+import {Clipboard} from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-root',
@@ -29,15 +31,22 @@ export class AppComponent implements OnInit {
               private _snackBar: MatSnackBar,
               private aRoute: ActivatedRoute,
               private call: CallServiceService,
-              private titleService:Title
+              private titleService:Title,
+              private clipboard: Clipboard,
+              private _router: Router,
+              private serializer: UrlSerializer
               ){
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    this.aRoute.fragment.subscribe((fragment) => {
-      this.data_service.data.set('page', fragment)
+    this.aRoute.queryParamMap.subscribe((fragment) => {
+      let page = fragment.get('page')
+      if (page === null){
+        page = '/'
+      }
+      this.data_service.data.set('page', page)
       this.data_service.reset_data()
       this.getScripts()
     })
@@ -56,10 +65,31 @@ export class AppComponent implements OnInit {
   }
 
   refresh_data(){
+    let document_id   = UUID.UUID();
+    let m = new MEData();
+    m.key = "document_id"
+    m.value = document_id
+    this.data_service.data_setter.emit(m)
     this.data_service.refresh.emit('')
+    this.call.call_response(this.call.my_url() + "backend/document",  undefined,
+    undefined).subscribe((data) => {
+      const myUrl = new URL(window.location.href);
+      myUrl.searchParams.set('document_id', document_id);
+      this.clipboard.copy(myUrl.href)
+
+      this._snackBar.openFromComponent(LoadingComponent, {
+        duration: this.durationInSeconds * 1000,
+        data: true
+      });
+    }, (error) =>{
+
+    })
+
     this._snackBar.openFromComponent(LoadingComponent, {
       duration: this.durationInSeconds * 1000,
+      data: false
     });
+
   }
 
   loadExternalScript(url: string| undefined, text: string | undefined, type: string) {

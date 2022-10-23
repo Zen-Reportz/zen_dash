@@ -117,9 +117,8 @@ export class ButtonToggleData{
 }
 
 export class ToggleData{
-  data!: boolean
   name!: string
-
+  checked!: boolean
 }
 
 export class SliderData{
@@ -130,6 +129,7 @@ export class SliderData{
   thumbLabel!: boolean
   invert!: boolean
   vertical!: boolean
+  value: number| undefined
 }
 
 
@@ -145,13 +145,14 @@ export class GroupFilterData{
   name!: string
   url: string | undefined
   data!: GroupedFilterDataInstance[]
+  selected!: string[]
 }
 
 export class SimpleFilterData{
   multi!: boolean
   name!: string
   data!: string[]
-
+  selected!: string[]
 }
 
 
@@ -185,7 +186,7 @@ export class ReactiveData {
 export class InputData {
   label: string | undefined
   name!: string
-
+  value: string | undefined
 }
 
 export class DownloadData{

@@ -16,6 +16,11 @@ export class InputComponent implements OnInit {
 
   ngOnInit() {
     this.label = this.dataService.input_filter_data.get(this.uuid)?.label;
+    let selected = this.dataService.input_filter_data.get(this.uuid)?.value
+    if (selected !== undefined){
+      this.data = selected
+    }
+
   }
 
   getLabel() {
