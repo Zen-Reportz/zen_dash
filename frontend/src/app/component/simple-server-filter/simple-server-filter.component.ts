@@ -20,6 +20,7 @@ import { MEData } from 'src/app/shared/application_data';
 })
 export class SimpleServerFilterComponent implements OnInit {
   @Input() url!: string;
+  @Input() isSidebar!: boolean
   multi: boolean = false;
   data!: string[];
   server_url!: string;
@@ -48,7 +49,7 @@ export class SimpleServerFilterComponent implements OnInit {
   protected _onDestroy = new Subject<void>();
 
   constructor(
-    private dataService: DataService,
+    private ds: DataService,
     private callService: CallServiceService
   ) {}
 
@@ -101,13 +102,13 @@ export class SimpleServerFilterComponent implements OnInit {
   }
 
   originalData() {
-    this.multi = this.dataService.all_input.get(this.url).simple_server_filter_data.multi as boolean;
+    this.multi = this.ds.all_input.get(this.url).simple_server_filter_data.multi as boolean;
 
-    this.data = this.dataService.all_input.get(this.url).simple_server_filter_data.data as string[];
+    this.data = this.ds.all_input.get(this.url).simple_server_filter_data.data as string[];
 
-    this.name = this.dataService.all_input.get(this.url).simple_server_filter_data.name as string;
+    this.name = this.ds.all_input.get(this.url).simple_server_filter_data.name as string;
 
-    this.server_url = this.dataService.all_input.get(this.url).simple_server_filter_data.url as string;
+    this.server_url = this.ds.all_input.get(this.url).simple_server_filter_data.url as string;
 
     // set initial selection
     this.ServerSideCtrl.setValue([]);
@@ -123,10 +124,10 @@ export class SimpleServerFilterComponent implements OnInit {
 
   detectChange(value: any) {
     let m = new MEData();
-    m.key = this.dataService.all_input.get(this.url).simple_server_filter_data.name as string;
+    m.key = this.ds.all_input.get(this.url).simple_server_filter_data.name as string;
     m.value = value.value;
-
-    this.dataService.data_setter.emit(m);
+    m.page = this.ds.dataLookup(this.isSidebar)
+    this.ds.data_setter.emit(m);
   }
 
 }

@@ -1,5 +1,5 @@
 from cgitb import reset
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Response
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -53,9 +53,9 @@ templates = Jinja2Templates(directory=folder)
 
 
 @app.get("/", response_class=HTMLResponse)
-async def root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
-
+async def root(request: Request): 
+    return templates.TemplateResponse("index.html", {"request": request, "test": "test"})
+   
 
 @app.get("/backend/title")
 async def title():
@@ -81,8 +81,8 @@ async def scripts(request: Request):
 
 @app.get("/backend/sidebar", response_model=s.Sidebar)
 async def sidebar():
-    return s.Sidebar(tabs=[s.SidebarTab(label="First Page", icon='delete', fragment="/backend/first_page"),
-                           s.SidebarTab(label="Last Page", icon='home', fragment="/backend/last_page")],
+    return s.Sidebar(tabs=[s.SidebarTab(label="First Page", icon='delete'),
+                           s.SidebarTab(label="Last Page", icon='home')],
                      filters=[s.FilterInfo(url="/backend/filters/single_filter"),
                               s.FilterInfo(
                                   url="/backend/filters/multi_filter"),
@@ -102,7 +102,8 @@ async def sidebar():
 
 @app.get("/backend/page_detail", response_model=p.Page)
 async def page_detail(fragment: str):
-    if fragment in ("/", "/backend/first_page", "/backend/last_page"):
+    print(fragment)
+    if fragment in ("page_0", "page_1"):
         p1 = p.Page(
             rows=[p.Row(data=[
                   p.Instance(url="/backend/page_one/row_one/date"),
@@ -184,7 +185,7 @@ async def page_detail(fragment: str):
                                  ),
                                  p.Instance(
                       url="/backend/page_one/row_eight/highchart2"),])
-                  ])
+                  ], first_page_fragment= "/backend/first_page")
         return p1
 
 

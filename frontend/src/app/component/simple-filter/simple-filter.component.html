@@ -6,7 +6,7 @@
       [formControl]="data_select_control"
       placeholder="getLabel()"
       (selectionChange)="detectChange($event)"
-      [multiple]="multi"
+      [multiple]="isMulti()"
       #dataSelect
     >
       <mat-option>

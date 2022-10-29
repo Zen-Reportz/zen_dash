@@ -9,43 +9,47 @@ import { MEData } from 'src/app/shared/application_data';
 })
 export class SliderComponent implements OnInit {
   @Input() url!: string;
+  @Input() isSidebar!: boolean
   value!: number;
 
-  constructor(private dataService: DataService) {}
+  constructor(private ds: DataService) {}
 
   ngOnInit(): void {
-    this.value =  this.dataService.all_input.get(this.url).slider_data.value as number
+    this.value =  this.ds.all_input.get(this.url).slider_data.value as number
   }
 
   isInverted() {
-    return this.dataService.all_input.get(this.url).slider_data.invert as boolean;
+    return this.ds.all_input.get(this.url).slider_data.invert as boolean;
   }
 
   isMax() {
-    return this.dataService.all_input.get(this.url).slider_data.max as number;
+    return this.ds.all_input.get(this.url).slider_data.max as number;
   }
 
   isMin() {
-    return this.dataService.all_input.get(this.url).slider_data.min as number;
+    return this.ds.all_input.get(this.url).slider_data.min as number;
   }
 
   step() {
-    return this.dataService.all_input.get(this.url).slider_data.step as number;
+    return this.ds.all_input.get(this.url).slider_data.step as number;
   }
 
   isThumbLabel() {
-    return this.dataService.all_input.get(this.url).slider_data.thumbLabel as boolean;
+    return this.ds.all_input.get(this.url).slider_data.thumbLabel as boolean;
   }
 
   isVertical() {
-    return this.dataService.all_input.get(this.url).slider_data.vertical as boolean;
+    return this.ds.all_input.get(this.url).slider_data.vertical as boolean;
   }
 
 
   detectChange() {
     let m = new MEData();
-    m.key = this.dataService.all_input.get(this.url).slider_data.name as string;
+    m.page = this.ds.dataLookup(this.isSidebar)
+
+    m.key = this.ds.all_input.get(this.url).slider_data.name as string;
     m.value = this.value;
-    this.dataService.data_setter.emit(m);
+    this.ds.data_setter.emit(m);
+    this.ds.all_input.get(this.url).slider_data.value = this.value
   }
 }

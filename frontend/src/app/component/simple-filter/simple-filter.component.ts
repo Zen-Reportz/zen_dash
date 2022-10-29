@@ -19,8 +19,8 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class SimpleFilterComponent implements OnInit {
   @Input() url!: string;
+  @Input() isSidebar!: boolean
   dataForm = new UntypedFormControl();
-  multi!: boolean;
 
   data: string[] | undefined;
   dataUrl: string | undefined;
@@ -44,7 +44,7 @@ export class SimpleFilterComponent implements OnInit {
 
 
   constructor(
-    private dataService: DataService,
+    private ds: DataService,
   ) {}
 
   ngOnInit(): void {
@@ -83,18 +83,25 @@ export class SimpleFilterComponent implements OnInit {
     );
   }
 
-  originalData() {
-    this.multi = this.dataService.all_input.get(this.url).simple_filter_data.multi as boolean;
+  selectedData(){
+    return this.ds.all_input.get(this.url).simple_filter_data.selected
+  }
 
-    this.data = this.dataService.all_input.get(this.url).simple_filter_data.data as string[];
+  isMulti(){
+    return this.ds.all_input.get(this.url).simple_filter_data.multi as boolean;
+  }
+
+  originalData() {
+
+    this.data = this.ds.all_input.get(this.url).simple_filter_data.data as string[];
 
     // set initial selection
-    let selected = this.dataService.all_input.get(this.url).simple_filter_data.selected
-    if ((selected !== undefined) && (selected.length > 0)){
-      if (this.multi){
-        this.data_select_control.setValue(selected);
+
+    if ((this.selectedData() !== undefined) && (this.selectedData().length > 0)){
+      if (this.isMulti()){
+        this.data_select_control.setValue(this.selectedData());
       } else {
-        this.data_select_control.setValue(selected[0]);
+        this.data_select_control.setValue(this.selectedData()[0]);
       }
 
     }
@@ -116,19 +123,25 @@ export class SimpleFilterComponent implements OnInit {
 
 
   getLabel() {
-    return this.dataService.all_input.get(this.url).simple_filter_data.name;
+    return this.ds.all_input.get(this.url).simple_filter_data.name;
   }
 
   detectChange(value: any) {
     let m = new MEData();
-    m.key = this.dataService.all_input.get(this.url).simple_filter_data.name as string;
+    m.key = this.ds.all_input.get(this.url).simple_filter_data.name as string;
     m.value = value.value;
+    m.page = this.ds.dataLookup(this.isSidebar)
 
-    this.dataService.data_setter.emit(m);
+
+    this.ds.data_setter.emit(m);
+    if (this.isMulti()){
+      this.ds.all_input.get(this.url).simple_filter_data.selected = value.value
+    } else {
+      this.ds.all_input.get(this.url).simple_filter_data.selected = [value.value]
+    }
   }
 
   isServerSide(){
-
     return this.dataUrl !== null
   }
 }

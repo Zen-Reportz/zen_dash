@@ -18,7 +18,6 @@ export class AppImageComponent implements OnInit {
   height!: string;
   width!: string;
   imageCall: Subscription | undefined;
-  loading= true
 
   data!: DataImage
 
@@ -47,7 +46,6 @@ export class AppImageComponent implements OnInit {
     }, undefined) as Observable<HttpResponse<Blob>>;
 
     this.imageCall = p.subscribe((res) => {
-      this.loading=false
       this.image = res.body;
       if (this.image !== null) {
         this.imageURL = this.sanitizer.bypassSecurityTrustUrl(

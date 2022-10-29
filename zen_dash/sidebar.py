@@ -6,7 +6,6 @@ from zen_dash.support import BaseUpdate
 class SidebarTab(BaseUpdate):
     label: str
     icon: Optional[str] = 'Home'
-    fragment: str
 
 class FilterInfo(BaseUpdate):
     url: str

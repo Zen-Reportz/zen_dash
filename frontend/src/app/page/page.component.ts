@@ -26,10 +26,7 @@ export class PageComponent implements OnInit {
   ngOnInit(): void {
     new SetTitleService().set_title(this.aRoute, this.titleService, this.http);
     this.aRoute.queryParamMap.subscribe((fragment) => {
-      let page = fragment.get('page')
-      if (page === null) {
-        page = '/'
-      }
+      let page = this.dataService.get_page()
       let params = new HttpParams().set('fragment', page);
 
       this.http
@@ -43,23 +40,26 @@ export class PageComponent implements OnInit {
 
 
   getFlex(original: string, type: string, url: string) {
+    let p = this.dataService.get_page()
+    let look_up =  this.dataService.input_lookup(p, url)
+
     let response: any;
-    if (this.dataService.all_input.get(url) !== undefined) {
-      if (this.dataService.all_input.get(url)?.fxFlex !== null) {
+    if (this.dataService.all_input.get(look_up) !== undefined) {
+      if (this.dataService.all_input.get(look_up)?.fxFlex !== null) {
         if (type == 'flex') {
-          response = this.dataService.all_input.get(url)?.flex.fxFlex;
+          response = this.dataService.all_input.get(look_up)?.flex.fxFlex;
         } else if (type == 'flex_md') {
-          response = this.dataService.all_input.get(url)?.flex.fxFlex_md;
+          response = this.dataService.all_input.get(look_up)?.flex.fxFlex_md;
         } else if (type == 'flex_sm') {
-          response = this.dataService.all_input.get(url).flex.fxFlex_sm;
+          response = this.dataService.all_input.get(look_up).flex.fxFlex_sm;
         } else if (type == 'flex_xs') {
-          response = this.dataService.all_input.get(url).flex.fxFlex_xs;
+          response = this.dataService.all_input.get(look_up).flex.fxFlex_xs;
         } else {
-          console.log(' issue with type for ' + url + ' ' + type);
+          console.log(' issue with type for ' + look_up + ' ' + type);
           response = original;
         }
       } else {
-        console.log(' issue with type for ' + url + ' ' + type);
+        console.log(' issue with type for ' + look_up + ' ' + type);
         response = original;
       }
     } else {

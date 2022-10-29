@@ -25,7 +25,8 @@ export class CallServiceService {
     let convMap: any = {};
     if (formdata !== undefined){
       convMap = formdata
-      this.dataService.data.forEach((val: string, key: string) => {
+      let d = this.dataService.get_all()
+      Object.entries(d).forEach((val: any, key: any) => {
         convMap.append(key, val);
       })
     } else {
@@ -73,4 +74,5 @@ export class CallServiceService {
   my_url(){
     return window.location.href.split("?")[0]
   }
+
 }

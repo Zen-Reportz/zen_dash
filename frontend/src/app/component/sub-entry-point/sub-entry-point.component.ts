@@ -1,9 +1,5 @@
 import { CallServiceService } from './../../services/call-service.service';
-import {
-  HighChartData,
-  SimpleServerFilterData,
-} from './../../shared/application_data';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import {
   FlexData,
   MultiURLInfo,
@@ -21,6 +17,7 @@ import { DataService } from 'src/app/services/data.service';
 export class SubEntryPointComponent implements OnInit {
   @Input() url!: string;
   @Input() isSidebar!: boolean;
+
   type: string | undefined;
   name: string | undefined;
   reactive: ReactiveData = new ReactiveData();
@@ -29,13 +26,22 @@ export class SubEntryPointComponent implements OnInit {
   pageCall: Subscription | undefined;
   data_type = ['box', 'table', 'chart', 'image', 'highchart'];
   loading = true;
-  size_data = new Map<string, FlexData>();
+  look_up!: string
+
   constructor(
     private dataService: DataService,
     private callService: CallServiceService
   ) {}
 
   ngOnInit(): void {
+    let p: string =''
+    if (this.isSidebar){
+      p = 'sidebar'
+    } else {
+      p = this.dataService.get_page()
+    }
+
+    this.look_up =  this.dataService.input_lookup(p, this.url)
     this.getData(true);
   }
 
@@ -44,7 +50,6 @@ export class SubEntryPointComponent implements OnInit {
       this.d.set(
         'refresh',
         this.dataService.refresh.subscribe((t) => {
-          console.log("refresh " + this.type)
           this.getData(false);
         })
       );
@@ -155,9 +160,9 @@ export class SubEntryPointComponent implements OnInit {
       undefined
     ) as Observable<ResponseData>;
 
-    if ((page_refreshed) && (this.dataService.all_input.get(this.url)!== undefined)) {
+    if ((page_refreshed) && (this.dataService.all_input.get(this.look_up)!== undefined)) {
         this.loading = false;
-        let t = this.dataService.all_input.get(this.url)
+        let t = this.dataService.all_input.get(this.look_up)
         this.reactive = t.reactive;
         this.set_name(t)
         this.type = t.type;
@@ -167,28 +172,23 @@ export class SubEntryPointComponent implements OnInit {
     }
 
     this.type = undefined
-    this.dataService.all_input.delete(this.url)
+    this.dataService.all_input.delete(this.look_up)
     this.pageCall = p.subscribe({
       next: (t: ResponseData) => {
         this.loading = false;
         this.reactive = t.reactive;
-        this.dataService.all_input.set(this.url, t);
+        this.dataService.all_input.set(this.look_up, t);
         this.set_name(t)
-
-        if (this.isSidebar) {
-          this.dataService.sidebar_ids.push(this.name);
-        }
 
         this.type = t.type;
         this.unsubscribe();
-        this.subscribe();
+        this.subscribe()
       },
       error: (e: any) => {
         console.error(e);
       },
     });
   }
-
 
   getURLs() {
     return this.multi_url;
@@ -202,30 +202,33 @@ export class SubEntryPointComponent implements OnInit {
     }
   }
 
-  setFlex(flex: FlexData, url: string) {
-    if (flex !== null) {
-      this.size_data.set(url, flex);
-    }
-  }
-
   getFlex(original: string, type: string, url: string) {
+    let p: string =''
+    if (this.isSidebar){
+      p = 'sidebar'
+    } else {
+      p = this.dataService.get_page()
+    }
+
+    let look_up =  this.dataService.input_lookup(p, this.url)
+
     let response: any;
-    if (this.size_data.get(url)?.fxFlex !== undefined) {
-      if (this.size_data.get(url)?.fxFlex !== null) {
+    if (this.dataService.all_input.get(look_up) !== undefined) {
+      if (this.dataService.all_input.get(look_up)?.fxFlex !== null) {
         if (type == 'flex') {
-          response = this.size_data.get(url)?.fxFlex;
+          response = this.dataService.all_input.get(look_up)?.flex.fxFlex;
         } else if (type == 'flex_md') {
-          response = this.size_data.get(url)?.fxFlex_md;
+          response = this.dataService.all_input.get(look_up)?.flex.fxFlex_md;
         } else if (type == 'flex_sm') {
-          response = this.size_data.get(url)?.fxFlex_sm;
+          response = this.dataService.all_input.get(look_up).flex.fxFlex_sm;
         } else if (type == 'flex_xs') {
-          response = this.size_data.get(url)?.fxFlex_xs;
+          response = this.dataService.all_input.get(look_up).flex.fxFlex_xs;
         } else {
-          console.log(' issue with type for ' + url + ' ' + type);
+          console.log(' issue with type for ' + look_up + ' ' + type);
           response = original;
         }
       } else {
-        console.log(' issue with type for ' + url + ' ' + type);
+        console.log(' issue with type for ' + look_up + ' ' + type);
         response = original;
       }
     } else {

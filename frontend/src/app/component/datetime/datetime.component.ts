@@ -10,6 +10,7 @@ import { DateData, MEData } from '../../shared/application_data';
 })
 export class DatetimeComponent implements OnInit {
   @Input() url!: string;
+  @Input() isSidebar!: boolean
 
   single!: boolean;
   form_data!: UntypedFormGroup;
@@ -17,14 +18,15 @@ export class DatetimeComponent implements OnInit {
 
   data!: DateData;
 
-  constructor(private dataService: DataService) {}
+  constructor(private ds: DataService) {}
 
   ngOnInit(): void {
     this.getData();
   }
 
+
   getData() {
-    this.data = this.dataService.all_input.get(this.url).date_data as DateData;
+    this.data = this.ds.all_input.get(this.url).date_data as DateData;
     if (this.data.second_date as string) {
       this.single = false;
       this.form_data = new UntypedFormGroup({
@@ -59,21 +61,28 @@ export class DatetimeComponent implements OnInit {
     let m = new MEData();
     let push = true;
     m.key = this.data.name as string;
+    m.page = this.ds.dataLookup(this.isSidebar)
+
+
 
     if (this.single) {
       m.value = this.form_control.value.toISOString();
+      this.ds.all_input.get(this.url).date_data.first_date = this.form_control.value.toISOString();
     } else {
       if (this.form_data.value.end && this.form_data.value.start) {
         m.value = [
           this.form_data.value.start.toISOString(),
           this.form_data.value.end.toISOString(),
         ];
+        this.ds.all_input.get(this.url).date_data.first_date = m.value[0];
+        this.ds.all_input.get(this.url).date_data.second_date = m.value[1];
+
       } else {
         push = false;
       }
     }
     if (push) {
-      this.dataService.data_setter.emit(m);
+      this.ds.data_setter.emit(m);
     }
   }
 }

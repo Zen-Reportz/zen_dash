@@ -23,8 +23,17 @@ export class EntryPointComponent implements OnInit {
 
 
   getFooter() {
-    if (this.dataService.all_input.get(this.url) !== undefined) {
-      return this.dataService.all_input.get(this.url).footer
+    let p: string =''
+    if (this.isSidebar){
+      p = 'sidebar'
+    } else {
+      p = this.dataService.get_page()
+    }
+
+    let look_up =  this.dataService.input_lookup(p, this.url)
+
+    if (this.dataService.all_input.get(look_up) !== undefined) {
+      return this.dataService.all_input.get(look_up).footer
     }
     return false
 
@@ -32,8 +41,17 @@ export class EntryPointComponent implements OnInit {
 
 
   getTitle() {
-    if (this.dataService.all_input.get(this.url) !== undefined) {
-      return this.dataService.all_input.get(this.url).title
+    let p: string =''
+    if (this.isSidebar){
+      p = 'sidebar'
+    } else {
+      p = this.dataService.get_page()
+    }
+
+    let look_up =  this.dataService.input_lookup(p, this.url)
+
+    if (this.dataService.all_input.get(look_up) !== undefined) {
+      return this.dataService.all_input.get(look_up).title
     }
     return false
 

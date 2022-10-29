@@ -1,6 +1,7 @@
 export class MEData {
   key!: string
   value!: any
+  page!: string
 }
 
 export class CustomScript{
@@ -24,7 +25,6 @@ export class FlexData{
 export class SidebarTab {
   label!: string;
   icon!: string;
-  fragment!: string;
 }
 
 export class Filter {

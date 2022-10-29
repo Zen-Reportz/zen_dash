@@ -34,8 +34,7 @@ export class AppComponent implements OnInit {
               private call: CallServiceService,
               private titleService:Title,
               private clipboard: Clipboard,
-              private _router: Router,
-              private serializer: UrlSerializer
+
               ){
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -43,13 +42,12 @@ export class AppComponent implements OnInit {
     this.mobileQuery.addListener(this._mobileQueryListener);
 
     this.aRoute.queryParamMap.subscribe((fragment) => {
-      let page = fragment.get('page')
-      if (page === null){
-        page = '/'
+      let page = this.data_service.get_page()
+      if (this.data_service.data["global"] ===undefined){
+        this.data_service.data['global'] ={}
       }
-      this.data_service.data.set('page', page)
-      this.data_service.reset_data()
-      this.getScripts()
+
+      this.data_service.data['global']["page"] = page
     })
   }
 
@@ -59,6 +57,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(){
+    this.getScripts()
     this.http.get<string>(this.call.my_url() + "backend/title").subscribe(data => {
       this.titleService.setTitle(data)
       this.title = data
@@ -67,6 +66,7 @@ export class AppComponent implements OnInit {
 
   refresh_data(){
 
+    // sessionStorage.setItem(this.data_service.get_data('global',"page"), JSON.stringify(this.data_service.data))
     this.data_service.refresh.emit('')
 
     this._snackBar.openFromComponent(LoadingComponent, {

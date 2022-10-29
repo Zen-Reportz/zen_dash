@@ -9,40 +9,48 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class InputComponent implements OnInit {
   @Input() url!: string;
-  data!: string;
-  label: string | undefined;
+  @Input() isSidebar!: boolean;
 
-  constructor(private dataService: DataService) {}
+  data!: string;
+
+  constructor(private ds: DataService) {}
 
   ngOnInit() {
-    this.label = this.dataService.all_input.get(this.url).input_data.label;
-    let selected = this.dataService.all_input.get(this.url).input_data.value
-    if (selected !== undefined){
-      this.data = selected
+    let selected = this.ds.all_input.get(this.url).input_data.value;
+    if (selected !== undefined) {
+      this.data = selected;
     }
+  }
 
+  getValue() {
+    return this.ds.all_input.get(this.url).input_data.value;
   }
 
   getLabel() {
-    if (this.label) {
+    if (this.ds.all_input.get(this.url).input_data.label) {
       return '';
     } else {
-      return this.label;
+      return this.ds.all_input.get(this.url).input_data.label;
     }
   }
 
   saveData() {
     let m = new MEData();
-    m.key = this.dataService.all_input.get(this.url).input_data.name as string;
+    m.key = this.ds.all_input.get(this.url).input_data.name as string;
     m.value = this.data;
-    this.dataService.data_setter.emit(m);
+    m.page = this.ds.dataLookup(this.isSidebar);
+
+    this.ds.data_setter.emit(m);
+    this.ds.all_input.get(this.url).input_data.value = this.data
   }
 
   clearData() {
     this.data = '';
     let m = new MEData();
-    m.key = this.dataService.all_input.get(this.url).input_data.name as string;
+    m.key = this.ds.all_input.get(this.url).input_data.name as string;
     m.value = this.data;
-    this.dataService.data_setter.emit(m);
+    m.page = this.ds.dataLookup(this.isSidebar);
+    this.ds.all_input.get(this.url).input_data.value = this.data
+    this.ds.data_setter.emit(m);
   }
 }

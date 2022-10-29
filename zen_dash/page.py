@@ -15,3 +15,4 @@ class Row(BaseUpdate):
 
 class Page(BaseUpdate):
     rows: List[Row]
+    first_page_fragment: str

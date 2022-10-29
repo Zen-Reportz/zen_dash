@@ -9,28 +9,30 @@ import { MEData } from 'src/app/shared/application_data';
 })
 export class RadioComponent implements OnInit {
   @Input() url!: string;
-
+  @Input() isSidebar!: boolean
   data!: string[];
   selected!: string;
 
-  constructor(private dataService: DataService) {}
+  constructor(private ds: DataService) {}
 
   ngOnInit(): void {
-    this.selected = this.dataService.all_input.get(this.url).radio_data.selected as string;
+    this.selected = this.ds.all_input.get(this.url).radio_data.selected as string;
   }
 
   getStyle() {
-    return this.dataService.all_input.get(this.url).radio_data.style as string;
+    return this.ds.all_input.get(this.url).radio_data.style as string;
   }
 
   update() {
     let m = new MEData();
-    m.key = this.dataService.all_input.get(this.url).radio_data.name as string;
+    m.page = this.ds.dataLookup(this.isSidebar)
+
+    m.key = this.ds.all_input.get(this.url).radio_data.name as string;
     m.value = this.selected;
-    this.dataService.data_setter.emit(m);
+    this.ds.data_setter.emit(m);
   }
 
   getData() {
-    return this.dataService.all_input.get(this.url).radio_data.data;
+    return this.ds.all_input.get(this.url).radio_data.data;
   }
 }

@@ -20,6 +20,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class GroupFilterComponent implements OnInit {
   @Input() url!: string;
+  @Input() isSidebar!: boolean
   dataForm = new UntypedFormControl();
   multi!: boolean;
 
@@ -39,7 +40,7 @@ export class GroupFilterComponent implements OnInit {
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
-  constructor(private dataService: DataService) {}
+  constructor(private ds: DataService) {}
 
   ngOnInit(): void {
     this.myData();
@@ -88,16 +89,16 @@ export class GroupFilterComponent implements OnInit {
   }
 
   myData() {
-    this.data = this.dataService.all_input.get(this.url).group_filter_data
+    this.data = this.ds.all_input.get(this.url).group_filter_data
 
-    this.multi = this.dataService.all_input.get(this.url).group_filter_data.multi as boolean;
+    this.multi = this.ds.all_input.get(this.url).group_filter_data.multi as boolean;
 
     this.group_data = this.data.data as GroupedFilterDataInstance[];
 
     // set initial selection
-    let selected = this.dataService.all_input.get(this.url).group_filter_data.selected
+    let selected = this.ds.all_input.get(this.url).group_filter_data.selected
     if ((selected !== undefined) && (selected.length > 0)){
-      if (this.dataService.all_input.get(this.url).group_filter_data.multi){
+      if (this.ds.all_input.get(this.url).group_filter_data.multi){
         this.data_select_control.setValue(selected);
       } else {
         this.data_select_control.setValue(selected[0]);
@@ -119,15 +120,25 @@ export class GroupFilterComponent implements OnInit {
   }
 
   getLabel() {
-    return this.dataService.all_input.get(this.url).group_filter_data.name;
+    return this.ds.all_input.get(this.url).group_filter_data.name;
   }
 
   detectChange(value: any) {
     let m = new MEData();
-    m.key = this.dataService.all_input.get(this.url).group_filter_data.name as string;
+    m.key = this.ds.all_input.get(this.url).group_filter_data.name as string;
     m.value = value.value;
+    m.page = this.ds.dataLookup(this.isSidebar)
 
-    this.dataService.data_setter.emit(m);
+
+    this.ds.data_setter.emit(m);
+    if (this.isMulti()){
+      this.ds.all_input.get(this.url).group_filter_data.selected = value.value
+    } else {
+      this.ds.all_input.get(this.url).group_filter_data.selected = [value.value]
+    }
+  }
+  isMulti(){
+    return this.ds.all_input.get(this.url).group_filter_data.multi as boolean;
   }
 
   protected copyGroups(group: GroupedFilterDataInstance[]) {

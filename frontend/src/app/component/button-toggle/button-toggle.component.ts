@@ -10,14 +10,14 @@ import { ButtonToggleInstance, MEData } from '../../shared/application_data';
 })
 export class ButtonToggleComponent implements OnInit {
   @Input() url!: string;
+  @Input() isSidebar!: boolean
+
   selected_data!: string | string[];
-  data!: ButtonToggleData
-  constructor(private dataService: DataService) {}
+  constructor(public ds: DataService) {}
 
   ngOnInit(): void {
-    this.data = this.dataService.all_input.get(this.url).button_toggle_data
 
-    if (this.data.multi) {
+    if (this.isMultiple()) {
       this.selected_data = [];
     } else {
       this.selected_data = '';
@@ -25,11 +25,55 @@ export class ButtonToggleComponent implements OnInit {
 
 
 
-    if (this.data) {
+
+  }
+
+  updateData(selected: any){
+    let m = new MEData();
+    m.page = this.ds.dataLookup(this.isSidebar)
+    m.key = this.ds.all_input.get(this.url).button_toggle_data.name as string;
+    m.value = selected
+    this.ds.data_setter.emit(m);
+
+    if (this.ds.trueTypeOf(selected) == 'string'){
+      for (let d of  this.get_buton_data() as ButtonToggleInstance[]) {
+        if (d.name !== selected){
+          d.selected = false
+        } else {
+          d.selected = true
+        }
+      }
+    } else if(this.ds.trueTypeOf(selected) == 'array') {
+      for (let d of  this.get_buton_data() as ButtonToggleInstance[]) {
+        if (selected.indexOf(d.name) == -1){
+          d.selected = false
+        } else {
+          d.selected = true
+        }
+      }
+    }
+  }
+
+  onChange($event: any) {
+    this.updateData($event.value)
+
+  }
+
+  isMultiple() {
+    return this.ds.all_input.get(this.url).button_toggle_data.multi as boolean;
+  }
+
+  get_buton_data() {
+    return this.ds.all_input.get(this.url).button_toggle_data.data as ButtonToggleInstance[];
+  }
+
+  get_value() {
+
+    if (this.ds.all_input.get(this.url).button_toggle_data.data) {
       let names = [];
-      for (let d of this.data.data as ButtonToggleInstance[]) {
+      for (let d of this.get_buton_data()) {
         if (d.selected) {
-          if (this.data.multi) {
+          if (this.ds.all_input.get(this.url).button_toggle_data.multi) {
             names.push(d.name);
           } else {
             this.selected_data = d.name;
@@ -42,25 +86,10 @@ export class ButtonToggleComponent implements OnInit {
       }
     }
 
-  }
 
-  updateData(selected: any){
-    let m = new MEData();
-    m.key = this.data.name as string;
-    m.value = selected
-    this.dataService.data_setter.emit(m);
-  }
-
-  onChange($event: any) {
-    this.updateData($event.value)
-
-  }
-
-  isMultiple() {
-    return this.data.multi as boolean;
-  }
-
-  get_data() {
-    return this.data.data as ButtonToggleInstance[];
+    // let key= this.ds.all_input.get(this.url).name
+    // let lookup = this.ds.dataLookup(this.isSidebar)
+    // return this.ds.get_data(lookup, key)
+    return this.selected_data
   }
 }
