@@ -29,6 +29,7 @@ export class RadioComponent implements OnInit {
 
     m.key = this.ds.all_input.get(this.url).radio_data.name as string;
     m.value = this.selected;
+    m.url = this.url
     this.ds.data_setter.emit(m);
   }
 

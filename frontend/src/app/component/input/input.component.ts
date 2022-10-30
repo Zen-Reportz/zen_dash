@@ -38,7 +38,8 @@ export class InputComponent implements OnInit {
     let m = new MEData();
     m.key = this.ds.all_input.get(this.url).input_data.name as string;
     m.value = this.data;
-    m.page = this.ds.dataLookup(this.isSidebar);
+    m.page = this.ds.dataLookup(this.isSidebar)
+    m.url = this.url
 
     this.ds.data_setter.emit(m);
     this.ds.all_input.get(this.url).input_data.value = this.data

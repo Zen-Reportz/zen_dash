@@ -128,7 +128,7 @@ export class GroupFilterComponent implements OnInit {
     m.key = this.ds.all_input.get(this.url).group_filter_data.name as string;
     m.value = value.value;
     m.page = this.ds.dataLookup(this.isSidebar)
-
+    m.url = this.url
 
     this.ds.data_setter.emit(m);
     if (this.isMulti()){

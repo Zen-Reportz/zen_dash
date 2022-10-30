@@ -24,7 +24,7 @@ export class CheckboxComponent implements OnInit {
 
     let m = new MEData();
     m.page = this.ds.dataLookup(this.isSidebar)
-
+    m.url = this.url
     m.key = this.data.name as string;
     m.value = this.data.data;
 

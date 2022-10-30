@@ -49,6 +49,8 @@ export class SliderComponent implements OnInit {
 
     m.key = this.ds.all_input.get(this.url).slider_data.name as string;
     m.value = this.value;
+    m.url = this.url
+
     this.ds.data_setter.emit(m);
     this.ds.all_input.get(this.url).slider_data.value = this.value
   }

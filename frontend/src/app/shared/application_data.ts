@@ -2,6 +2,7 @@ export class MEData {
   key!: string
   value!: any
   page!: string
+  url!: string
 }
 
 export class CustomScript{

@@ -28,8 +28,9 @@ export class DataService {
       if (this.data[t.page] === undefined) {
         this.data[t.page] = {};
       }
-      this.data[t.page][t.key] = t.value;
 
+      this.data[t.page][t.url] = [t.key, t.value]
+      this.data[t.page]["need_to_refresh"] = true
       console.log(this.data);
     });
   }

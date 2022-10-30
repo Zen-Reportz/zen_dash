@@ -27,6 +27,8 @@ export class ToggleComponent implements OnInit {
     let m = new MEData();
     m.key = this.ds.all_input.get(this.url).toggle_data.name as string;
     m.value = checked;
+    m.url = this.url
+
     m.page = this.ds.dataLookup(this.isSidebar)
     this.ds.data_setter.emit(m);
     this.ds.all_input.get(this.url).toggle_data.checked = checked

@@ -23,12 +23,13 @@ export class AppComponent implements OnInit {
   durationInSeconds = 5;
   mySize = '500px'
   document_id: any
+  color: string = 'primary'
   private _mobileQueryListener: () => void;
 
   constructor(changeDetectorRef: ChangeDetectorRef,
               media: MediaMatcher,
               private http: HttpClient,
-              private data_service:DataService,
+              public data_service:DataService,
               private _snackBar: MatSnackBar,
               private aRoute: ActivatedRoute,
               private call: CallServiceService,
@@ -36,6 +37,10 @@ export class AppComponent implements OnInit {
               private clipboard: Clipboard,
 
               ){
+
+    this.data_service.data_setter.subscribe((t) => {
+      this.color = 'warn'
+    })
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -64,9 +69,14 @@ export class AppComponent implements OnInit {
     })
   }
 
-  refresh_data(){
+  save_deafult(){
 
-    // sessionStorage.setItem(this.data_service.get_data('global',"page"), JSON.stringify(this.data_service.data))
+  }
+
+  refresh_data(){
+    this.color = 'primary'
+
+
     this.data_service.refresh.emit('')
 
     this._snackBar.openFromComponent(LoadingComponent, {

@@ -10,7 +10,7 @@ import { DateData, MEData } from '../../shared/application_data';
 })
 export class DatetimeComponent implements OnInit {
   @Input() url!: string;
-  @Input() isSidebar!: boolean
+  @Input() isSidebar!: boolean;
 
   single!: boolean;
   form_data!: UntypedFormGroup;
@@ -23,7 +23,6 @@ export class DatetimeComponent implements OnInit {
   ngOnInit(): void {
     this.getData();
   }
-
 
   getData() {
     this.data = this.ds.all_input.get(this.url).date_data as DateData;
@@ -61,13 +60,15 @@ export class DatetimeComponent implements OnInit {
     let m = new MEData();
     let push = true;
     m.key = this.data.name as string;
-    m.page = this.ds.dataLookup(this.isSidebar)
-
-
+    m.url = this.url
+    m.page = this.ds.dataLookup(this.isSidebar);
 
     if (this.single) {
       m.value = this.form_control.value.toISOString();
-      this.ds.all_input.get(this.url).date_data.first_date = this.form_control.value.toISOString();
+      m.page = this.ds.dataLookup(this.isSidebar);
+
+      this.ds.all_input.get(this.url).date_data.first_date =
+        this.form_control.value.toISOString();
     } else {
       if (this.form_data.value.end && this.form_data.value.start) {
         m.value = [
@@ -76,7 +77,6 @@ export class DatetimeComponent implements OnInit {
         ];
         this.ds.all_input.get(this.url).date_data.first_date = m.value[0];
         this.ds.all_input.get(this.url).date_data.second_date = m.value[1];
-
       } else {
         push = false;
       }
