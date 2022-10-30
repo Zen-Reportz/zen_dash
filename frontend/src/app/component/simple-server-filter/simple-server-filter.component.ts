@@ -101,17 +101,32 @@ export class SimpleServerFilterComponent implements OnInit {
     this._onDestroy.complete();
   }
 
+  selectedData(){
+    return this.ds.all_input.get(this.url)?.simple_server_filter_data?.selected as string[]
+  }
+  isMulti(){
+    return this.ds.all_input.get(this.url)?.simple_server_filter_data?.multi as boolean;
+  }
+
   originalData() {
-    this.multi = this.ds.all_input.get(this.url)?.simple_server_filter_data?.multi as boolean;
 
-    this.data = this.ds.all_input.get(this.url)?.simple_server_filter_data?.data as string[];
+    let d = this.ds.all_input.get(this.url)?.simple_server_filter_data?.data as string[];
 
+    d = d.concat(this.selectedData())
+    this.data = [... new Set(d)]
     this.name = this.ds.all_input.get(this.url)?.simple_server_filter_data?.name as string;
 
     this.server_url = this.ds.all_input.get(this.url)?.simple_server_filter_data?.url as string;
 
-    // set initial selection
-    this.ServerSideCtrl.setValue([]);
+    if ((this.selectedData() !== undefined) && (this.selectedData().length > 0)){
+      if (this.isMulti()){
+
+        this.ServerSideCtrl.setValue(this.selectedData());
+      } else {
+        this.ServerSideCtrl.setValue(this.selectedData()[0]);
+      }
+
+    }
 
     // load the initial bank list
     this.filteredServerSideBanks.next(this.data.slice());

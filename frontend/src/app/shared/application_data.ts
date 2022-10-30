@@ -162,6 +162,8 @@ export class SimpleServerFilterData{
   name!: string
   data!: string[]
   url!: string
+  selected!: string[]
+
 }
 
 export class MultiURLInfo{

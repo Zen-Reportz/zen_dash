@@ -33,6 +33,7 @@ export class ButtonToggleComponent implements OnInit {
     m.page = this.ds.dataLookup(this.isSidebar)
     m.key = this.ds.all_input.get(this.url)?.button_toggle_data?.name as string;
     m.value = selected
+    m.url = this.url
     this.ds.data_setter.emit(m);
 
     if (this.ds.trueTypeOf(selected) == 'string'){
