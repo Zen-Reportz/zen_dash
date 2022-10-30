@@ -28,7 +28,7 @@ export class AppImageComponent implements OnInit {
   ) {}
 
   get_data(){
-    this.data = this.dataService.get_input_data(this.url).image_data
+    this.data = this.dataService.get_input_data(this.url)?.image_data as DataImage
   }
 
 

@@ -14,6 +14,6 @@ export class PlotComponent implements OnInit {
   ngOnInit(): void {}
 
   get_options() {
-    return this.dataService.all_input.get(this.url).chart_data.data as any;
+    return this.dataService.all_input.get(this.url)?.chart_data?.data as any;
   }
 }

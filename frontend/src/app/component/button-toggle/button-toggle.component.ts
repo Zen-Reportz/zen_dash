@@ -31,7 +31,7 @@ export class ButtonToggleComponent implements OnInit {
   updateData(selected: any){
     let m = new MEData();
     m.page = this.ds.dataLookup(this.isSidebar)
-    m.key = this.ds.all_input.get(this.url).button_toggle_data.name as string;
+    m.key = this.ds.all_input.get(this.url)?.button_toggle_data?.name as string;
     m.value = selected
     this.ds.data_setter.emit(m);
 
@@ -60,20 +60,20 @@ export class ButtonToggleComponent implements OnInit {
   }
 
   isMultiple() {
-    return this.ds.all_input.get(this.url).button_toggle_data.multi as boolean;
+    return this.ds.all_input.get(this.url)?.button_toggle_data?.multi as boolean;
   }
 
   get_buton_data() {
-    return this.ds.all_input.get(this.url).button_toggle_data.data as ButtonToggleInstance[];
+    return this.ds.all_input.get(this.url)?.button_toggle_data?.data as ButtonToggleInstance[];
   }
 
   get_value() {
 
-    if (this.ds.all_input.get(this.url).button_toggle_data.data) {
+    if (this.ds.all_input.get(this.url)?.button_toggle_data?.data) {
       let names = [];
       for (let d of this.get_buton_data()) {
         if (d.selected) {
-          if (this.ds.all_input.get(this.url).button_toggle_data.multi) {
+          if (this.isMultiple()) {
             names.push(d.name);
           } else {
             this.selected_data = d.name;
@@ -87,7 +87,7 @@ export class ButtonToggleComponent implements OnInit {
     }
 
 
-    // let key= this.ds.all_input.get(this.url).name
+    // let key= this.ds.all_input.get(this.url)?.name
     // let lookup = this.ds.dataLookup(this.isSidebar)
     // return this.ds.get_data(lookup, key)
     return this.selected_data

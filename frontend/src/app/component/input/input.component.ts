@@ -16,42 +16,42 @@ export class InputComponent implements OnInit {
   constructor(private ds: DataService) {}
 
   ngOnInit() {
-    let selected = this.ds.all_input.get(this.url).input_data.value;
+    let selected = this.ds.all_input.get(this.url)?.input_data?.value;
     if (selected !== undefined) {
       this.data = selected;
     }
   }
 
   getValue() {
-    return this.ds.all_input.get(this.url).input_data.value;
+    return this.ds.all_input.get(this.url)?.input_data?.value;
   }
 
   getLabel() {
-    if (this.ds.all_input.get(this.url).input_data.label) {
+    if (this.ds.all_input.get(this.url)?.input_data?.label) {
       return '';
     } else {
-      return this.ds.all_input.get(this.url).input_data.label;
+      return this.ds.all_input.get(this.url)?.input_data?.label;
     }
   }
 
   saveData() {
     let m = new MEData();
-    m.key = this.ds.all_input.get(this.url).input_data.name as string;
+    m.key = this.ds.all_input.get(this.url)?.input_data?.name as string;
     m.value = this.data;
     m.page = this.ds.dataLookup(this.isSidebar)
     m.url = this.url
 
     this.ds.data_setter.emit(m);
-    this.ds.all_input.get(this.url).input_data.value = this.data
+    // this.ds.all_input.get(this.url)?.input_data?.value = this.data
   }
 
   clearData() {
     this.data = '';
     let m = new MEData();
-    m.key = this.ds.all_input.get(this.url).input_data.name as string;
+    m.key = this.ds.all_input.get(this.url)?.input_data?.name as string;
     m.value = this.data;
     m.page = this.ds.dataLookup(this.isSidebar);
-    this.ds.all_input.get(this.url).input_data.value = this.data
+    // this.ds.all_input.get(this.url)?.input_data.value = this.data
     this.ds.data_setter.emit(m);
   }
 }

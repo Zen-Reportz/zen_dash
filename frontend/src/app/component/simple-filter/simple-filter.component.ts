@@ -84,16 +84,16 @@ export class SimpleFilterComponent implements OnInit {
   }
 
   selectedData(){
-    return this.ds.all_input.get(this.url).simple_filter_data.selected
+    return this.ds.all_input.get(this.url)?.simple_filter_data?.selected as string[]
   }
 
   isMulti(){
-    return this.ds.all_input.get(this.url).simple_filter_data.multi as boolean;
+    return this.ds.all_input.get(this.url)?.simple_filter_data?.multi as boolean;
   }
 
   originalData() {
 
-    this.data = this.ds.all_input.get(this.url).simple_filter_data.data as string[];
+    this.data = this.ds.all_input.get(this.url)?.simple_filter_data?.data as string[];
 
     // set initial selection
 
@@ -123,22 +123,22 @@ export class SimpleFilterComponent implements OnInit {
 
 
   getLabel() {
-    return this.ds.all_input.get(this.url).simple_filter_data.name;
+    return this.ds.all_input.get(this.url)?.simple_filter_data?.name;
   }
 
   detectChange(value: any) {
     let m = new MEData();
-    m.key = this.ds.all_input.get(this.url).simple_filter_data.name as string;
+    m.key = this.ds.all_input.get(this.url)?.simple_filter_data?.name as string;
     m.value = value.value;
     m.page = this.ds.dataLookup(this.isSidebar)
     m.url = this.url
 
     this.ds.data_setter.emit(m);
-    if (this.isMulti()){
-      this.ds.all_input.get(this.url).simple_filter_data.selected = value.value
-    } else {
-      this.ds.all_input.get(this.url).simple_filter_data.selected = [value.value]
-    }
+    // if (this.isMulti()){
+    //   this.ds.all_input.get(this.url)?.simple_filter_data?.selected = value.value
+    // } else {
+    //   this.ds.all_input.get(this.url)?.simple_filter_data?.selected = [value.value]
+    // }
   }
 
   isServerSide(){

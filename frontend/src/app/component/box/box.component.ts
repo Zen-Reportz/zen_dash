@@ -17,14 +17,14 @@ export class BoxComponent implements OnInit {
 
 
   getIcon() {
-    return this.dataService.all_input.get(this.url).box_data.icon;
+    return this.dataService.all_input.get(this.url)?.box_data?.icon;
   }
 
   getValue() {
-    return this.dataService.all_input.get(this.url).box_data.value;
+    return this.dataService.all_input.get(this.url)?.box_data?.value;
   }
 
   getName() {
-    return this.dataService.all_input.get(this.url).box_data.name;
+    return this.dataService.all_input.get(this.url)?.box_data?.name;
   }
 }

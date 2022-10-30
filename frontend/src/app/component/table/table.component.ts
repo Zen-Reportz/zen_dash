@@ -29,10 +29,10 @@ export class TableComponent implements OnInit {
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.columns = this.dataService.all_input.get(this.url).table_data
+    this.columns = this.dataService.all_input.get(this.url)?.table_data
       ?.columns as TableColumn[];
     this.dataSource = new MatTableDataSource<any>(
-      this.dataService.all_input.get(this.url).table_data.data as any
+      this.dataService.all_input.get(this.url)?.table_data?.data as any
     );
 
 

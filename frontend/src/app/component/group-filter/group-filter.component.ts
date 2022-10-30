@@ -89,16 +89,16 @@ export class GroupFilterComponent implements OnInit {
   }
 
   myData() {
-    this.data = this.ds.all_input.get(this.url).group_filter_data
+    this.data = this.ds.all_input.get(this.url)?.group_filter_data as GroupFilterData
 
-    this.multi = this.ds.all_input.get(this.url).group_filter_data.multi as boolean;
+    this.multi = this.ds.all_input.get(this.url)?.group_filter_data?.multi as boolean;
 
     this.group_data = this.data.data as GroupedFilterDataInstance[];
 
     // set initial selection
-    let selected = this.ds.all_input.get(this.url).group_filter_data.selected
+    let selected = this.ds.all_input.get(this.url)?.group_filter_data?.selected
     if ((selected !== undefined) && (selected.length > 0)){
-      if (this.ds.all_input.get(this.url).group_filter_data.multi){
+      if (this.isMulti()){
         this.data_select_control.setValue(selected);
       } else {
         this.data_select_control.setValue(selected[0]);
@@ -120,25 +120,25 @@ export class GroupFilterComponent implements OnInit {
   }
 
   getLabel() {
-    return this.ds.all_input.get(this.url).group_filter_data.name;
+    return this.ds.all_input.get(this.url)?.group_filter_data?.name;
   }
 
   detectChange(value: any) {
     let m = new MEData();
-    m.key = this.ds.all_input.get(this.url).group_filter_data.name as string;
+    m.key = this.ds.all_input.get(this.url)?.group_filter_data?.name as string;
     m.value = value.value;
     m.page = this.ds.dataLookup(this.isSidebar)
     m.url = this.url
 
     this.ds.data_setter.emit(m);
-    if (this.isMulti()){
-      this.ds.all_input.get(this.url).group_filter_data.selected = value.value
-    } else {
-      this.ds.all_input.get(this.url).group_filter_data.selected = [value.value]
-    }
+    // if (this.isMulti()){
+    //   this.ds.all_input.get(this.url).group_filter_data.selected = value.value
+    // } else {
+    //   this.ds.all_input.get(this.url).group_filter_data.selected = [value.value]
+    // }
   }
   isMulti(){
-    return this.ds.all_input.get(this.url).group_filter_data.multi as boolean;
+    return this.ds.all_input.get(this.url)?.group_filter_data?.multi as boolean;
   }
 
   protected copyGroups(group: GroupedFilterDataInstance[]) {

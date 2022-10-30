@@ -13,7 +13,7 @@ import { DownloadData } from 'src/app/shared/application_data';
 })
 export class AppDownloadComponent implements OnInit {
   @Input() url!: string;
-  data: DownloadData | undefined;
+  data!: DownloadData ;
   downloadCall: Subscription | undefined;
 
   constructor(
@@ -37,7 +37,7 @@ export class AppDownloadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.data = this.dataService.get_input_data(this.url).download_data;
+    this.data = this.dataService.get_input_data(this.url)?.download_data as DownloadData
   }
 
   fileName() {

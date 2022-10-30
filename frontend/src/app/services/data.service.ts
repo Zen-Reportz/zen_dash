@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { MEData, SidebarData } from '../shared/application_data';
+import { MEData, ResponseData, SidebarData } from '../shared/application_data';
 import { Params, Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Params, Router, ActivatedRoute } from '@angular/router';
 export class DataService {
   side_data!: SidebarData;
 
-  all_input = new Map<string, any>();
+  all_input = new Map<string, ResponseData>();
 
   data: any = {};
 
@@ -29,8 +29,11 @@ export class DataService {
         this.data[t.page] = {};
       }
 
-      this.data[t.page][t.url] = [t.key, t.value]
-      this.data[t.page]["need_to_refresh"] = true
+      this.data[t.page][t.url] = [t.key, t.value];
+      if (t.page !== 'global'){
+        this.data[t.page]['need_to_refresh'] = true;
+      }
+
       console.log(this.data);
     });
   }
@@ -49,10 +52,10 @@ export class DataService {
   }
 
   get_data(page: string, key: string) {
-    if (this.data[page]!==undefined){
-      return this.data[page][key]
+    if (this.data[page] !== undefined) {
+      return this.data[page][key];
     }
-    return undefined
+    return undefined;
   }
 
   get_all() {
@@ -83,15 +86,29 @@ export class DataService {
     return url + '--' + page;
   }
 
-  trueTypeOf(obj: any){
-    return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase()
+  trueTypeOf(obj: any) {
+    return Object.prototype.toString.call(obj).slice(8, -1).toLowerCase();
   }
 
-  dataLookup(isSidebar: boolean){
-    if (isSidebar){
-      return "global"
+  dataLookup(isSidebar: boolean) {
+    if (isSidebar) {
+      return 'global';
     } else {
-      return this.get_page()
+      return this.get_page();
+    }
+  }
+
+  save_instance(){
+
+  }
+
+  save_default() {
+    for (const [url, value] of Object.entries(this.data['global'])) {
+      if (url !== "page"){
+        let d: any = value
+        let dd = this.all_input.get(url)
+        console.log(dd)
+      }
     }
   }
 }

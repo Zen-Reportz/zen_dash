@@ -25,7 +25,7 @@ export class DatetimeComponent implements OnInit {
   }
 
   getData() {
-    this.data = this.ds.all_input.get(this.url).date_data as DateData;
+    this.data = this.ds.all_input.get(this.url)?.date_data as DateData;
     if (this.data.second_date as string) {
       this.single = false;
       this.form_data = new UntypedFormGroup({
@@ -67,16 +67,16 @@ export class DatetimeComponent implements OnInit {
       m.value = this.form_control.value.toISOString();
       m.page = this.ds.dataLookup(this.isSidebar);
 
-      this.ds.all_input.get(this.url).date_data.first_date =
-        this.form_control.value.toISOString();
+      // this.ds.all_input.get(this.url)?.date_data?.first_date =
+      //   this.form_control.value.toISOString();
     } else {
       if (this.form_data.value.end && this.form_data.value.start) {
         m.value = [
           this.form_data.value.start.toISOString(),
           this.form_data.value.end.toISOString(),
         ];
-        this.ds.all_input.get(this.url).date_data.first_date = m.value[0];
-        this.ds.all_input.get(this.url).date_data.second_date = m.value[1];
+        // this.ds.all_input.get(this.url).date_data.first_date = m.value[0];
+        // this.ds.all_input.get(this.url).date_data.second_date = m.value[1];
       } else {
         push = false;
       }

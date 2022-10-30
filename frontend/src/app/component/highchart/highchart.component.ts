@@ -35,11 +35,11 @@ export class HighchartComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.checkFunction(this.dataService.all_input.get(this.url).highchart_data.config)
+    this.checkFunction(this.dataService.all_input.get(this.url)?.highchart_data?.config)
 
 
     this.data = new Chart(
-      this.dataService.all_input.get(this.url).highchart_data.config
+      this.dataService.all_input.get(this.url)?.highchart_data?.config
     );
   }
 }

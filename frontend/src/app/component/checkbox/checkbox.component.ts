@@ -16,7 +16,7 @@ export class CheckboxComponent implements OnInit {
   constructor(public ds: DataService) {}
 
   ngOnInit(): void {
-    this.data = this.ds.all_input.get(this.url).checkbox_data
+    this.data = this.ds.all_input.get(this.url)?.checkbox_data as CheckboxData
 
   }
 

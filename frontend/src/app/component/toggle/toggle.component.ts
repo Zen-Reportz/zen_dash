@@ -16,7 +16,7 @@ export class ToggleComponent implements OnInit {
   }
 
   checkData(){
-    return this.ds.all_input.get(this.url).toggle_data.checked as boolean;
+    return this.ds.all_input.get(this.url)?.toggle_data?.checked as boolean;
   }
 
   saveData(event: any){
@@ -25,16 +25,19 @@ export class ToggleComponent implements OnInit {
 
   update(checked: any) {
     let m = new MEData();
-    m.key = this.ds.all_input.get(this.url).toggle_data.name as string;
+    m.key = this.ds.all_input.get(this.url)?.toggle_data?.name as string;
     m.value = checked;
     m.url = this.url
 
     m.page = this.ds.dataLookup(this.isSidebar)
     this.ds.data_setter.emit(m);
-    this.ds.all_input.get(this.url).toggle_data.checked = checked
+    // if (this.ds.all_input.get(this.url)?.toggle_data){
+    //   this.ds.all_input.get(this.url).toggle_data.checked=checked
+    // }
+
   }
 
   get_name() {
-    return this.ds.all_input.get(this.url).toggle_data.name;
+    return this.ds.all_input.get(this.url)?.toggle_data?.name;
   }
 }

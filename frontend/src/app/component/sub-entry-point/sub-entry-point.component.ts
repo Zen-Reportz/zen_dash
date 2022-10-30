@@ -163,9 +163,9 @@ export class SubEntryPointComponent implements OnInit {
     if ((page_refreshed) && (this.dataService.all_input.get(this.look_up)!== undefined)) {
         this.loading = false;
         let t = this.dataService.all_input.get(this.look_up)
-        this.reactive = t.reactive;
+        this.reactive = t?.reactive as ReactiveData;
         this.set_name(t)
-        this.type = t.type;
+        this.type = t?.type as string;
         this.unsubscribe();
         this.subscribe();
         return
@@ -214,15 +214,15 @@ export class SubEntryPointComponent implements OnInit {
 
     let response: any;
     if (this.dataService.all_input.get(look_up) !== undefined) {
-      if (this.dataService.all_input.get(look_up)?.fxFlex !== null) {
+      if (this.dataService.all_input.get(look_up)?.flex !== null) {
         if (type == 'flex') {
-          response = this.dataService.all_input.get(look_up)?.flex.fxFlex;
+          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex;
         } else if (type == 'flex_md') {
-          response = this.dataService.all_input.get(look_up)?.flex.fxFlex_md;
+          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_md;
         } else if (type == 'flex_sm') {
-          response = this.dataService.all_input.get(look_up).flex.fxFlex_sm;
+          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_sm;
         } else if (type == 'flex_xs') {
-          response = this.dataService.all_input.get(look_up).flex.fxFlex_xs;
+          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_xs;
         } else {
           console.log(' issue with type for ' + look_up + ' ' + type);
           response = original;

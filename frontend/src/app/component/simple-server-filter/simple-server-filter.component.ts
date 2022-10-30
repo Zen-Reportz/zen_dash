@@ -102,13 +102,13 @@ export class SimpleServerFilterComponent implements OnInit {
   }
 
   originalData() {
-    this.multi = this.ds.all_input.get(this.url).simple_server_filter_data.multi as boolean;
+    this.multi = this.ds.all_input.get(this.url)?.simple_server_filter_data?.multi as boolean;
 
-    this.data = this.ds.all_input.get(this.url).simple_server_filter_data.data as string[];
+    this.data = this.ds.all_input.get(this.url)?.simple_server_filter_data?.data as string[];
 
-    this.name = this.ds.all_input.get(this.url).simple_server_filter_data.name as string;
+    this.name = this.ds.all_input.get(this.url)?.simple_server_filter_data?.name as string;
 
-    this.server_url = this.ds.all_input.get(this.url).simple_server_filter_data.url as string;
+    this.server_url = this.ds.all_input.get(this.url)?.simple_server_filter_data?.url as string;
 
     // set initial selection
     this.ServerSideCtrl.setValue([]);
@@ -124,7 +124,7 @@ export class SimpleServerFilterComponent implements OnInit {
 
   detectChange(value: any) {
     let m = new MEData();
-    m.key = this.ds.all_input.get(this.url).simple_server_filter_data.name as string;
+    m.key = this.ds.all_input.get(this.url)?.simple_server_filter_data?.name as string;
     m.value = value.value;
     m.page = this.ds.dataLookup(this.isSidebar)
     m.url = this.url

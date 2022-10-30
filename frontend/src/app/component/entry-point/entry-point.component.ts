@@ -1,6 +1,5 @@
 import { DataService } from 'src/app/services/data.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FlexData } from 'src/app/shared/application_data';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-entry-point',
@@ -33,7 +32,7 @@ export class EntryPointComponent implements OnInit {
     let look_up =  this.dataService.input_lookup(p, this.url)
 
     if (this.dataService.all_input.get(look_up) !== undefined) {
-      return this.dataService.all_input.get(look_up).footer
+      return this.dataService.all_input.get(look_up)?.footer
     }
     return false
 
@@ -51,7 +50,7 @@ export class EntryPointComponent implements OnInit {
     let look_up =  this.dataService.input_lookup(p, this.url)
 
     if (this.dataService.all_input.get(look_up) !== undefined) {
-      return this.dataService.all_input.get(look_up).title
+      return this.dataService.all_input.get(look_up)?.title
     }
     return false
 

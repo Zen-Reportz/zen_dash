@@ -7,168 +7,170 @@ import { LoadingComponent } from './component/loading/loading.component';
 import { DataService } from './services/data.service';
 import { ActivatedRoute, Router, UrlSerializer } from '@angular/router';
 import { CallServiceService } from './services/call-service.service';
-import {Title} from "@angular/platform-browser";
+import { Title } from '@angular/platform-browser';
 import { CustomScripts } from './shared/application_data';
 import { UUID } from 'angular2-uuid';
-import {Clipboard} from '@angular/cdk/clipboard';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   title: string | undefined;
   mobileQuery: MediaQueryList;
   durationInSeconds = 5;
-  mySize = '500px'
-  document_id: any
-  color: string = 'primary'
+  mySize = '500px';
+  document_id: any;
+  color: string = 'primary';
   private _mobileQueryListener: () => void;
 
-  constructor(changeDetectorRef: ChangeDetectorRef,
-              media: MediaMatcher,
-              private http: HttpClient,
-              public data_service:DataService,
-              private _snackBar: MatSnackBar,
-              private aRoute: ActivatedRoute,
-              private call: CallServiceService,
-              private titleService:Title,
-              private clipboard: Clipboard,
-
-              ){
-
-    this.data_service.data_setter.subscribe((t) => {
-      this.color = 'warn'
-    })
+  constructor(
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
+    private http: HttpClient,
+    public ds: DataService,
+    private _snackBar: MatSnackBar,
+    private aRoute: ActivatedRoute,
+    private call: CallServiceService,
+    private titleService: Title,
+    private clipboard: Clipboard
+  ) {
+    this.ds.data_setter.subscribe((t) => {
+      this.color = 'warn';
+    });
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
     this.aRoute.queryParamMap.subscribe((fragment) => {
-      let page = this.data_service.get_page()
-      if (this.data_service.data["global"] ===undefined){
-        this.data_service.data['global'] ={}
+      let page = this.ds.get_page();
+      if (this.ds.data['global'] === undefined) {
+        this.ds.data['global'] = {};
       }
 
-      this.data_service.data['global']["page"] = page
-    })
+      this.ds.data['global']['page'] = page;
+    });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.mobileQuery.removeListener(this._mobileQueryListener);
-
   }
 
-  ngOnInit(){
-    this.getScripts()
-    this.http.get<string>(this.call.my_url() + "backend/title").subscribe(data => {
-      this.titleService.setTitle(data)
-      this.title = data
-    })
+  ngOnInit() {
+    this.getScripts();
+    this.http
+      .get<string>(this.call.my_url() + 'backend/title')
+      .subscribe((data) => {
+        this.titleService.setTitle(data);
+        this.title = data;
+      });
   }
 
-  save_deafult(){
+  refresh_data() {
+    this.color = 'primary';
 
-  }
+    this.ds.refresh.emit('');
+    let page = this.ds.get_page();
+    try {
+      this.ds.data[page]['need_to_refresh'] = false;
+    } catch {}
 
-  refresh_data(){
-    this.color = 'primary'
-
-
-    this.data_service.refresh.emit('')
-
+    this.ds.save_default();
     this._snackBar.openFromComponent(LoadingComponent, {
       duration: this.durationInSeconds * 1000,
-      data: false
+      data: false,
     });
-
   }
 
-  loadExternalScript(url: string| undefined, text: string | undefined, type: string) {
-    const body = <HTMLBodyElement> document.body;
+  loadExternalScript(
+    url: string | undefined,
+    text: string | undefined,
+    type: string
+  ) {
+    const body = <HTMLBodyElement>document.body;
 
-    if (type == "css"){
+    if (type == 'css') {
       const link = document.createElement('link');
 
-      link.id   = UUID.UUID();
-      link.rel  = 'stylesheet';
+      link.id = UUID.UUID();
+      link.rel = 'stylesheet';
       link.type = 'text/css';
       link.media = 'all';
       if (url !== undefined) {
-        link.href = url
+        link.href = url;
       }
-      if (text !== undefined){
-        link.textContent = text
+      if (text !== undefined) {
+        link.textContent = text;
       }
       body.appendChild(link);
-
     }
 
-
-    if (type == "javascript"){
+    if (type == 'javascript') {
       const script = document.createElement('script');
 
-      script.id   = UUID.UUID();
+      script.id = UUID.UUID();
       script.type = 'text/javascript';
 
       if (url !== undefined) {
-        script.src = url
+        script.src = url;
       }
-      if (text !== undefined){
-        script.text = text
+      if (text !== undefined) {
+        script.text = text;
       }
 
       script.async = true;
       script.defer = true;
       body.appendChild(script);
-
     }
-
-
   }
 
-  getScripts(){
+  getScripts() {
     this.http
-    .post<CustomScripts>(this.call.my_url()  +'backend/scripts', this.data_service.get_all())
-    .subscribe((script_data) => {
-      let dd = script_data.scripts
-      for (let d of dd){
-        this.loadExternalScript(d.url, d.text, d.type)
-      }
-    });
-
-  }
-
-  set_size(event:string){
-    this.mySize  = event
-  }
-
-  saveReport(){
-    this.document_id   = UUID.UUID();
-    let m = new MEData();
-    m.key = "document_id"
-    m.value = this.document_id
-    this.data_service.data_setter.emit(m)
-    this.refresh_data()
-
-    this.call.call_response(this.call.my_url() + "backend/document",  undefined,
-    undefined).subscribe((data) => {
-      const myUrl = new URL(window.location.href);
-      myUrl.searchParams.set('document_id', this.document_id);
-      this.clipboard.copy(myUrl.href)
-
-      this._snackBar.openFromComponent(LoadingComponent, {
-        duration: this.durationInSeconds * 1000,
-        data: true
+      .post<CustomScripts>(
+        this.call.my_url() + 'backend/scripts',
+        this.ds.get_all()
+      )
+      .subscribe((script_data) => {
+        let dd = script_data.scripts;
+        for (let d of dd) {
+          this.loadExternalScript(d.url, d.text, d.type);
+        }
       });
-    }, (error) =>{
-
-    })
-
   }
 
+  set_size(event: string) {
+    this.mySize = event;
+  }
 
+  saveReport() {
+    this.document_id = UUID.UUID();
+    let m = new MEData();
+    m.key = 'document_id';
+    m.value = this.document_id;
+    this.ds.data_setter.emit(m);
+    this.refresh_data();
 
+    this.call
+      .call_response(
+        this.call.my_url() + 'backend/document',
+        undefined,
+        undefined
+      )
+      .subscribe(
+        (data) => {
+          const myUrl = new URL(window.location.href);
+          myUrl.searchParams.set('document_id', this.document_id);
+          this.clipboard.copy(myUrl.href);
+
+          this._snackBar.openFromComponent(LoadingComponent, {
+            duration: this.durationInSeconds * 1000,
+            data: true,
+          });
+        },
+        (error) => {}
+      );
+  }
 }

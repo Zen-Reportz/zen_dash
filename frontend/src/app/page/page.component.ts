@@ -45,15 +45,15 @@ export class PageComponent implements OnInit {
 
     let response: any;
     if (this.dataService.all_input.get(look_up) !== undefined) {
-      if (this.dataService.all_input.get(look_up)?.fxFlex !== null) {
+      if (this.dataService.all_input.get(look_up)?.flex !== null) {
         if (type == 'flex') {
-          response = this.dataService.all_input.get(look_up)?.flex.fxFlex;
+          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex;
         } else if (type == 'flex_md') {
-          response = this.dataService.all_input.get(look_up)?.flex.fxFlex_md;
+          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_md;
         } else if (type == 'flex_sm') {
-          response = this.dataService.all_input.get(look_up).flex.fxFlex_sm;
+          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_sm;
         } else if (type == 'flex_xs') {
-          response = this.dataService.all_input.get(look_up).flex.fxFlex_xs;
+          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_xs;
         } else {
           console.log(' issue with type for ' + look_up + ' ' + type);
           response = original;
@@ -73,7 +73,9 @@ export class PageComponent implements OnInit {
   isHiddenFunction(url:string){
     if (this.dataService.all_input.get(url) !== undefined) {
 
-      return this.dataService.all_input.get(url).reactive.hidden
+      return this.dataService.all_input.get(url)?.reactive.hidden
+    } else {
+      return
     }
   }
 }
