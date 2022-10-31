@@ -33,20 +33,27 @@ export class DataService {
       let queryParams: Params = {};
       queryParams = { page: page[0] };
 
-      this.router.navigate([], {
-        relativeTo: activatedRoute,
-        queryParams: {},
-      });
+      let url = new URL(window.location.href);
+      let params = new URLSearchParams(url.search);
+      if (params.get('document_id') !== null) {
+        if (params.get('page') !== null) {
+          this.router.navigate([], {
+            relativeTo: activatedRoute,
+            queryParams: { page: params.get('page') },
+          });
+        } else {
+          this.router.navigate([], {
+            relativeTo: activatedRoute,
+            queryParams: {},
+          });
+        }
+      }
+
       if (this.data[t.page] === undefined) {
         this.data[t.page] = {};
       }
 
       this.data[t.page][t.url] = [t.key, t.value];
-      if (t.page !== 'global') {
-        this.data[t.page]['need_to_refresh'] = true;
-      }
-
-      console.log(this.data);
     });
   }
 
@@ -71,14 +78,24 @@ export class DataService {
   }
 
   get_all() {
+    let page = this.get_page();
     let convMap: any = {};
 
-    let global = this.data['global'] ?? {};
-    Object.entries(global).forEach(([key, value]) => (convMap[key] = value));
+    let page_data = this.data[page] ?? {};
+    Object.entries(page_data).forEach(([key, value]) => {
+      let d: any = value;
+      convMap[d[0]] = d[1];
+    });
 
-    let page = this.get_page();
-    let page_data = this.data[page[0]] ?? {};
-    Object.entries(page_data).forEach(([key, value]) => (convMap[key] = value));
+    let global = this.data['global'] ?? {};
+    Object.entries(global).forEach(([key, value]) => {
+      if (key === 'page') {
+        convMap[key] = value;
+      } else {
+        let d: any = value;
+        convMap[d[0]] = d[1];
+      }
+    });
 
     return convMap;
   }
@@ -235,6 +252,7 @@ export class DataService {
   }
 
   save_default() {
+    let page = this.get_page();
     for (const [url, value] of Object.entries(this.data['global'])) {
       if (url !== 'page') {
         let d: any = value;
@@ -242,14 +260,12 @@ export class DataService {
         this.save_instance(dd, d[1], url);
       }
     }
-    let page = this.get_page();
-    for (const [url, value] of Object.entries(this.data[page])) {
-      if (url !== 'need_to_refresh') {
+    try {
+      for (const [url, value] of Object.entries(this.data[page])) {
         let d: any = value;
-        console.log(d);
         let dd = this.all_input.get(url) as ResponseData;
         this.save_instance(dd, d[1], url);
       }
-    }
+    } catch {}
   }
 }

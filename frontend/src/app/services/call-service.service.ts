@@ -21,7 +21,6 @@ export class CallServiceService {
       }
       url_ = first + url
     }
-
     let convMap: any = {};
     if (formdata !== undefined){
       convMap = formdata

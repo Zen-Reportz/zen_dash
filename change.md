@@ -1,3 +1,12 @@
+# 0.3.0
+- allow service search to have seleced value
+- stop calling backend moving between page wihtout chaning global filter
+- BREAKING CHANGE:
+    - SidebarTab object dont have fragmen key any more 
+    - Tab will name incremenal order starting 0, example page_0, page_1...
+    - backend will return data seperately between global filter and page filter for better isolation
+    
+
 # 0.2.12
 - moved document id as seperate options
 

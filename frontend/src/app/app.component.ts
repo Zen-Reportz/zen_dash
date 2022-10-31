@@ -1,5 +1,5 @@
 import { MEData } from 'src/app/shared/application_data';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,7 +17,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title: string | undefined;
   mobileQuery: MediaQueryList;
   durationInSeconds = 5;
@@ -52,11 +52,16 @@ export class AppComponent implements OnInit {
       }
 
       this.ds.data['global']['page'] = page;
+      this.color = 'primary';
+
+
+
     });
   }
 
   ngOnDestroy() {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+
   }
 
   ngOnInit() {
@@ -67,16 +72,13 @@ export class AppComponent implements OnInit {
         this.titleService.setTitle(data);
         this.title = data;
       });
+
   }
 
   refresh_data() {
     this.color = 'primary';
 
     this.ds.refresh.emit('');
-    let page = this.ds.get_page();
-    try {
-      this.ds.data[page]['need_to_refresh'] = false;
-    } catch {}
 
     this.ds.save_default();
     this._snackBar.openFromComponent(LoadingComponent, {

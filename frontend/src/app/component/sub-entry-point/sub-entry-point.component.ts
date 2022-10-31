@@ -29,27 +29,48 @@ export class SubEntryPointComponent implements OnInit {
   look_up!: string
 
   constructor(
-    private dataService: DataService,
+    private ds: DataService,
     private callService: CallServiceService
   ) {}
 
-  ngOnInit(): void {
+  needToPull(){
+    let page = this.ds.get_page()
     let p: string =''
     if (this.isSidebar){
       p = 'sidebar'
     } else {
-      p = this.dataService.get_page()
+      p = this.ds.get_page()
     }
 
-    this.look_up =  this.dataService.input_lookup(p, this.url)
-    this.getData(true);
+    this.look_up =  this.ds.input_lookup(p, this.url)
+    let pull = false
+    let d = sessionStorage.getItem(this.look_up)
+    let current_data = JSON.stringify({"global": this.ds.data['global'], page: this.ds.data[page]})
+    if (d !== null){
+      if (current_data !== d) {
+        pull = true
+        sessionStorage.setItem(this.look_up, current_data)
+      }
+    } else {
+      pull = true
+      sessionStorage.setItem(this.look_up, current_data)
+    }
+
+    return pull
+  }
+
+  ngOnInit(): void {
+    let pull = this.needToPull()
+
+    this.getData(pull);
   }
 
   subscribe() {
     if (this.data_type.indexOf(this.type as string) >= 0) {
       this.d.set(
         'refresh',
-        this.dataService.refresh.subscribe((t) => {
+        this.ds.refresh.subscribe((t) => {
+          this.needToPull()
           this.getData(false);
         })
       );
@@ -58,8 +79,9 @@ export class SubEntryPointComponent implements OnInit {
     if (this.reactive.full_reactive) {
       this.d.set(
         'reactive',
-        this.dataService.data_setter.subscribe((t) => {
+        this.ds.data_setter.subscribe((t) => {
           if (t.key !== this.name) {
+            this.needToPull()
             this.getData(false);
           }
         })
@@ -67,8 +89,9 @@ export class SubEntryPointComponent implements OnInit {
     } else if (this.reactive.reactive_ids.length > 0) {
       this.d.set(
         'specific_reactive',
-        this.dataService.data_setter.subscribe((t) => {
+        this.ds.data_setter.subscribe((t) => {
           if (this.reactive.reactive_ids.indexOf(t.key) >= 0) {
+            this.needToPull()
             this.getData(false);
           }
         })
@@ -160,9 +183,9 @@ export class SubEntryPointComponent implements OnInit {
       undefined
     ) as Observable<ResponseData>;
 
-    if ((page_refreshed) && (this.dataService.all_input.get(this.look_up)!== undefined)) {
+    if ((page_refreshed) && (this.ds.all_input.get(this.look_up)!== undefined)) {
         this.loading = false;
-        let t = this.dataService.all_input.get(this.look_up)
+        let t = this.ds.all_input.get(this.look_up)
         this.reactive = t?.reactive as ReactiveData;
         this.set_name(t)
         this.type = t?.type as string;
@@ -172,12 +195,12 @@ export class SubEntryPointComponent implements OnInit {
     }
 
     this.type = undefined
-    this.dataService.all_input.delete(this.look_up)
+    this.ds.all_input.delete(this.look_up)
     this.pageCall = p.subscribe({
       next: (t: ResponseData) => {
         this.loading = false;
         this.reactive = t.reactive;
-        this.dataService.all_input.set(this.look_up, t);
+        this.ds.all_input.set(this.look_up, t);
         this.set_name(t)
 
         this.type = t.type;
@@ -207,22 +230,22 @@ export class SubEntryPointComponent implements OnInit {
     if (this.isSidebar){
       p = 'sidebar'
     } else {
-      p = this.dataService.get_page()
+      p = this.ds.get_page()
     }
 
-    let look_up =  this.dataService.input_lookup(p, this.url)
+    let look_up =  this.ds.input_lookup(p, this.url)
 
     let response: any;
-    if (this.dataService.all_input.get(look_up) !== undefined) {
-      if (this.dataService.all_input.get(look_up)?.flex !== null) {
+    if (this.ds.all_input.get(look_up) !== undefined) {
+      if (this.ds.all_input.get(look_up)?.flex !== null) {
         if (type == 'flex') {
-          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex;
+          response = this.ds.all_input.get(look_up)?.flex?.fxFlex;
         } else if (type == 'flex_md') {
-          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_md;
+          response = this.ds.all_input.get(look_up)?.flex?.fxFlex_md;
         } else if (type == 'flex_sm') {
-          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_sm;
+          response = this.ds.all_input.get(look_up)?.flex?.fxFlex_sm;
         } else if (type == 'flex_xs') {
-          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_xs;
+          response = this.ds.all_input.get(look_up)?.flex?.fxFlex_xs;
         } else {
           console.log(' issue with type for ' + look_up + ' ' + type);
           response = original;
