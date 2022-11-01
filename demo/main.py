@@ -185,7 +185,7 @@ async def page_detail(fragment: str):
                                  ),
                                  p.Instance(
                       url="/backend/page_one/row_eight/highchart2"),])
-                  ], first_page_fragment= "/backend/first_page")
+                  ])
         return p1
 
 

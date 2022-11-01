@@ -1,3 +1,6 @@
+# 0.3.1
+- Remove first_page_fragment from page
+
 # 0.3.0
 - allow service search to have seleced value
 - stop calling backend moving between page wihtout chaning global filter
