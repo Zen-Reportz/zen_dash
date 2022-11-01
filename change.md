@@ -1,3 +1,6 @@
+# 0.3.2
+- Fix bug regarding cache lookup
+
 # 0.3.1
 - Remove first_page_fragment from page
 

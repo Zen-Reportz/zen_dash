@@ -46,12 +46,20 @@ export class SubEntryPointComponent implements OnInit {
     let pull = false
     let d = sessionStorage.getItem(this.look_up)
     let current_data = JSON.stringify({"global": this.ds.data['global'], page: this.ds.data[page]})
+
     if (d !== null){
+      // console.log(`d is not null at ${this.url}`)
       if (current_data !== d) {
         pull = true
+        // console.log(`data is not same ${current_data} and ${d} at ${this.url} ${this.ds.get_page()}` )
         sessionStorage.setItem(this.look_up, current_data)
       }
+      // else {
+      //   console.log(`data is same ${current_data} and ${d} at ${this.url} ${this.ds.get_page()}` )
+      // }
+
     } else {
+      // console.log(`d is null at ${this.url} ${this.ds.get_page()}`)
       pull = true
       sessionStorage.setItem(this.look_up, current_data)
     }
@@ -171,6 +179,8 @@ export class SubEntryPointComponent implements OnInit {
   }
 
   getData(page_refreshed: boolean) {
+    // console.log(`pull is ${page_refreshed} at ${this.url} ${this.ds.get_page()}`)
+
     this.loading = true;
     this.multi_url = [];
     if (this.pageCall !== undefined) {
@@ -183,7 +193,8 @@ export class SubEntryPointComponent implements OnInit {
       undefined
     ) as Observable<ResponseData>;
 
-    if ((page_refreshed) && (this.ds.all_input.get(this.look_up)!== undefined)) {
+    if ((!page_refreshed) && (this.ds.all_input.get(this.look_up)!== undefined)) {
+        // console.log(`not pulling at ${this.url} ${this.ds.get_page()}`)
         this.loading = false;
         let t = this.ds.all_input.get(this.look_up)
         this.reactive = t?.reactive as ReactiveData;
@@ -193,7 +204,8 @@ export class SubEntryPointComponent implements OnInit {
         this.subscribe();
         return
     }
-
+    // console.log(`${this.ds.all_input.get(this.look_up)} at ${this.url} ${this.ds.get_page()}`)
+    // console.log(`pulling at ${this.url} ${this.ds.get_page()}`)
     this.type = undefined
     this.ds.all_input.delete(this.look_up)
     this.pageCall = p.subscribe({
