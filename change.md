@@ -1,3 +1,6 @@
+# 0.3.4
+- fixed compilation issue
+
 # 0.3.3
 - fixed reactivity issue
 
