@@ -6,6 +6,8 @@
   <mat-card-content>
     <app-sub-entry-point [url]="url"
                          [isSidebar]="isSidebar"
+                         (rd)="rd.emit($event)"
+                         (fd)="fx.emit($event)"
                          ></app-sub-entry-point>
   </mat-card-content>
 

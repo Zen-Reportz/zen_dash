@@ -1,5 +1,6 @@
+import { FlexData, ReactiveData } from './../../shared/application_data';
 import { DataService } from 'src/app/services/data.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-entry-point',
@@ -9,6 +10,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class EntryPointComponent implements OnInit {
   @Input() url!: string;
   @Input() isSidebar!: boolean
+  @Output() fx = new EventEmitter<FlexData>();
+  @Output() rd = new EventEmitter<ReactiveData>();
 
   pulled: boolean = false;
   footer!: string;

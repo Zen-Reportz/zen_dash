@@ -1,3 +1,4 @@
+import { ReactiveData } from './../shared/application_data';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
@@ -14,6 +15,9 @@ import { SetTitleService } from '../shared/set-title.service';
 })
 export class PageComponent implements OnInit {
   page: Page | undefined = undefined;
+  reactivityData = new Map<string, ReactiveData>();
+  flexData = new Map<string, FlexData>();
+
 
   constructor(
     private http: HttpClient,
@@ -39,43 +43,51 @@ export class PageComponent implements OnInit {
 
 
 
-  getFlex(original: string, type: string, url: string) {
-    let p = this.dataService.get_page()
-    let look_up =  this.dataService.input_lookup(p, url)
+  // getFlex(original: string, type: string, url: string) {
+  //   let p = this.dataService.get_page()
+  //   let look_up =  this.dataService.input_lookup(p, url)
 
-    let response: any;
-    if (this.dataService.all_input.get(look_up) !== undefined) {
-      if (this.dataService.all_input.get(look_up)?.flex !== null) {
-        if (type == 'flex') {
-          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex;
-        } else if (type == 'flex_md') {
-          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_md;
-        } else if (type == 'flex_sm') {
-          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_sm;
-        } else if (type == 'flex_xs') {
-          response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_xs;
-        } else {
-          console.log(' issue with type for ' + look_up + ' ' + type);
-          response = original;
-        }
-      } else {
-        console.log(' issue with type for ' + look_up + ' ' + type);
-        response = original;
-      }
-    } else {
-      // console.log("No data so returning original")
-      response = original;
-    }
+  //   let response: any;
+  //   if (this.dataService.all_input.get(look_up) !== undefined) {
+  //     if (this.dataService.all_input.get(look_up)?.flex !== null) {
+  //       if (type == 'flex') {
+  //         response = this.dataService.all_input.get(look_up)?.flex?.fxFlex;
+  //       } else if (type == 'flex_md') {
+  //         response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_md;
+  //       } else if (type == 'flex_sm') {
+  //         response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_sm;
+  //       } else if (type == 'flex_xs') {
+  //         response = this.dataService.all_input.get(look_up)?.flex?.fxFlex_xs;
+  //       } else {
+  //         console.log(' issue with type for ' + look_up + ' ' + type);
+  //         response = original;
+  //       }
+  //     } else {
+  //       console.log(' issue with type for ' + look_up + ' ' + type);
+  //       response = original;
+  //     }
+  //   } else {
+  //     // console.log("No data so returning original")
+  //     response = original;
+  //   }
 
-    return response;
+  //   return response;
+  // }
+
+  // isHiddenFunction(url:string){
+  //   if (this.dataService.all_input.get(url) !== undefined) {
+
+  //     return this.dataService.all_input.get(url)?.reactive.hidden
+  //   } else {
+  //     return
+  //   }
+  // }
+
+  setFlex(url: string, flexData: FlexData){
+    this.flexData.set(url, flexData)
   }
 
-  isHiddenFunction(url:string){
-    if (this.dataService.all_input.get(url) !== undefined) {
-
-      return this.dataService.all_input.get(url)?.reactive.hidden
-    } else {
-      return
-    }
+  setReactivity(url: string, reactiveData: ReactiveData){
+    this.reactivityData.set(url, reactiveData)
   }
 }

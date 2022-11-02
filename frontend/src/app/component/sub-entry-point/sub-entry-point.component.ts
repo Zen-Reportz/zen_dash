@@ -1,5 +1,5 @@
 import { CallServiceService } from './../../services/call-service.service';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   FlexData,
   MultiURLInfo,
@@ -17,6 +17,11 @@ import { DataService } from 'src/app/services/data.service';
 export class SubEntryPointComponent implements OnInit {
   @Input() url!: string;
   @Input() isSidebar!: boolean;
+  @Output() rd = new EventEmitter<ReactiveData>();
+  @Output() fd = new EventEmitter<FlexData>();
+
+  reactivityData = new Map<string, ReactiveData>();
+  flexData = new Map<string, FlexData>();
 
   type: string | undefined;
   name: string | undefined;
@@ -26,49 +31,45 @@ export class SubEntryPointComponent implements OnInit {
   pageCall: Subscription | undefined;
   data_type = ['box', 'table', 'chart', 'image', 'highchart'];
   loading = true;
-  look_up!: string
+  look_up!: string;
 
   constructor(
     private ds: DataService,
     private callService: CallServiceService
   ) {}
 
-  needToPull(){
-    let page = this.ds.get_page()
-    let p: string =''
-    if (this.isSidebar){
-      p = 'sidebar'
+  needToPull() {
+    let page = this.ds.get_page();
+    let p: string = '';
+    if (this.isSidebar) {
+      p = 'sidebar';
     } else {
-      p = this.ds.get_page()
+      p = this.ds.get_page();
     }
 
-    this.look_up =  this.ds.input_lookup(p, this.url)
-    let pull = false
-    let d = sessionStorage.getItem(this.look_up)
-    let current_data = JSON.stringify({"global": this.ds.data['global'], page: this.ds.data[page]})
+    this.look_up = this.ds.input_lookup(p, this.url);
+    let pull = false;
+    let d = sessionStorage.getItem(this.look_up);
+    let current_data = JSON.stringify({
+      global: this.ds.data['global'],
+      page: this.ds.data[page],
+    });
 
-    if (d !== null){
-      // console.log(`d is not null at ${this.url}`)
+    if (d !== null) {
       if (current_data !== d) {
-        pull = true
-        // console.log(`data is not same ${current_data} and ${d} at ${this.url} ${this.ds.get_page()}` )
-        sessionStorage.setItem(this.look_up, current_data)
+        pull = true;
+        sessionStorage.setItem(this.look_up, current_data);
       }
-      // else {
-      //   console.log(`data is same ${current_data} and ${d} at ${this.url} ${this.ds.get_page()}` )
-      // }
-
     } else {
-      // console.log(`d is null at ${this.url} ${this.ds.get_page()}`)
-      pull = true
-      sessionStorage.setItem(this.look_up, current_data)
+      pull = true;
+      sessionStorage.setItem(this.look_up, current_data);
     }
 
-    return pull
+    return pull;
   }
 
   ngOnInit(): void {
-    let pull = this.needToPull()
+    let pull = this.needToPull();
 
     this.getData(pull);
   }
@@ -78,8 +79,8 @@ export class SubEntryPointComponent implements OnInit {
       this.d.set(
         'refresh',
         this.ds.refresh.subscribe((t) => {
-          this.needToPull()
-          this.getData(false);
+          this.needToPull();
+          this.getData(true);
         })
       );
     }
@@ -89,8 +90,8 @@ export class SubEntryPointComponent implements OnInit {
         'reactive',
         this.ds.data_setter.subscribe((t) => {
           if (t.key !== this.name) {
-            this.needToPull()
-            this.getData(false);
+            this.needToPull();
+            this.getData(true);
           }
         })
       );
@@ -99,14 +100,12 @@ export class SubEntryPointComponent implements OnInit {
         'specific_reactive',
         this.ds.data_setter.subscribe((t) => {
           if (this.reactive.reactive_ids.indexOf(t.key) >= 0) {
-            this.needToPull()
-            this.getData(false);
+            this.needToPull();
+            this.getData(true);
           }
         })
       );
     }
-
-
   }
 
   unsubscribe() {
@@ -193,31 +192,35 @@ export class SubEntryPointComponent implements OnInit {
       undefined
     ) as Observable<ResponseData>;
 
-    if ((!page_refreshed) && (this.ds.all_input.get(this.look_up)!== undefined)) {
-        // console.log(`not pulling at ${this.url} ${this.ds.get_page()}`)
-        this.loading = false;
-        let t = this.ds.all_input.get(this.look_up)
-        this.reactive = t?.reactive as ReactiveData;
-        this.set_name(t)
-        this.type = t?.type as string;
-        this.unsubscribe();
-        this.subscribe();
-        return
+    if (!page_refreshed && this.ds.all_input.get(this.look_up) !== undefined) {
+      // console.log(`not pulling at ${this.url} ${this.ds.get_page()}`)
+      this.loading = false;
+      let t = this.ds.all_input.get(this.look_up);
+      this.reactive = t?.reactive as ReactiveData;
+      this.set_name(t);
+      this.type = t?.type as string;
+      this.unsubscribe();
+      this.subscribe();
+      return;
     }
     // console.log(`${this.ds.all_input.get(this.look_up)} at ${this.url} ${this.ds.get_page()}`)
     // console.log(`pulling at ${this.url} ${this.ds.get_page()}`)
-    this.type = undefined
-    this.ds.all_input.delete(this.look_up)
+    this.type = undefined;
+    this.ds.all_input.delete(this.look_up);
     this.pageCall = p.subscribe({
       next: (t: ResponseData) => {
         this.loading = false;
         this.reactive = t.reactive;
+        this.rd.emit(this.reactive);
+        console.log(this.reactive)
+        this.fd.emit(t.flex);
+        console.log(t.flex)
         this.ds.all_input.set(this.look_up, t);
-        this.set_name(t)
+        this.set_name(t);
 
         this.type = t.type;
         this.unsubscribe();
-        this.subscribe()
+        this.subscribe();
       },
       error: (e: any) => {
         console.error(e);
@@ -237,40 +240,11 @@ export class SubEntryPointComponent implements OnInit {
     }
   }
 
-  getFlex(original: string, type: string, url: string) {
-    let p: string =''
-    if (this.isSidebar){
-      p = 'sidebar'
-    } else {
-      p = this.ds.get_page()
-    }
+  setFlex(url: string, flexData: FlexData) {
+    this.flexData.set(url, flexData);
+  }
 
-    let look_up =  this.ds.input_lookup(p, this.url)
-
-    let response: any;
-    if (this.ds.all_input.get(look_up) !== undefined) {
-      if (this.ds.all_input.get(look_up)?.flex !== null) {
-        if (type == 'flex') {
-          response = this.ds.all_input.get(look_up)?.flex?.fxFlex;
-        } else if (type == 'flex_md') {
-          response = this.ds.all_input.get(look_up)?.flex?.fxFlex_md;
-        } else if (type == 'flex_sm') {
-          response = this.ds.all_input.get(look_up)?.flex?.fxFlex_sm;
-        } else if (type == 'flex_xs') {
-          response = this.ds.all_input.get(look_up)?.flex?.fxFlex_xs;
-        } else {
-          console.log(' issue with type for ' + look_up + ' ' + type);
-          response = original;
-        }
-      } else {
-        console.log(' issue with type for ' + look_up + ' ' + type);
-        response = original;
-      }
-    } else {
-      // console.log("No data so returning original")
-      response = original;
-    }
-
-    return response;
+  setReactivity(url: string, reactiveData: ReactiveData) {
+    this.reactivityData.set(url, reactiveData);
   }
 }

@@ -20,7 +20,10 @@
   <app-slider [url]="look_up" [isSidebar]="isSidebar"></app-slider>
 </span>
 <span *ngIf="type === 'button_toggle'">
-  <app-button-toggle [url]="look_up" [isSidebar]="isSidebar"></app-button-toggle>
+  <app-button-toggle
+    [url]="look_up"
+    [isSidebar]="isSidebar"
+  ></app-button-toggle>
 </span>
 <span *ngIf="type === 'toggle'">
   <app-toggle [url]="look_up" [isSidebar]="isSidebar"></app-toggle>
@@ -29,13 +32,18 @@
   <span *ngFor="let url_info of getURLs()">
     <!-- <ng-container *ngIf="url_info.with_card; else mulit_list"> -->
     <app-entry-point
-        [url]="url_info.url"
-        [isSidebar]="isSidebar"
-        url_info
-
-        class="padding"
-      >
-      </app-entry-point>
+      [hidden]="reactivityData.get(url_info.url)?.hidden"
+      [url]="url_info.url"
+      [isSidebar]="isSidebar"
+      [fxFlex]="flexData.get(url_info.url)?.fxFlex || '100%%'"
+      [fxFlex.md]="flexData.get(url_info.url)?.fxFlex_md || '100%'"
+      [fxFlex.sm]="flexData.get(url_info.url)?.fxFlex_sm || '100%'"
+      [fxFlex.xs]="flexData.get(url_info.url)?.fxFlex_sm || '100%'"
+      (fx)="setFlex(url_info.url, $event)"
+      (rd)="setReactivity(url_info.url, $event)"
+      class="padding"
+    >
+    </app-entry-point>
     <!-- </ng-container> -->
     <!-- <ng-template #mulit_list> -->
     <!-- <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point> <br /> -->
@@ -47,7 +55,19 @@
   <mat-tab-group>
     <mat-tab *ngFor="let url_info of getURLs()" [label]="url_info.name || ''">
       <br />
-      <app-sub-entry-point [url]="url_info.url"         [isSidebar]="isSidebar"      ></app-sub-entry-point>
+      <app-sub-entry-point
+        [hidden]="reactivityData.get(url_info.url)?.hidden"
+        (rd)="setReactivity(url_info.url, $event)"
+        [url]="url_info.url"
+        [isSidebar]="isSidebar"
+        [fxFlex]="flexData.get(url_info.url)?.fxFlex || '100%'"
+        [fxFlex.md]="flexData.get(url_info.url)?.fxFlex_md || '100%'"
+        [fxFlex.sm]="flexData.get(url_info.url)?.fxFlex_sm || '100%'"
+        [fxFlex.xs]="flexData.get(url_info.url)?.fxFlex_sm || '100%'"
+        (rd)="setReactivity(url_info.url, $event)"
+        (fd)="setFlex(url_info.url, $event)"
+
+      ></app-sub-entry-point>
     </mat-tab>
   </mat-tab-group>
 </span>
@@ -62,14 +82,28 @@
             {{ url_info.name }}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-sub-entry-point [url]="url_info.url"         [isSidebar]="isSidebar"        ></app-sub-entry-point>
+        <app-sub-entry-point
+          [url]="url_info.url"
+          [isSidebar]="isSidebar"
+          [hidden]="reactivityData.get(url_info.url)?.hidden"
+          [fxFlex]="flexData.get(url_info.url)?.fxFlex || '100%'"
+          [fxFlex.md]="flexData.get(url_info.url)?.fxFlex_md || '100%'"
+          [fxFlex.sm]="flexData.get(url_info.url)?.fxFlex_sm || '50%'"
+          [fxFlex.xs]="flexData.get(url_info.url)?.fxFlex_sm || '100%'"
+          (rd)="setReactivity(url_info.url, $event)"
+          (fd)="setFlex(url_info.url, $event)"
+
+        ></app-sub-entry-point>
       </mat-expansion-panel>
     </span>
   </mat-accordion>
 </span>
 
 <span *ngIf="type == 'simple_filter'">
-  <app-simple-filter [url]="look_up" [isSidebar]="isSidebar"></app-simple-filter>
+  <app-simple-filter
+    [url]="look_up"
+    [isSidebar]="isSidebar"
+  ></app-simple-filter>
 </span>
 
 <span *ngIf="type == 'simple_server_filter'">

@@ -31,30 +31,36 @@ async def prf():
 
 
 @router.post("/date", response_model=i.ReturnData)
-async def prf(req: Request):   
-    data = await req.json() 
+async def prf(req: Request):
+    data = await req.json()
     if data.get("single_toggle_data", '') == 'black':
-        return i.ReturnData(type=i.InstanceType.DATE, 
-                        date_data=i.DateTimeData(label="Select Date Range", name="multi_date", first_date="2020-11-24", second_date="2022-11-24"), 
-                        reactive=i.ReactiveData(hidden=True, reactive_ids=['single_toggle_data']))
-    
-    t = [i.ReturnData(type=i.InstanceType.DATE, 
-                        date_data=i.DateTimeData(label="Select Date Range", name="multi_date", first_date="2020-11-24", second_date="2022-11-24"), 
-                        reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data'])),
-        i.ReturnData(type=i.InstanceType.DATE, 
-                        date_data=i.DateTimeData(label="Select Date Range", name="multi_date", first_date="2020-11-10", second_date="2022-03-24"), 
-                        reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data']))]
+        return i.ReturnData(type=i.InstanceType.DATE,
+                            date_data=i.DateTimeData(
+                                label="Select Date Range", name="multi_date", first_date="2020-11-24", second_date="2022-11-24"),
+                            reactive=i.ReactiveData(hidden=True, reactive_ids=['single_toggle_data']))
+
+    t = [i.ReturnData(type=i.InstanceType.DATE,
+                      date_data=i.DateTimeData(
+                          label="Select Date Range", name="multi_date", first_date="2020-11-24", second_date="2022-11-24"),
+                      reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data']), flex=i.FlexData(fxFlex='35%', fxFlex_md='50%', fxFlex_sm='100%', fxFlex_xs='100%')),
+         i.ReturnData(type=i.InstanceType.DATE,
+                      date_data=i.DateTimeData(
+                          label="Select Date Range", name="multi_date", first_date="2020-11-10", second_date="2022-03-24"),
+                      reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data']))]
     return random.choice(t)
+
 
 @router.post("/single_date", response_model=i.ReturnData)
 async def prf():
 
-    d = [i.ReturnData(type=i.InstanceType.DATE,  
-            date_data=i.DateTimeData(label="Select Date", name="single_date", first_date="2020-02-10"), 
-            reactive=i.ReactiveData( reactive_ids=['multi_toggle_data'])),
-        i.ReturnData(type=i.InstanceType.DATE, 
-            date_data=i.DateTimeData(label="Select Date", name="single_date", first_date="2023-03-24"), 
-            reactive=i.ReactiveData(reactive_ids=['multi_toggle_data']
-        ))]
+    d = [i.ReturnData(type=i.InstanceType.DATE,
+                      date_data=i.DateTimeData(
+                          label="Select Date", name="single_date", first_date="2020-02-10"),
+                      reactive=i.ReactiveData(reactive_ids=['multi_toggle_data'])),
+         i.ReturnData(type=i.InstanceType.DATE,
+                      date_data=i.DateTimeData(
+                          label="Select Date", name="single_date", first_date="2023-03-24"),
+                      reactive=i.ReactiveData(reactive_ids=['multi_toggle_data']
+                                              ), flex=i.FlexData(fxFlex='35%', fxFlex_md='50%', fxFlex_sm='100%', fxFlex_xs='100%'))]
 
     return random.choice(d)

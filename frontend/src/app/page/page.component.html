@@ -11,14 +11,17 @@
           fxFlexFill
         >
           <app-entry-point
-            [hidden]="isHiddenFunction(instance.url)"
+            [hidden]="reactivityData.get(instance.url)?.hidden"
             [url]="instance.url"
             [isSidebar]=false
             *ngFor="let instance of row_data.data"
-            [fxFlex]="getFlex('25%', 'flex', instance.url)"
-            [fxFlex.md]="getFlex('33%', 'flex_md', instance.url)"
-            [fxFlex.sm]="getFlex('50%', 'flex_sm', instance.url)"
-            [fxFlex.xs]="getFlex('100%', 'flex_xs', instance.url)"
+            [fxFlex]="flexData.get(instance.url)?.fxFlex || '33%'"
+            [fxFlex.md]="flexData.get(instance.url)?.fxFlex_md || '33%'"
+            [fxFlex.sm]="flexData.get(instance.url)?.fxFlex_sm || '50%'"
+            [fxFlex.xs]="flexData.get(instance.url)?.fxFlex_sm || '100%'"
+            (fx)="setFlex(instance.url, $event)"
+            (rd)="setReactivity(instance.url, $event)"
+
             class="padding"
           >
           </app-entry-point>

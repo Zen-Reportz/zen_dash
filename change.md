@@ -1,3 +1,6 @@
+# 0.3.3
+- fixed reactivity issue
+
 # 0.3.2
 - Fix bug regarding cache lookup
 
