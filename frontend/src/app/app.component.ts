@@ -83,7 +83,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.ds.save_default();
     this._snackBar.openFromComponent(LoadingComponent, {
       duration: this.durationInSeconds * 1000,
-      data: false,
+      data: { message: 'Refreshing data', status: 'sucess' },
     });
   }
 
@@ -169,10 +169,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
           this._snackBar.openFromComponent(LoadingComponent, {
             duration: this.durationInSeconds * 1000,
-            data: true,
+            data: { message: 'Document URL copied', status: 'sucess' },
           });
         },
-        (error) => {}
+        (error) => {
+          this._snackBar.openFromComponent(LoadingComponent, {
+            duration: this.durationInSeconds * 1000,
+            data: { message: 'Saving report failed', status: 'error' },
+          });
+        }
       );
   }
 }

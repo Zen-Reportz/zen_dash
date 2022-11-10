@@ -193,9 +193,9 @@ export class InputData {
 }
 
 export class DownloadData{
-  file_name!: string
-    url!: string
-
+  label!: string
+  url!: string
+  name!: string
 }
 
 export class DataImage{

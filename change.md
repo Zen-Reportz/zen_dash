@@ -1,3 +1,9 @@
+# 0.3.5
+- Breaking change DownloadData, removed file name and added label
+- Ability provide file name with FileResponse rather than InstanceType.DOWNLOAD
+- Using LoadingComponent for sucess or failer of upload and download 
+- adding ability to add reactivity with sucessful upload and download 
+
 # 0.3.4
 - fixed compilation issue
 

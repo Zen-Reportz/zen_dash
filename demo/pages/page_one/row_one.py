@@ -42,7 +42,7 @@ async def prf(req: Request):
     t = [i.ReturnData(type=i.InstanceType.DATE,
                       date_data=i.DateTimeData(
                           label="Select Date Range", name="multi_date", first_date="2020-11-24", second_date="2022-11-24"),
-                      reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data']), flex=i.FlexData(fxFlex='35%', fxFlex_md='50%', fxFlex_sm='100%', fxFlex_xs='100%')),
+                      reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data']), flex=i.FlexData(fxFlex='25%', fxFlex_md='50%', fxFlex_sm='100%', fxFlex_xs='100%')),
          i.ReturnData(type=i.InstanceType.DATE,
                       date_data=i.DateTimeData(
                           label="Select Date Range", name="multi_date", first_date="2020-11-10", second_date="2022-03-24"),
@@ -61,6 +61,6 @@ async def prf():
                       date_data=i.DateTimeData(
                           label="Select Date", name="single_date", first_date="2023-03-24"),
                       reactive=i.ReactiveData(reactive_ids=['multi_toggle_data']
-                                              ), flex=i.FlexData(fxFlex='35%', fxFlex_md='50%', fxFlex_sm='100%', fxFlex_xs='100%'))]
+                                              ), flex=i.FlexData(fxFlex='25%', fxFlex_md='50%', fxFlex_sm='100%', fxFlex_xs='100%'))]
 
     return random.choice(d)

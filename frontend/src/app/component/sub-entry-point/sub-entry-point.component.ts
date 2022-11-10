@@ -212,9 +212,8 @@ export class SubEntryPointComponent implements OnInit {
         this.loading = false;
         this.reactive = t.reactive;
         this.rd.emit(this.reactive);
-        console.log(this.reactive)
+
         this.fd.emit(t.flex);
-        console.log(t.flex)
         this.ds.all_input.set(this.look_up, t);
         this.set_name(t);
 

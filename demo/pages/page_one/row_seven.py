@@ -24,12 +24,13 @@ async def d3():
 async def d3():
     return i.ReturnData(type=i.InstanceType.DOWNLOAD,
                         title="Download Option",
-                       download_data= i.DownloadData(file_name="download.pdf", url="/backend/page_one/row_seven/download_data"))
+                       download_data= i.DownloadData(url="/backend/page_one/row_seven/download_data", name="download", label="Report"))
 
 @router.post("/download_data")
 async def d3():
     file_path = "files/Home - ZenReportz.pdf"
-    return FileResponse(path=file_path, filename=file_path)
+    file_name = "test.pdf"
+    return FileResponse(path=file_path, filename=file_name)
 
 @router.post("/upload", response_model=i.ReturnData)
 async def d3():

@@ -1,5 +1,11 @@
-<span *ngIf="data" class="hotpink"> Document URL is copied</span>
-<span *ngIf="!data" class="hotpink">
-  Refreshing Data
+<span *ngIf="data['status'] === 'sucess'">
+  <span class="sucess"> {{ data["message"] }}</span>
+</span>
 
+<span *ngIf="data['status'] === 'warn'">
+  <span class="warn"> {{ data["message"] }}</span>
+</span>
+
+<span *ngIf="data['status'] === 'error'">
+  <span class="error"> {{ data["message"] }}</span>
 </span>

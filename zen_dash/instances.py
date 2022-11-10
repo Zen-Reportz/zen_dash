@@ -151,8 +151,9 @@ class ReactiveData(BaseUpdate):
     hidden: bool = False
 
 class DownloadData(BaseUpdate):
-    file_name: str
+    label: str
     url: str
+    name: str
 
 class ImageData(BaseUpdate):
     url: str
