@@ -18,6 +18,7 @@ export class AppDownloadComponent implements OnInit {
   @Input() url!: string;
   data!: DownloadData ;
   downloadCall: Subscription | undefined;
+  show: boolean = false
 
   constructor(
     private ds: DataService,
@@ -27,9 +28,32 @@ export class AppDownloadComponent implements OnInit {
 
   ) {}
 
+  getFileName(disposition: string): any {
+    let utf8FilenameRegex = /filename\*=UTF-8''([\w%\-\.]+)(?:; ?|$)/i;
+    let asciiFilenameRegex = /^filename=(["']?)(.*?[^\\])\1(?:; ?|$)/i;
+
+    let fileName: any = null;
+    if (utf8FilenameRegex.test(disposition)) {
+      let p = utf8FilenameRegex.exec(disposition) as any
+      fileName = decodeURIComponent(p[1]);
+    } else {
+      // prevent ReDos attacks by anchoring the ascii regex to string start and
+      //  slicing off everything before 'filename='
+      const filenameStart = disposition.toLowerCase().indexOf('filename=');
+      if (filenameStart >= 0) {
+        const partialDisposition = disposition.slice(filenameStart);
+        const matches = asciiFilenameRegex.exec(partialDisposition );
+        if (matches != null && matches[2]) {
+          fileName = matches[2];
+        }
+      }
+    }
+    return fileName;
+}
+
   onSave() {
 
-
+    this.show = true
 
     if (this.downloadCall !== undefined) {
       this.downloadCall.unsubscribe();
@@ -47,12 +71,15 @@ export class AppDownloadComponent implements OnInit {
       m.url = this.url;
       this.ds.data_setter.emit(m);
       let contentDisposition = res.headers.get('content-disposition') as string
-      let filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim()
+      let filename = this.getFileName(contentDisposition)
       this.fileSaverService.save(res.body, filename);
+      this.show = false
     }, (error) => {
+      this.show = false
       this._snackBar.openFromComponent(LoadingComponent, {
         duration: 5 * 1000,
         data: { message: 'Failed download', status: 'error' },
+
       });
     });
   }

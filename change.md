@@ -1,3 +1,9 @@
+# 0.3.6
+- added tooltip
+- added progressive bar during waiting for upload and download 
+- fixed name issues with download 
+- sending python library version to UI for print too
+
 # 0.3.5
 - Breaking change DownloadData, removed file name and added label
 - Ability provide file name with FileResponse rather than InstanceType.DOWNLOAD

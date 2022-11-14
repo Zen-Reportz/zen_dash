@@ -37,6 +37,7 @@ export class SidebarData{
   tabs!: SidebarTab[]
   filters!: Filter[]
   size!: string
+  library_version!: string
 }
 
 
@@ -238,7 +239,7 @@ export class ResponseData{
   highchart_data: HighChartData | undefined
   footer: string | undefined
   flex: FlexData | undefined
-
+  tooltip_data!: ToolTipData
 }
 
 
@@ -246,4 +247,9 @@ export class UpdateReturnData{
   type!: string
   simple_fitler_data: string[] | undefined
 
+}
+
+export class ToolTipData {
+  label: string | undefined
+  disable!: boolean
 }

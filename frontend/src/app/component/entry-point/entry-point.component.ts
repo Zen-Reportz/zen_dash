@@ -1,4 +1,4 @@
-import { FlexData, ReactiveData } from './../../shared/application_data';
+import { FlexData, ReactiveData, ToolTipData } from './../../shared/application_data';
 import { DataService } from 'src/app/services/data.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
@@ -16,6 +16,7 @@ export class EntryPointComponent implements OnInit {
   pulled: boolean = false;
   footer!: string;
   title!: string;
+  tooltip_data:  ToolTipData = {"label": '', "disable": true}
 
   constructor(private dataService: DataService) {}
 
@@ -59,5 +60,12 @@ export class EntryPointComponent implements OnInit {
 
   }
 
+  getToolTip(event: ToolTipData){
+    this.tooltip_data = event
+    console.log(this.tooltip_data)
+  }
 
+  getToolTipLable(){
+    return this.tooltip_data.label
+  }
 }

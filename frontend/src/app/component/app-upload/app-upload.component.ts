@@ -17,6 +17,7 @@ export class AppUploadComponent implements OnInit {
   data!: UploadData;
   myFiles: File[] = [];
   uploadCall: Subscription | undefined;
+  show: boolean = false
 
   constructor(
     private ds: DataService,
@@ -32,7 +33,7 @@ export class AppUploadComponent implements OnInit {
   }
 
   saveData(event: any) {
-
+    this.show = true
 
     for (var i = 0; i < event.target.files.length; i++) {
       this.myFiles.push(event.target.files[i]);
@@ -66,8 +67,11 @@ export class AppUploadComponent implements OnInit {
         m.url = this.url;
         this.ds.data_setter.emit(m);
         this.myFiles = [];
+        this.show = false
+
       },
       (error) => {
+        this.show = false
         this._snackBar.openFromComponent(LoadingComponent, {
           duration: 5 * 1000,
           data: { message: 'Failed Uploaded file', status: 'error' },

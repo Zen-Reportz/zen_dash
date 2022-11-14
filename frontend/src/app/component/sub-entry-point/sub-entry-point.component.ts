@@ -5,6 +5,7 @@ import {
   MultiURLInfo,
   ReactiveData,
   ResponseData,
+  ToolTipData,
 } from '../../shared/application_data';
 import { Observable, Subscription } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
@@ -32,6 +33,7 @@ export class SubEntryPointComponent implements OnInit {
   data_type = ['box', 'table', 'chart', 'image', 'highchart'];
   loading = true;
   look_up!: string;
+  tooltip_data: ToolTipData = {"disable": true, 'label': ""}
 
   constructor(
     private ds: DataService,
@@ -217,6 +219,8 @@ export class SubEntryPointComponent implements OnInit {
         this.ds.all_input.set(this.look_up, t);
         this.set_name(t);
 
+        this.tooltip_data = t.tooltip_data
+
         this.type = t.type;
         this.unsubscribe();
         this.subscribe();
@@ -245,5 +249,10 @@ export class SubEntryPointComponent implements OnInit {
 
   setReactivity(url: string, reactiveData: ReactiveData) {
     this.reactivityData.set(url, reactiveData);
+  }
+
+  getToolTipLabel(){
+    console.log(this.tooltip_data.label)
+    return this.tooltip_data.label ?? ''
   }
 }

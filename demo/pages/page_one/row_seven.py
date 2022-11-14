@@ -28,8 +28,11 @@ async def d3():
 
 @router.post("/download_data")
 async def d3():
+    import time
+    time.sleep(2)
     file_path = "files/Home - ZenReportz.pdf"
-    file_name = "test.pdf"
+    from datetime import datetime
+    file_name = datetime.now().strftime("%Y%m%d-%H:%M:%S_") + "test.pdf"
     return FileResponse(path=file_path, filename=file_name)
 
 @router.post("/upload", response_model=i.ReturnData)
@@ -40,6 +43,8 @@ async def d3():
 
 @router.post("/upload_data")
 async def data(files: List[UploadFile]):
+    import time
+    time.sleep(2)
     t = {"filenames": [file.filename for file in files]}  
     for file_ in files:
         dd = file_.filename.split("/")[-1]

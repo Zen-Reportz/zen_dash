@@ -170,6 +170,10 @@ class HighChartData(BaseUpdate):
     config: Dict
 
 
+class ToolTipData(BaseUpdate):
+    label: Optional[str] = ''
+    disable: bool = True
+
 
 class ReturnData(BaseUpdate):
     """
@@ -209,6 +213,7 @@ class ReturnData(BaseUpdate):
     footer: Optional[str]
     flex: Optional[FlexData] = FlexData()
     reactive: Optional[ReactiveData] = ReactiveData()
+    tooltip_data: ToolTipData = ToolTipData()
 
 class UpdateInstanceType(Enum):
     """ Docstring for class UpdateInstanceType
