@@ -39,7 +39,6 @@ app.include_router(pre.router)
 app.include_router(prn.router)
 
 
-
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 
@@ -53,13 +52,14 @@ templates = Jinja2Templates(directory=folder)
 
 
 @app.get("/", response_class=HTMLResponse)
-async def root(request: Request): 
+async def root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request, "test": "test"})
-   
+
 
 @app.get("/backend/title")
 async def title():
     return 'Demo'
+
 
 @app.post("/backend/document")
 async def save_doc(request: Request):
@@ -70,13 +70,15 @@ async def save_doc(request: Request):
 @app.post("/backend/scripts", response_model=sc.CustomScripts)
 async def scripts(request: Request):
     return sc.CustomScripts(scripts=[
-        sc.CustomScript(url="https://code.jquery.com/jquery-3.6.1.min.js", type=sc.Style.JS),
-        sc.CustomScript(url="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js", type=sc.Style.JS),
-        sc.CustomScript(url="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css", type=sc.Style.STYLE),
-        sc.CustomScript(url="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js", type=sc.Style.JS),
+        sc.CustomScript(
+            url="https://code.jquery.com/jquery-3.6.1.min.js", type=sc.Style.JS),
+        sc.CustomScript(
+            url="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js", type=sc.Style.JS),
+        sc.CustomScript(
+            url="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css", type=sc.Style.STYLE),
+        sc.CustomScript(
+            url="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js", type=sc.Style.JS),
     ])
-
-     
 
 
 @app.get("/backend/sidebar", response_model=s.Sidebar)
@@ -105,7 +107,8 @@ async def page_detail(fragment: str):
     print(fragment)
     if fragment in ("page_0", "page_1"):
         p1 = p.Page(
-            rows=[p.Row(data=[
+            rows=[
+                p.Row(data=[
                   p.Instance(url="/backend/page_one/row_one/date"),
                   p.Instance(url="/backend/page_one/row_one/single_date"),
                   p.Instance(url="/backend/page_one/row_one/first_box"),
@@ -113,15 +116,14 @@ async def page_detail(fragment: str):
                   p.Instance(url="/backend/page_one/row_one/third_box"),
 
                   ]),
-
-                  p.Row(data=[
+                p.Row(data=[
                       p.Instance(url="/backend/page_one/row_two/table",
                                  ),
                       p.Instance(url="/backend/page_one/row_two/chart",
                                  ),
 
                   ]),
-                  p.Row(data=[
+                p.Row(data=[
                       p.Instance(url="/backend/page_one/row_three/checkbox"),
                       p.Instance(
                           url="/backend/page_one/row_three/checkbox_vertical"),
@@ -129,7 +131,7 @@ async def page_detail(fragment: str):
                       p.Instance(
                           url="/backend/page_one/row_three/radiobox_vertical"),
                   ]),
-                  p.Row(data=[
+                p.Row(data=[
                       p.Instance(url="/backend/page_one/row_four/slider"),
                       p.Instance(
                           url="/backend/page_one/row_four/slider_inverted"),
@@ -138,7 +140,7 @@ async def page_detail(fragment: str):
                       p.Instance(
                           url="/backend/page_one/row_four/slider_vertical_inverted")
                   ]),
-                  p.Row(data=[
+                p.Row(data=[
                       p.Instance(
                           url="/backend/page_one/row_five/button_toggle"),
                       p.Instance(
@@ -148,7 +150,7 @@ async def page_detail(fragment: str):
                           url="/backend/page_one/row_five/multi_records"),
 
                   ]),
-                  p.Row(data=[
+                p.Row(data=[
                       p.Instance(
                           url="/backend/page_one/row_five/multi_records"),
                       p.Instance(url="/backend/page_one/row_six/multi_records_tabs", flex=FlexData(
@@ -157,35 +159,31 @@ async def page_detail(fragment: str):
                         fxFlex="33%", fxFlex_md="33%", fxFlex_sm="110%", fxFlex_xs="110%")),
 
                   ]),
-                  p.Row(data=[
+                p.Row(data=[
                       p.Instance(url="/backend/filters/single_filter"),
-
                       p.Instance(url="/backend/filters/multi_filter"),
-
                       p.Instance(url="/backend/filters/single_filter_group"),
                       p.Instance(url="/backend/filters/multi_filter_group"),
                       p.Instance(url="/backend/page_one/row_seven/input"),
 
                   ]),
-                  p.Row(data=[
+                p.Row(data=[
                       p.Instance(url="/backend/filters/single_filter_server"),
                       p.Instance(url="/backend/filters/multi_filter_server"),
-
-
-
                   ]),
-                  p.Row(data=[p.Instance(url="/backend/page_one/row_seven/file_download"),
+                p.Row(data=[
+                    p.Instance(url="/backend/page_one/row_seven/file_download"),
                               p.Instance(url="/backend/page_one/row_seven/upload"), ]),
-                  p.Row(data=[p.Instance(url="/backend/page_one/row_eight/image"),
+                p.Row(data=[
+                    p.Instance(url="/backend/page_one/row_eight/image"),
                               p.Instance(
                       url="/backend/page_one/row_eight/highchart"),
 
                   ]),
-                  p.Row(data=[p.Instance(url="/backend/page_one/row_nine/table",
-                                 ),
-                                 p.Instance(
-                      url="/backend/page_one/row_eight/highchart2"),])
+                p.Row(data=[p.Instance(url="/backend/page_one/row_nine/table"),
+                            p.Instance(url="/backend/page_one/row_nine/iframe")])
                   ])
+
         return p1
 
 

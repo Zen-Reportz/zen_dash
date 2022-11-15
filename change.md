@@ -1,3 +1,8 @@
+# 0.3.7
+- added iframe
+- allow refresh when fail 
+- allow copy error when fail
+
 # 0.3.6
 - added tooltip
 - added progressive bar during waiting for upload and download 

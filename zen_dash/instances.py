@@ -39,6 +39,7 @@ class InstanceType(Enum):
     IMAGE = "image"
     HIGHCHART = "highchart"
     DATATABLE = "data_table"
+    IFRAME = "iframe"
 
 class BoxData(BaseUpdate):
     icon: str
@@ -169,6 +170,10 @@ class UploadData(BaseUpdate):
 class HighChartData(BaseUpdate):
     config: Dict
 
+class IframeData(BaseUpdate):
+    url: str
+    width: str = "1100"
+    height: str = "400"
 
 class ToolTipData(BaseUpdate):
     label: Optional[str] = ''
@@ -209,7 +214,7 @@ class ReturnData(BaseUpdate):
     upload_data: Optional[UploadData]
     image_data: Optional[ImageData]
     highchart_data: Optional[HighChartData]
-
+    iframe_data: Optional[IframeData]
     footer: Optional[str]
     flex: Optional[FlexData] = FlexData()
     reactive: Optional[ReactiveData] = ReactiveData()

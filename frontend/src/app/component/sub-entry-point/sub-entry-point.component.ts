@@ -9,6 +9,7 @@ import {
 } from '../../shared/application_data';
 import { Observable, Subscription } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-sub-entry-point',
@@ -23,6 +24,7 @@ export class SubEntryPointComponent implements OnInit {
 
   reactivityData = new Map<string, ReactiveData>();
   flexData = new Map<string, FlexData>();
+  error!: string
 
   type: string | undefined;
   name: string | undefined;
@@ -35,9 +37,12 @@ export class SubEntryPointComponent implements OnInit {
   look_up!: string;
   tooltip_data: ToolTipData = {"disable": true, 'label': ""}
 
+  failed = false
+
   constructor(
     private ds: DataService,
-    private callService: CallServiceService
+    private callService: CallServiceService,
+    private clipboard: Clipboard
   ) {}
 
   needToPull() {
@@ -73,7 +78,7 @@ export class SubEntryPointComponent implements OnInit {
   ngOnInit(): void {
     let pull = this.needToPull();
 
-    this.getData(pull);
+    this.getData(pull, false);
   }
 
   subscribe() {
@@ -82,7 +87,7 @@ export class SubEntryPointComponent implements OnInit {
         'refresh',
         this.ds.refresh.subscribe((t) => {
           this.needToPull();
-          this.getData(true);
+          this.getData(true, false);
         })
       );
     }
@@ -93,7 +98,7 @@ export class SubEntryPointComponent implements OnInit {
         this.ds.data_setter.subscribe((t) => {
           if (t.key !== this.name) {
             this.needToPull();
-            this.getData(true);
+            this.getData(true, false);
           }
         })
       );
@@ -103,7 +108,7 @@ export class SubEntryPointComponent implements OnInit {
         this.ds.data_setter.subscribe((t) => {
           if (this.reactive.reactive_ids.indexOf(t.key) >= 0) {
             this.needToPull();
-            this.getData(true);
+            this.getData(true, false);
           }
         })
       );
@@ -174,15 +179,18 @@ export class SubEntryPointComponent implements OnInit {
         break;
       case 'highchart':
         break;
+      case 'iframe':
+        break;
       default:
         console.log(t.type);
     }
   }
 
-  getData(page_refreshed: boolean) {
+  getData(page_refreshed: boolean, forced:boolean) {
     // console.log(`pull is ${page_refreshed} at ${this.url} ${this.ds.get_page()}`)
 
     this.loading = true;
+    this.failed = false
     this.multi_url = [];
     if (this.pageCall !== undefined) {
       this.pageCall.unsubscribe();
@@ -194,8 +202,9 @@ export class SubEntryPointComponent implements OnInit {
       undefined
     ) as Observable<ResponseData>;
 
-    if (!page_refreshed && this.ds.all_input.get(this.look_up) !== undefined) {
+    if (!page_refreshed && this.ds.all_input.get(this.look_up) !== undefined && !forced) {
       // console.log(`not pulling at ${this.url} ${this.ds.get_page()}`)
+      console.log(`force is ${forced}`)
       this.loading = false;
       let t = this.ds.all_input.get(this.look_up);
       this.reactive = t?.reactive as ReactiveData;
@@ -225,7 +234,9 @@ export class SubEntryPointComponent implements OnInit {
         this.unsubscribe();
         this.subscribe();
       },
-      error: (e: any) => {
+      error: (e: Error) => {
+        this.failed = true
+        this.error = e.message
         console.error(e);
       },
     });
@@ -255,4 +266,14 @@ export class SubEntryPointComponent implements OnInit {
     console.log(this.tooltip_data.label)
     return this.tooltip_data.label ?? ''
   }
+
+  copy_error(){
+    this.clipboard.copy(this.error);
+  }
+
+  force_refresh(){
+
+    this.getData(false, true);
+  }
+
 }

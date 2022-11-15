@@ -215,6 +215,12 @@ export class HighChartData {
   config!:  any
 }
 
+export class IframeData {
+  url!: string
+  width!: string
+  height!: string
+}
+
 export class ResponseData{
   type!: string
   reactive!: ReactiveData
@@ -237,6 +243,7 @@ export class ResponseData{
   upload_data: UploadData | undefined
   image_data: DataImage | undefined
   highchart_data: HighChartData | undefined
+  iframe_data: IframeData | undefined
   footer: string | undefined
   flex: FlexData | undefined
   tooltip_data!: ToolTipData

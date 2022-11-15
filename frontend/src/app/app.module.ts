@@ -78,6 +78,8 @@ import { AppImageComponent } from './component/app-image/app-image.component';
 import { HighchartComponent } from './component/highchart/highchart.component';
 import { ChartModule } from 'angular-highcharts';
 import { SimpleServerFilterComponent } from './component/simple-server-filter/simple-server-filter.component';
+import { AppIframeComponent } from './component/app-iframe/app-iframe.component';
+import { SafePipe } from './shared/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -104,6 +106,8 @@ import { SimpleServerFilterComponent } from './component/simple-server-filter/si
     AppImageComponent,
     HighchartComponent,
     SimpleServerFilterComponent,
+    AppIframeComponent,
+    SafePipe,
   ],
   imports: [
     FlexLayoutModule,

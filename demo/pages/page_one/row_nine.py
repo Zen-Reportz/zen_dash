@@ -121,3 +121,8 @@ async def prf():
                                                 "country": "Chile",
                                                 "city": "Niterói",
                                                 "phone": "1-678-156-9674"}]), flex=flex)
+
+
+@router.post("/iframe", response_model=i.ReturnData, response_model_exclude_none=True)
+async def prf():
+    return i.ReturnData(type=i.InstanceType.IFRAME, iframe_data=i.IframeData(url="https://pepy.tech/project/zen_dash"), flex=i.FlexData(fxFlex='50%', fxFlex_md='100%', fxFlex_sm='100%'))

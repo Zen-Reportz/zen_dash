@@ -1,4 +1,7 @@
-<span [matTooltip]="tooltip_data.label ?? '' " [matTooltipDisabled]="tooltip_data.disable">
+<span
+  [matTooltip]="tooltip_data.label ?? ''"
+  [matTooltipDisabled]="tooltip_data.disable"
+>
   <span *ngIf="type === 'box'">
     <app-box [url]="look_up"></app-box>
   </span>
@@ -136,7 +139,22 @@
     <app-highchart [url]="look_up"></app-highchart>
   </span>
 
+  <span *ngIf="type == 'iframe'">
+    <app-app-iframe [url]="look_up"></app-app-iframe>
+  </span>
+
   <span *ngIf="loading">
     <mat-progress-bar mode="query"></mat-progress-bar>
+  </span>
+  <br />
+  <span *ngIf="failed">
+    <button mat-menu-item (click)="copy_error()">
+      <mat-icon>content_copy</mat-icon>
+      <span>Copy Error</span>
+    </button>
+    <button mat-menu-item (click)="force_refresh()">
+      <mat-icon>refresh</mat-icon>
+      <span>Refresh Data</span>
+    </button>
   </span>
 </span>
