@@ -105,7 +105,8 @@
     <span class="n">UPLOAD</span> <span class="o">=</span> <span class="s2">&quot;upload&quot;</span>
     <span class="n">IMAGE</span> <span class="o">=</span> <span class="s2">&quot;image&quot;</span>
     <span class="n">HIGHCHART</span> <span class="o">=</span> <span class="s2">&quot;highchart&quot;</span>
-    <span class="n">DATATABLE</span> <span class="o">=</span> <span class="s2">&quot;data_table&quot;</span></div>
+    <span class="n">DATATABLE</span> <span class="o">=</span> <span class="s2">&quot;data_table&quot;</span>
+    <span class="n">IFRAME</span> <span class="o">=</span> <span class="s2">&quot;iframe&quot;</span></div>
 
 <div class="viewcode-block" id="BoxData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.BoxData">[docs]</a><span class="k">class</span> <span class="nc">BoxData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
     <span class="n">icon</span><span class="p">:</span> <span class="nb">str</span>
@@ -236,6 +237,10 @@
 <div class="viewcode-block" id="HighChartData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.HighChartData">[docs]</a><span class="k">class</span> <span class="nc">HighChartData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
     <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span></div>
 
+<div class="viewcode-block" id="IframeData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.IframeData">[docs]</a><span class="k">class</span> <span class="nc">IframeData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1100&quot;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;400&quot;</span></div>
 
 <div class="viewcode-block" id="ToolTipData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.ToolTipData">[docs]</a><span class="k">class</span> <span class="nc">ToolTipData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
     <span class="n">label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -276,7 +281,7 @@
     <span class="n">upload_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">UploadData</span><span class="p">]</span>
     <span class="n">image_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ImageData</span><span class="p">]</span>
     <span class="n">highchart_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">HighChartData</span><span class="p">]</span>
-
+    <span class="n">iframe_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">IframeData</span><span class="p">]</span>
     <span class="n">footer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="n">flex</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FlexData</span><span class="p">]</span> <span class="o">=</span> <span class="n">FlexData</span><span class="p">()</span>
     <span class="n">reactive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReactiveData</span><span class="p">]</span> <span class="o">=</span> <span class="n">ReactiveData</span><span class="p">()</span>
