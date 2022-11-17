@@ -25,6 +25,8 @@ export class AppComponent implements OnInit, OnDestroy {
   document_id: any;
   color: string = 'primary';
   private _mobileQueryListener: () => void;
+  checked = false
+  runRefresh!: any
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -40,6 +42,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.ds.data_setter.subscribe((t) => {
       this.color = 'warn';
     });
+
+
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -78,7 +82,7 @@ export class AppComponent implements OnInit, OnDestroy {
   refresh_data() {
     this.color = 'primary';
 
-    this.ds.refresh.emit('');
+    this.ds.refresh.emit(false);
 
     this.ds.save_default();
     this._snackBar.openFromComponent(LoadingComponent, {
@@ -179,5 +183,20 @@ export class AppComponent implements OnInit, OnDestroy {
           });
         }
       );
+  }
+
+  call_refresh(ds: any){
+    console.log("hi")
+    ds.refresh.emit(true)
+  }
+
+  set_auto(event: any){
+    if (event.checked){
+      this.runRefresh = setInterval(this.call_refresh,  5*60*1000, this.ds);
+    } else {
+      console.log("stop")
+
+      clearInterval(this.runRefresh);
+    }
   }
 }

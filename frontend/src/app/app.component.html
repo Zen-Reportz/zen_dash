@@ -4,7 +4,11 @@
   </button>
   <span>{{ title }}</span>
   <div fxFlex fxLayoutAlign="end end">
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
       <mat-icon>more_vert</mat-icon>
     </button>
   </div>
@@ -14,11 +18,9 @@
       <mat-icon>saved_search</mat-icon>
       <span>Save Report</span>
     </button>
-    <!-- <button mat-menu-item>
-      <mat-icon>refresh</mat-icon>
-      <span>Refresh Report</span>
-    </button> -->
-
+    <button mat-menu-item>
+      <mat-slide-toggle [checked]="checked" (change)="set_auto($event)"> Auto Refresh </mat-slide-toggle>
+    </button>
   </mat-menu>
 </mat-toolbar>
 

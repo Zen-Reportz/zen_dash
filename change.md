@@ -1,3 +1,6 @@
+# 0.3.8
+- allowd 5 min auto refresh
+
 # 0.3.7
 - added iframe
 - allow refresh when fail 

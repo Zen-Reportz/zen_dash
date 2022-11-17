@@ -87,7 +87,7 @@ export class SubEntryPointComponent implements OnInit {
         'refresh',
         this.ds.refresh.subscribe((t) => {
           this.needToPull();
-          this.getData(true, false);
+          this.getData(true, t);
         })
       );
     }

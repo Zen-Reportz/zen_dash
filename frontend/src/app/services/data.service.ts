@@ -25,7 +25,7 @@ export class DataService {
   data: any = {};
 
   data_setter = new EventEmitter<MEData>();
-  refresh = new EventEmitter<string>();
+  refresh = new EventEmitter<boolean>();
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.data_setter.subscribe((t) => {
