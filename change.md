@@ -1,3 +1,6 @@
+# 0.3.10
+- Fixed issued complied 
+
 # 0.3.9
 - Breaking change: ToolTip response
 - added dialog box to render page 
