@@ -16,7 +16,8 @@ export class EntryPointComponent implements OnInit {
   pulled: boolean = false;
   footer!: string;
   title!: string;
-  tooltip_data:  ToolTipData = {"label": '', "disable": true}
+
+
 
   constructor(private dataService: DataService) {}
 
@@ -60,12 +61,4 @@ export class EntryPointComponent implements OnInit {
 
   }
 
-  getToolTip(event: ToolTipData){
-    this.tooltip_data = event
-    console.log(this.tooltip_data)
-  }
-
-  getToolTipLable(){
-    return this.tooltip_data.label
-  }
 }

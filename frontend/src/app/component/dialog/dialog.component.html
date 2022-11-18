@@ -1,0 +1,32 @@
+<div *ngIf="page">
+  <div *ngFor="let row_data of page?.rows" style="padding: 10px">
+    <mat-card>
+      <mat-card-content>
+        <div
+          fxLayout="row wrap"
+          fxLayout.lt-sm="column"
+          fxLayoutGap="row_data.layoutGap"
+          fxLayoutAlign="space-around center"
+          fxLayoutAlign.lt-sm="space-around stretch"
+          fxFlexFill
+        >
+          <app-entry-point
+            [hidden]="reactivityData.get(instance.url)?.hidden"
+            [url]="instance.url"
+            [isSidebar]=false
+            *ngFor="let instance of row_data.data"
+            [fxFlex]="flexData.get(instance.url)?.fxFlex || '33%'"
+            [fxFlex.md]="flexData.get(instance.url)?.fxFlex_md || '33%'"
+            [fxFlex.sm]="flexData.get(instance.url)?.fxFlex_sm || '50%'"
+            [fxFlex.xs]="flexData.get(instance.url)?.fxFlex_sm || '100%'"
+            (fx)="setFlex(instance.url, $event)"
+            (rd)="setReactivity(instance.url, $event)"
+
+            class="padding"
+          >
+          </app-entry-point>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

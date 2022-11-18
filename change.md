@@ -1,3 +1,7 @@
+# 0.3.9
+- Breaking change: ToolTip response
+- added dialog box to render page 
+
 # 0.3.8
 - allowd 5 min auto refresh
 

@@ -244,9 +244,11 @@ export class ResponseData{
   image_data: DataImage | undefined
   highchart_data: HighChartData | undefined
   iframe_data: IframeData | undefined
+
   footer: string | undefined
   flex: FlexData | undefined
-  tooltip_data!: ToolTipData
+  tooltip_data: ToolTipData | undefined
+  dialog_data: DialogData | undefined
 }
 
 
@@ -257,6 +259,11 @@ export class UpdateReturnData{
 }
 
 export class ToolTipData {
-  label: string | undefined
-  disable!: boolean
+  label!: string
+}
+
+export class DialogData {
+  url!: string
+  width!: string
+  height!: string
 }

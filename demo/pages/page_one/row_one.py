@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Request
 from zen_dash import instances as i
 import random
+from zen_dash import page as p
 
 
 router = APIRouter(
@@ -12,12 +13,27 @@ router = APIRouter(
 
 @router.post("/first_box", response_model=i.ReturnData, response_model_exclude_none=True)
 async def prf():
-    return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="person", name="Users", value="5000"), footer="5% increase compare to last week ", tooltip_data=i.ToolTipData(label="my label", disable=False))
+    return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="person", name="Users", value="5000"), footer="5% increase compare to last week ", tooltip_data=i.ToolTipData(label="my label", disable=False), dialog_data=i.DialogBox(url="/backend/page_one/row_one/first_box_dialog", height="70%", width="70%"))
+
+
+@router.post("/first_box_dialog", response_model=p.Page, response_model_exclude_none=True)
+async def prf():
+    return p.Page(
+        rows=[
+            p.Row(data=[
+                p.Instance(url="/backend/page_one/row_one/first_box"),
+                p.Instance(url="/backend/page_one/row_one/second_box"),
+                p.Instance(url="/backend/page_one/row_one/forth_box")])])
 
 
 @router.post("/second_box", response_model=i.ReturnData)
 async def prf():
     return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="attach_money", name="User Spent", value="$5000"), footer="10% increase compare to last week ")
+
+
+@router.post("/forth_box", response_model=i.ReturnData)
+async def prf():
+    return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="attach_money", name="User Spent Total", value="$2000"))
 
 
 @router.post("/third_box", response_model=i.ReturnData)

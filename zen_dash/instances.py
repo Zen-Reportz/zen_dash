@@ -176,9 +176,12 @@ class IframeData(BaseUpdate):
     height: str = "400"
 
 class ToolTipData(BaseUpdate):
-    label: Optional[str] = ''
-    disable: bool = True
+    label: str = ''
 
+class DialogBox(BaseUpdate):
+    url: str = ''
+    height: str = '60%'
+    width: str = '60%'
 
 class ReturnData(BaseUpdate):
     """
@@ -218,7 +221,8 @@ class ReturnData(BaseUpdate):
     footer: Optional[str]
     flex: Optional[FlexData] = FlexData()
     reactive: Optional[ReactiveData] = ReactiveData()
-    tooltip_data: ToolTipData = ToolTipData()
+    tooltip_data: Optional[ToolTipData]
+    dialog_data: Optional[DialogBox]
 
 class UpdateInstanceType(Enum):
     """ Docstring for class UpdateInstanceType

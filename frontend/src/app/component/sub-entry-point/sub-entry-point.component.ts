@@ -1,6 +1,7 @@
 import { CallServiceService } from './../../services/call-service.service';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {
+  DialogData,
   FlexData,
   MultiURLInfo,
   ReactiveData,
@@ -10,6 +11,8 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { DialogComponent } from '../dialog/dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sub-entry-point',
@@ -35,14 +38,17 @@ export class SubEntryPointComponent implements OnInit {
   data_type = ['box', 'table', 'chart', 'image', 'highchart'];
   loading = true;
   look_up!: string;
-  tooltip_data: ToolTipData = {"disable": true, 'label': ""}
+  tooltip_data: ToolTipData | undefined
+  dialog_data: DialogData | undefined
+
 
   failed = false
 
   constructor(
     private ds: DataService,
     private callService: CallServiceService,
-    private clipboard: Clipboard
+    private clipboard: Clipboard,
+    public dialog: MatDialog
   ) {}
 
   needToPull() {
@@ -206,7 +212,9 @@ export class SubEntryPointComponent implements OnInit {
       // console.log(`not pulling at ${this.url} ${this.ds.get_page()}`)
       console.log(`force is ${forced}`)
       this.loading = false;
-      let t = this.ds.all_input.get(this.look_up);
+      let t = this.ds.all_input.get(this.look_up)
+      this.tooltip_data = t?.tooltip_data
+      this.dialog_data = t?.dialog_data
       this.reactive = t?.reactive as ReactiveData;
       this.set_name(t);
       this.type = t?.type as string;
@@ -229,6 +237,7 @@ export class SubEntryPointComponent implements OnInit {
         this.set_name(t);
 
         this.tooltip_data = t.tooltip_data
+        this.dialog_data = t.dialog_data
 
         this.type = t.type;
         this.unsubscribe();
@@ -263,8 +272,7 @@ export class SubEntryPointComponent implements OnInit {
   }
 
   getToolTipLabel(){
-    console.log(this.tooltip_data.label)
-    return this.tooltip_data.label ?? ''
+    return this.tooltip_data?.label ?? ''
   }
 
   copy_error(){
@@ -274,6 +282,20 @@ export class SubEntryPointComponent implements OnInit {
   force_refresh(){
 
     this.getData(false, true);
+  }
+
+
+  openDialog(){
+
+    if (this.dialog_data){
+      const dialogRef = this.dialog.open(DialogComponent, {
+        height: this.dialog_data.height,
+        width: this.dialog_data.width,
+        data: this.dialog_data.url,
+      });
+    } else {
+      console.log("nothing to do")
+    }
   }
 
 }

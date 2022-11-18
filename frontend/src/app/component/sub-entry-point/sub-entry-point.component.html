@@ -1,6 +1,6 @@
 <span
-  [matTooltip]="tooltip_data.label ?? ''"
-  [matTooltipDisabled]="tooltip_data.disable"
+  [matTooltip]="tooltip_data?.label ?? ''"
+  [matTooltipDisabled]="tooltip_data === undefined" (click)="openDialog()"
 >
   <span *ngIf="type === 'box'">
     <app-box [url]="look_up"></app-box>
