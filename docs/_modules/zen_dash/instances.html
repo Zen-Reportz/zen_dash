@@ -243,9 +243,12 @@
     <span class="n">height</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;400&quot;</span></div>
 
 <div class="viewcode-block" id="ToolTipData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.ToolTipData">[docs]</a><span class="k">class</span> <span class="nc">ToolTipData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
-    <span class="n">label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">disable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span></div>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></div>
 
+<div class="viewcode-block" id="DialogBox"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.DialogBox">[docs]</a><span class="k">class</span> <span class="nc">DialogBox</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;60%&#39;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;60%&#39;</span></div>
 
 <div class="viewcode-block" id="ReturnData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.ReturnData">[docs]</a><span class="k">class</span> <span class="nc">ReturnData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -285,7 +288,8 @@
     <span class="n">footer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
     <span class="n">flex</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FlexData</span><span class="p">]</span> <span class="o">=</span> <span class="n">FlexData</span><span class="p">()</span>
     <span class="n">reactive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReactiveData</span><span class="p">]</span> <span class="o">=</span> <span class="n">ReactiveData</span><span class="p">()</span>
-    <span class="n">tooltip_data</span><span class="p">:</span> <span class="n">ToolTipData</span> <span class="o">=</span> <span class="n">ToolTipData</span><span class="p">()</span></div>
+    <span class="n">tooltip_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ToolTipData</span><span class="p">]</span>
+    <span class="n">dialog_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DialogBox</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="UpdateInstanceType"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.UpdateInstanceType">[docs]</a><span class="k">class</span> <span class="nc">UpdateInstanceType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Docstring for class UpdateInstanceType</span>
