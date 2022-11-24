@@ -1,3 +1,7 @@
+# 0.3.11
+- Server side filter bug fix
+- Custom HTML (CSS, JS) can be pass to render.
+
 # 0.3.10
 - Fixed issued complied 
 

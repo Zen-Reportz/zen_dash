@@ -177,6 +177,9 @@ export class SubEntryPointComponent implements OnInit {
       case 'input':
         this.name = t.input_data?.name;
         break;
+      case 'custom_html':
+        this.name = t.custom_html?.name
+        break
       case 'download':
         break;
       case 'upload':
@@ -210,7 +213,7 @@ export class SubEntryPointComponent implements OnInit {
 
     if (!page_refreshed && this.ds.all_input.get(this.look_up) !== undefined && !forced) {
       // console.log(`not pulling at ${this.url} ${this.ds.get_page()}`)
-      console.log(`force is ${forced}`)
+      // console.log(`force is ${forced}`)
       this.loading = false;
       let t = this.ds.all_input.get(this.look_up)
       this.tooltip_data = t?.tooltip_data

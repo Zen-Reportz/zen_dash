@@ -81,6 +81,7 @@ import { SimpleServerFilterComponent } from './component/simple-server-filter/si
 import { AppIframeComponent } from './component/app-iframe/app-iframe.component';
 import { SafePipe } from './shared/safe.pipe';
 import { DialogComponent } from './component/dialog/dialog.component';
+import { CustomHtmlComponent } from './component/custom-html/custom-html.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { DialogComponent } from './component/dialog/dialog.component';
     AppIframeComponent,
     SafePipe,
     DialogComponent,
+    CustomHtmlComponent,
   ],
   imports: [
     FlexLayoutModule,

@@ -1,14 +1,14 @@
-.column {
-  float: left;
-  // width: 50%;
-}
+// .column {
+//   float: left;
+//   // width: 50%;
+// }
 
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+// /* Clear floats after the columns */
+// .row:after {
+//   content: "";
+//   display: table;
+//   clear: both;
+// }
 
 @mixin md-icon-size($size: 50px) {
   font-size: $size;
@@ -17,7 +17,7 @@
   line-height: $size;
 }
 
-/* 2. Then use it like this in you component scss */
+// /* 2. Then use it like this in you component scss */
 
 mat-icon {
   @include md-icon-size(50px);

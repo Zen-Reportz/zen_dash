@@ -8,10 +8,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CallServiceService {
-  constructor(private http: HttpClient, private dataService: DataService) {}
+  constructor(private http: HttpClient, private dataService: DataService) {
+
+  }
 
   call_response(url: string, parameters: any | undefined, formdata: FormData | undefined) {
+
     let url_: string
+
     if (url.includes('http')){
       url_ = url
     } else {

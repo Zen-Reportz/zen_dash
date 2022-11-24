@@ -40,6 +40,7 @@ class InstanceType(Enum):
     HIGHCHART = "highchart"
     DATATABLE = "data_table"
     IFRAME = "iframe"
+    CUSTOM_HTML="custom_html"
 
 class BoxData(BaseUpdate):
     icon: str
@@ -183,6 +184,10 @@ class DialogBox(BaseUpdate):
     height: str = '60%'
     width: str = '60%'
 
+class CustomHTML(BaseUpdate):
+    name: str
+    html: str
+
 class ReturnData(BaseUpdate):
     """
     Main return object use for everything except /backend/page_detail, /backend/sidebar, and /backend/title
@@ -218,6 +223,7 @@ class ReturnData(BaseUpdate):
     image_data: Optional[ImageData]
     highchart_data: Optional[HighChartData]
     iframe_data: Optional[IframeData]
+    custom_html_data: Optional[CustomHTML]
     footer: Optional[str]
     flex: Optional[FlexData] = FlexData()
     reactive: Optional[ReactiveData] = ReactiveData()

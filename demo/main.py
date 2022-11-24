@@ -181,7 +181,9 @@ async def page_detail(fragment: str):
 
                   ]),
                 p.Row(data=[p.Instance(url="/backend/page_one/row_nine/table"),
-                            p.Instance(url="/backend/page_one/row_nine/iframe")])
+                            # p.Instance(url="/backend/page_one/row_nine/iframe")
+                            ]),
+                p.Row(data=[p.Instance(url="/backend/page_one/row_nine/custom_html")])
                   ])
 
         return p1

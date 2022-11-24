@@ -1,4 +1,3 @@
-import { BoxData } from './../../shared/application_data';
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 

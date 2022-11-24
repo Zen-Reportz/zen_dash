@@ -142,6 +142,9 @@
   <span *ngIf="type == 'iframe'">
     <app-app-iframe [url]="look_up"></app-app-iframe>
   </span>
+  <span *ngIf="type == 'custom_html'">
+    <app-custom-html [url]="look_up"></app-custom-html>
+  </span>
 
   <span *ngIf="loading">
     <mat-progress-bar mode="query"></mat-progress-bar>

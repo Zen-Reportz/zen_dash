@@ -13,9 +13,9 @@
         [formControl]="ServerSideFilteringCtrl"
         [searching]="searching"
       >
-        <!-- [alwaysRestoreSelectedOptionsMulti]="true" -->
       </ngx-mat-select-search>
     </mat-option>
+
     <mat-option
       *ngFor="let it of filteredServerSideBanks | async"
       [value]="it"

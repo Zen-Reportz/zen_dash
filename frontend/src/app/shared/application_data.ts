@@ -221,6 +221,11 @@ export class IframeData {
   height!: string
 }
 
+export class CustomHTML {
+  html!: string
+  name!: string
+}
+
 export class ResponseData{
   type!: string
   reactive!: ReactiveData
@@ -244,7 +249,7 @@ export class ResponseData{
   image_data: DataImage | undefined
   highchart_data: HighChartData | undefined
   iframe_data: IframeData | undefined
-
+  custom_html_data: CustomHTML | undefined
   footer: string | undefined
   flex: FlexData | undefined
   tooltip_data: ToolTipData | undefined

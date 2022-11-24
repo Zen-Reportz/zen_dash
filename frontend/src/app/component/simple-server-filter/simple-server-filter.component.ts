@@ -80,8 +80,17 @@ export class SimpleServerFilterComponent implements OnInit {
           (data) => {
             this.searching = false;
             let selected = this.ServerSideCtrl.value
+
             let new_data = data.simple_fitler_data as string[]
-            let final_data = new_data.concat(selected)
+
+            let final_data: string[]
+            if (selected !== null){
+              final_data = new_data.concat(selected)
+            } else {
+              final_data = new_data
+            }
+
+
 
             this.filteredServerSideBanks.next(
               final_data
@@ -117,6 +126,7 @@ export class SimpleServerFilterComponent implements OnInit {
     this.name = this.ds.all_input.get(this.url)?.simple_server_filter_data?.name as string;
 
     this.server_url = this.ds.all_input.get(this.url)?.simple_server_filter_data?.url as string;
+
 
     if ((this.selectedData() !== undefined) && (this.selectedData().length > 0)){
       if (this.isMulti()){

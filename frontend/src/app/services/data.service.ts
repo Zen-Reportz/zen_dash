@@ -28,6 +28,12 @@ export class DataService {
   refresh = new EventEmitter<boolean>();
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+
+    (window as { [key: string]: any })['data_service'] = this;
+    (window as { [key: string]: any })['data_service_get_page'] = this.get_page;
+    (window as { [key: string]: any })['data_service_get_all'] = this.get_all;
+
+
     this.data_setter.subscribe((t) => {
       let page = this.get_page();
       let queryParams: Params = {};
@@ -78,16 +84,36 @@ export class DataService {
   }
 
   get_all() {
-    let page = this.get_page();
+    let page : string
+    try {
+      page = this.get_page();
+    } catch {
+      page = (window as { [key: string]: any })['data_service_get_page']()
+    }
+
+
     let convMap: any = {};
 
-    let page_data = this.data[page] ?? {};
+    let page_data: any
+    try {
+       page_data = this.data[page] ?? {};
+
+    } catch {
+      page_data =  (window as { [key: string]: any })['data_service']['data'][page] ?? {};
+    }
+
     Object.entries(page_data).forEach(([key, value]) => {
       let d: any = value;
       convMap[d[0]] = d[1];
     });
 
-    let global = this.data['global'] ?? {};
+    let global: any
+    try {
+      global = this.data[global] ?? {};
+    } catch {
+      global =  (window as { [key: string]: any })['data_service']['data']["global"] ?? {};
+    }
+
     Object.entries(global).forEach(([key, value]) => {
       if (key === 'page') {
         convMap[key] = value;
