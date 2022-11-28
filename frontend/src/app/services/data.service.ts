@@ -295,5 +295,12 @@ export class DataService {
     } catch {}
   }
 
+  isFullCustom(url: string){
+    if (this.all_input.get(url)?.custom_html_data?.full_custom == undefined){
+      return false
+    } else {
+      return this.all_input.get(url)?.custom_html_data?.full_custom
+    }
+  }
 
 }

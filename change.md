@@ -1,3 +1,6 @@
+# 0.3.12
+- Fully Custom HTML (CSS, JS)
+
 # 0.3.11
 - Server side filter bug fix
 - Custom HTML (CSS, JS) can be pass to render.

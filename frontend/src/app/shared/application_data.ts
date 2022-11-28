@@ -224,6 +224,7 @@ export class IframeData {
 export class CustomHTML {
   html!: string
   name!: string
+  full_custom!: boolean
 }
 
 export class ResponseData{

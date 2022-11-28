@@ -1,13 +1,14 @@
-import { FlexData, ReactiveData, ToolTipData } from './../../shared/application_data';
+import { FlexData, ReactiveData } from './../../shared/application_data';
 import { DataService } from 'src/app/services/data.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-entry-point',
   templateUrl: './entry-point.component.html',
   styleUrls: ['./entry-point.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EntryPointComponent implements OnInit {
+export class EntryPointComponent implements OnInit, AfterViewInit {
   @Input() url!: string;
   @Input() isSidebar!: boolean
   @Output() fx = new EventEmitter<FlexData>();
@@ -16,28 +17,31 @@ export class EntryPointComponent implements OnInit {
   pulled: boolean = false;
   footer!: string;
   title!: string;
+  look_up!: string;
 
-
-
-  constructor(private dataService: DataService) {}
+  constructor(public ds: DataService, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-  }
-
-
-
-  getFooter() {
     let p: string =''
     if (this.isSidebar){
       p = 'sidebar'
     } else {
-      p = this.dataService.get_page()
+      p = this.ds.get_page()
     }
 
-    let look_up =  this.dataService.input_lookup(p, this.url)
+    this.look_up =  this.ds.input_lookup(p, this.url)
+  }
 
-    if (this.dataService.all_input.get(look_up) !== undefined) {
-      return this.dataService.all_input.get(look_up)?.footer
+  ngAfterViewInit(): void {
+    this.cd.detectChanges()
+  }
+
+
+  getFooter() {
+
+
+    if (this.ds.all_input.get(this.look_up) !== undefined) {
+      return this.ds.all_input.get(this.look_up)?.footer
     }
     return false
 
@@ -45,20 +49,25 @@ export class EntryPointComponent implements OnInit {
 
 
   getTitle() {
-    let p: string =''
-    if (this.isSidebar){
-      p = 'sidebar'
-    } else {
-      p = this.dataService.get_page()
-    }
-
-    let look_up =  this.dataService.input_lookup(p, this.url)
-
-    if (this.dataService.all_input.get(look_up) !== undefined) {
-      return this.dataService.all_input.get(look_up)?.title
+    if (this.ds.all_input.get(this.look_up) !== undefined) {
+      return this.ds.all_input.get(this.look_up)?.title
     }
     return false
 
+  }
+
+
+
+  get_lookup_url(){
+    let page = this.ds.get_page();
+    let p: string = '';
+    if (this.isSidebar) {
+      p = 'sidebar';
+    } else {
+      p = this.ds.get_page();
+    }
+
+    this.look_up = this.ds.input_lookup(p, this.url);
   }
 
 }

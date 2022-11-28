@@ -187,6 +187,7 @@ class DialogBox(BaseUpdate):
 class CustomHTML(BaseUpdate):
     name: str
     html: str
+    full_custom: bool = False
 
 class ReturnData(BaseUpdate):
     """

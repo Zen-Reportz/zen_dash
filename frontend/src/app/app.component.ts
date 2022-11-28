@@ -186,7 +186,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   call_refresh(ds: any){
-    console.log("hi")
     ds.refresh.emit(true)
   }
 
@@ -194,7 +193,6 @@ export class AppComponent implements OnInit, OnDestroy {
     if (event.checked){
       this.runRefresh = setInterval(this.call_refresh,  5*60*1000, this.ds);
     } else {
-      console.log("stop")
 
       clearInterval(this.runRefresh);
     }

@@ -1,6 +1,7 @@
 
-<mat-card   >
-  <mat-card-header *ngIf="getTitle()">
+<mat-card *ngIf="!ds.isFullCustom(look_up)">
+  <mat-card-header >
+
     <h4>{{ getTitle() }}</h4>
   </mat-card-header>
   <mat-card-content>
@@ -15,3 +16,8 @@
     {{ getFooter() }}
   </mat-card-footer>
 </mat-card>
+
+<span *ngIf="ds.isFullCustom(look_up)">
+  <app-custom-html [url]="look_up"
+  ></app-custom-html>
+</span>
