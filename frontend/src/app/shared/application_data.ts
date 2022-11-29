@@ -9,6 +9,8 @@ export class CustomScript{
   url: string | undefined
   text: string | undefined
   type!: string
+  rel!: string | undefined
+
 }
 
 export class CustomScripts {
@@ -225,6 +227,7 @@ export class CustomHTML {
   html!: string
   name!: string
   full_custom!: boolean
+  script!: string | undefined
 }
 
 export class ResponseData{

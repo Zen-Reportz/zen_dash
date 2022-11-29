@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from zen_dash import instances as i
 from zen_dash.flex_data import FlexData
-
+from jinja2 import Template
 
 router = APIRouter(
     prefix="/backend/page_one/row_nine",
@@ -153,7 +153,7 @@ async def prf():
 
 @router.post("/full_custom_html", response_model=i.ReturnData, response_model_exclude_none=True)
 async def prf():
-      return i.ReturnData(type=i.InstanceType.CUSTOM_HTML, custom_html_data=i.CustomHTML(name="test_custom", html="""
+      return i.ReturnData(type=i.InstanceType.CUSTOM_HTML, custom_html_data=i.CustomHTML(name="table", html="""
 
     <mat-card  class="mat-card mat-focus-indicator ng-star-inserted" style="background-color:red">
         <mat-card-content  class="mat-card-content">
@@ -192,3 +192,15 @@ async def prf():
         <mat-card-footer  class="mat-card-footer ng-star-inserted" style="font-size: 10px; text-align: center;"> 5% increase compare to last week  
         </mat-card-footer>
 </mat-card>""", full_custom=True))
+
+
+@router.post("/data_table_html", response_model=i.ReturnData, response_model_exclude_none=True)
+async def prf():
+    with open("files/table.html", "r") as f:
+        template = Template(f.read())
+    
+    return i.ReturnData(type=i.InstanceType.CUSTOM_HTML, custom_html_data=i.CustomHTML(name="test_custom", html=template.render(), full_custom=True, script="""
+    $(document).ready(function () {
+        $('#example').DataTable();
+    });
+    """))

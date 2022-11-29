@@ -188,6 +188,8 @@ class CustomHTML(BaseUpdate):
     name: str
     html: str
     full_custom: bool = False
+    script: Optional[str]
+
 
 class ReturnData(BaseUpdate):
     """

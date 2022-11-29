@@ -71,16 +71,34 @@
 <span class="kn">from</span> <span class="nn">zen_dash.support</span> <span class="kn">import</span> <span class="n">BaseUpdate</span>
 
 
+<div class="viewcode-block" id="Rel"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.scripts.Rel">[docs]</a><span class="k">class</span> <span class="nc">Rel</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+  <span class="n">ALTERNATE</span> <span class="o">=</span> <span class="s2">&quot;alternate&quot;</span>
+  <span class="n">AUTHOR</span> <span class="o">=</span>  <span class="s2">&quot;author&quot;</span>
+  <span class="n">DNS_PREFETCH</span> <span class="o">=</span> <span class="s2">&quot;dns-prefetch&quot;</span>
+  <span class="n">HELP</span> <span class="o">=</span> <span class="s2">&quot;help&quot;</span>
+  <span class="n">ICON</span> <span class="o">=</span> <span class="s2">&quot;ocpm&quot;</span>
+  <span class="n">LICENSE</span> <span class="o">=</span> <span class="s2">&quot;license&quot;</span>
+  <span class="n">NEXT</span> <span class="o">=</span> <span class="s2">&quot;next&quot;</span>
+  <span class="n">PINGBACK</span> <span class="o">=</span> <span class="s2">&quot;pingback&quot;</span>
+  <span class="n">PRECONNECT</span> <span class="o">=</span> <span class="s2">&quot;preconnect&quot;</span>
+  <span class="n">PREFETCH</span> <span class="o">=</span> <span class="s2">&quot;prefetch&quot;</span>
+  <span class="n">PRELOAD</span> <span class="o">=</span> <span class="s2">&quot;preload&quot;</span>
+  <span class="n">PRERENDER</span> <span class="o">=</span> <span class="s2">&quot;prerender&quot;</span>
+  <span class="n">PREV</span> <span class="o">=</span> <span class="s2">&quot;prev&quot;</span>
+  <span class="n">SEARCH</span> <span class="o">=</span> <span class="s2">&quot;search&quot;</span>
+  <span class="n">STYLESHEET</span> <span class="o">=</span> <span class="s2">&quot;stylesheet&quot;</span></div>
 
 
 <div class="viewcode-block" id="Style"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.scripts.Style">[docs]</a><span class="k">class</span> <span class="nc">Style</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
   <span class="n">JS</span><span class="o">=</span> <span class="s2">&quot;javascript&quot;</span>
-  <span class="n">STYLE</span> <span class="o">=</span><span class="s2">&quot;css&quot;</span></div>
-
+  <span class="n">LINK</span><span class="o">=</span><span class="s2">&quot;link&quot;</span></div>
+  
 <div class="viewcode-block" id="CustomScript"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.scripts.CustomScript">[docs]</a><span class="k">class</span> <span class="nc">CustomScript</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
   <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
   <span class="n">text</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
-  <span class="nb">type</span><span class="p">:</span> <span class="n">Style</span></div>
+  <span class="nb">type</span><span class="p">:</span> <span class="n">Style</span>
+  <span class="n">rel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Rel</span><span class="p">]</span> <span class="c1"># Only for link</span>
+  <span class="n">custom</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="CustomScripts"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.scripts.CustomScripts">[docs]</a><span class="k">class</span> <span class="nc">CustomScripts</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>

@@ -255,7 +255,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="zen_dash.instances.CustomHTML">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zen_dash.instances.</span></span><span class="sig-name descname"><span class="pre">CustomHTML</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">html</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_custom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zen_dash/instances.html#CustomHTML"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zen_dash.instances.CustomHTML" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zen_dash.instances.</span></span><span class="sig-name descname"><span class="pre">CustomHTML</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">html</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">full_custom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">script</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zen_dash/instances.html#CustomHTML"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zen_dash.instances.CustomHTML" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="zen_dash.support.html#zen_dash.support.BaseUpdate" title="zen_dash.support.BaseUpdate"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUpdate</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="zen_dash.instances.CustomHTML.full_custom">
@@ -270,6 +270,11 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="zen_dash.instances.CustomHTML.name">
 <span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#zen_dash.instances.CustomHTML.name" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.instances.CustomHTML.script">
+<span class="sig-name descname"><span class="pre">script</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zen_dash.instances.CustomHTML.script" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1094,8 +1099,18 @@ Instance Type required for UpdateReturnData</p>
 <span id="zen-dash-scripts-module"></span><h2>zen_dash.scripts module<a class="headerlink" href="#module-zen_dash.scripts" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="zen_dash.scripts.CustomScript">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zen_dash.scripts.</span></span><span class="sig-name descname"><span class="pre">CustomScript</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#zen_dash.scripts.Style" title="zen_dash.scripts.Style"><span class="pre">Style</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zen_dash/scripts.html#CustomScript"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zen_dash.scripts.CustomScript" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zen_dash.scripts.</span></span><span class="sig-name descname"><span class="pre">CustomScript</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#zen_dash.scripts.Style" title="zen_dash.scripts.Style"><span class="pre">Style</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#zen_dash.scripts.Rel" title="zen_dash.scripts.Rel"><span class="pre">Rel</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zen_dash/scripts.html#CustomScript"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zen_dash.scripts.CustomScript" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="zen_dash.support.html#zen_dash.support.BaseUpdate" title="zen_dash.support.BaseUpdate"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseUpdate</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.CustomScript.custom">
+<span class="sig-name descname"><span class="pre">custom</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zen_dash.scripts.CustomScript.custom" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.CustomScript.rel">
+<span class="sig-name descname"><span class="pre">rel</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#zen_dash.scripts.Rel" title="zen_dash.scripts.Rel"><span class="pre">Rel</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zen_dash.scripts.CustomScript.rel" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt class="sig sig-object py" id="zen_dash.scripts.CustomScript.text">
 <span class="sig-name descname"><span class="pre">text</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#zen_dash.scripts.CustomScript.text" title="Permalink to this definition"></a></dt>
@@ -1125,6 +1140,88 @@ Instance Type required for UpdateReturnData</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zen_dash.scripts.</span></span><span class="sig-name descname"><span class="pre">Rel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zen_dash/scripts.html#Rel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zen_dash.scripts.Rel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.ALTERNATE">
+<span class="sig-name descname"><span class="pre">ALTERNATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'alternate'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.ALTERNATE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.AUTHOR">
+<span class="sig-name descname"><span class="pre">AUTHOR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'author'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.AUTHOR" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.DNS_PREFETCH">
+<span class="sig-name descname"><span class="pre">DNS_PREFETCH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'dns-prefetch'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.DNS_PREFETCH" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.HELP">
+<span class="sig-name descname"><span class="pre">HELP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'help'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.HELP" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.ICON">
+<span class="sig-name descname"><span class="pre">ICON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ocpm'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.ICON" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.LICENSE">
+<span class="sig-name descname"><span class="pre">LICENSE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'license'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.LICENSE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.NEXT">
+<span class="sig-name descname"><span class="pre">NEXT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'next'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.NEXT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.PINGBACK">
+<span class="sig-name descname"><span class="pre">PINGBACK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pingback'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.PINGBACK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.PRECONNECT">
+<span class="sig-name descname"><span class="pre">PRECONNECT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'preconnect'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.PRECONNECT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.PREFETCH">
+<span class="sig-name descname"><span class="pre">PREFETCH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'prefetch'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.PREFETCH" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.PRELOAD">
+<span class="sig-name descname"><span class="pre">PRELOAD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'preload'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.PRELOAD" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.PRERENDER">
+<span class="sig-name descname"><span class="pre">PRERENDER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'prerender'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.PRERENDER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.PREV">
+<span class="sig-name descname"><span class="pre">PREV</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'prev'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.PREV" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.SEARCH">
+<span class="sig-name descname"><span class="pre">SEARCH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'search'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.SEARCH" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="zen_dash.scripts.Rel.STYLESHEET">
+<span class="sig-name descname"><span class="pre">STYLESHEET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'stylesheet'</span></em><a class="headerlink" href="#zen_dash.scripts.Rel.STYLESHEET" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="zen_dash.scripts.Style">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">zen_dash.scripts.</span></span><span class="sig-name descname"><span class="pre">Style</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/zen_dash/scripts.html#Style"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#zen_dash.scripts.Style" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
@@ -1135,8 +1232,8 @@ Instance Type required for UpdateReturnData</p>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="zen_dash.scripts.Style.STYLE">
-<span class="sig-name descname"><span class="pre">STYLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'css'</span></em><a class="headerlink" href="#zen_dash.scripts.Style.STYLE" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="zen_dash.scripts.Style.LINK">
+<span class="sig-name descname"><span class="pre">LINK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'link'</span></em><a class="headerlink" href="#zen_dash.scripts.Style.LINK" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>

@@ -1,3 +1,8 @@
+# 0.3.13
+- ### Breakiing change updated CustomScript (remove style tag functionality and folded in link tag)
+- fix bug with title rendiner in UI
+- Data Table render using Custom HTML and CustomStript Functionality
+
 # 0.3.12
 - Fully Custom HTML (CSS, JS)
 

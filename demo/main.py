@@ -75,9 +75,9 @@ async def scripts(request: Request):
         sc.CustomScript(
             url="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js", type=sc.Style.JS),
         sc.CustomScript(
-            url="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css", type=sc.Style.STYLE),
+            url="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css", type=sc.Style.LINK, rel=sc.Rel.STYLESHEET),
         sc.CustomScript(
-            url="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js", type=sc.Style.JS),
+            url="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js", type=sc.Style.JS)
     ])
 
 
@@ -104,7 +104,6 @@ async def sidebar():
 
 @app.get("/backend/page_detail", response_model=p.Page)
 async def page_detail(fragment: str):
-    print(fragment)
     if fragment in ("page_0", "page_1"):
         p1 = p.Page(
             rows=[
@@ -184,7 +183,9 @@ async def page_detail(fragment: str):
                             # p.Instance(url="/backend/page_one/row_nine/iframe")
                             ]),
                 p.Row(data=[p.Instance(url="/backend/page_one/row_nine/custom_html")]),
-                p.Row(data=[p.Instance(url="/backend/page_one/row_nine/full_custom_html")])
+                p.Row(data=[p.Instance(url="/backend/page_one/row_nine/full_custom_html")]),
+                p.Row(data=[p.Instance(url="/backend/page_one/row_nine/data_table_html")])
+
                   ])
 
         return p1

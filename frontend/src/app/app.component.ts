@@ -7,7 +7,7 @@ import { LoadingComponent } from './component/loading/loading.component';
 import { DataService } from './services/data.service';
 import { ActivatedRoute, Router, UrlSerializer } from '@angular/router';
 import { CallServiceService } from './services/call-service.service';
-import { Title } from '@angular/platform-browser';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 import { CustomScripts } from './shared/application_data';
 import { UUID } from 'angular2-uuid';
 import { Clipboard } from '@angular/cdk/clipboard';
@@ -25,8 +25,8 @@ export class AppComponent implements OnInit, OnDestroy {
   document_id: any;
   color: string = 'primary';
   private _mobileQueryListener: () => void;
-  checked = false
-  runRefresh!: any
+  checked = false;
+  runRefresh!: any;
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -37,13 +37,12 @@ export class AppComponent implements OnInit, OnDestroy {
     private aRoute: ActivatedRoute,
     private call: CallServiceService,
     private titleService: Title,
-    private clipboard: Clipboard
+    private clipboard: Clipboard,
+    private sanitizer: DomSanitizer
   ) {
     this.ds.data_setter.subscribe((t) => {
       this.color = 'warn';
     });
-
-
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -57,15 +56,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
       this.ds.data['global']['page'] = page;
       this.color = 'primary';
-
-
-
     });
   }
 
   ngOnDestroy() {
     this.mobileQuery.removeListener(this._mobileQueryListener);
-
   }
 
   ngOnInit() {
@@ -76,7 +71,6 @@ export class AppComponent implements OnInit, OnDestroy {
         this.titleService.setTitle(data);
         this.title = data;
       });
-
   }
 
   refresh_data() {
@@ -94,27 +88,13 @@ export class AppComponent implements OnInit, OnDestroy {
   loadExternalScript(
     url: string | undefined,
     text: string | undefined,
-    type: string
+    type: string,
+    rel: string | undefined
   ) {
-    const body = <HTMLBodyElement>document.body;
 
-    if (type == 'css') {
-      const link = document.createElement('link');
+    const head = <HTMLBodyElement>document.head;
 
-      link.id = UUID.UUID();
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.media = 'all';
-      if (url !== undefined) {
-        link.href = url;
-      }
-      if (text !== undefined) {
-        link.textContent = text;
-      }
-      body.appendChild(link);
-    }
-
-    if (type == 'javascript') {
+    if (type === 'javascript') {
       const script = document.createElement('script');
 
       script.id = UUID.UUID();
@@ -127,10 +107,21 @@ export class AppComponent implements OnInit, OnDestroy {
         script.text = text;
       }
 
-      script.async = true;
+      script.async = false;
       script.defer = true;
-      body.appendChild(script);
+      head.appendChild(script);
     }
+
+    if (type === 'link') {
+      const link = document.createElement('link');
+
+      link.id = UUID.UUID();
+      link.rel = rel as string;
+      link.href = url as string;
+      head.appendChild(link);
+
+    }
+
   }
 
   getScripts() {
@@ -142,7 +133,7 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe((script_data) => {
         let dd = script_data.scripts;
         for (let d of dd) {
-          this.loadExternalScript(d.url, d.text, d.type);
+          this.loadExternalScript(d.url, d.text, d.type, d.rel);
         }
       });
   }
@@ -185,15 +176,14 @@ export class AppComponent implements OnInit, OnDestroy {
       );
   }
 
-  call_refresh(ds: any){
-    ds.refresh.emit(true)
+  call_refresh(ds: any) {
+    ds.refresh.emit(true);
   }
 
-  set_auto(event: any){
-    if (event.checked){
-      this.runRefresh = setInterval(this.call_refresh,  5*60*1000, this.ds);
+  set_auto(event: any) {
+    if (event.checked) {
+      this.runRefresh = setInterval(this.call_refresh, 5 * 60 * 1000, this.ds);
     } else {
-
       clearInterval(this.runRefresh);
     }
   }

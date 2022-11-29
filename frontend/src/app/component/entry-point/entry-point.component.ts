@@ -52,7 +52,7 @@ export class EntryPointComponent implements OnInit, AfterViewInit {
     if (this.ds.all_input.get(this.look_up) !== undefined) {
       return this.ds.all_input.get(this.look_up)?.title
     }
-    return false
+    return ''
 
   }
 
