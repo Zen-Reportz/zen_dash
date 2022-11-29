@@ -1,3 +1,6 @@
+# 0.3.14
+- fixed complied issue
+
 # 0.3.13
 - ### Breakiing change updated CustomScript (remove style tag functionality and folded in link tag)
 - fix bug with title rendiner in UI
