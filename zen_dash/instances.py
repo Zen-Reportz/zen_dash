@@ -167,8 +167,13 @@ class UploadData(BaseUpdate):
     multi: bool=  False
     name: str
 
+class HighChartType(Enum):
+    CHART = "chart"
+    STOCK = "stock"
+    MAP = "map"
 
 class HighChartData(BaseUpdate):
+    type: HighChartType = HighChartType.CHART
     config: Dict
 
 class IframeData(BaseUpdate):

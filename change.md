@@ -1,3 +1,9 @@
+# 0.3.15
+- better working example of data table
+- highchart stock and Highchart Map added
+- mat icon fix
+- async and deffer functionality added for loadExternalScript
+
 # 0.3.14
 - fixed complied issue
 

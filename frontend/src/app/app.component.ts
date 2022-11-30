@@ -89,9 +89,10 @@ export class AppComponent implements OnInit, OnDestroy {
     url: string | undefined,
     text: string | undefined,
     type: string,
-    rel: string | undefined
+    rel: string | undefined,
+    async_: boolean,
+    defer_: boolean
   ) {
-
     const head = <HTMLBodyElement>document.head;
 
     if (type === 'javascript') {
@@ -107,8 +108,8 @@ export class AppComponent implements OnInit, OnDestroy {
         script.text = text;
       }
 
-      script.async = false;
-      script.defer = true;
+      script.async = async_;
+      script.defer = defer_;
       head.appendChild(script);
     }
 
@@ -119,9 +120,7 @@ export class AppComponent implements OnInit, OnDestroy {
       link.rel = rel as string;
       link.href = url as string;
       head.appendChild(link);
-
     }
-
   }
 
   getScripts() {
@@ -133,7 +132,14 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe((script_data) => {
         let dd = script_data.scripts;
         for (let d of dd) {
-          this.loadExternalScript(d.url, d.text, d.type, d.rel);
+          this.loadExternalScript(
+            d.url,
+            d.text,
+            d.type,
+            d.rel,
+            d.async,
+            d.defer
+          );
         }
       });
   }

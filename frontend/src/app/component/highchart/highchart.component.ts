@@ -1,4 +1,4 @@
-import { Chart } from 'angular-highcharts';
+import { Chart, StockChart } from 'angular-highcharts';
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 
@@ -37,9 +37,19 @@ export class HighchartComponent implements OnInit {
 
     this.checkFunction(this.dataService.all_input.get(this.url)?.highchart_data?.config)
 
+    if (this.dataService.all_input.get(this.url)?.highchart_data?.type == "chart"){
+      this.data = new Chart(
+        this.dataService.all_input.get(this.url)?.highchart_data?.config
+      );
+    }
 
-    this.data = new Chart(
-      this.dataService.all_input.get(this.url)?.highchart_data?.config
-    );
+    if (this.dataService.all_input.get(this.url)?.highchart_data?.type == "stock"){
+      this.data = new StockChart(
+        this.dataService.all_input.get(this.url)?.highchart_data?.config
+      );
+    }
+
+
+
   }
 }

@@ -196,11 +196,13 @@ async def prf():
 
 @router.post("/data_table_html", response_model=i.ReturnData, response_model_exclude_none=True)
 async def prf():
+    import uuid
+    d = str(uuid.uuid4().hex)
     with open("files/table.html", "r") as f:
         template = Template(f.read())
     
-    return i.ReturnData(type=i.InstanceType.CUSTOM_HTML, custom_html_data=i.CustomHTML(name="test_custom", html=template.render(), full_custom=True, script="""
-    $(document).ready(function () {
-        $('#example').DataTable();
-    });
-    """))
+    return i.ReturnData(type=i.InstanceType.CUSTOM_HTML, custom_html_data=i.CustomHTML(name="test_custom", html=template.render(my_id=d), full_custom=True, script="""
+    $(document).ready(function () {{
+        $('#{my_id}').DataTable({{    responsive: true}});
+    }});
+    """.format(my_id=d)), flex=i.FlexData(fxFlex="33%"))

@@ -75,9 +75,15 @@ async def scripts(request: Request):
         sc.CustomScript(
             url="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js", type=sc.Style.JS),
         sc.CustomScript(
-            url="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css", type=sc.Style.LINK, rel=sc.Rel.STYLESHEET),
+            url="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css", type=sc.Style.LINK, rel=sc.Rel.STYLESHEET),
         sc.CustomScript(
-            url="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js", type=sc.Style.JS)
+            url="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js", type=sc.Style.JS, defer=False),
+        sc.CustomScript(
+            url="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css", type=sc.Style.LINK, rel=sc.Rel.STYLESHEET),
+        sc.CustomScript(
+            url="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js", type=sc.Style.JS, defer=False
+        )
+
     ])
 
 
@@ -108,20 +114,20 @@ async def page_detail(fragment: str):
         p1 = p.Page(
             rows=[
                 p.Row(data=[
-                  p.Instance(url="/backend/page_one/row_one/date"),
-                  p.Instance(url="/backend/page_one/row_one/single_date"),
-                  p.Instance(url="/backend/page_one/row_one/first_box"),
-                  p.Instance(url="/backend/page_one/row_one/second_box"),
-                  p.Instance(url="/backend/page_one/row_one/third_box"),
+                    p.Instance(url="/backend/page_one/row_one/date"),
+                    p.Instance(url="/backend/page_one/row_one/single_date"),
+                    p.Instance(url="/backend/page_one/row_one/first_box"),
+                    p.Instance(url="/backend/page_one/row_one/second_box"),
+                    p.Instance(url="/backend/page_one/row_one/third_box"),
 
-                  ]),
+                ]),
                 p.Row(data=[
                       p.Instance(url="/backend/page_one/row_two/table",
                                  ),
                       p.Instance(url="/backend/page_one/row_two/chart",
                                  ),
 
-                  ]),
+                      ]),
                 p.Row(data=[
                       p.Instance(url="/backend/page_one/row_three/checkbox"),
                       p.Instance(
@@ -129,7 +135,7 @@ async def page_detail(fragment: str):
                       p.Instance(url="/backend/page_one/row_three/radiobox"),
                       p.Instance(
                           url="/backend/page_one/row_three/radiobox_vertical"),
-                  ]),
+                      ]),
                 p.Row(data=[
                       p.Instance(url="/backend/page_one/row_four/slider"),
                       p.Instance(
@@ -138,7 +144,7 @@ async def page_detail(fragment: str):
                           url="/backend/page_one/row_four/slider_vertical"),
                       p.Instance(
                           url="/backend/page_one/row_four/slider_vertical_inverted")
-                  ]),
+                      ]),
                 p.Row(data=[
                       p.Instance(
                           url="/backend/page_one/row_five/button_toggle"),
@@ -148,16 +154,16 @@ async def page_detail(fragment: str):
                       p.Instance(
                           url="/backend/page_one/row_five/multi_records"),
 
-                  ]),
+                      ]),
                 p.Row(data=[
                       p.Instance(
                           url="/backend/page_one/row_five/multi_records"),
                       p.Instance(url="/backend/page_one/row_six/multi_records_tabs", flex=FlexData(
                           fxFlex="33%", fxFlex_md="33%", fxFlex_sm="110%", fxFlex_xs="110%")),
                       p.Instance(url="/backend/page_one/row_six/multi_records_expanded",  flex=FlexData(
-                        fxFlex="33%", fxFlex_md="33%", fxFlex_sm="110%", fxFlex_xs="110%")),
+                          fxFlex="33%", fxFlex_md="33%", fxFlex_sm="110%", fxFlex_xs="110%")),
 
-                  ]),
+                      ]),
                 p.Row(data=[
                       p.Instance(url="/backend/filters/single_filter"),
                       p.Instance(url="/backend/filters/multi_filter"),
@@ -165,28 +171,39 @@ async def page_detail(fragment: str):
                       p.Instance(url="/backend/filters/multi_filter_group"),
                       p.Instance(url="/backend/page_one/row_seven/input"),
 
-                  ]),
+                      ]),
                 p.Row(data=[
                       p.Instance(url="/backend/filters/single_filter_server"),
                       p.Instance(url="/backend/filters/multi_filter_server"),
-                  ]),
+                      ]),
                 p.Row(data=[
-                    p.Instance(url="/backend/page_one/row_seven/file_download"),
-                              p.Instance(url="/backend/page_one/row_seven/upload"), ]),
+                    p.Instance(
+                        url="/backend/page_one/row_seven/file_download"),
+                    p.Instance(url="/backend/page_one/row_seven/upload"), ]),
                 p.Row(data=[
                     p.Instance(url="/backend/page_one/row_eight/image"),
-                              p.Instance(
-                      url="/backend/page_one/row_eight/highchart"),
+                    p.Instance(
+                      url="/backend/page_one/row_eight/highchart")]),
+                p.Row(data = [
+                      p.Instance(
+                      url="/backend/page_one/row_eight/highchart_stock"),
 
-                  ]),
+                ]),
                 p.Row(data=[p.Instance(url="/backend/page_one/row_nine/table"),
                             # p.Instance(url="/backend/page_one/row_nine/iframe")
                             ]),
-                p.Row(data=[p.Instance(url="/backend/page_one/row_nine/custom_html")]),
-                p.Row(data=[p.Instance(url="/backend/page_one/row_nine/full_custom_html")]),
-                p.Row(data=[p.Instance(url="/backend/page_one/row_nine/data_table_html")])
+                p.Row(
+                    data=[p.Instance(url="/backend/page_one/row_nine/custom_html")]),
+                p.Row(
+                    data=[p.Instance(url="/backend/page_one/row_nine/full_custom_html")]),
+                p.Row(
+                    data=[
+                          p.Instance(url="/backend/page_one/row_nine/data_table_html?test"),
+                          p.Instance(url="/backend/page_one/row_nine/data_table_html?test1"),
+                          p.Instance(url="/backend/page_one/row_nine/data_table_html?test2")
+                          ])
 
-                  ])
+            ])
 
         return p1
 

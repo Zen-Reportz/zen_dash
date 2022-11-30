@@ -16,7 +16,7 @@ export class BoxComponent implements OnInit {
 
 
   getIcon() {
-    return this.dataService.all_input.get(this.url)?.box_data?.icon;
+    return this.dataService.all_input.get(this.url)?.box_data?.icon as string;
   }
 
   getValue() {

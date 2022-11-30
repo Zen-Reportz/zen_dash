@@ -32,6 +32,8 @@ class CustomScript(BaseUpdate):
   type: Style
   rel: Optional[Rel] # Only for link
   custom: Optional[str]
+  aysnc: bool = False
+  defer: bool = True
 
 
 class CustomScripts(BaseUpdate):

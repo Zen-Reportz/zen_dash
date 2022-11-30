@@ -1,18 +1,17 @@
-
-    <mat-grid-list cols="2" rowHeight="3:1">
-      <mat-grid-tile [colspan]="1" [rowspan]="2"
-        ><mat-icon>
-          {{ getIcon() }}
-        </mat-icon></mat-grid-tile
-      >
-      <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <div style="font-size: 30px; text-align: right">
-          {{ getValue() }}
-        </div></mat-grid-tile
-      >
-      <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <div style="font-size: 12px; text-align: right">
-          {{ getName() }}
-        </div></mat-grid-tile
-      >
-    </mat-grid-list>
+<mat-grid-list cols="2" rowHeight="3:1">
+  <mat-grid-tile [colspan]="1" [rowspan]="2">
+    <span class="material-symbols-outlined">
+      {{ getIcon() }}
+      </span>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <div style="font-size: 30px; text-align: right">
+      {{ getValue() }}
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <div style="font-size: 12px; text-align: right">
+      {{ getName() }}
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

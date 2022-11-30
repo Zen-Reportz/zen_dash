@@ -10,6 +10,8 @@ export class CustomScript{
   text: string | undefined
   type!: string
   rel!: string | undefined
+  async!: boolean
+  defer!: boolean
 
 }
 
@@ -214,6 +216,7 @@ export class UploadData{
 }
 
 export class HighChartData {
+  type!: string
   config!:  any
 }
 
