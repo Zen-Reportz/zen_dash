@@ -234,8 +234,13 @@
     <span class="n">multi</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span>  <span class="kc">False</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span></div>
 
+<div class="viewcode-block" id="HighChartType"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.HighChartType">[docs]</a><span class="k">class</span> <span class="nc">HighChartType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">CHART</span> <span class="o">=</span> <span class="s2">&quot;chart&quot;</span>
+    <span class="n">STOCK</span> <span class="o">=</span> <span class="s2">&quot;stock&quot;</span>
+    <span class="n">MAP</span> <span class="o">=</span> <span class="s2">&quot;map&quot;</span></div>
 
 <div class="viewcode-block" id="HighChartData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.HighChartData">[docs]</a><span class="k">class</span> <span class="nc">HighChartData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">HighChartType</span> <span class="o">=</span> <span class="n">HighChartType</span><span class="o">.</span><span class="n">CHART</span>
     <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span></div>
 
 <div class="viewcode-block" id="IframeData"><a class="viewcode-back" href="../../zen_dash.html#zen_dash.instances.IframeData">[docs]</a><span class="k">class</span> <span class="nc">IframeData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
