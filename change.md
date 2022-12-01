@@ -1,3 +1,7 @@
+# 0.3.16
+- fixed bug with refresh
+- fixed bug with custom_html where it didnt refresh when click
+
 # 0.3.15
 - better working example of data table
 - highchart stock and Highchart Map added

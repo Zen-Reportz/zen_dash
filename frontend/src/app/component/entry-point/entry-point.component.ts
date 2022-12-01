@@ -6,7 +6,7 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, E
   selector: 'app-entry-point',
   templateUrl: './entry-point.component.html',
   styleUrls: ['./entry-point.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EntryPointComponent implements OnInit, AfterViewInit {
   @Input() url!: string;

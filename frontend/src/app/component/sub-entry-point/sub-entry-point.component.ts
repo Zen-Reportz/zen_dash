@@ -35,7 +35,7 @@ export class SubEntryPointComponent implements OnInit {
   d: Map<string, Subscription> = new Map();
   multi_url!: MultiURLInfo[];
   pageCall: Subscription | undefined;
-  data_type = ['box', 'table', 'chart', 'image', 'highchart'];
+  data_type = ['box', 'table', 'chart', 'image', 'highchart', 'custom_html'];
   loading = true;
   look_up!: string;
   tooltip_data: ToolTipData | undefined
@@ -178,6 +178,7 @@ export class SubEntryPointComponent implements OnInit {
         this.name = t.input_data?.name;
         break;
       case 'custom_html':
+        console.log("hi")
         this.name = t.custom_html?.name
         break
       case 'download':

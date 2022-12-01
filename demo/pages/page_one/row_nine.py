@@ -129,6 +129,7 @@ async def prf():
 
 @router.post("/custom_html", response_model=i.ReturnData, response_model_exclude_none=True)
 async def prf():
+    print("hi")
     return i.ReturnData(type=i.InstanceType.CUSTOM_HTML, custom_html_data=i.CustomHTML(name="test", full_custom=False, html="""
     <mat-grid-list  cols="2" rowheight="3:1" class="mat-grid-list" ng-reflect-cols="2" ng-reflect-row-height="3:1" style="padding-bottom: calc(33.3333% + 0px); background-color: red">
         <div>

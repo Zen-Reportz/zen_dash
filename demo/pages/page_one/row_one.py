@@ -28,8 +28,6 @@ async def prf():
 
 @router.post("/second_box", response_model=i.ReturnData)
 async def prf():
-    import time
-    time.sleep(1)
     return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="percent", name="User Spent", value="$5000"), footer="10% increase compare to last week ")
 
 
