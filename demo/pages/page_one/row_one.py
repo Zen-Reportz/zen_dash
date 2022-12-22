@@ -13,7 +13,12 @@ router = APIRouter(
 
 @router.post("/first_box", response_model=i.ReturnData, response_model_exclude_none=True)
 async def prf():
-    return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="person", name="Users", value="5000"), footer="5% increase compare to last week ", tooltip_data=i.ToolTipData(label="my label", disable=False), dialog_data=i.DialogBox(url="/backend/page_one/row_one/first_box_dialog", height="70%", width="70%"))
+    return i.ReturnData(type=i.InstanceType.BOX, 
+                        box_data=i.BoxData(icon="person", name="Users", value="5000"),
+                        footer="5% increase compare to last week ", 
+                        tooltip_data=i.ToolTipData(label="my label", disable=False), 
+                        dialog_data=i.DialogBox(url="/backend/page_one/row_one/first_box_dialog", height="70%", width="70%")
+                        )
 
 
 @router.post("/first_box_dialog", response_model=p.Page, response_model_exclude_none=True)
@@ -53,7 +58,8 @@ async def prf(req: Request):
         return i.ReturnData(type=i.InstanceType.DATE,
                             date_data=i.DateTimeData(
                                 label="Select Date Range", name="multi_date", first_date="2020-11-24", second_date="2022-11-24"),
-                            reactive=i.ReactiveData(hidden=True, reactive_ids=['single_toggle_data']))
+                            reactive=i.ReactiveData(hidden=True, reactive_ids=['single_toggle_data'])
+                            )
 
     t = [i.ReturnData(type=i.InstanceType.DATE,
                       date_data=i.DateTimeData(

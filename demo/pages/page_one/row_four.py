@@ -12,7 +12,8 @@ router = APIRouter(
 async def d3():
     return i.ReturnData(type=i.InstanceType.SLIDER,
                         title="Slider Example",
-                        slider_data=i.SliderData(name="slider_example", min=0, max=100, step=10, value=20, tick_interval=30))
+                        slider_data=i.SliderData(name="slider_example", min=0, max=100, step=10, value=20, tick_interval=30)
+                        )
 
 
 @router.post("/slider_vertical", response_model=i.ReturnData)

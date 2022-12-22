@@ -17,7 +17,8 @@ async def d3():
                                                 multi=False,
                                                 data=[i.ButtonToggleInstance(label="Red", name="red", selected=True),
                                                       i.ButtonToggleInstance(label="Blue", name="blue"),
-                                                      i.ButtonToggleInstance(label="Black", name="black")]))
+                                                      i.ButtonToggleInstance(label="Black", name="black")])
+                        )
     return t
 
 
@@ -36,7 +37,8 @@ async def d3():
 async def d3():
     return i.ReturnData(type=i.InstanceType.TOGGLE,
                         title="Toggle Example",
-                        toggle_data=i.ToggleData(name="toggle_data",  checked=True))
+                        toggle_data=i.ToggleData(name="toggle_data",  checked=True)
+                        )
 
 
 @router.post("/multi_records", response_model=i.ReturnData)
@@ -45,4 +47,5 @@ async def d3():
                         title="List Example",
                         multi_data=i.MultiData(urls=[i.MultiURLInfo(name="button toggle", url="/backend/page_one/row_five/button_toggle"), 
                                                      i.MultiURLInfo(name="button toggle multiple", url="/backend/page_one/row_five/button_toggle_multiple"),
-                                                     i.MultiURLInfo(name = "toggle", url="/backend/page_one/row_five/toggle")]))
+                                                     i.MultiURLInfo(name = "toggle", url="/backend/page_one/row_five/toggle")])
+                                                     )

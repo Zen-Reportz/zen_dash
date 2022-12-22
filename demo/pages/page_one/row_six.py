@@ -15,7 +15,9 @@ async def d3():
                         title="Multi Tabs",
                        multi_data=i.MultiData(urls=[i.MultiURLInfo(name="button toggle", url="/backend/page_one/row_five/button_toggle"), 
                                                      i.MultiURLInfo(name="button toggle multiple", url="/backend/page_one/row_five/button_toggle_multiple"),
-                                                     i.MultiURLInfo(name = "toggle", url="/backend/page_one/row_five/toggle")]), flex=FlexData(fxFlex="27%"))
+                                                     i.MultiURLInfo(name = "toggle", url="/backend/page_one/row_five/toggle")]), flex=FlexData(fxFlex="27%")
+                                                     
+                    )
 
 
 @router.post("/multi_records_expanded", response_model=i.ReturnData)
@@ -24,4 +26,6 @@ async def d3():
                         title="Multi Expands",
                        multi_data=i.MultiData(urls=[i.MultiURLInfo(name="button toggle", url="/backend/page_one/row_five/button_toggle"), 
                                                      i.MultiURLInfo(name="button toggle multiple", url="/backend/page_one/row_five/button_toggle_multiple"),
-                                                     i.MultiURLInfo(name = "toggle", url="/backend/page_one/row_five/toggle")]))
+                                                     i.MultiURLInfo(name = "toggle", url="/backend/page_one/row_five/toggle")])
+                                                     
+                    )

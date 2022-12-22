@@ -82,6 +82,8 @@ import { AppIframeComponent } from './component/app-iframe/app-iframe.component'
 import { SafePipe } from './shared/safe.pipe';
 import { DialogComponent } from './component/dialog/dialog.component';
 import { CustomHtmlComponent } from './component/custom-html/custom-html.component';
+import { ButtonComponent } from './component/button/button.component';
+
 
 @NgModule({
   declarations: [
@@ -112,6 +114,7 @@ import { CustomHtmlComponent } from './component/custom-html/custom-html.compone
     SafePipe,
     DialogComponent,
     CustomHtmlComponent,
+    ButtonComponent,
   ],
   imports: [
     FlexLayoutModule,

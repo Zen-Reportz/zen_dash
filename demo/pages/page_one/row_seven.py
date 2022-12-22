@@ -16,7 +16,8 @@ router = APIRouter(
 async def d3():
     return i.ReturnData(type=i.InstanceType.INPUT,
                         title="Input",
-                       input_data= i.InputData(label="Input Data", name="myInput", value='test'))
+                       input_data= i.InputData(label="Input Data", name="myInput", value='test')
+                       )
 
 
 
@@ -24,7 +25,8 @@ async def d3():
 async def d3():
     return i.ReturnData(type=i.InstanceType.DOWNLOAD,
                         title="Download Option",
-                       download_data= i.DownloadData(url="/backend/page_one/row_seven/download_data", name="download", label="Report"))
+                       download_data= i.DownloadData(url="/backend/page_one/row_seven/download_data", name="download", label="Report")
+                       )
 
 @router.post("/download_data")
 async def d3():
@@ -38,7 +40,9 @@ async def d3():
 @router.post("/upload", response_model=i.ReturnData)
 async def d3():
 
-    return i.ReturnData(type=i.InstanceType.UPLOAD, title="upload file", upload_data=i.UploadData(url="/backend/page_one/row_seven/upload_data", multi=True, name="download_data"))
+    return i.ReturnData(type=i.InstanceType.UPLOAD, title="upload file", 
+                        upload_data=i.UploadData(url="/backend/page_one/row_seven/upload_data", multi=True, name="download_data")
+                        )
 
 
 @router.post("/upload_data")

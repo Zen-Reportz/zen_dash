@@ -233,6 +233,11 @@ export class CustomHTML {
   script!: string | undefined
 }
 
+export class ButtonData {
+  url!: string
+  name!: string
+}
+
 export class ResponseData{
   type!: string
   reactive!: ReactiveData
@@ -257,6 +262,7 @@ export class ResponseData{
   highchart_data: HighChartData | undefined
   iframe_data: IframeData | undefined
   custom_html_data: CustomHTML | undefined
+  button_data: ButtonData | undefined
   footer: string | undefined
   flex: FlexData | undefined
   tooltip_data: ToolTipData | undefined

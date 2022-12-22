@@ -17,7 +17,9 @@ async def d3():
                                                            i.CheckBoxInstance(name="Option 2", selected=False),
                                                           i.CheckBoxInstance(name="Option 3", selected=False)],
                                                     style=i.Style.horizontal,
-                                                    name="check_box_example"))
+                                                    name="check_box_example")
+                        
+                        )
 
 
 @router.post("/checkbox_vertical", response_model=i.ReturnData)
@@ -38,7 +40,9 @@ async def d3():
                         title="Radio Example",
                         radio_data=i.RadioData(data=["Option 1", "Option 2", "Option 3"],
                                                style=i.Style.horizontal,
-                                               name="radio_example_1"))
+                                               name="radio_example_1")
+                        
+                        )
 
 
 @router.post("/radiobox_vertical", response_model=i.ReturnData)

@@ -125,12 +125,14 @@ async def prf():
 
 @router.post("/iframe", response_model=i.ReturnData, response_model_exclude_none=True)
 async def prf():
-    return i.ReturnData(type=i.InstanceType.IFRAME, iframe_data=i.IframeData(url="https://pepy.tech/project/zen_dash"), flex=i.FlexData(fxFlex='50%', fxFlex_md='100%', fxFlex_sm='100%'))
+    return i.ReturnData(type=i.InstanceType.IFRAME, 
+                        iframe_data=i.IframeData(url="https://pepy.tech/project/zen_dash"), flex=i.FlexData(fxFlex='50%', fxFlex_md='100%', fxFlex_sm='100%')
+                        )
 
 @router.post("/custom_html", response_model=i.ReturnData, response_model_exclude_none=True)
 async def prf():
-    print("hi")
-    return i.ReturnData(type=i.InstanceType.CUSTOM_HTML, custom_html_data=i.CustomHTML(name="test", full_custom=False, html="""
+    return i.ReturnData(type=i.InstanceType.CUSTOM_HTML,
+     custom_html_data=i.CustomHTML(name="test", full_custom=False, html="""
     <mat-grid-list  cols="2" rowheight="3:1" class="mat-grid-list" ng-reflect-cols="2" ng-reflect-row-height="3:1" style="padding-bottom: calc(33.3333% + 0px); background-color: red">
         <div>
             <mat-grid-tile  class="mat-grid-tile" ng-reflect-colspan="1" ng-reflect-rowspan="2" style="left: 0px; width: calc(50% - 0.5px); margin-top: 0px; padding-top: calc(33.3333% + 0px);" rowspan="2" colspan="1">
@@ -150,7 +152,8 @@ async def prf():
             </mat-grid-tile>
         </div>
     </mat-grid-list>
-    """))
+    """)
+    )
 
 @router.post("/full_custom_html", response_model=i.ReturnData, response_model_exclude_none=True)
 async def prf():
@@ -207,3 +210,17 @@ async def prf():
         $('#{my_id}').DataTable({{    responsive: true}});
     }});
     """.format(my_id=d)), flex=i.FlexData(fxFlex="33%"))
+
+
+@router.post("/button", response_model=i.ReturnData, response_model_exclude_none=True)
+async def prf():
+    return i.ReturnData(
+        title="button data",
+        type=i.InstanceType.BUTTON,
+        button_data=i.ButtonData(url="/backend/page_one/row_nine/button_result", name="test")
+    )
+
+
+@router.post("/button_result")
+async def prf():
+    return 

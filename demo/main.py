@@ -200,7 +200,9 @@ async def page_detail(fragment: str):
                     data=[
                           p.Instance(url="/backend/page_one/row_nine/data_table_html?test"),
                           p.Instance(url="/backend/page_one/row_nine/data_table_html?test1"),
-                          p.Instance(url="/backend/page_one/row_nine/data_table_html?test2")
+                          p.Instance(url="/backend/page_one/row_nine/data_table_html?test2"),
+                          p.Instance(url="/backend/page_one/row_nine/button")
+
                           ])
 
             ])

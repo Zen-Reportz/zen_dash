@@ -1,3 +1,7 @@
+# 0.3.17
+- added button with action url call
+- added central class to center checkbox, radio, slider, button toggle, toggle, simple filter, simple server filter, group filter, input, download, upload, button
+- added validation for better experience regarding type and respective class
 # 0.3.16
 - fixed bug with refresh
 - fixed bug with custom_html where it didnt refresh when click

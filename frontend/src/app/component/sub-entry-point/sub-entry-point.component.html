@@ -5,34 +5,34 @@
   <span *ngIf="type === 'box'">
     <app-box [url]="look_up"></app-box>
   </span>
-  <span *ngIf="type === 'date'">
+  <span *ngIf="type === 'date'" >
     <app-datetime [url]="look_up" [isSidebar]="isSidebar"></app-datetime>
   </span>
-  <span *ngIf="type === 'table'">
+  <span *ngIf="type === 'table'" >
     <app-table [url]="look_up"></app-table>
   </span>
   <span *ngIf="type === 'chart'">
     <app-plot [url]="look_up"></app-plot>
   </span>
-  <span *ngIf="type === 'checkbox'">
+  <span *ngIf="type === 'checkbox'" class="center">
     <app-checkbox [url]="look_up"></app-checkbox>
   </span>
-  <span *ngIf="type === 'radio'">
+  <span *ngIf="type === 'radio'" class="center">
     <app-radio [url]="look_up" [isSidebar]="isSidebar"></app-radio>
   </span>
-  <span *ngIf="type === 'slider'">
+  <span *ngIf="type === 'slider'" class="center">
     <app-slider [url]="look_up" [isSidebar]="isSidebar"></app-slider>
   </span>
-  <span *ngIf="type === 'button_toggle'">
+  <span *ngIf="type === 'button_toggle'" class="center">
     <app-button-toggle
       [url]="look_up"
       [isSidebar]="isSidebar"
     ></app-button-toggle>
   </span>
-  <span *ngIf="type === 'toggle'">
+  <span *ngIf="type === 'toggle'" class="center">
     <app-toggle [url]="look_up" [isSidebar]="isSidebar"></app-toggle>
   </span>
-  <span *ngIf="type === 'multi_list'">
+  <span *ngIf="type === 'multi_list'" >
     <span *ngFor="let url_info of getURLs()">
       <!-- <ng-container *ngIf="url_info.with_card; else mulit_list"> -->
       <app-entry-point
@@ -85,6 +85,7 @@
               {{ url_info.name }}
             </mat-panel-title>
           </mat-expansion-panel-header>
+          <br>
           <app-sub-entry-point
             [url]="url_info.url"
             [isSidebar]="isSidebar"
@@ -101,33 +102,33 @@
     </mat-accordion>
   </span>
 
-  <span *ngIf="type == 'simple_filter'">
+  <span *ngIf="type == 'simple_filter'" class="center">
     <app-simple-filter
       [url]="look_up"
       [isSidebar]="isSidebar"
     ></app-simple-filter>
   </span>
 
-  <span *ngIf="type == 'simple_server_filter'">
+  <span *ngIf="type == 'simple_server_filter'" class="center">
     <app-simple-server-filter [url]="look_up"></app-simple-server-filter>
   </span>
 
-  <span *ngIf="type == 'group_filter'">
+  <span *ngIf="type == 'group_filter'" class="center">
     <app-group-filter
       [url]="look_up"
       [isSidebar]="isSidebar"
     ></app-group-filter>
   </span>
 
-  <span *ngIf="type == 'input'">
+  <span *ngIf="type == 'input'" class="center">
     <app-input [url]="look_up" [isSidebar]="isSidebar"></app-input>
   </span>
 
-  <span *ngIf="type == 'download'">
+  <span *ngIf="type == 'download'" class="center">
     <app-app-download [url]="look_up"></app-app-download>
   </span>
 
-  <span *ngIf="type == 'upload'">
+  <span *ngIf="type == 'upload'" class="center">
     <app-app-upload [url]="look_up"></app-app-upload>
   </span>
 
@@ -144,6 +145,10 @@
   </span>
   <span *ngIf="type == 'custom_html'">
     <app-custom-html [url]="look_up"></app-custom-html>
+  </span>
+
+  <span *ngIf="type == 'button'" class="center">
+    <app-button [url]="look_up"></app-button>
   </span>
 
   <span *ngIf="loading">

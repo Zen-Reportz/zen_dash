@@ -1,6 +1,6 @@
 from enum import Enum
 from re import T
-from pydantic import BaseConfig
+from pydantic import BaseConfig, ValidationError, root_validator, validator
 from typing import List, Optional, Dict, Union
 from zen_dash.flex_data import FlexData
 from zen_dash.support import BaseUpdate
@@ -23,7 +23,6 @@ class InstanceType(Enum):
     CHART = "chart"
     CHECKBOX = "checkbox"
     RADIO = "radio"
-    MIXED = "mixed"
     SIMPLE_FILTER = "simple_filter"
     SIMPLE_SERVER_FILTER = "simple_server_filter"
     GROUP_FILTER = "group_filter"
@@ -38,10 +37,9 @@ class InstanceType(Enum):
     UPLOAD = "upload"
     IMAGE = "image"
     HIGHCHART = "highchart"
-    DATATABLE = "data_table"
     IFRAME = "iframe"
     CUSTOM_HTML="custom_html"
-
+    BUTTON = "button"
 class BoxData(BaseUpdate):
     icon: str
     name: str
@@ -195,6 +193,10 @@ class CustomHTML(BaseUpdate):
     full_custom: bool = False
     script: Optional[str]
 
+class ButtonData(BaseUpdate):
+    url: str
+    name: str
+
 
 class ReturnData(BaseUpdate):
     """
@@ -237,6 +239,58 @@ class ReturnData(BaseUpdate):
     reactive: Optional[ReactiveData] = ReactiveData()
     tooltip_data: Optional[ToolTipData]
     dialog_data: Optional[DialogBox]
+    button_data: Optional[ButtonData]
+
+    @root_validator
+    def validator_type_match(cls, field_values):
+        if (field_values["type"] == InstanceType.BOX) and (field_values["box_data"] is None):
+            raise ValueError("You have selected InstanceType.BOX, and box_data is missing")
+        elif (field_values["type"] == InstanceType.DATE) and (field_values["date_data"] is None):
+            raise ValueError("You have selected InstanceType.DATE, and date_data is missing")
+        elif (field_values["type"] == InstanceType.TABLE) and (field_values["table_data"] is None):
+            raise ValueError("You have selected InstanceType.TABLE, and table_data is missing")
+        elif (field_values["type"] == InstanceType.CHART) and (field_values["chart_data"] is None):
+            raise ValueError("You have selected InstanceType.CHART, and chart_data is missing")
+        elif (field_values["type"] == InstanceType.CHECKBOX) and (field_values["checkbox_data"] is None):
+            raise ValueError("You have selected InstanceType.CHECKBOX, and checkbox_data is missing")
+        elif (field_values["type"] == InstanceType.RADIO) and (field_values["radio_data"] is None):
+            raise ValueError("You have selected InstanceType.RADIO, and radio_data is missing")
+        elif (field_values["type"] == InstanceType.SIMPLE_FILTER) and (field_values["simple_filter_data"] is None):
+            raise ValueError("You have selected InstanceType.SIMPLE_FILTER, and simple_filter_data is missing")
+        elif (field_values["type"] == InstanceType.SIMPLE_SERVER_FILTER) and (field_values["simple_server_filter_data"] is None):
+            raise ValueError("You have selected InstanceType.SIMPLE_SERVER_FILTER, and simple_server_filter_data is missing")
+        elif (field_values["type"] == InstanceType.GROUP_FILTER) and (field_values["group_filter_data"] is None):
+            raise ValueError("You have selected InstanceType.GROUP_FILTER, and group_filter_data is missing")
+        elif (field_values["type"] == InstanceType.SLIDER) and (field_values["slider_data"] is None):
+            raise ValueError("You have selected InstanceType.SLIDER, and slider_data is missing")
+        elif (field_values["type"] == InstanceType.BUTTON_TOGGLE) and (field_values["button_toggle_data"] is None):
+            raise ValueError("You have selected InstanceType.BUTTON_TOGGLE, and button_toggle_data is missing")
+        elif (field_values["type"] == InstanceType.TOGGLE) and (field_values["toggle_data"] is None):
+            raise ValueError("You have selected InstanceType.TOGGLE, and toggle_data is missing")
+        elif (field_values["type"] == InstanceType.MULTI_LIST) and (field_values["multi_data"] is None):
+            raise ValueError("You have selected InstanceType.MULTI_LIST, and multi_data is missing")
+        elif (field_values["type"] == InstanceType.MULTI_TABS) and (field_values["multi_data"] is None):
+            raise ValueError("You have selected InstanceType.MULTI_TABS, and multi_data is missing")
+        elif (field_values["type"] == InstanceType.MULTI_EXPAND) and (field_values["multi_data"] is None):
+            raise ValueError("You have selected InstanceType.MULTI_EXPAND, and multi_data is missing")
+        elif (field_values["type"] == InstanceType.INPUT) and (field_values["input_data"] is None):
+            raise ValueError("You have selected InstanceType.INPUT, and input_data is missing")
+        elif (field_values["type"] == InstanceType.DOWNLOAD) and (field_values["download_data"] is None):
+            raise ValueError("You have selected InstanceType.DOWNLOAD, and download_data is missing")
+        elif (field_values["type"] == InstanceType.UPLOAD) and (field_values["upload_data"] is None):
+            raise ValueError("You have selected InstanceType.UPLOAD, and upload_data is missing")
+        elif (field_values["type"] == InstanceType.IMAGE) and (field_values["image_data"] is None):
+            raise ValueError("You have selected InstanceType.IMAGE, and image_data is missing")
+        elif (field_values["type"] == InstanceType.IFRAME) and (field_values["iframe_data"] is None):
+            raise ValueError("You have selected InstanceType.IFRAME, and iframe_data is missing")
+        elif (field_values["type"] == InstanceType.HIGHCHART) and (field_values["highchart_data"] is None):
+            raise ValueError("You have selected InstanceType.HIGHCHART, and highchart_data is missing")
+        elif (field_values["type"] == InstanceType.CUSTOM_HTML) and (field_values["custom_html_data"] is None):
+            raise ValueError("You have selected InstanceType.CUSTOM_HTML, and custom_html_data is missing")
+        elif (field_values["type"] == InstanceType.BUTTON) and (field_values["button_data"] is None):
+            raise ValueError("You have selected InstanceType.BUTTON, and button_data is missing")
+
+        return field_values
 
 class UpdateInstanceType(Enum):
     """ Docstring for class UpdateInstanceType

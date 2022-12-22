@@ -120,7 +120,9 @@ async def prf():
                                                 "company": "Erat Volutpat Corp.",
                                                 "country": "Chile",
                                                 "city": "Niterói",
-                                                "phone": "1-678-156-9674"}]), flex=flex)
+                                                "phone": "1-678-156-9674"}]), flex=flex
+                        
+                        )
 
 
 @router.post("/chart", response_model=i.ReturnData)
@@ -181,4 +183,6 @@ async def prf():
                                     ]
                                 }
                             ]
-                        }), flex=flex)
+                        }), flex=flex
+                        
+                        )
