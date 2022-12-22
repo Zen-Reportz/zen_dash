@@ -99,7 +99,11 @@ async def sidebar():
                               s.FilterInfo(
                                   url="/backend/filters/multi_filter_group"),
                               s.FilterInfo(
-                                  url="/backend/page_one/row_six/multi_records_expanded")
+                                  url="/backend/page_one/row_six/multi_records_expanded"),
+                              s.FilterInfo(
+                                  url="/backend/page_one/row_one/date?test"),    
+                            s.FilterInfo(
+                                  url="/backend/filters/single_filter"),
                               ]
                      )
 

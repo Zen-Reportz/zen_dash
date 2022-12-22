@@ -27,6 +27,30 @@ export class DataService {
   data_setter = new EventEmitter<MEData>();
   refresh = new EventEmitter<boolean>();
 
+  reset_path(activatedRoute: any){
+    let page = this.get_page();
+
+    let queryParams: Params = {};
+    queryParams = { page: page[0] };
+
+    let url = new URL(window.location.href);
+    let params = new URLSearchParams(url.search);
+
+    if (params.get('document_id') !== null) {
+      if (params.get('page') !== null) {
+        this.router.navigate([], {
+          relativeTo: activatedRoute,
+          queryParams: { page: params.get('page') },
+        });
+      } else {
+        this.router.navigate([], {
+          relativeTo: activatedRoute,
+          queryParams: {},
+        });
+      }
+    }
+  }
+
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
 
     (window as { [key: string]: any })['data_service'] = this;
@@ -35,31 +59,15 @@ export class DataService {
 
 
     this.data_setter.subscribe((t) => {
-      let page = this.get_page();
-      let queryParams: Params = {};
-      queryParams = { page: page[0] };
-
-      let url = new URL(window.location.href);
-      let params = new URLSearchParams(url.search);
-      if (params.get('document_id') !== null) {
-        if (params.get('page') !== null) {
-          this.router.navigate([], {
-            relativeTo: activatedRoute,
-            queryParams: { page: params.get('page') },
-          });
-        } else {
-          this.router.navigate([], {
-            relativeTo: activatedRoute,
-            queryParams: {},
-          });
-        }
-      }
+      console.log(t)
+      this.reset_path(activatedRoute)
 
       if (this.data[t.page] === undefined) {
         this.data[t.page] = {};
       }
 
       this.data[t.page][t.url] = [t.key, t.value];
+
     });
   }
 
@@ -109,7 +117,7 @@ export class DataService {
 
     let global: any
     try {
-      global = this.data[global] ?? {};
+      global = this.data["global"] ?? {};
     } catch {
       global =  (window as { [key: string]: any })['data_service']['data']["global"] ?? {};
     }

@@ -1,3 +1,5 @@
+# 0.3.18
+- fixed bug with global filters
 # 0.3.17
 - added button with action url call
 - added central class to center checkbox, radio, slider, button toggle, toggle, simple filter, simple server filter, group filter, input, download, upload, button
