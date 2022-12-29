@@ -9,3 +9,4 @@ frontend/.vscode/**
 **/dist/**
 **/venv/**
 **/demo_venv/**
+publish.sh
