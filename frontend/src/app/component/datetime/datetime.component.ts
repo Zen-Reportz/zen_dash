@@ -26,6 +26,7 @@ export class DatetimeComponent implements OnInit {
 
   getData() {
     this.data = this.ds.all_input.get(this.url)?.date_data as DateData;
+
     if (this.data.second_date as string) {
       this.single = false;
       this.form_data = new UntypedFormGroup({

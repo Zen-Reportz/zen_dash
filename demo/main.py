@@ -52,7 +52,7 @@ templates = Jinja2Templates(directory=folder)
 
 
 @app.get("/", response_class=HTMLResponse)
-async def root(request: Request):
+async def root(request: Request, response: Response):
     return templates.TemplateResponse("index.html", {"request": request, "test": "test"})
 
 
@@ -91,7 +91,8 @@ async def scripts(request: Request):
 async def sidebar():
     return s.Sidebar(tabs=[s.SidebarTab(label="First Page", icon='delete'),
                            s.SidebarTab(label="Last Page", icon='home')],
-                     filters=[s.FilterInfo(url="/backend/filters/single_filter"),
+                     filters=[
+                        s.FilterInfo(url="/backend/filters/single_filter"),
                               s.FilterInfo(
                                   url="/backend/filters/multi_filter"),
                               s.FilterInfo(

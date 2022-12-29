@@ -34,7 +34,6 @@
   </span>
   <span *ngIf="type === 'multi_list'" >
     <span *ngFor="let url_info of getURLs()">
-      <!-- <ng-container *ngIf="url_info.with_card; else mulit_list"> -->
       <app-entry-point
         [hidden]="reactivityData.get(url_info.url)?.hidden"
         [url]="url_info.url"
@@ -48,11 +47,8 @@
         class="padding"
       >
       </app-entry-point>
-      <!-- </ng-container> -->
-      <!-- <ng-template #mulit_list> -->
-      <!-- <app-sub-entry-point [url]="url_info.url"></app-sub-entry-point> <br /> -->
+
       <br />
-      <!-- </ng-template> -->
     </span>
   </span>
   <span *ngIf="type === 'multi_tabs'">
@@ -76,17 +72,19 @@
   </span>
 
   <span *ngIf="type === 'multi_expand'">
+
     <mat-accordion>
       <br /><br />
       <span *ngFor="let url_info of getURLs()">
-        <mat-expansion-panel>
+        <mat-expansion-panel >
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{ url_info.name }}
             </mat-panel-title>
           </mat-expansion-panel-header>
           <br>
-          <app-sub-entry-point
+          <mat-panel-description class="center">
+            <app-sub-entry-point
             [url]="url_info.url"
             [isSidebar]="isSidebar"
             [hidden]="reactivityData.get(url_info.url)?.hidden"
@@ -97,6 +95,8 @@
             (rd)="setReactivity(url_info.url, $event)"
             (fd)="setFlex(url_info.url, $event)"
           ></app-sub-entry-point>
+          </mat-panel-description>
+
         </mat-expansion-panel>
       </span>
     </mat-accordion>

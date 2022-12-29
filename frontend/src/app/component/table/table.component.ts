@@ -26,15 +26,20 @@ export class TableComponent implements OnInit {
   displayedColumns: string[] = [];
   value!: string;
   columns!: Array<TableColumn>;
+  items_per_page!: number
+  items_per_page_options!: number[]
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
     this.columns = this.dataService.all_input.get(this.url)?.table_data
       ?.columns as TableColumn[];
+
     this.dataSource = new MatTableDataSource<any>(
       this.dataService.all_input.get(this.url)?.table_data?.data as any
     );
 
+    this.items_per_page = this.dataService.all_input.get(this.url)?.table_data?.items_per_page as number
+    this.items_per_page_options = this.dataService.all_input.get(this.url)?.table_data?.items_per_page_options as number[]
 
     this.displayedColumns = this.displayedColumns.concat(
       this.columns.map((x) => x.columnDef)

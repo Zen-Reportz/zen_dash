@@ -10,14 +10,28 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
-
+RETRY = 0
 @router.post("/first_box", response_model=i.ReturnData, response_model_exclude_none=True)
-async def prf():
+async def prf(req: Request):
+    global RETRY
+    if RETRY < 2:
+        RETRY += 1
+        raise Exception("test")
+
+    if (req.query_params):
+        flex = i.FlexData(fxFlex="50%", fxFlex_md="50%")
+        dialog_data = None
+    else:
+        flex = i.FlexData()
+        dialog_data=i.DialogBox(url="/backend/page_one/row_one/first_box_dialog", height="70%", width="70%")
+    
+
     return i.ReturnData(type=i.InstanceType.BOX, 
                         box_data=i.BoxData(icon="person", name="Users", value="5000"),
                         footer="5% increase compare to last week ", 
                         tooltip_data=i.ToolTipData(label="my label", disable=False), 
-                        dialog_data=i.DialogBox(url="/backend/page_one/row_one/first_box_dialog", height="70%", width="70%")
+                        dialog_data=dialog_data,
+                        flex=flex
                         )
 
 
@@ -26,9 +40,9 @@ async def prf():
     return p.Page(
         rows=[
             p.Row(data=[
-                p.Instance(url="/backend/page_one/row_one/first_box"),
-                p.Instance(url="/backend/page_one/row_one/second_box"),
-                p.Instance(url="/backend/page_one/row_one/forth_box")])])
+                p.Instance(url="/backend/page_one/row_one/first_box?dialogbox"),
+                p.Instance(url="/backend/page_one/row_one/second_box?dialogbox"),
+                p.Instance(url="/backend/page_one/row_one/forth_box?dialogbox")])])
 
 
 @router.post("/second_box", response_model=i.ReturnData)

@@ -120,7 +120,10 @@ async def prf():
                                                 "company": "Erat Volutpat Corp.",
                                                 "country": "Chile",
                                                 "city": "Niterói",
-                                                "phone": "1-678-156-9674"}]), flex=flex
+                                                "phone": "1-678-156-9674"}],
+                                                items_per_page_options=[11, 12, 13],
+                                                items_per_page= 13
+                                                ), flex=flex
                         
                         )
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ResponseData, UpdateReturnData } from '../shared/application_data';
-import { Observable } from 'rxjs';
+import { Observable, retry } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -42,9 +42,9 @@ export class CallServiceService {
       | Observable<HttpResponse<Blob>>
       | Observable<Object>;
     if (parameters === undefined) {
-      p = this.http.post<ResponseData>(url_, convMap);
+      p = this.http.post<ResponseData>(url_, convMap).pipe(retry({count: 5, delay: 2000}));
     } else {
-      p = this.http.post<ResponseData>(url_, convMap, parameters);
+      p = this.http.post<ResponseData>(url_, convMap, parameters).pipe(retry({count: 5, delay: 2000}));
     }
 
     return p;
@@ -69,7 +69,7 @@ export class CallServiceService {
 
     let p: Observable<UpdateReturnData>
 
-    p = this.http.post<UpdateReturnData>(url_, convMap);
+    p = this.http.post<UpdateReturnData>(url_, convMap).pipe(retry({count: 5, delay: 2000}));
 
     return p;
   }

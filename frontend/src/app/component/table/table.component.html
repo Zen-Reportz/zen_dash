@@ -39,7 +39,8 @@
 
   <!-- table pagination -->
   <mat-paginator
-    [pageSizeOptions]="[5, 10, 20]"
+    [pageSizeOptions]="items_per_page_options"
+    [pageSize]="items_per_page"
     showFirstLastButtons
   ></mat-paginator>
 </div>

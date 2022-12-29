@@ -59,6 +59,8 @@ class TableData(BaseUpdate):
     columns: List[TableColumn]
     data: List[Dict]
     name: str
+    items_per_page_options: List[int] = [5, 10, 20]
+    items_per_page: int = 5
     
 class ChartData(BaseUpdate):
     name: str

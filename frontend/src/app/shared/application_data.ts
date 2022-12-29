@@ -1,3 +1,5 @@
+import { Optional } from "@angular/core"
+
 export class MEData {
   key!: string
   value!: any
@@ -77,6 +79,8 @@ export class TableData{
   columns!: TableColumn[]
   data!: Map<string, any>[]
   name!: string
+  items_per_page_options!: number[]
+  items_per_page!: number
 }
 
 export interface TableColumn{
@@ -284,4 +288,26 @@ export class DialogData {
   url!: string
   width!: string
   height!: string
+}
+
+export class FailedCall {
+  message!: string
+}
+
+export class CallingCall {
+
+}
+
+export class ResponseReturn {
+  t: ResponseData | undefined
+  message: string | undefined
+  calling: boolean | undefined
+  lookup!: string
+}
+
+export class CallInfo{
+  page_refreshed!: boolean
+  forced!:boolean
+  url!:string
+  look_up!: string
 }

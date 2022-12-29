@@ -5,6 +5,7 @@ import {
   GroupFilterData,
   InputData,
   RadioData,
+  ResponseReturn,
   SimpleFilterData,
   SimpleServerFilterData,
   SliderData,
@@ -21,8 +22,9 @@ export class DataService {
   side_data!: SidebarData;
 
   all_input = new Map<string, ResponseData>();
+  input_emitter = new EventEmitter<ResponseReturn>();
 
-  data: any = {};
+  data:any = {};
 
   data_setter = new EventEmitter<MEData>();
   refresh = new EventEmitter<boolean>();
@@ -65,6 +67,7 @@ export class DataService {
       if (this.data[t.page] === undefined) {
         this.data[t.page] = {};
       }
+
 
       this.data[t.page][t.url] = [t.key, t.value];
 

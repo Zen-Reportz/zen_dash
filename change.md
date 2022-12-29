@@ -1,3 +1,8 @@
+# 0.4.0
+- fixed dialog box flex issue
+- update Table such that you can pass items per page and items per page options 
+- made more response between page change change. 
+- if call fails, it attemps 5 time every 2000 milliseocnds
 # 0.3.18
 - fixed bug with global filters
 # 0.3.17
