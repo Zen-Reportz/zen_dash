@@ -1,3 +1,6 @@
+# 0.4.1
+- width issue highchart
+- fixed issue with reload
 # 0.4.0
 - fixed dialog box flex issue
 - update Table such that you can pass items per page and items per page options 

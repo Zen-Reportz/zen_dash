@@ -1,3 +1,4 @@
+import asyncio
 from fastapi import APIRouter, Request
 from zen_dash import instances as i
 import random
@@ -17,6 +18,7 @@ async def prf(req: Request):
     if RETRY < 2:
         RETRY += 1
         raise Exception("test")
+    await asyncio.sleep(1)
 
     if (req.query_params):
         flex = i.FlexData(fxFlex="50%", fxFlex_md="50%")
@@ -25,24 +27,29 @@ async def prf(req: Request):
         flex = i.FlexData()
         dialog_data=i.DialogBox(url="/backend/page_one/row_one/first_box_dialog", height="70%", width="70%")
     
-
-    return i.ReturnData(type=i.InstanceType.BOX, 
+    t = [i.ReturnData(type=i.InstanceType.DATE,
+                      date_data=i.DateTimeData(
+                          label="Select Date Range", name="multi_date", first_date="2020-11-24", second_date="2022-11-24"),
+                      reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data']), flex=i.FlexData(fxFlex='25%', fxFlex_md='50%', fxFlex_sm='100%', fxFlex_xs='100%')),
+         i.ReturnData(type=i.InstanceType.DATE,
+                      date_data=i.DateTimeData(
+                          label="Select Date Range", name="multi_date", first_date="2020-11-10", second_date="2022-03-24"),
+                      reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data'])),
+         i.ReturnData(type=i.InstanceType.BOX, 
                         box_data=i.BoxData(icon="person", name="Users", value="5000"),
                         footer="5% increase compare to last week ", 
                         tooltip_data=i.ToolTipData(label="my label", disable=False), 
                         dialog_data=dialog_data,
                         flex=flex
-                        )
-
+                        )]
+    return random.choice(t)
 
 @router.post("/first_box_dialog", response_model=p.Page, response_model_exclude_none=True)
 async def prf():
     return p.Page(
         rows=[
             p.Row(data=[
-                p.Instance(url="/backend/page_one/row_one/first_box?dialogbox"),
-                p.Instance(url="/backend/page_one/row_one/second_box?dialogbox"),
-                p.Instance(url="/backend/page_one/row_one/forth_box?dialogbox")])])
+                p.Instance(url="/backend/page_one/row_eight/highchart_stock")])])
 
 
 @router.post("/second_box", response_model=i.ReturnData)

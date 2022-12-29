@@ -50,6 +50,10 @@ export class HighchartComponent implements OnInit {
     }
 
 
+    setTimeout(this.resize_it, 1000);
+  }
 
+  resize_it(){
+    window.dispatchEvent(new Event('resize'));
   }
 }

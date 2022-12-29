@@ -58,7 +58,6 @@ export class ButtonComponent implements OnInit {
         });
       }
     );
-    console.log("called nme")
   }
 
 }

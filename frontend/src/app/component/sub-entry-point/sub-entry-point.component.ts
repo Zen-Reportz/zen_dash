@@ -59,7 +59,6 @@ export class SubEntryPointComponent implements OnInit {
       if (rr.lookup !== this.look_up){
         return
       }
-      console.log(rr)
       if (rr.message !== undefined){
         this.loading = true;
         this.failed = true
@@ -67,12 +66,14 @@ export class SubEntryPointComponent implements OnInit {
         this.tooltip_data = undefined
         this.dialog_data = undefined
         this.name = undefined
+        this.type = undefined
       } else if (rr.calling){
         this.loading = true;
         this.failed = false
         this.tooltip_data = undefined
         this.dialog_data = undefined
         this.name = undefined
+        this.type = undefined
       } else {
         let t = rr.t as ResponseData
         this.loading = false
