@@ -1,3 +1,6 @@
+# 0.4.2
+- added device_information in api call 
+
 # 0.4.1
 - width issue highchart
 - fixed issue with reload

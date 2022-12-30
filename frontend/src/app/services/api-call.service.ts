@@ -118,8 +118,6 @@ export class ApiCallService {
       undefined
     ) as Observable<ResponseData>;
 
-
-
     this.ds.input_emitter.emit({"calling": true, "lookup": look_up, "t": undefined, "message": undefined})
 
     this.ds.all_input.delete(look_up);

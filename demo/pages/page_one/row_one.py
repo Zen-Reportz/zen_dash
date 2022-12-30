@@ -14,11 +14,14 @@ router = APIRouter(
 RETRY = 0
 @router.post("/first_box", response_model=i.ReturnData, response_model_exclude_none=True)
 async def prf(req: Request):
+    print(await req.json())
+
     global RETRY
     if RETRY < 2:
         RETRY += 1
         raise Exception("test")
     await asyncio.sleep(1)
+
 
     if (req.query_params):
         flex = i.FlexData(fxFlex="50%", fxFlex_md="50%")

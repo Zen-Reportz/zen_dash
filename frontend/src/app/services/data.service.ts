@@ -24,10 +24,18 @@ export class DataService {
   all_input = new Map<string, ResponseData>();
   input_emitter = new EventEmitter<ResponseReturn>();
 
-  data:any = {};
+  data:any = {
+    "global":{
+      "device_information": ["device_information", {
+        "browser": navigator.userAgent,
+        "screen_info": {"height": screen.availHeight, "width": screen.availWidth}
+      }]
+    }
+  };
 
   data_setter = new EventEmitter<MEData>();
   refresh = new EventEmitter<boolean>();
+
 
   reset_path(activatedRoute: any){
     let page = this.get_page();
@@ -123,6 +131,7 @@ export class DataService {
     } catch {
       global =  (window as { [key: string]: any })['data_service']['data']["global"] ?? {};
     }
+
 
     Object.entries(global).forEach(([key, value]) => {
       if (key === 'page') {
