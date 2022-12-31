@@ -5,11 +5,31 @@
 
 @import '~@angular/material/theming';
 
-.mat-list-option[aria-selected="true"] {
-  background: mat-color($mat-light-theme-background, hover, 0.12);
+// .mat-list-option[aria-selected="true"] {
+//   background: mat-color($mat-light-theme-background, hover, 0.12);
+// }
+
+// .mat-list-option{
+//   padding-bottom: 5px;
+//   padding-top: 5px;
+// }
+
+
+.toolbar-item-spacer {
+  flex: 1 1 auto;
 }
 
-.mat-list-option{
-  padding-bottom: 5px;
-  padding-top: 5px;
+.app-container {
+  height: 90%;
+  margin: 0;
 }
+.app-sidenav {
+  width: 230px;
+}
+.app-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+

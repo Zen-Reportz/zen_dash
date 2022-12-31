@@ -24,8 +24,8 @@
   </mat-menu>
 </mat-toolbar>
 
-<mat-sidenav-container>
-  <mat-sidenav #snav [mode]="'over'" [style.width]="mySize">
+<mat-sidenav-container  class="app-container">
+  <mat-sidenav #snav [mode]="'over'" [style.width]="mySize" class="app-sidenav">
     <mat-nav-list>
       <app-sidebar (size)="set_size($event)"></app-sidebar>
     </mat-nav-list>

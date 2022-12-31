@@ -1,3 +1,4 @@
+import { SidebarTab, SidebarGroup } from './../../shared/application_data';
 import { DataService } from 'src/app/services/data.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
@@ -12,7 +13,7 @@ import { SidebarData } from 'src/app/shared/application_data';
 })
 export class SidebarComponent implements OnInit {
   @Output() size = new EventEmitter<string>();
-  side_data: SidebarData | undefined;
+  side_data!: SidebarData ;
   page: string | null | undefined = null;
 
 
@@ -24,11 +25,21 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.get<SidebarData>(this.call.my_url()  + 'backend/sidebar').subscribe((data) => {
+      console.log(data)
       this.side_data = data;
       console.log(`Python library version is ${this.side_data.library_version}`)
       this.side_data.tabs.forEach((name)=> {
+        if (name instanceof SidebarTab){
+          this.page = 'page_0'
+        } else if (name instanceof SidebarGroup){
+          this.page = 'page_0_0'
+        }
       })
       this.size.emit(this.side_data.size)
     });
+  }
+
+  getSideData(){
+    return this.side_data?.tabs as any
   }
 }

@@ -89,8 +89,13 @@ async def scripts(request: Request):
 
 @app.get("/backend/sidebar", response_model=s.Sidebar)
 async def sidebar():
-    return s.Sidebar(tabs=[s.SidebarTab(label="First Page", icon='delete'),
-                           s.SidebarTab(label="Last Page", icon='home')],
+    return s.Sidebar(tabs=[
+                           s.SidebarGroup(name="KPI", subtabs=[
+                            s.SidebarTab(label="Short Term KPI", icon='home'),
+                            s.SidebarTab(label="Long Term KPI", icon='home')
+                           ]),
+                           s.SidebarTab(label="User Info", icon='delete'),
+                           s.SidebarTab(label="Perfomance", icon='home')],
                      filters=[
                         s.FilterInfo(url="/backend/filters/single_filter"),
                               s.FilterInfo(
@@ -115,7 +120,7 @@ async def sidebar():
 
 @app.get("/backend/page_detail", response_model=p.Page)
 async def page_detail(fragment: str):
-    if fragment in ("page_0", "page_1"):
+    if fragment in ("page_0_0", 'page_0_1', "page_1", 'page_2'):
         p1 = p.Page(
             rows=[
                 p.Row(data=[

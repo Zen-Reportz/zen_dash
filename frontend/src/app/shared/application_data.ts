@@ -39,8 +39,13 @@ export class Filter {
 
 }
 
+export class SidebarGroup{
+  name!:string
+  subtabs!: SidebarTab[]
+}
+
 export class SidebarData{
-  tabs!: SidebarTab[]
+  tabs!: SidebarTab[] | SidebarGroup[]
   filters!: Filter[]
   size!: string
   library_version!: string

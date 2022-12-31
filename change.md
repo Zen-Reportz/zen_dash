@@ -1,20 +1,27 @@
+# 0.4.3
+- Now subtab is allowed in sidebar
+
 # 0.4.2
 - added device_information in api call 
 
 # 0.4.1
 - width issue highchart
 - fixed issue with reload
+
 # 0.4.0
 - fixed dialog box flex issue
 - update Table such that you can pass items per page and items per page options 
 - made more response between page change change. 
 - if call fails, it attemps 5 time every 2000 milliseocnds
+
 # 0.3.18
 - fixed bug with global filters
+
 # 0.3.17
 - added button with action url call
 - added central class to center checkbox, radio, slider, button toggle, toggle, simple filter, simple server filter, group filter, input, download, upload, button
 - added validation for better experience regarding type and respective class
+
 # 0.3.16
 - fixed bug with refresh
 - fixed bug with custom_html where it didnt refresh when click

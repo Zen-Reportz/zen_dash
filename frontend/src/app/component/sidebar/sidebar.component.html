@@ -1,18 +1,75 @@
+<!--
+  <mat-selection-list [multiple]="false">
+
+    <mat-list-option
+
+      >
+
+         
+
+       
+
+    </mat-list-option>
+
+  </mat-selection-list>
+
+
+ -->
 <span *ngIf="side_data !== undefined">
   <mat-selection-list [multiple]="false">
 
-    <mat-list-option *ngFor="let tab of side_data.tabs; let i = index" [value]="tab.label" [selected]="'page_'+ i === page" [style.height]="'50px'">
-      <a [routerLink]="'.'" [queryParams]="{'page': 'page_'+ i}" type="button" [style.height]="'45px'">
-        <mat-icon>{{tab.icon}}  </mat-icon>  {{tab.label}}
-      </a>
-    </mat-list-option>
+    <span *ngFor="let tab of getSideData(); let i = index">
+      <p *ngIf="tab.icon; then thenBlock2 else elseBlock2"></p>
 
+      <ng-template #thenBlock2>
+        <mat-list-option [selected]="'page_' + i === page">
+          <a mat-list-item [routerLink]="'.'" [queryParams]="{'page': 'page_'+ i}" type="button" [style.height]="'45px'">
+            <mat-icon>{{tab.icon}} </mat-icon> {{tab.label}}
+          </a>
+        </mat-list-option>
+      </ng-template>
+
+      <ng-template #elseBlock2>
+        <mat-expansion-panel [class.mat-elevation-z0]="true">
+          <mat-expansion-panel-header>
+            {{tab.name}}
+          </mat-expansion-panel-header>
+          <mat-nav-list>
+            <mat-list-option [selected]="'page_' + i + '_' + j === page" *ngFor="let subtab of tab.subtabs let j = index">
+              <a mat-list-item [routerLink]="'.'" [queryParams]="{'page': 'page_'+ i + '_' + j}" type="button"
+                [style.height]="'45px'" >
+                <mat-icon>{{subtab.icon}} </mat-icon> {{subtab.label}}
+              </a>
+            </mat-list-option>
+          </mat-nav-list>
+        </mat-expansion-panel>
+
+
+      </ng-template>
+
+
+    </span>
   </mat-selection-list>
   <br>
   <ng-container *ngFor="let f of side_data.filters">
     <mat-divider></mat-divider> <br>
     <app-entry-point [url]="f.url" [isSidebar]=true></app-entry-point> <br>
   </ng-container>
- <br>
+  <br>
 
 </span>
+<!--
+<mat-expansion-panel [class.mat-elevation-z0]="true">
+  <mat-expansion-panel-header>
+      Mobile Phone
+  </mat-expansion-panel-header>
+  <mat-nav-list>
+      <a mat-list-item routerLink="#">
+          <mat-icon>apple</mat-icon><span>iOS</span>
+      </a>
+      <a mat-list-item routerLink="#">
+          <mat-icon>android</mat-icon><span>Android</span>
+      </a>
+  </mat-nav-list>
+</mat-expansion-panel>
+-->
