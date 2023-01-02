@@ -1,3 +1,6 @@
+# 0.4.4
+- fixed complied code
+
 # 0.4.3
 - Now subtab is allowed in sidebar
 
