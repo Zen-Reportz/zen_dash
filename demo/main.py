@@ -122,7 +122,7 @@ async def sidebar():
 @app.get("/backend/page_detail", response_model=p.Page)
 async def page_detail(fragment: Optional[str]):
     print(fragment)
-    if fragment in ("page_0_0", 'page_0_1', "page_1", 'page_2', 'null'):
+    if fragment in ("page_0_0", 'page_0_1', "page_1", 'page_2', 'page_0'):
         p1 = p.Page(
             rows=[
                 p.Row(data=[
