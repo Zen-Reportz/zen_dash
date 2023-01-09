@@ -17,7 +17,10 @@ export class SidebarComponent implements OnInit {
   page: string | null | undefined = null;
 
 
-  constructor(private http: HttpClient, private aRoute: ActivatedRoute, private call: CallServiceService, private ds: DataService) {
+  constructor(private http: HttpClient,
+    private aRoute: ActivatedRoute,
+    private call: CallServiceService,
+    private ds: DataService) {
     this.aRoute.queryParamMap.subscribe((fragment) => {
       this.page = fragment.get('page');
     });
@@ -25,16 +28,23 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.get<SidebarData>(this.call.my_url()  + 'backend/sidebar').subscribe((data) => {
-      console.log(data)
       this.side_data = data;
       console.log(`Python library version is ${this.side_data.library_version}`)
-      this.side_data.tabs.forEach((name)=> {
-        if (name instanceof SidebarTab){
-          this.page = 'page_0'
-        } else if (name instanceof SidebarGroup){
-          this.page = 'page_0_0'
-        }
-      })
+      try {
+        this.side_data.tabs.forEach((name:any)=> {
+          if (name.label !== undefined){
+            this.page = 'page_0'
+            this.ds.defaul_page = 'page_0'
+          } else if (name.name !== undefined){
+            this.page = 'page_0_0'
+            this.ds.defaul_page = 'page_0_0'
+          }
+          throw "break";
+        })
+      } catch {
+
+      }
+
       this.size.emit(this.side_data.size)
     });
   }

@@ -247,6 +247,19 @@ export class ButtonData {
   name!: string
 }
 
+export class SubmitFormData{
+  name!: string
+  url!: string
+}
+
+export class FormCustomData {
+  name!: string
+  submit_info!: SubmitFormData
+  form_schema!: any
+  ui_schema!: any
+  data!: any
+}
+
 export class ResponseData{
   type!: string
   reactive!: ReactiveData
@@ -276,6 +289,7 @@ export class ResponseData{
   flex: FlexData | undefined
   tooltip_data: ToolTipData | undefined
   dialog_data: DialogData | undefined
+  form_data: FormCustomData | undefined
 }
 
 

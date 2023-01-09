@@ -40,11 +40,12 @@ class InstanceType(Enum):
     IFRAME = "iframe"
     CUSTOM_HTML="custom_html"
     BUTTON = "button"
+    FORM = "form"
+
 class BoxData(BaseUpdate):
     icon: str
     name: str
     value: str
-
 
 class DateTimeData(BaseUpdate):
     name: str
@@ -199,6 +200,17 @@ class ButtonData(BaseUpdate):
     url: str
     name: str
 
+class SubmitFormData(BaseUpdate):
+    name: str
+    url: str
+
+class FormData(BaseUpdate):
+    name: str
+    submit_info: SubmitFormData
+    form_schema: Dict
+    ui_schema: Dict
+    data: Dict
+
 
 class ReturnData(BaseUpdate):
     """
@@ -242,6 +254,7 @@ class ReturnData(BaseUpdate):
     tooltip_data: Optional[ToolTipData]
     dialog_data: Optional[DialogBox]
     button_data: Optional[ButtonData]
+    form_data: Optional[FormData]
 
     @root_validator
     def validator_type_match(cls, field_values):
@@ -291,6 +304,8 @@ class ReturnData(BaseUpdate):
             raise ValueError("You have selected InstanceType.CUSTOM_HTML, and custom_html_data is missing")
         elif (field_values["type"] == InstanceType.BUTTON) and (field_values["button_data"] is None):
             raise ValueError("You have selected InstanceType.BUTTON, and button_data is missing")
+        elif (field_values["type"] == InstanceType.FORM) and (field_values["form_data"] is None):
+            raise ValueError("You have selected InstanceType.FORM, and form_data is missing")
 
         return field_values
 

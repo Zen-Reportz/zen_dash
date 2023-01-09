@@ -1,4 +1,4 @@
-from cgitb import reset
+from typing import Optional
 from fastapi import FastAPI, Request, Response
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -19,6 +19,7 @@ from pages.page_one import row_six as prs
 from pages.page_one import row_seven as pors
 from pages.page_one import row_eight as pre
 from pages.page_one import row_nine as prn
+from pages.page_one import row_ten as rt
 
 import filters as f
 from zen_dash.flex_data import FlexData
@@ -37,7 +38,7 @@ app.include_router(prs.router)
 app.include_router(pors.router)
 app.include_router(pre.router)
 app.include_router(prn.router)
-
+app.include_router(rt.router)
 
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
@@ -119,8 +120,9 @@ async def sidebar():
 
 
 @app.get("/backend/page_detail", response_model=p.Page)
-async def page_detail(fragment: str):
-    if fragment in ("page_0_0", 'page_0_1', "page_1", 'page_2'):
+async def page_detail(fragment: Optional[str]):
+    print(fragment)
+    if fragment in ("page_0_0", 'page_0_1', "page_1", 'page_2', 'null'):
         p1 = p.Page(
             rows=[
                 p.Row(data=[
@@ -213,7 +215,13 @@ async def page_detail(fragment: str):
                           p.Instance(url="/backend/page_one/row_nine/data_table_html?test2"),
                           p.Instance(url="/backend/page_one/row_nine/button")
 
-                          ])
+                          ]),
+                p.Row(
+                    data=[
+                        p.Instance(url="/backend/page_one/row_ten/form"),
+
+                    ]
+                )
 
             ])
 

@@ -151,6 +151,10 @@
     <app-button [url]="look_up"></app-button>
   </span>
 
+  <span *ngIf="type == 'form'">
+    <app-form [url]="look_up"></app-form>
+  </span>
+
   <span *ngIf="loading">
     <mat-progress-bar mode="query"></mat-progress-bar>
   </span>

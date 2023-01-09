@@ -1,0 +1,17 @@
+
+
+<jsonforms
+    [(data)]="formData"
+    [schema]="data.form_schema"
+    [uischema]="data.ui_schema"
+    [renderers]="renderers"
+></jsonforms>
+<button mat-raised-button color="primary" (click)="trigger()" style="
+  position: absolute;  left: 50%;
+
+">{{data.submit_info.name}}</button>
+<br>
+<span *ngIf="show">
+  <br /><br /><br />
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</span>

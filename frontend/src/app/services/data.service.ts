@@ -20,6 +20,7 @@ import { Params, Router, ActivatedRoute } from '@angular/router';
 })
 export class DataService {
   side_data!: SidebarData;
+  defaul_page: string = 'page_0'
 
   all_input = new Map<string, ResponseData>();
   input_emitter = new EventEmitter<ResponseReturn>();
@@ -88,7 +89,7 @@ export class DataService {
     if (params.get('page') !== null) {
       page = params.get('page') as string;
     } else {
-      page = 'page_0';
+      page = this.defaul_page;
     }
 
     return page;

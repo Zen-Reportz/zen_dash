@@ -132,7 +132,7 @@ unicode_backport = ["unicodedata2"]
 name = "click"
 version = "8.1.3"
 description = "Composable command line interface toolkit"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.7"
 
@@ -766,7 +766,7 @@ docs = ["jaraco.tidelift (>=1.4)", "rst.linker (>=1.9)", "jaraco.packaging (>=9)
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "f8d8d2b1841108316a9a263e5a8e04358d5d971a3f63351a6bd1b487cd528a6d"
+content-hash = "00e189802a8c7f5a9d5ca8f798651a7db43de11066ee690b5ba2261f3a359e5a"
 
 [metadata.files]
 alabaster = [

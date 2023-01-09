@@ -1,3 +1,8 @@
+# 0.4.5
+- integrated json form (https://jsonforms.io/) 
+- create_project will create new project, venv, qa.sh, prod.sh and requirements.txt file
+- due to async nature, if you use SidebarGroup, it is possible you will get page_0 or page_0_0 on default page. 
+
 # 0.4.4
 - fixed complied code
 

@@ -83,7 +83,9 @@ import { SafePipe } from './shared/safe.pipe';
 import { DialogComponent } from './component/dialog/dialog.component';
 import { CustomHtmlComponent } from './component/custom-html/custom-html.component';
 import { ButtonComponent } from './component/button/button.component';
-
+import { FormComponent } from './component/form/form.component';
+import { JsonFormsModule } from '@jsonforms/angular';
+import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
 
 @NgModule({
   declarations: [
@@ -115,6 +117,7 @@ import { ButtonComponent } from './component/button/button.component';
     DialogComponent,
     CustomHtmlComponent,
     ButtonComponent,
+    FormComponent,
   ],
   imports: [
     FlexLayoutModule,
@@ -177,7 +180,9 @@ import { ButtonComponent } from './component/button/button.component';
     }),
     NgxMatSelectSearchModule,
     FileSaverModule,
-    ChartModule
+    ChartModule,
+    JsonFormsModule,
+    JsonFormsAngularMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
