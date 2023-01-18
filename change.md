@@ -1,3 +1,6 @@
+# 0.4.6
+- Showing progress bar when submit
+
 # 0.4.5
 - integrated json form (https://jsonforms.io/) 
 - create_project will create new project, venv, qa.sh, prod.sh and requirements.txt file

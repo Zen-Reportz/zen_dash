@@ -39,7 +39,7 @@ export class FormComponent implements OnInit {
     m.url = this.url
     m.key = this.data.name as string;
     m.value = this.formData;
-
+    this.show = true
     this.ds.data_setter.emit(m);
 
     let p = this.callService.call_response(this.data.submit_info.url, undefined,
