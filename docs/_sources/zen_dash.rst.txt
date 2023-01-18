@@ -7,6 +7,8 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
+   zen_dash.cli
+   zen_dash.project_management
    zen_dash.support
 
 Submodules
