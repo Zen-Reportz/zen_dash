@@ -108,3 +108,76 @@ async def multi_filter_group():
             selected=["Option 1", "Option 4"]
         ))
     # fxFlex: Optional[str] = "20%"
+
+
+@router.post("/single_filter_global", response_model=i.ReturnData)
+async def single_filter():
+    s = i.ReturnData(
+        title="Simple Filter",
+        type=i.InstanceType.SIMPLE_FILTER,
+        simple_filter_data=i.SimpleFilterData(
+            name="simple_filter_global",
+            data=["Test 1", "My 2"],
+            selected=['Test 1']),
+        flex=i.FlexData(fxFlex='100%', fxFlex_md='100%', fxFlex_sm='100%')
+    )
+
+    return s
+
+
+@router.post("/single_filter_server_global", response_model=i.ReturnData)
+async def single_filter(req: Request):
+    t = await req.json()
+    if t.get("simple_filter_global") is None:
+        s = i.ReturnData(
+            title="Simple Filter Server side",
+            type=i.InstanceType.SIMPLE_SERVER_FILTER,
+            simple_server_filter_data=i.SimpleServerSideFilterData(
+                name="simple_filter_server_global",
+                data=["Test 1", "My 2"],
+                url="/backend/filters/my_data_filter",
+                selected=["Test 1"]
+            ),
+            reactive=i.ReactiveData(
+                reactive_ids=["simple_filter_global"],
+                hidden=True
+            ),
+            flex=i.FlexData(fxFlex='100%', fxFlex_md='100%', fxFlex_sm='100%')
+
+        )
+    elif t.get("simple_filter_global") == "Test 1":
+        s = i.ReturnData(
+            title="Simple Filter Server side",
+            type=i.InstanceType.SIMPLE_SERVER_FILTER,
+            simple_server_filter_data=i.SimpleServerSideFilterData(
+                name="simple_filter_server_global",
+                data=["Test 1", "My 2"],
+                url="/backend/filters/my_data_filter",
+                selected=["Test 1"]
+            ),
+            reactive=i.ReactiveData(
+                reactive_ids=["simple_filter_global"],
+                hidden=True
+            ),
+            flex=i.FlexData(fxFlex='100%', fxFlex_md='100%', fxFlex_sm='100%')
+
+        )
+    else:
+        s = i.ReturnData(
+            title="Simple Filter Server side",
+            type=i.InstanceType.SIMPLE_SERVER_FILTER,
+            simple_server_filter_data=i.SimpleServerSideFilterData(
+                name="simple_filter_server_global",
+                data=["Test 1", "My 2"],
+                url="/backend/filters/my_data_filter",
+                selected=["Test 1"]
+            ),
+            reactive=i.ReactiveData(
+                reactive_ids=["simple_filter_global"],
+                hidden=False
+            ),
+            flex=i.FlexData(fxFlex='100%', fxFlex_md='100%', fxFlex_sm='100%')
+
+        )
+
+    return s

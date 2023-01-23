@@ -98,19 +98,9 @@ async def sidebar():
                            s.SidebarTab(label="User Info", icon='delete'),
                            s.SidebarTab(label="Perfomance", icon='home')],
                      filters=[
-                        s.FilterInfo(url="/backend/filters/single_filter"),
+                        s.FilterInfo(url="/backend/filters/single_filter_global"),
                               s.FilterInfo(
-                                  url="/backend/filters/multi_filter"),
-                              s.FilterInfo(
-                                  url="/backend/filters/single_filter_group"),
-                              s.FilterInfo(
-                                  url="/backend/filters/multi_filter_group"),
-                              s.FilterInfo(
-                                  url="/backend/page_one/row_six/multi_records_expanded"),
-                              s.FilterInfo(
-                                  url="/backend/page_one/row_one/date?test"),    
-                            s.FilterInfo(
-                                  url="/backend/filters/single_filter"),
+                                  url="/backend/filters/single_filter_server_global"),
                               ]
                      )
 

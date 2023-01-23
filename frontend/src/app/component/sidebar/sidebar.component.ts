@@ -1,4 +1,4 @@
-import { SidebarTab, SidebarGroup } from './../../shared/application_data';
+import { SidebarTab, SidebarGroup, ReactiveData, FlexData } from './../../shared/application_data';
 import { DataService } from 'src/app/services/data.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
@@ -14,6 +14,9 @@ import { SidebarData } from 'src/app/shared/application_data';
 export class SidebarComponent implements OnInit {
   @Output() size = new EventEmitter<string>();
   side_data!: SidebarData ;
+  reactivityData = new Map<string, ReactiveData>();
+  flexData = new Map<string, FlexData>();
+
   page: string | null | undefined = null;
 
 
@@ -51,5 +54,13 @@ export class SidebarComponent implements OnInit {
 
   getSideData(){
     return this.side_data?.tabs as any
+  }
+
+  setFlex(url: string, flexData: FlexData){
+    this.flexData.set(url, flexData)
+  }
+
+  setReactivity(url: string, reactiveData: ReactiveData){
+    this.reactivityData.set(url, reactiveData)
   }
 }

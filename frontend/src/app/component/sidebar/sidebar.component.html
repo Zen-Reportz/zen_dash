@@ -51,9 +51,15 @@
     </span>
   </mat-selection-list>
   <br>
+  <br>
   <ng-container *ngFor="let f of side_data.filters">
     <mat-divider></mat-divider> <br>
-    <app-entry-point [url]="f.url" [isSidebar]=true></app-entry-point> <br>
+    <app-entry-point
+      [hidden]="reactivityData.get(f.url)?.hidden"
+      [url]="f.url"
+      (fx)="setFlex(f.url, $event)"
+      (rd)="setReactivity(f.url, $event)"
+      [isSidebar]=true></app-entry-point> <br>
   </ng-container>
   <br>
 

@@ -55,6 +55,8 @@ export class SubEntryPointComponent implements OnInit {
 
   ngOnInit(): void {
     this.look_up = this.api.lookup(this.isSidebar, this.url)
+    let temp = this.ds.get_all()
+
     this.ds.input_emitter.subscribe((rr:ResponseReturn) => {
       if (rr.lookup !== this.look_up){
         return

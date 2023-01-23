@@ -1,3 +1,6 @@
+# 0.4.7
+- Fixed side bar reactivity 
+
 # 0.4.6
 - Showing progress bar when submit
 
