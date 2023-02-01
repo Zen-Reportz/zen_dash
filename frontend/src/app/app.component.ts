@@ -49,7 +49,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.mobileQuery.addListener(this._mobileQueryListener);
 
     this.aRoute.queryParamMap.subscribe((fragment) => {
+
       let page = this.ds.get_page();
+      // this.ds.refresh.emit('PageRefresh');
       if (this.ds.data['global'] === undefined) {
         this.ds.data['global'] = {};
       }
@@ -76,12 +78,12 @@ export class AppComponent implements OnInit, OnDestroy {
   refresh_data() {
     this.color = 'primary';
 
-    this.ds.refresh.emit(false);
+    this.ds.refresh.emit('RefreshButton');
 
     this.ds.save_default();
     this._snackBar.openFromComponent(LoadingComponent, {
       duration: this.durationInSeconds * 1000,
-      data: { message: 'Refreshing data', status: 'sucess' },
+      data: { message: 'Refreshing data', status: 'success' },
     });
   }
 
@@ -170,7 +172,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
           this._snackBar.openFromComponent(LoadingComponent, {
             duration: this.durationInSeconds * 1000,
-            data: { message: 'Document URL copied', status: 'sucess' },
+            data: { message: 'Document URL copied', status: 'success' },
           });
         },
         (error) => {
@@ -183,7 +185,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   call_refresh(ds: any) {
-    ds.refresh.emit(true);
+    ds.refresh.emit("AutoRefresh");
   }
 
   set_auto(event: any) {

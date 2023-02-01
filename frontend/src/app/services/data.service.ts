@@ -22,6 +22,8 @@ export class DataService {
   side_data!: SidebarData;
   defaul_page: string = 'page_0'
 
+
+
   all_input = new Map<string, ResponseData>();
   input_emitter = new EventEmitter<ResponseReturn>();
 
@@ -35,7 +37,7 @@ export class DataService {
   };
 
   data_setter = new EventEmitter<MEData>();
-  refresh = new EventEmitter<boolean>();
+  refresh = new EventEmitter<string>();
 
 
   reset_path(activatedRoute: any){
@@ -71,6 +73,7 @@ export class DataService {
 
     this.data_setter.subscribe((t) => {
       this.reset_path(activatedRoute)
+      // console.log(t)
 
       if (this.data[t.page] === undefined) {
         this.data[t.page] = {};
@@ -78,7 +81,7 @@ export class DataService {
 
 
       this.data[t.page][t.url] = [t.key, t.value];
-
+      // console.log(this.data)
     });
   }
 

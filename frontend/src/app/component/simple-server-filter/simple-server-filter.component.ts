@@ -153,7 +153,6 @@ export class SimpleServerFilterComponent implements OnInit {
     m.value = value.value;
     m.page = this.ds.dataLookup(this.isSidebar)
     m.url = this.url
-
     this.ds.data_setter.emit(m);
   }
 

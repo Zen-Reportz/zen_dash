@@ -329,4 +329,6 @@ export class CallInfo{
   forced!:boolean
   url!:string
   look_up!: string
+  page!: string
+  isSidebar!: boolean
 }

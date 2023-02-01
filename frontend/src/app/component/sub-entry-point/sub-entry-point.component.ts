@@ -29,6 +29,7 @@ export class SubEntryPointComponent implements OnInit {
   reactivityData = new Map<string, ReactiveData>();
   flexData = new Map<string, FlexData>();
   error!: string
+  page!: string
 
   type: string | undefined;
   name: string | undefined;
@@ -46,7 +47,6 @@ export class SubEntryPointComponent implements OnInit {
 
   constructor(
     private ds: DataService,
-    private callService: CallServiceService,
     private clipboard: Clipboard,
     public dialog: MatDialog,
     private api: ApiCallService
@@ -55,7 +55,7 @@ export class SubEntryPointComponent implements OnInit {
 
   ngOnInit(): void {
     this.look_up = this.api.lookup(this.isSidebar, this.url)
-    let temp = this.ds.get_all()
+    this.page = this.ds.get_page()
 
     this.ds.input_emitter.subscribe((rr:ResponseReturn) => {
       if (rr.lookup !== this.look_up){
@@ -92,8 +92,8 @@ export class SubEntryPointComponent implements OnInit {
 
     })
 
-    let pull = this.api.needToPull(this.isSidebar, this.url);
-    this.api.call_this.emit({"page_refreshed": pull, "forced": false, "url": this.url, "look_up": this.look_up})
+    let pull = this.api.needToPull(this.isSidebar, this.url, this.page);
+    this.api.call_this.emit({"page_refreshed": pull, "forced": false, "url": this.url, "look_up": this.look_up, "page": this.page, "isSidebar": this.isSidebar})
 
   }
 
@@ -127,7 +127,7 @@ export class SubEntryPointComponent implements OnInit {
   }
 
   force_refresh(){
-    this.api.getData(false, true, this.url, this.look_up);
+    this.api.getData(false, true, this.url, this.look_up, this.page, this.isSidebar);
 
   }
 

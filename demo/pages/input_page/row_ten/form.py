@@ -1,16 +1,3 @@
-from typing import List
-from fastapi import APIRouter
-from zen_dash import instances as i
-from fastapi.responses import FileResponse
-from fastapi import Request
-from fastapi import UploadFile
-
-
-router = APIRouter(
-    prefix="/backend/page_one/row_ten",
-    tags=["row_ten"],
-    responses={404: {"description": "Not found"}},
-)
 
 formdata  ={ "orders": [
             {
@@ -262,22 +249,3 @@ formUISchema = {
     }
   ]
 }
-
-
-@router.post("/form", response_model=i.ReturnData)
-async def d3():
-    return i.ReturnData(type=i.InstanceType.FORM,
-                        form_data= i.FormData(
-                            name="form_data",
-                            submit_info=i.SubmitFormData(name="Save", url="/backend/page_one/row_ten/save_form"),
-                            data=formdata,
-                            form_schema=formSchema,
-                            ui_schema=formUISchema),
-                        flex=i.FlexData(fxFlex='100%', fxFlex_md='100%')
-                       )
-
-@router.post("/save_form", response_model=i.ReturnData)
-async def d3(req: Request):
-    import time
-    time.sleep(10)
-    print(await req.json())

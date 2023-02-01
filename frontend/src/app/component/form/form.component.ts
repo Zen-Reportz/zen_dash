@@ -5,6 +5,7 @@ import { DataService } from 'src/app/services/data.service';
 import { CallServiceService } from 'src/app/services/call-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingComponent } from '../loading/loading.component';
+import { UUID } from 'angular2-uuid';
 
 @Component({
   selector: 'app-form',
@@ -33,22 +34,27 @@ export class FormComponent implements OnInit {
 
   }
 
-  trigger(){
+  reactiveity(type: string){
     let m = new MEData();
-    m.page = this.ds.dataLookup(false)
-    m.url = this.url
-    m.key = this.data.name as string;
-    m.value = this.formData;
-    this.show = true
+    m.page = this.ds.dataLookup(false);
+    m.key = this.ds.all_input.get(this.url)?.form_data?.name as string + "_" +type
+    m.value = UUID.UUID();
+    m.url = this.url;
     this.ds.data_setter.emit(m);
+  }
+
+  trigger(){
+    this.reactiveity("triggered")
 
     let p = this.callService.call_response(this.data.submit_info.url, undefined,
       undefined);
     this.call = p.subscribe(
       (res) => {
+        this.reactiveity("success")
+
         this._snackBar.openFromComponent(LoadingComponent, {
           duration: 5 * 1000,
-          data: { message: 'API called Sucessfully ', status: 'sucess' },
+          data: { message: 'API called Sucessfully ', status: 'success' },
         });
 
 
@@ -56,6 +62,8 @@ export class FormComponent implements OnInit {
 
       },
       (error) => {
+        this.reactiveity("failed")
+
         this.show = false
         this._snackBar.openFromComponent(LoadingComponent, {
           duration: 5 * 1000,

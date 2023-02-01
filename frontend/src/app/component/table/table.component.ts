@@ -69,4 +69,36 @@ export class TableComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  download(){
+    let csv = '';
+
+    let csv_columns = []
+    for (let column = 0; column < this.columns.length; column++) {
+
+      csv += this.columns[column]["header"] + ';';
+      csv_columns.push(this.columns[column]["columnDef"])
+      csv = csv.replace(/\n/g, '');
+    }
+
+    csv = csv.substring(0, csv.length - 1) + '\n';
+    const rows = this.dataService.all_input.get(this.url)?.table_data?.data as any;
+    for (let row = 0; row < rows.length; row++) {
+     for (let colindex = 0; colindex < csv_columns.length; colindex++) {
+        csv += rows[row][csv_columns[colindex]] + ';';
+     }
+      csv = csv.substring(0, csv.length - 1) + '\n';
+    }
+    csv = csv.substring(0, csv.length - 1) + '\n';
+    const docElement = document.createElement('a');
+    const universalBOM = '\uFEFF';
+
+    //You can edit the code for the file name according to your requirements
+    let filename = "download_file"
+    const fileNameWithType = filename.concat('.csv');
+    docElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(universalBOM + csv);
+    docElement.target = '_blank';
+    docElement.download = fileNameWithType;
+    docElement.click();
+  }
 }

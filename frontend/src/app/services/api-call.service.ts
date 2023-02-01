@@ -23,7 +23,7 @@ export class ApiCallService {
     public dialog: MatDialog
   ) {
     this.call_this.subscribe((ct) => {
-      this.getData(ct.page_refreshed, ct.forced, ct.url, ct.look_up)
+      this.getData(ct.page_refreshed, ct.forced, ct.url, ct.look_up, ct.page, ct.isSidebar)
     })
 
   }
@@ -100,7 +100,7 @@ export class ApiCallService {
   }
 
 
-  async getData(page_refreshed: boolean, forced:boolean, url:string, look_up: string) {
+  async getData(page_refreshed: boolean, forced:boolean, url:string, look_up: string, page:string, isSidebar:boolean) {
 
     if (!page_refreshed && this.ds.all_input.get(look_up) !== undefined && !forced) {
       let t = this.ds.all_input.get(look_up)
@@ -123,12 +123,13 @@ export class ApiCallService {
     this.ds.all_input.delete(look_up);
     this.subscription_lookup[look_up] =  await p.subscribe({
       next: (t: ResponseData) => {
+        this.saveData(isSidebar, url, page)
         let reactive = t?.reactive as ReactiveData;
         let type = t?.type as string;
         let name = this.set_name(t)
 
         this.unsubscribe(look_up);
-        this.subscribe(type, look_up, url, reactive, name);
+        this.subscribe(type, look_up, url, reactive, name, page, isSidebar);
         this.ds.all_input.set(look_up, t);
         this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
         return
@@ -150,13 +151,35 @@ export class ApiCallService {
     this.d.get('specific_reactive_' + look_up,)?.unsubscribe();
   }
 
+  callGetData(look_up: string, url:string, page:string, t:string, isSidebar: boolean){
+    let current_page= this.ds.get_page()
+    if (current_page === page){
+      let force = false
+      let page_refreshed = false
+      if (t === "PageRefresh"){
+        page_refreshed = true
+      } else if(t === "RefreshButton"){
+        force = true
+      } else if (t === "AutoRefresh"){
+        force = true
+      } else if (t === "Reactive"){
+        force = true
+      } else if (t === "SpecificReactive"){
+        force = true
+      } else {
+        return
+      }
+      this.getData(page_refreshed, force, url, look_up, page, isSidebar);
 
-  subscribe(type: string, look_up: string, url:string, reactive: ReactiveData, name: string) {
+    }
+  }
+
+  subscribe(type: string, look_up: string, url:string, reactive: ReactiveData, name: string, page:string, isSidebar:boolean) {
     if (this.data_type.indexOf(type as string) >= 0) {
       this.d.set(
         'refresh_' + look_up,
         this.ds.refresh.subscribe((t) => {
-          this.getData(true, true, url, look_up);
+          this.callGetData(look_up, url, page, t, isSidebar)
         })
       );
     }
@@ -166,7 +189,7 @@ export class ApiCallService {
         'reactive_' + look_up,
         this.ds.data_setter.subscribe((t) => {
           if (t.key !== name) {
-            this.getData(true, true, url, look_up);
+            this.callGetData(look_up, url, page, "Reactive", isSidebar)
           }
         })
       );
@@ -175,7 +198,7 @@ export class ApiCallService {
         'specific_reactive_' + look_up,
         this.ds.data_setter.subscribe((t) => {
           if (reactive.reactive_ids.indexOf(t.key) >= 0) {
-            this.getData(true, true, url, look_up);
+            this.callGetData(look_up, url, page, "SpecificReactive", isSidebar)
           }
         })
       );
@@ -195,8 +218,8 @@ export class ApiCallService {
   }
 
 
-  needToPull(isSidebar: boolean, url:string) {
-    let page = this.ds.get_page();
+  needToPull(isSidebar: boolean, url:string, page:string) {
+
 
     let look_up = this.lookup(isSidebar, url)
     let pull = false;
@@ -209,14 +232,24 @@ export class ApiCallService {
     if (d !== null) {
       if (current_data !== d) {
         pull = true;
-        sessionStorage.setItem(look_up, current_data);
       }
     } else {
       pull = true;
-      sessionStorage.setItem(look_up, current_data);
     }
 
     return pull;
   }
 
+  saveData(isSidebar: boolean, url:string, page:string){
+    let look_up = this.lookup(isSidebar, url)
+
+    let current_data = JSON.stringify({
+      global: this.ds.data['global'],
+      page: this.ds.data[page],
+    });
+    // console.log(current_data)
+    // console.log(this.ds.get_all())
+    sessionStorage.setItem(look_up, current_data);
+
+  }
 }

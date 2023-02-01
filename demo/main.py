@@ -4,41 +4,55 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import pkg_resources
-from zen_dash import instances as i
+from pages.box_page import BOXPAGE
 from zen_dash import sidebar as s
 from zen_dash import page as p
 from zen_dash import scripts as sc
 from pydantic import BaseConfig
 from fastapi.middleware.gzip import GZipMiddleware
-from pages.page_one import row_one as pro
-from pages.page_one import row_three as prt
-from pages.page_one import row_four as prf
-from pages.page_one import row_five as prfi
-from pages.page_one import row_two as prtw
-from pages.page_one import row_six as prs
-from pages.page_one import row_seven as pors
-from pages.page_one import row_eight as pre
-from pages.page_one import row_nine as prn
-from pages.page_one import row_ten as rt
+
+from pages.input_page import INPUTZENPAGE
+from pages.chart_page import CHARTPAGE
+from pages.table_page import TABLEPAGE
+from pages.custom_page import CUSTOMPAGE
+
+from pages.input_page import row_one as iro
+from pages.input_page import row_three as irt
+from pages.input_page import row_four as irf
+from pages.input_page import row_five as irfi
+from pages.input_page import row_six as irs
+from pages.input_page import row_seven as irse
+from pages.input_page import row_ten as irte
+
+from pages.table_page import row_two as trt
+from pages.table_page import row_nine as trn
+
+from pages.chart_page import row_two as crt
+from pages.chart_page import row_eight as cre
+
+from pages.box_page import row_one as bro
+
+from pages.custom_page import row_nine as crn
 
 import filters as f
-from zen_dash.flex_data import FlexData
-
+from filters import view as fv
 BaseConfig.arbitrary_types_allowed = True  # change #1
 
 app = FastAPI()
-
-app.include_router(pro.router)
 app.include_router(f.router)
-app.include_router(prt.router)
-app.include_router(prf.router)
-app.include_router(prfi.router)
-app.include_router(prtw.router)
-app.include_router(prs.router)
-app.include_router(pors.router)
-app.include_router(pre.router)
-app.include_router(prn.router)
-app.include_router(rt.router)
+app.include_router(iro.router)
+app.include_router(irt.router)
+app.include_router(irf.router)
+app.include_router(irfi.router)
+app.include_router(irs.router)
+app.include_router(irse.router)
+app.include_router(irte.router)
+app.include_router(trn.router)
+app.include_router(trt.router)
+app.include_router(crt.router)
+app.include_router(cre.router)
+app.include_router(bro.router)
+app.include_router(crn.router)
 
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
@@ -90,19 +104,21 @@ async def scripts(request: Request):
 
 @app.get("/backend/sidebar", response_model=s.Sidebar)
 async def sidebar():
-    return s.Sidebar(tabs=[
-                           s.SidebarGroup(name="KPI", subtabs=[
-                            s.SidebarTab(label="Short Term KPI", icon='home'),
-                            s.SidebarTab(label="Long Term KPI", icon='home')
-                           ]),
-                           s.SidebarTab(label="User Info", icon='delete'),
-                           s.SidebarTab(label="Perfomance", icon='home')],
-                     filters=[
-                        s.FilterInfo(url="/backend/filters/single_filter_global"),
-                              s.FilterInfo(
-                                  url="/backend/filters/single_filter_server_global"),
-                              ]
-                     )
+    x =  s.Sidebar(tabs=[
+        s.SidebarTab(label=INPUTZENPAGE.name, icon=INPUTZENPAGE.icon),
+        s.SidebarGroup(name="Data", subtabs=[
+            s.SidebarTab(label=TABLEPAGE.name, icon=TABLEPAGE.icon),
+            s.SidebarTab(label=CHARTPAGE.name, icon=CHARTPAGE.icon),
+            s.SidebarTab(label=BOXPAGE.name, icon=BOXPAGE.icon),
+            s.SidebarTab(label=CUSTOMPAGE.name, icon=CUSTOMPAGE.icon)
+        ])],
+        filters=[
+        s.FilterInfo(url=fv.SingleFilterGlobal.full_url()),
+        s.FilterInfo(
+            url=fv.SingleFilterServerGlobal.full_url())]
+    )
+    print(x)
+    return x
 
 
 # fxFlex_md: Optional[str] = "40%"
@@ -111,111 +127,17 @@ async def sidebar():
 
 @app.get("/backend/page_detail", response_model=p.Page)
 async def page_detail(fragment: Optional[str]):
-    print(fragment)
-    if fragment in ("page_0_0", 'page_0_1', "page_1", 'page_2', 'page_0'):
-        p1 = p.Page(
-            rows=[
-                p.Row(data=[
-                    p.Instance(url="/backend/page_one/row_one/date"),
-                    p.Instance(url="/backend/page_one/row_one/single_date"),
-                    p.Instance(url="/backend/page_one/row_one/first_box"),
-                    p.Instance(url="/backend/page_one/row_one/second_box"),
-                    p.Instance(url="/backend/page_one/row_one/third_box"),
-
-                ]),
-                p.Row(data=[
-                      p.Instance(url="/backend/page_one/row_two/table",
-                                 ),
-                      p.Instance(url="/backend/page_one/row_two/chart",
-                                 ),
-
-                      ]),
-                p.Row(data=[
-                      p.Instance(url="/backend/page_one/row_three/checkbox"),
-                      p.Instance(
-                          url="/backend/page_one/row_three/checkbox_vertical"),
-                      p.Instance(url="/backend/page_one/row_three/radiobox"),
-                      p.Instance(
-                          url="/backend/page_one/row_three/radiobox_vertical"),
-                      ]),
-                p.Row(data=[
-                      p.Instance(url="/backend/page_one/row_four/slider"),
-                      p.Instance(
-                          url="/backend/page_one/row_four/slider_inverted"),
-                      p.Instance(
-                          url="/backend/page_one/row_four/slider_vertical"),
-                      p.Instance(
-                          url="/backend/page_one/row_four/slider_vertical_inverted")
-                      ]),
-                p.Row(data=[
-                      p.Instance(
-                          url="/backend/page_one/row_five/button_toggle"),
-                      p.Instance(
-                          url="/backend/page_one/row_five/button_toggle_multiple"),
-                      p.Instance(url="/backend/page_one/row_five/toggle"),
-                      p.Instance(
-                          url="/backend/page_one/row_five/multi_records"),
-
-                      ]),
-                p.Row(data=[
-                      p.Instance(
-                          url="/backend/page_one/row_five/multi_records"),
-                      p.Instance(url="/backend/page_one/row_six/multi_records_tabs", flex=FlexData(
-                          fxFlex="33%", fxFlex_md="33%", fxFlex_sm="110%", fxFlex_xs="110%")),
-                      p.Instance(url="/backend/page_one/row_six/multi_records_expanded",  flex=FlexData(
-                          fxFlex="33%", fxFlex_md="33%", fxFlex_sm="110%", fxFlex_xs="110%")),
-
-                      ]),
-                p.Row(data=[
-                      p.Instance(url="/backend/filters/single_filter"),
-                      p.Instance(url="/backend/filters/multi_filter"),
-                      p.Instance(url="/backend/filters/single_filter_group"),
-                      p.Instance(url="/backend/filters/multi_filter_group"),
-                      p.Instance(url="/backend/page_one/row_seven/input"),
-
-                      ]),
-                p.Row(data=[
-                      p.Instance(url="/backend/filters/single_filter_server"),
-                      p.Instance(url="/backend/filters/multi_filter_server"),
-                      ]),
-                p.Row(data=[
-                    p.Instance(
-                        url="/backend/page_one/row_seven/file_download"),
-                    p.Instance(url="/backend/page_one/row_seven/upload"), ]),
-                p.Row(data=[
-                    p.Instance(url="/backend/page_one/row_eight/image"),
-                    p.Instance(
-                      url="/backend/page_one/row_eight/highchart")]),
-                p.Row(data = [
-                      p.Instance(
-                      url="/backend/page_one/row_eight/highchart_stock"),
-
-                ]),
-                p.Row(data=[p.Instance(url="/backend/page_one/row_nine/table"),
-                            # p.Instance(url="/backend/page_one/row_nine/iframe")
-                            ]),
-                p.Row(
-                    data=[p.Instance(url="/backend/page_one/row_nine/custom_html")]),
-                p.Row(
-                    data=[p.Instance(url="/backend/page_one/row_nine/full_custom_html")]),
-                p.Row(
-                    data=[
-                          p.Instance(url="/backend/page_one/row_nine/data_table_html?test"),
-                          p.Instance(url="/backend/page_one/row_nine/data_table_html?test1"),
-                          p.Instance(url="/backend/page_one/row_nine/data_table_html?test2"),
-                          p.Instance(url="/backend/page_one/row_nine/button")
-
-                          ]),
-                p.Row(
-                    data=[
-                        p.Instance(url="/backend/page_one/row_ten/form"),
-
-                    ]
-                )
-
-            ])
-
-        return p1
-
+    if fragment == "page_0":
+        return INPUTZENPAGE.page
+    elif fragment == "page_1_0":
+        return TABLEPAGE.page
+    elif fragment == "page_1_1":
+        return CHARTPAGE.page
+    elif fragment == "page_1_2":
+        return BOXPAGE.page
+    elif fragment == "page_1_3":
+        return CUSTOMPAGE.page
+   
+   
 
 app.mount("/", StaticFiles(directory=folder), name="static")

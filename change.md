@@ -1,3 +1,14 @@
+# 0.4.8
+- Reactive support for form and button, following trigger name can be used. where name is name defined in form or button
+    - `{name}_trigger`
+    - `{name}_success`
+    - `{name}_failed`
+- Fixed misspellings
+- Only call page's APIs not all pages's APIs.
+- Table download csv option
+- Raise error if first tab in Sidebar is SidebarGroup
+- Fixed bug with Server filter
+
 # 0.4.7
 - Fixed side bar reactivity 
 

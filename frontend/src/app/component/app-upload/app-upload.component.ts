@@ -58,7 +58,7 @@ export class AppUploadComponent implements OnInit {
       (res) => {
         this._snackBar.openFromComponent(LoadingComponent, {
           duration: 5 * 1000,
-          data: { message: 'Sucessfully Uploaded file', status: 'sucess' },
+          data: { message: 'Sucessfully Uploaded file', status: 'success' },
         });
         let m = new MEData();
         m.page = this.ds.dataLookup(false);

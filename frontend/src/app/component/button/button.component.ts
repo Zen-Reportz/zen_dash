@@ -21,13 +21,23 @@ export class ButtonComponent implements OnInit {
     private callService: CallServiceService,
     private _snackBar: MatSnackBar) { }
 
+  reactiveity(type: string){
+    let m = new MEData();
+    m.page = this.ds.dataLookup(false);
+    m.key = this.ds.all_input.get(this.url)?.button_data?.name as string + "_" +type
+    m.value = UUID.UUID();
+    m.url = this.url;
+    this.ds.data_setter.emit(m);
+
+  }
+
   ngOnInit(): void {
     this.data = this.ds.all_input.get(this.url)?.button_data as ButtonData;
   }
 
   trigger(){
 
-
+    this.reactiveity("triggered")
     if (this.second_call !== undefined) {
       this.second_call.unsubscribe();
     }
@@ -38,20 +48,15 @@ export class ButtonComponent implements OnInit {
       (res) => {
         this._snackBar.openFromComponent(LoadingComponent, {
           duration: 5 * 1000,
-          data: { message: 'API called Sucessfully ', status: 'sucess' },
+          data: { message: 'API called Sucessfully ', status: 'success' },
         });
-        let m = new MEData();
-        m.page = this.ds.dataLookup(false);
-        m.key = this.ds.all_input.get(this.url)?.upload_data?.name as string
-        m.value = UUID.UUID();
-        m.url = this.url;
-        this.ds.data_setter.emit(m);
-
+        this.reactiveity("success")
         this.show = false
 
       },
       (error) => {
         this.show = false
+        this.reactiveity("failed")
         this._snackBar.openFromComponent(LoadingComponent, {
           duration: 5 * 1000,
           data: { message: 'API called Failed', status: 'error' },
