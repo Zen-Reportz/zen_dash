@@ -13,7 +13,7 @@ router = APIRouter(
 async def form():
     return v.Form.view()
 
-@router.post(v.Form.server_url(), response_model=i.ReturnData)
+@router.post(v.Form.server_url())
 async def form_submit(req: Request):
-
-    return v.Form.server(await req.json())
+    print(await req.json())
+    

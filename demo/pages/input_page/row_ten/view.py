@@ -18,7 +18,7 @@ class Form(Zen):
          return i.ReturnData(type=i.InstanceType.FORM,
                         form_data= i.FormData(
                             name="form_data",
-                            submit_info=i.SubmitFormData(name="Save", url=Form.full_url()),
+                            submit_info=i.SubmitFormData(name="Save", url=Form.server_full_url()),
                             data=formdata,
                             form_schema=formSchema,
                             ui_schema=formUISchema),

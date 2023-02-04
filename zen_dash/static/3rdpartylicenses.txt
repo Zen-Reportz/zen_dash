@@ -827,6 +827,9 @@ Apache-2.0
    See the License for the specific language governing permissions and
    limitations under the License.
 
+ngx-cookie-service
+MIT
+
 ngx-echarts
 MIT
 MIT License

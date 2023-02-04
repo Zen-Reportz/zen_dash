@@ -1,4 +1,3 @@
-import { UUID } from 'angular2-uuid';
 import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -67,7 +66,7 @@ export class AppDownloadComponent implements OnInit {
       let m = new MEData();
       m.page = this.ds.dataLookup(false);
       m.key = this.ds.all_input.get(this.url)?.download_data?.name as string
-      m.value = UUID.UUID();
+      m.value = this.ds.makeid(2);
       m.url = this.url;
       this.ds.data_setter.emit(m);
       let contentDisposition = res.headers.get('content-disposition') as string

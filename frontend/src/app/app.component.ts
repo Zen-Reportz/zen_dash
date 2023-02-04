@@ -9,8 +9,8 @@ import { ActivatedRoute, Router, UrlSerializer } from '@angular/router';
 import { CallServiceService } from './services/call-service.service';
 import { DomSanitizer, Title } from '@angular/platform-browser';
 import { CustomScripts } from './shared/application_data';
-import { UUID } from 'angular2-uuid';
 import { Clipboard } from '@angular/cdk/clipboard';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private _mobileQueryListener: () => void;
   checked = false;
   runRefresh!: any;
+  show_right_sidebar!: string
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private call: CallServiceService,
     private titleService: Title,
     private clipboard: Clipboard,
-    private sanitizer: DomSanitizer
+    private cs: CookieService
   ) {
     this.ds.data_setter.subscribe((t) => {
       this.color = 'warn';
@@ -66,6 +67,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.show_right_sidebar = this.cs.get("show_right_sidebar")
+
+
     this.getScripts();
     this.http
       .get<string>(this.call.my_url() + 'backend/title')
@@ -100,7 +104,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (type === 'javascript') {
       const script = document.createElement('script');
 
-      script.id = UUID.UUID();
+      script.id = this.ds.makeid(5);
       script.type = 'text/javascript';
 
       if (url !== undefined) {
@@ -118,7 +122,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (type === 'link') {
       const link = document.createElement('link');
 
-      link.id = UUID.UUID();
+      link.id = this.ds.makeid(5);
       link.rel = rel as string;
       link.href = url as string;
       head.appendChild(link);
@@ -151,7 +155,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   saveReport() {
-    this.document_id = UUID.UUID();
+    this.document_id = this.ds.makeid(32);
     let m = new MEData();
     m.key = 'document_id';
     m.value = this.document_id;

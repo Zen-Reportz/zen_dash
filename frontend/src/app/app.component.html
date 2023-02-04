@@ -3,12 +3,14 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span>{{ title }}</span>
+
   <div fxFlex fxLayoutAlign="end end">
-    <button
-      mat-icon-button
-      [matMenuTriggerFor]="menu"
-      aria-label="Example icon-button with a menu"
-    >
+    <span *ngIf="show_right_sidebar === 'true'">
+      <button mat-icon-button (click)="snav2.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </span>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
   </div>
@@ -22,13 +24,21 @@
       <mat-slide-toggle [checked]="checked" (change)="set_auto($event)"> Auto Refresh </mat-slide-toggle>
     </button>
   </mat-menu>
+
 </mat-toolbar>
 
-<mat-sidenav-container  class="app-container">
+<mat-sidenav-container class="app-container">
   <mat-sidenav #snav [mode]="'over'" [style.width]="mySize" class="app-sidenav">
     <mat-nav-list>
-      <app-sidebar (size)="set_size($event)"></app-sidebar>
+      <app-sidebar (size)="set_size($event)" [url]="'backend/sidebar'"></app-sidebar>
     </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav #snav2 [position]="'end'" [mode]="'over'" [style.width]="mySize" class="app-sidenav">
+    <mat-nav-list>
+      <app-sidebar (size)="set_size($event)" [url]="'backend/sidebar2'"></app-sidebar>
+    </mat-nav-list>
+
   </mat-sidenav>
 
   <mat-sidenav-content>
@@ -36,13 +46,8 @@
       <div layout="row" style="width: 100%; z-index: 5">
         <div flex>
           <div style="float: right">
-            <button
-              class="float"
-              mat-mini-fab
-              [color]="color"
-              aria-label="Example icon button with a filter list icon"
-              (click)="refresh_data()"
-            >
+            <button class="float" mat-mini-fab [color]="color" aria-label="Example icon button with a filter list icon"
+              (click)="refresh_data()">
               <mat-icon>refresh</mat-icon>
             </button>
           </div>

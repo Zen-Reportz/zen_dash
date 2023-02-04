@@ -86,6 +86,7 @@ import { ButtonComponent } from './component/button/button.component';
 import { FormComponent } from './component/form/form.component';
 import { JsonFormsModule } from '@jsonforms/angular';
 import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -184,7 +185,7 @@ import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
     JsonFormsModule,
     JsonFormsAngularMaterialModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

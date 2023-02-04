@@ -5,7 +5,6 @@ import { Observable, Subscription } from 'rxjs';
 import { CallServiceService } from 'src/app/services/call-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingComponent } from '../loading/loading.component';
-import { UUID } from 'angular2-uuid';
 
 @Component({
   selector: 'app-app-upload',
@@ -63,7 +62,7 @@ export class AppUploadComponent implements OnInit {
         let m = new MEData();
         m.page = this.ds.dataLookup(false);
         m.key = this.ds.all_input.get(this.url)?.upload_data?.name as string
-        m.value = UUID.UUID();
+        m.value = this.ds.makeid(2);
         m.url = this.url;
         this.ds.data_setter.emit(m);
         this.myFiles = [];

@@ -67,8 +67,11 @@ templates = Jinja2Templates(directory=folder)
 
 
 @app.get("/", response_class=HTMLResponse)
-async def root(request: Request, response: Response):
-    return templates.TemplateResponse("index.html", {"request": request, "test": "test"})
+async def root(request: Request, res: Response):
+    tr = templates.TemplateResponse("index.html", {"request": request})
+    tr.set_cookie("retry_count", "5")
+    tr.set_cookie("show_right_sidebar","true")
+    return tr
 
 
 @app.get("/backend/title")
@@ -112,6 +115,21 @@ async def sidebar():
             s.SidebarTab(label=BOXPAGE.name, icon=BOXPAGE.icon),
             s.SidebarTab(label=CUSTOMPAGE.name, icon=CUSTOMPAGE.icon)
         ])],
+        filters=[
+        s.FilterInfo(url=fv.SingleFilterGlobal.full_url()),
+        s.FilterInfo(
+            url=fv.SingleFilterServerGlobal.full_url())]
+    )
+    print(x)
+    return x
+
+
+
+@app.get("/backend/sidebar2", response_model=s.Sidebar)
+async def sidebar():
+    x =  s.Sidebar(tabs=[
+        s.SidebarTab(label=INPUTZENPAGE.name, icon=INPUTZENPAGE.icon),
+        ],
         filters=[
         s.FilterInfo(url=fv.SingleFilterGlobal.full_url()),
         s.FilterInfo(

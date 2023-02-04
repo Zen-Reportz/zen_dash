@@ -1,3 +1,8 @@
+# 0.4.9
+- allow user to set retry count
+- allow user to show or hide right sidebar using cookie
+- fixed bug with form reactivity and submission
+
 # 0.4.8
 - Reactive support for form and button, following trigger name can be used. where name is name defined in form or button
     - `{name}_trigger`

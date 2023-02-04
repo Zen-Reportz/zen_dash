@@ -3,7 +3,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from 'src/app/services/data.service';
 import { CallServiceService } from 'src/app/services/call-service.service';
-import { UUID } from 'angular2-uuid';
 import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
@@ -25,8 +24,8 @@ export class ButtonComponent implements OnInit {
     let m = new MEData();
     m.page = this.ds.dataLookup(false);
     m.key = this.ds.all_input.get(this.url)?.button_data?.name as string + "_" +type
-    m.value = UUID.UUID();
-    m.url = this.url;
+    m.value = this.ds.makeid(2);
+    m.url = this.url + "_" +type;
     this.ds.data_setter.emit(m);
 
   }
