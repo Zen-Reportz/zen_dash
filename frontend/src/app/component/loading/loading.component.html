@@ -1,5 +1,6 @@
 <span *ngIf="data['status'] === 'success'">
   <span class="success"> {{ data["message"] }}</span>
+  <span class="success"> Brought you by Zen Reportz</span>
 </span>
 
 <span *ngIf="data['status'] === 'warn'">
@@ -9,3 +10,8 @@
 <span *ngIf="data['status'] === 'error'">
   <span class="error"> {{ data["message"] }}</span>
 </span>
+
+<span *ngIf="data['status'] === 'loading'">
+  <span class="success"> Brought you by Zen Reportz</span>
+</span>
+

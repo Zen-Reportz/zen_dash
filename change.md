@@ -1,3 +1,6 @@
+# 0.4.10
+- added loading Snack Bar
+
 # 0.4.9
 - allow user to set retry count
 - allow user to show or hide right sidebar using cookie

@@ -67,6 +67,12 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    this._snackBar.openFromComponent(LoadingComponent, {
+      duration: 5 * 1000,
+      data: { message: 'API called Sucessfully ', status: 'loading' },
+    });
+
     this.show_right_sidebar = this.cs.get("show_right_sidebar")
 
 
