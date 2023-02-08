@@ -10,6 +10,20 @@ import { Observable, Subscription } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiCallService {
+  input_types = ["date",
+    "checkbox",
+    "radio",
+    "simple_filter",
+    "simple_server_filter",
+    "group_filter",
+    "slider",
+    "button_toggle",
+    "toggle",
+    "input",
+    "download",
+    "upload",
+    "button",
+    "form"]
 
   subscription_lookup: any = {}
   d: Map<string, Subscription> = new Map();
@@ -23,7 +37,7 @@ export class ApiCallService {
     public dialog: MatDialog
   ) {
     this.call_this.subscribe((ct) => {
-      this.getData(ct.page_refreshed, ct.forced, ct.url, ct.look_up, ct.page, ct.isSidebar)
+      this.getData(ct.forced, ct.url, ct.look_up, ct.page, ct.isSidebar)
     })
 
   }
@@ -100,15 +114,22 @@ export class ApiCallService {
   }
 
 
-  async getData(page_refreshed: boolean, forced:boolean, url:string, look_up: string, page:string, isSidebar:boolean) {
+  async getData(forced:boolean, url:string, look_up: string, page:string, isSidebar:boolean) {
+    let t = this.ds.all_input.get(look_up)
+    if (t !== undefined && !forced) {
+      this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
+      // console.log("No call" + url + look_up)
+      return
+    }
 
-    if (!page_refreshed && this.ds.all_input.get(look_up) !== undefined && !forced) {
-      let t = this.ds.all_input.get(look_up)
+    if (this.input_types.includes(t?.type as string)){
       this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
       return
     }
 
+
     if (this.subscription_lookup[look_up] !== undefined) {
+      // console.log("unscribring it"+ url + look_up)
       this.subscription_lookup[look_up].unsubscribe();
     }
 
@@ -119,7 +140,7 @@ export class ApiCallService {
     ) as Observable<ResponseData>;
 
     this.ds.input_emitter.emit({"calling": true, "lookup": look_up, "t": undefined, "message": undefined})
-
+    // console.log("calling" + url + look_up)
     this.ds.all_input.delete(look_up);
     this.subscription_lookup[look_up] =  await p.subscribe({
       next: (t: ResponseData) => {
@@ -132,11 +153,13 @@ export class ApiCallService {
         this.subscribe(type, look_up, url, reactive, name, page, isSidebar);
         this.ds.all_input.set(look_up, t);
         this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
+        // console.log("called" + url + look_up)
         return
       },
       error: (e: Error) => {
         // this.ds.input_emitter[look_up].emit(undefined)
         this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": undefined, "message": e.message})
+        // console.log("errored" + url + look_up)
         return
       },
     });
@@ -155,9 +178,8 @@ export class ApiCallService {
     let current_page= this.ds.get_page()
     if (current_page === page){
       let force = false
-      let page_refreshed = false
       if (t === "PageRefresh"){
-        page_refreshed = true
+        force = true
       } else if(t === "RefreshButton"){
         force = true
       } else if (t === "AutoRefresh"){
@@ -169,7 +191,7 @@ export class ApiCallService {
       } else {
         return
       }
-      this.getData(page_refreshed, force, url, look_up, page, isSidebar);
+      this.getData(force, url, look_up, page, isSidebar);
 
     }
   }
@@ -224,10 +246,21 @@ export class ApiCallService {
     let look_up = this.lookup(isSidebar, url)
     let pull = false;
     let d = sessionStorage.getItem(look_up);
-    let current_data = JSON.stringify({
+    let dd = {
       global: this.ds.data['global'],
       page: this.ds.data[page],
-    });
+    }
+    try {
+      delete dd["page"][look_up]
+      if (Object.keys(dd["page"]).length === 0){
+        delete dd["page"]
+      }
+
+    }catch {
+
+    }
+
+    let current_data = JSON.stringify(dd);
 
     if (d !== null) {
       if (current_data !== d) {
@@ -242,11 +275,22 @@ export class ApiCallService {
 
   saveData(isSidebar: boolean, url:string, page:string){
     let look_up = this.lookup(isSidebar, url)
-
-    let current_data = JSON.stringify({
+    let dd = {
       global: this.ds.data['global'],
       page: this.ds.data[page],
-    });
+    }
+    try {
+      delete dd["page"][look_up]
+      if (Object.keys(dd["page"]).length === 0){
+        delete dd["page"]
+      }
+
+    }catch {
+
+    }
+
+
+    let current_data = JSON.stringify(dd);
     // console.log(current_data)
     // console.log(this.ds.get_all())
     sessionStorage.setItem(look_up, current_data);

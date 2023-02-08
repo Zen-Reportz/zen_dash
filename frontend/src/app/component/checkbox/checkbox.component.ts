@@ -11,31 +11,35 @@ import { CheckboxInstance, MEData } from '../../shared/application_data';
 export class CheckboxComponent implements OnInit {
   @Input() url!: string;
   @Input() isSidebar!: boolean
-  name!: string;
-  data!: CheckboxData
+  // name!: string;
+  // data!: CheckboxData
   constructor(public ds: DataService) {}
 
   ngOnInit(): void {
-    this.data = this.ds.all_input.get(this.url)?.checkbox_data as CheckboxData
+      this.getData()
+  }
 
+  getData(){
+    return this.ds.all_input.get(this.url)?.checkbox_data as CheckboxData
   }
 
   update() {
 
+
     let m = new MEData();
     m.page = this.ds.dataLookup(this.isSidebar)
     m.url = this.url
-    m.key = this.data.name as string;
-    m.value = this.data.data;
+    m.key = this.getData().name as string;
+    m.value = this.getData().data;
 
     this.ds.data_setter.emit(m);
   }
 
   get_style() {
-    return this.data.style;
+    return this.getData().style;
   }
 
   my_data() {
-    return this.data.data as CheckboxInstance[];
+    return this.getData().data as CheckboxInstance[];
   }
 }

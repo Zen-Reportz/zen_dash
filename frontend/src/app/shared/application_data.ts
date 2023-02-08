@@ -325,7 +325,6 @@ export class ResponseReturn {
 }
 
 export class CallInfo{
-  page_refreshed!: boolean
   forced!:boolean
   url!:string
   look_up!: string

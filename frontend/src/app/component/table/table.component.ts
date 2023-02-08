@@ -76,7 +76,7 @@ export class TableComponent implements OnInit {
     let csv_columns = []
     for (let column = 0; column < this.columns.length; column++) {
 
-      csv += this.columns[column]["header"] + ';';
+      csv += this.columns[column]["header"] + ',';
       csv_columns.push(this.columns[column]["columnDef"])
       csv = csv.replace(/\n/g, '');
     }
@@ -85,7 +85,7 @@ export class TableComponent implements OnInit {
     const rows = this.dataService.all_input.get(this.url)?.table_data?.data as any;
     for (let row = 0; row < rows.length; row++) {
      for (let colindex = 0; colindex < csv_columns.length; colindex++) {
-        csv += rows[row][csv_columns[colindex]] + ';';
+        csv += rows[row][csv_columns[colindex]] + ',';
      }
       csv = csv.substring(0, csv.length - 1) + '\n';
     }

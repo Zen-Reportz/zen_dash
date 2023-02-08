@@ -21,7 +21,7 @@ import { Params, Router, ActivatedRoute } from '@angular/router';
 export class DataService {
   side_data!: SidebarData;
   defaul_page: string = 'page_0'
-
+  data_state!: number
 
 
   all_input = new Map<string, ResponseData>();
@@ -73,7 +73,7 @@ export class DataService {
 
     this.data_setter.subscribe((t) => {
       this.reset_path(activatedRoute)
-      // console.log(t)
+
 
       if (this.data[t.page] === undefined) {
         this.data[t.page] = {};
@@ -81,6 +81,7 @@ export class DataService {
 
 
       this.data[t.page][t.url] = [t.key, t.value];
+
     });
   }
 
@@ -302,11 +303,15 @@ export class DataService {
   save_default() {
     let page = this.get_page();
     for (const [url, value] of Object.entries(this.data['global'])) {
-      if (url !== 'page') {
-        let d: any = value;
-        let dd = this.all_input.get(url) as ResponseData;
-        this.save_instance(dd, d[1], url);
-      }
+      // console.log(url + value)
+      try {
+        if (url !== 'page') {
+          let d: any = value;
+          let dd = this.all_input.get(url) as ResponseData;
+          this.save_instance(dd, d[1], url);
+        }
+      } catch {}
+
     }
     try {
       for (const [url, value] of Object.entries(this.data[page])) {

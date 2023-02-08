@@ -93,7 +93,7 @@ export class SubEntryPointComponent implements OnInit {
     })
 
     let pull = this.api.needToPull(this.isSidebar, this.url, this.page);
-    this.api.call_this.emit({"page_refreshed": pull, "forced": false, "url": this.url, "look_up": this.look_up, "page": this.page, "isSidebar": this.isSidebar})
+    this.api.call_this.emit({"forced": pull, "url": this.url, "look_up": this.look_up, "page": this.page, "isSidebar": this.isSidebar})
 
   }
 
@@ -127,7 +127,7 @@ export class SubEntryPointComponent implements OnInit {
   }
 
   force_refresh(){
-    this.api.getData(false, true, this.url, this.look_up, this.page, this.isSidebar);
+    this.api.getData(true, this.url, this.look_up, this.page, this.isSidebar);
 
   }
 

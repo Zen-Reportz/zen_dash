@@ -50,7 +50,7 @@ export class FormComponent implements OnInit {
     m.value = this.formData;
     this.show = true
     this.ds.data_setter.emit(m);
-    console.log(m)
+    // console.log(m)
     this.reactiveity("triggered")
 
     let p = this.callService.call_response(this.data.submit_info.url, undefined,
