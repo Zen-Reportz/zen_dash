@@ -57,7 +57,7 @@ export class FormComponent implements OnInit {
       undefined);
     this.call = p.subscribe(
       (res) => {
-        // this.reactiveity("success")
+        this.reactiveity("success")
 
         this._snackBar.openFromComponent(LoadingComponent, {
           duration: 5 * 1000,
@@ -69,7 +69,7 @@ export class FormComponent implements OnInit {
 
       },
       (error) => {
-        // this.reactiveity("failed")
+        this.reactiveity("failed")
 
         this.show = false
         this._snackBar.openFromComponent(LoadingComponent, {
