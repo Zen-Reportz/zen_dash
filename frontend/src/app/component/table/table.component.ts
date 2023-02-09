@@ -28,6 +28,7 @@ export class TableComponent implements OnInit {
   columns!: Array<TableColumn>;
   items_per_page!: number
   items_per_page_options!: number[]
+  show_download_button!: boolean
   constructor(private dataService: DataService) {}
 
   ngOnInit() {
@@ -37,6 +38,8 @@ export class TableComponent implements OnInit {
     this.dataSource = new MatTableDataSource<any>(
       this.dataService.all_input.get(this.url)?.table_data?.data as any
     );
+
+    this.show_download_button = this.dataService.all_input.get(this.url)?.table_data?.show_download_button as boolean
 
     this.items_per_page = this.dataService.all_input.get(this.url)?.table_data?.items_per_page as number
     this.items_per_page_options = this.dataService.all_input.get(this.url)?.table_data?.items_per_page_options as number[]

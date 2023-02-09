@@ -62,6 +62,7 @@ class TableData(BaseUpdate):
     name: str
     items_per_page_options: List[int] = [5, 10, 20]
     items_per_page: int = 5
+    allow_download: bool = True
     
 class ChartData(BaseUpdate):
     name: str

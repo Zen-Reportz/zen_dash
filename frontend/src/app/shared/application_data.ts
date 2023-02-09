@@ -86,6 +86,7 @@ export class TableData{
   name!: string
   items_per_page_options!: number[]
   items_per_page!: number
+  allow_download!: boolean
 }
 
 export interface TableColumn{

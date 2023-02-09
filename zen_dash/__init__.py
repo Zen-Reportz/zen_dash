@@ -36,3 +36,4 @@ class ZenPage(BaseModel):
     name: str
     icon: str
     page: Page
+

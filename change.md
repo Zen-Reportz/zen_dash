@@ -1,3 +1,7 @@
+# 0.4.12
+- fixed bug on form reactivity issue
+- Optional download button for Table, by default it is True
+
 # 0.4.11
 - table download button return comma seperated file rather than semi-colon seperated file
 - input widgets will not call api if it is already loaded. 
