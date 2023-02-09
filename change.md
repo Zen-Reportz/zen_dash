@@ -2,7 +2,7 @@
 - fixed deployment
 
 # 0.4.12
-- fixed bug on form reactivity issue
+- fixed bug on form reactivity issue (Thank you  @everettbergeson)
 - Optional download button for Table, by default it is True
 
 # 0.4.11
