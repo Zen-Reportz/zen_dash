@@ -1,6 +1,7 @@
 [tool.poetry]
 name = "zen_dash"
-version = "0.4.13"
+version = "0.4.14"
+license = "MIT"
 description = "Simple yet scable and production ready python dashboard that is better than shiny application for business."
 readme = "README.md"
 authors = ["Zen <zenreportz@pm.me>"]
@@ -13,7 +14,7 @@ include = [
     { path = 'zen_dash/static/*.ico', format = 'sdist' },
     { path = 'zen_dash/static/*.woff2', format = 'sdist' },
     { path = 'zen_dash/static/*.woff', format = 'sdist' },
-
+    "LICENSE",
 ]
 
 [tool.poetry.dependencies]

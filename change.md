@@ -1,3 +1,6 @@
+# 0.4.14
+- added license
+
 # 0.4.13
 - fixed deployment
 
