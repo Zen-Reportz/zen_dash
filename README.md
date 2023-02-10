@@ -7,6 +7,9 @@ Zen Dash, a python package, simplifies the building analytics/BI dashboard proce
 [![license](https://img.shields.io/github/license/Zen-Reportz/zen_dash?color=green)](https://img.shields.io/github/license/Zen-Reportz/zen_dash?color=green)
 [![version](https://img.shields.io/pypi/v/zen-dash?color=green&label=pypi%20package)](https://img.shields.io/pypi/v/zen-dash?color=green&label=pypi%20package)
 
+# How to Contribute
+Please visit this page to learn how to contribute: [Link](https://github.com/Zen-Reportz/zen_dash/blob/main/how_to_contribute.md)
+
 # Why did I build Zen Dash?
 
 There are many dashboarding solutions, like shiny (R, python), Streamlit, and others. I have used all of these solutions. I enjoy building solutions. However, all of these tools and libraries lack one vital point. They are not enterprise-ready solutions. They are fragile and not scalable solutions. So, whenever I built analytics/ BI Dashboards, Even after many bandages, dashboards were delicate and unstable. 
