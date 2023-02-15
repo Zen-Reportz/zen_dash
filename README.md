@@ -7,6 +7,9 @@ Zen Dash, a python package, simplifies the building analytics/BI dashboard proce
 [![license](https://img.shields.io/github/license/Zen-Reportz/zen_dash?color=green)](https://img.shields.io/github/license/Zen-Reportz/zen_dash?color=green)
 [![version](https://img.shields.io/pypi/v/zen-dash?color=green&label=pypi%20package)](https://img.shields.io/pypi/v/zen-dash?color=green&label=pypi%20package)
 
+# How to run demo
+Learn more about how to run demo here: [Link](https://github.com/Zen-Reportz/zen_dash/wiki/How-can-I-run-demo-%3F)
+
 # How to Contribute
 Please visit this page to learn how to contribute: [Link](https://github.com/Zen-Reportz/zen_dash/blob/main/how_to_contribute.md)
 
