@@ -122,10 +122,10 @@ export class ApiCallService {
       return
     }
 
-    if (this.input_types.includes(t?.type as string)){
-      this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
-      return
-    }
+    //if (this.input_types.includes(t?.type as string)){
+    //  this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
+    //  return
+    //}
 
 
     if (this.subscription_lookup[look_up] !== undefined) {
