@@ -296,7 +296,7 @@ export class DataService {
       // case 'highchart':
       //   break;
       default:
-        console.log(input_data.type);
+        console.error(input_data.type);
     }
   }
 
