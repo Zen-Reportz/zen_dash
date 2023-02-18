@@ -62,5 +62,4 @@ Once you restart the server, the backend demo server and front end will start co
     ```
     this will complie frontend code into zen_dash/zen_dash/static folder.
 2. push code to branch
-3. create pull request
-
+3. create pull request main branch

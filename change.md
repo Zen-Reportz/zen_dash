@@ -1,3 +1,6 @@
+# 0.4.15
+- added reactivity to input as well (Thank you  @dorjeys3)
+
 # 0.4.14
 - added license
 
