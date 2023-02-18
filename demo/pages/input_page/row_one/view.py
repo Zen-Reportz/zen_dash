@@ -10,11 +10,11 @@ prefix = "/backend/input_page/row_one"
 class DateReactive(Zen):
     @staticmethod
     def full_url() -> str:
-        return f"{prefix}/first_box"
+        return f"{prefix}/date_reactive"
 
     @staticmethod
     def url() -> str:
-        return "/first_box"
+        return "/date_reactive"
 
     @staticmethod
     def view():

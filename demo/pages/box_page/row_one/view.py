@@ -18,15 +18,22 @@ class FirstBox(Zen):
 
     @staticmethod
     def view():
-        dialog_data = i.DialogBox(url=FirstBoxDialog.full_url(), height="70%", width="70%")
+        dialog_data = i.DialogBox(
+            url=FirstBoxDialog.full_url(), height="70%", width="70%")
 
-        return i.ReturnData(type=i.InstanceType.BOX, 
-                        box_data=i.BoxData(icon="person", name="Users", value="5000"),
-                        footer="5% increase compare to last week ", 
-                        tooltip_data=i.ToolTipData(label="my label", disable=False), 
-                        dialog_data=dialog_data,
-                        )
-    
+        return i.ReturnData(type=i.InstanceType.BOX,
+                            box_data=i.BoxData(
+                                icon="person", name="Users", value="5000"),
+                            footer="5% increase compare to last week ",
+                            tooltip_data=i.ToolTipData(
+                                label="my label", disable=False),
+                            dialog_data=dialog_data,
+                            )
+
+    @staticmethod
+    def websocket():
+        import random
+        return random.choice([100, "rade", "test"])
 
 
 class FirstBoxDialog(Zen):
@@ -57,7 +64,9 @@ class SecondBox(Zen):
 
     @staticmethod
     def view():
-        return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="percent", name="User Spent", value="$5000"), footer="10% increase compare to last week ")
+        return i.ReturnData(type=i.InstanceType.BOX, 
+                        box_data=i.BoxData(icon="percent", name="User Spent", value="$5000"), 
+                        footer="10% increase compare to last week ")
 
 
 class ThirdBox(Zen):
@@ -86,4 +95,3 @@ class ForthBox(Zen):
     @staticmethod
     def view():
         return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="attach_money", name="User Spent Total", value="$2000"))
-

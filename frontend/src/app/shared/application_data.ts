@@ -72,6 +72,7 @@ export class BoxData{
   icon!: string
   name!: string
   value!: string
+  websocket!: boolean
 }
 
 export class DateData{

@@ -46,6 +46,7 @@ class BoxData(BaseUpdate):
     icon: str
     name: str
     value: str
+    websocket: bool = False
 
 class DateTimeData(BaseUpdate):
     name: str
