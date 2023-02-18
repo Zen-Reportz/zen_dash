@@ -121,13 +121,17 @@ export class ApiCallService {
       // console.log("No call" + url + look_up)
       return
     }
-
+    console.log("hi")
+    console.log(look_up)
+    console.log(refresh_reason)
     if (this.input_types.includes(t?.type as string)){
       if (!((refresh_reason === 'Reactive') || (refresh_reason === 'SpecificReactive'))){
+        console.log("hi")
         this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
+        return
+
       }
 
-     return
     }
 
 
