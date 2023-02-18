@@ -127,7 +127,7 @@ export class SubEntryPointComponent implements OnInit {
   }
 
   force_refresh(){
-    this.api.getData(true, this.url, this.look_up, this.page, this.isSidebar);
+    this.api.getData(true, this.url, this.look_up, this.page, this.isSidebar, '');
 
   }
 

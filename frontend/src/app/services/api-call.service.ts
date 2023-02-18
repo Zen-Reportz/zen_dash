@@ -37,7 +37,7 @@ export class ApiCallService {
     public dialog: MatDialog
   ) {
     this.call_this.subscribe((ct) => {
-      this.getData(ct.forced, ct.url, ct.look_up, ct.page, ct.isSidebar)
+      this.getData(ct.forced, ct.url, ct.look_up, ct.page, ct.isSidebar, '')
     })
 
   }
@@ -114,7 +114,7 @@ export class ApiCallService {
   }
 
 
-  async getData(forced:boolean, url:string, look_up: string, page:string, isSidebar:boolean) {
+  async getData(forced:boolean, url:string, look_up: string, page:string, isSidebar:boolean, refresh_reason:string) {
     let t = this.ds.all_input.get(look_up)
     if (t !== undefined && !forced) {
       this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
@@ -123,8 +123,11 @@ export class ApiCallService {
     }
 
     if (this.input_types.includes(t?.type as string)){
-      this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
-      return
+      if (!((refresh_reason === 'Reactive') || (refresh_reason === 'SpecificReactive'))){
+        this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
+      }
+
+     return
     }
 
 
@@ -191,7 +194,7 @@ export class ApiCallService {
       } else {
         return
       }
-      this.getData(force, url, look_up, page, isSidebar);
+      this.getData(force, url, look_up, page, isSidebar, t);
 
     }
   }
