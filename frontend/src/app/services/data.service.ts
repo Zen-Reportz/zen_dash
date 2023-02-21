@@ -72,6 +72,7 @@ export class DataService {
 
 
     this.data_setter.subscribe((t) => {
+      console.log(t)
       this.reset_path(activatedRoute)
 
 

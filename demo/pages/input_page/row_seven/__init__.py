@@ -38,6 +38,7 @@ async def d3():
     return v.Button.view()
 
 
-@router.post(v.Button.server_url(), response_model=i.ReturnData)
+@router.post(v.Button.server_url(), response_model=i.UpdateReturnData)
 async def d3():
     return v.Button.server()
+    # return 

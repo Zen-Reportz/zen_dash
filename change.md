@@ -1,3 +1,6 @@
+# 0.4.17
+-  Button component submit can return result that can be useful for future communication.
+
 # 0.4.16
 - added reactivity to input as well (Thank you  @dorjeys3)
 

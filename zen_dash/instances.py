@@ -319,6 +319,7 @@ class UpdateInstanceType(Enum):
 
     """
     SIMPLE_FILTER = "simple_filter"
+    BUTTON_RESULT = "button_result"
 
 
 
@@ -326,4 +327,5 @@ class UpdateInstanceType(Enum):
 class UpdateReturnData(BaseUpdate):
     type: UpdateInstanceType
     simple_fitler_data: Optional[List[str]]
+    button_result: Optional[str]
     
