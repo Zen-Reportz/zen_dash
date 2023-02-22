@@ -1,3 +1,6 @@
+# 0.4.19
+- Fixed double scrolls
+
 # 0.4.18
 - Fixed bug on Second sidebar
 - allow no tabs
