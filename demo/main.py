@@ -81,7 +81,6 @@ async def title():
 
 @app.post("/backend/document")
 async def save_doc(request: Request):
-    print(await request.json())
     return "yes"
 
 
@@ -120,7 +119,7 @@ async def sidebar():
         s.FilterInfo(
             url=fv.SingleFilterServerGlobal.full_url())]
     )
-    print(x)
+    
     return x
 
 
@@ -128,14 +127,12 @@ async def sidebar():
 @app.get("/backend/sidebar2", response_model=s.Sidebar)
 async def sidebar():
     x =  s.Sidebar(tabs=[
-        s.SidebarTab(label=INPUTZENPAGE.name, icon=INPUTZENPAGE.icon),
         ],
         filters=[
         s.FilterInfo(url=fv.SingleFilterGlobal.full_url()),
         s.FilterInfo(
             url=fv.SingleFilterServerGlobal.full_url())]
     )
-    print(x)
     return x
 
 

@@ -1,5 +1,10 @@
+# 0.4.18
+- Fixed bug on Second sidebar
+- allow no tabs
+
 # 0.4.17
 -  Button component submit can return result that can be useful for future communication.
+-  Access submit button result using `{name}_result`
 
 # 0.4.16
 - added reactivity to input as well (Thank you  @dorjeys3)

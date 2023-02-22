@@ -22,6 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
   mobileQuery: MediaQueryList;
   durationInSeconds = 5;
   mySize = '500px';
+  mySize2 = '500px';
   document_id: any;
   color: string = 'primary';
   private _mobileQueryListener: () => void;
@@ -74,7 +75,6 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.show_right_sidebar = this.cs.get("show_right_sidebar")
-
 
     this.getScripts();
     this.http
@@ -156,8 +156,13 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
-  set_size(event: string) {
-    this.mySize = event;
+  set_size(event: string, second: boolean) {
+    if (second){
+      this.mySize2 = event;
+    } else{
+      this.mySize = event;
+
+    }
   }
 
   saveReport() {
