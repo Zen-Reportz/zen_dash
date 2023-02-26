@@ -1,7 +1,8 @@
-from enum import Enum
-from re import T
+from enum import Enum, unique
+import json
 from pydantic import BaseConfig, ValidationError, root_validator, validator
 from typing import List, Optional, Dict, Union
+from zen_dash.encoder import JsonEncoder
 from zen_dash.flex_data import FlexData
 from zen_dash.support import BaseUpdate
 
@@ -46,7 +47,7 @@ class BoxData(BaseUpdate):
     icon: str
     name: str
     value: str
-    websocket: bool = False
+    websocket_url: Optional[str]
 
 class DateTimeData(BaseUpdate):
     name: str
@@ -311,7 +312,8 @@ class ReturnData(BaseUpdate):
 
         return field_values
 
-class UpdateInstanceType(Enum):
+@unique
+class UpdateInstanceType(str, Enum):
     """ Docstring for class UpdateInstanceType
     Instance Type required for UpdateReturnData
 
@@ -320,6 +322,7 @@ class UpdateInstanceType(Enum):
 
     """
     SIMPLE_FILTER = "simple_filter"
+    BOX = "box"
 
 
 
@@ -327,4 +330,17 @@ class UpdateInstanceType(Enum):
 class UpdateReturnData(BaseUpdate):
     type: UpdateInstanceType
     simple_fitler_data: Optional[List[str]]
-    
+    box_data: Optional[BoxData]
+
+    @root_validator
+    def validator_type_match(cls, field_values):
+        if (field_values["type"] == UpdateInstanceType.BOX) and (field_values["box_data"] is None):
+            raise ValueError("You have selected InstanceType.BOX, and box_data is missing")
+        elif (field_values["type"] == InstanceType.SIMPLE_FILTER) and (field_values["simple_fitler_data"] is None):
+            raise ValueError("You have selected InstanceType.SIMPLE_FILTER, and simple_fitler_data is missing")
+        
+        return field_values
+
+    def json(self):
+        d = self.dict()
+        return json.dumps(d, cls=JsonEncoder)

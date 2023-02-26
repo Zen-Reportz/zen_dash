@@ -1,3 +1,8 @@
+# 0.5.0
+## Beta release Websocket
+- working websocket for Box
+- Added websocket management
+
 # 0.4.14
 - added license
 

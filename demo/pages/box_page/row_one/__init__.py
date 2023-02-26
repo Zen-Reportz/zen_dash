@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Request, WebSocket
+from fastapi import APIRouter, Request
+from fastapi.websockets import WebSocket
 from pages.box_page.row_one import view as v
 from zen_dash import instances as i
 from zen_dash import page as p
@@ -8,16 +9,17 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
+# @router.get(v.FirstBox.url_websocket())
+# async def websocket_get():
+#     pass
+
+
+
 @router.post(v.FirstBox.url(), response_model=i.ReturnData)
 async def d3(res: Request):
     return v.FirstBox.view()
 
-@router.websocket(v.FirstBox.url())
-async def d3(websocket: WebSocket):
-    await websocket.accept()
-    while True:
-        # data = await websocket.receive_text()
-        await websocket.send_text(v.FirstBox.websocket())
+
 
 @router.post(v.FirstBoxDialog.url(), response_model=p.Page)
 async def d3(res: Request):

@@ -1,5 +1,6 @@
+import asyncio
 from typing import Optional
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request, Response, WebSocket
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -10,6 +11,7 @@ from zen_dash import page as p
 from zen_dash import scripts as sc
 from pydantic import BaseConfig
 from fastapi.middleware.gzip import GZipMiddleware
+from pages.box_page.row_one import view as v
 
 from pages.input_page import INPUTZENPAGE
 from pages.chart_page import CHARTPAGE
@@ -70,7 +72,7 @@ templates = Jinja2Templates(directory=folder)
 async def root(request: Request, res: Response):
     tr = templates.TemplateResponse("index.html", {"request": request})
     tr.set_cookie("retry_count", "5")
-    tr.set_cookie("show_right_sidebar","true")
+    tr.set_cookie("show_right_sidebar", "true")
     return tr
 
 
@@ -105,9 +107,14 @@ async def scripts(request: Request):
     ])
 
 
+@app.websocket(v.FirstBox.websocket_url())
+async def websocket_func(websocket: WebSocket):
+    await v.FirstBox.websocket(websocket)
+    
+
 @app.get("/backend/sidebar", response_model=s.Sidebar)
 async def sidebar():
-    x =  s.Sidebar(tabs=[
+    x = s.Sidebar(tabs=[
         s.SidebarTab(label=INPUTZENPAGE.name, icon=INPUTZENPAGE.icon),
         s.SidebarGroup(name="Data", subtabs=[
             s.SidebarTab(label=TABLEPAGE.name, icon=TABLEPAGE.icon),
@@ -120,22 +127,19 @@ async def sidebar():
         s.FilterInfo(
             url=fv.SingleFilterServerGlobal.full_url())]
     )
-    print(x)
     return x
-
 
 
 @app.get("/backend/sidebar2", response_model=s.Sidebar)
 async def sidebar():
-    x =  s.Sidebar(tabs=[
+    x = s.Sidebar(tabs=[
         s.SidebarTab(label=INPUTZENPAGE.name, icon=INPUTZENPAGE.icon),
-        ],
+    ],
         filters=[
         s.FilterInfo(url=fv.SingleFilterGlobal.full_url()),
         s.FilterInfo(
             url=fv.SingleFilterServerGlobal.full_url())]
     )
-    print(x)
     return x
 
 
@@ -155,7 +159,6 @@ async def page_detail(fragment: Optional[str]):
         return BOXPAGE.page
     elif fragment == "page_1_3":
         return CUSTOMPAGE.page
-   
-   
+
 
 app.mount("/", StaticFiles(directory=folder), name="static")

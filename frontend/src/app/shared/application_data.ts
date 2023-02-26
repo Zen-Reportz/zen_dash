@@ -72,7 +72,7 @@ export class BoxData{
   icon!: string
   name!: string
   value!: string
-  websocket!: boolean
+  websocket_url: string | undefined
 }
 
 export class DateData{
@@ -298,7 +298,7 @@ export class ResponseData{
 export class UpdateReturnData{
   type!: string
   simple_fitler_data: string[] | undefined
-
+  box_data: BoxData | undefined
 }
 
 export class ToolTipData {

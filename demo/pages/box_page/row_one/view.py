@@ -1,8 +1,13 @@
+import asyncio
 from pages.chart_page.row_eight.view import HighchartStock
 from zen_dash import instances as i
 from zen_dash import page as p
 from zen_dash import Zen
+from zen_dash.encoder import JsonEncoder
 import random
+import json
+import time
+from fastapi.websockets import WebSocket
 
 prefix = "/backend/box_page/row_one"
 
@@ -23,7 +28,11 @@ class FirstBox(Zen):
 
         return i.ReturnData(type=i.InstanceType.BOX,
                             box_data=i.BoxData(
-                                icon="person", name="Users", value="5000"),
+                                icon="person", 
+                                name="Users", 
+                                value="5000", 
+                                websocket_url=FirstBox.websocket_url()
+                                ),
                             footer="5% increase compare to last week ",
                             tooltip_data=i.ToolTipData(
                                 label="my label", disable=False),
@@ -31,9 +40,25 @@ class FirstBox(Zen):
                             )
 
     @staticmethod
-    def websocket():
-        import random
-        return random.choice([100, "rade", "test"])
+    def websocket_url() -> str:
+        return "/backend/websocket/first_box"
+
+    @staticmethod
+    async def websocket(websocket: WebSocket):
+        await websocket.accept()
+        data = None
+        while True:
+            try:
+                data = await asyncio.wait_for(websocket.receive_text(), timeout=1)
+            except:
+                pass
+            value = random.choice(["100", "200", "300", "400"])
+            name = random.choice(["Users", "Unique Users", "Volume", "Money"])
+            icon = random.choice(["person", "home", "percent"])
+            dd = i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(
+                icon=icon, name=name, value=value))
+            await websocket.send_text(dd.json())
+            time.sleep(10)
 
 
 class FirstBoxDialog(Zen):
@@ -64,9 +89,10 @@ class SecondBox(Zen):
 
     @staticmethod
     def view():
-        return i.ReturnData(type=i.InstanceType.BOX, 
-                        box_data=i.BoxData(icon="percent", name="User Spent", value="$5000"), 
-                        footer="10% increase compare to last week ")
+        return i.ReturnData(type=i.InstanceType.BOX,
+                            box_data=i.BoxData(
+                                icon="percent", name="User Spent", value="$5000"),
+                            footer="10% increase compare to last week ")
 
 
 class ThirdBox(Zen):
