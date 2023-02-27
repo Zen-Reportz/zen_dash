@@ -55,8 +55,13 @@ class FirstBox(Zen):
             value = random.choice(["100", "200", "300", "400"])
             name = random.choice(["Users", "Unique Users", "Volume", "Money"])
             icon = random.choice(["person", "home", "percent"])
-            dd = i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(
-                icon=icon, name=name, value=value))
+            dd = i.ReturnData(type=i.InstanceType.BOX, 
+                             box_data=i.BoxData(
+                                        icon=icon, 
+                                        name=name, 
+                                        value=value, 
+                                        websocket_url=FirstBox.websocket_url())
+                            )
             await websocket.send_text(dd.json())
             time.sleep(10)
 

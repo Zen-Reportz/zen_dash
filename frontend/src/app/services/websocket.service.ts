@@ -17,7 +17,11 @@ export class WebsocketService {
     this.aRoute.queryParamMap.subscribe((fragment) => {
       // this make sure if there are no other websocket, it will be closed when page changes
       let page = this.ds.get_page();
-      this.close(page)
+      if (this.current_page !== page){
+        this.close(this.current_page)
+        this.current_page = page
+      }
+
     });
   }
 
@@ -34,9 +38,26 @@ export class WebsocketService {
     }
 
   }
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
 
 
-  connect(url: string, page: string, f: any, data: any , lookup: string) {
+  _reconnect(url: string, page: string, f: any, lookup: string){
+
+    (async () => {
+      await this.delay(1000);
+    })()
+    console.log("disconnected")
+    let current_page = this.ds.get_page()
+    if (current_page === page){
+      this.connect(url, page, f,lookup)
+      console.log("connected")
+    }
+  }
+
+
+  connect(url: string, page: string, f: any,  lookup: string) {
     // this.close(this.current_page);
     if (url.substring(0,3) === "wss") {
 
@@ -46,8 +67,13 @@ export class WebsocketService {
       url = this.ws_or_wss() + url
     }
 
+    let data = this.ds.get_all()
+    if (this.current_page !== page) {
+      this.close(this.current_page)
+      this.current_page = page;
 
-    this.current_page = page;
+    }
+
     if (this.subjects.get(page) === undefined) {
       this.subjects.set(page, new Map<string, WebSocketSubject<unknown>>());
     }
@@ -58,8 +84,8 @@ export class WebsocketService {
 
     subject.subscribe({
       next: (msg) => f(msg, this.ds, lookup), // Called whenever there is a message from the server.
-      error: (err) => console.log(err), // Called if at any point WebSocket API signals some kind of error.
-      complete: () => console.log('complete'), // Called when connection is closed (for whatever reason).
+      error: (err) => this._reconnect(url, page, f, lookup), // Called if at any point WebSocket API signals some kind of error.
+      complete: () => this._reconnect(url, page, f, lookup), // Called when connection is closed (for whatever reason).
     });
     subject.next(data);
     p.set(url, subject);

@@ -26,7 +26,7 @@ export class BoxComponent implements OnInit, OnDestroy {
       let url = this.ds.all_input.get(this.url)?.box_data?.websocket_url as string
       let p = this.ds.get_page()
       let data = this.ds.get_all()
-      this.websocket.connect(url, p, this.c_this, data, this.url)
+      this.websocket.connect(url, p, this.c_this, this.url)
     }
   }
 
