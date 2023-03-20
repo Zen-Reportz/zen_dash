@@ -72,7 +72,6 @@ export class BoxData{
   icon!: string
   name!: string
   value!: string
-  websocket_url: string | undefined
 }
 
 export class DateData{
@@ -292,6 +291,7 @@ export class ResponseData{
   tooltip_data: ToolTipData | undefined
   dialog_data: DialogData | undefined
   form_data: FormCustomData | undefined
+  websocket_url: string | undefined
 }
 
 

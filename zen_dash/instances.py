@@ -47,7 +47,7 @@ class BoxData(BaseUpdate):
     icon: str
     name: str
     value: str
-    websocket_url: Optional[str]
+    
 
 class DateTimeData(BaseUpdate):
     name: str
@@ -258,9 +258,13 @@ class ReturnData(BaseUpdate):
     dialog_data: Optional[DialogBox]
     button_data: Optional[ButtonData]
     form_data: Optional[FormData]
+    websocket_url: Optional[str]
 
     @root_validator
     def validator_type_match(cls, field_values):
+        if (field_values["type"] != InstanceType.BOX) and (field_values["websocket_url"] is not None):
+            raise ValueError("Websocket is only supported for Box Data")
+
         if (field_values["type"] == InstanceType.BOX) and (field_values["box_data"] is None):
             raise ValueError("You have selected InstanceType.BOX, and box_data is missing")
         elif (field_values["type"] == InstanceType.DATE) and (field_values["date_data"] is None):

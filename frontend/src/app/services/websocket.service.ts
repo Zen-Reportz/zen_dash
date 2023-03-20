@@ -8,21 +8,12 @@ import { DataService } from './data.service';
 })
 export class WebsocketService {
   subjects: Map<string, Map<string, WebSocketSubject<unknown>>> = new Map();
-  current_page: string = '';
   constructor(
     private aRoute: ActivatedRoute,
     private ds: DataService,
 
   ) {
-    this.aRoute.queryParamMap.subscribe((fragment) => {
-      // this make sure if there are no other websocket, it will be closed when page changes
-      let page = this.ds.get_page();
-      if (this.current_page !== page){
-        this.close(this.current_page)
-        this.current_page = page
-      }
 
-    });
   }
 
   ws_or_wss(){
@@ -58,6 +49,8 @@ export class WebsocketService {
 
 
   connect(url: string, page: string, f: any,  lookup: string) {
+
+
     // this.close(this.current_page);
     if (url.substring(0,3) === "wss") {
 
@@ -68,18 +61,16 @@ export class WebsocketService {
     }
 
     let data = this.ds.get_all()
-    if (this.current_page !== page) {
-      this.close(this.current_page)
-      this.current_page = page;
 
-    }
 
     if (this.subjects.get(page) === undefined) {
       this.subjects.set(page, new Map<string, WebSocketSubject<unknown>>());
     }
     let p = this.subjects.get(page) as Map<string, WebSocketSubject<unknown>>;
-    console.log(url)
+    // if (p.get(url)!== undefined){
 
+    //   p.delete(url)
+    // }
     const subject = webSocket(url);
 
     subject.subscribe({
@@ -89,19 +80,35 @@ export class WebsocketService {
     });
     subject.next(data);
     p.set(url, subject);
+    this.aRoute.queryParamMap.subscribe((fragment) => {
+      // this make sure if there are no other websocket, it will be closed when page changes
+      let new_page = this.ds.get_page();
+      if (page !== new_page){
+        subject.complete()
+      }
+
+    });
   }
 
-  close(page: string) {
-    let p = this.subjects.get(page);
-    if (p !== undefined) {
-      p.forEach((value: WebSocketSubject<unknown>, key: string) => {
-        value.complete();
-      });
-    }
-  }
+  // close(page: string) {
+  //   let p = this.subjects.get(page) as Map<string, WebSocketSubject<unknown>>;
+  //   if (p !== undefined) {
+  //     p.forEach((value: WebSocketSubject<unknown>, key: string) => {
+  //       console.log(1)
+  //       value.unsubscribe()
+  //       value.complete();
+  //       console.log(value.closed)
+  //       console.log(2)
 
-  send(data: any, page: string) {
+  //     });
+  //   }
+
+  // }
+
+  send(page: string) {
     let p = this.subjects.get(page) as Map<string, WebSocketSubject<unknown>>;
+    let data = this.ds.get_all()
+
     if (p !== undefined) {
       p.forEach((value: WebSocketSubject<unknown>, key: string) => {
         value.next(data);

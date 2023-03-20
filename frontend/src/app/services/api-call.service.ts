@@ -35,7 +35,8 @@ export class ApiCallService {
   constructor(
     private ds: DataService,
     private callService: CallServiceService,
-    public dialog: MatDialog  ) {
+    public dialog: MatDialog ,
+    public websocket: WebsocketService ) {
     this.call_this.subscribe((ct) => {
       this.getData(ct.forced, ct.url, ct.look_up, ct.page, ct.isSidebar)
     })

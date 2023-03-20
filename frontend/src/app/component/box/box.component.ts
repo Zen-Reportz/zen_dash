@@ -17,15 +17,14 @@ export class BoxComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    let p = this.ds.get_page()
-    this.websocket.close(p)
+    // let p = this.ds.get_page()
+    // this.websocket.close(p)
   }
 
   ngOnInit(): void {
-    if (this.ds.all_input.get(this.url)?.box_data?.websocket_url !== undefined) {
-      let url = this.ds.all_input.get(this.url)?.box_data?.websocket_url as string
+    if (this.ds.all_input.get(this.url)?.websocket_url !== undefined) {
+      let url = this.ds.all_input.get(this.url)?.websocket_url as string
       let p = this.ds.get_page()
-      let data = this.ds.get_all()
       this.websocket.connect(url, p, this.c_this, this.url)
     }
   }

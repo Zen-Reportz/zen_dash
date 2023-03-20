@@ -13,6 +13,9 @@ router = APIRouter(
 # async def websocket_get():
 #     pass
 
+@router.get(v.FirstBox.websocket_url())
+async def websocket_endpoint(websocket: WebSocket):
+    await v.FirstBox.websocket(websocket)
 
 
 @router.post(v.FirstBox.url(), response_model=i.ReturnData)

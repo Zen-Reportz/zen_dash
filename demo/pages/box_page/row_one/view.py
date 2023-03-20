@@ -30,9 +30,8 @@ class FirstBox(Zen):
                             box_data=i.BoxData(
                                 icon="person", 
                                 name="Users", 
-                                value="5000", 
-                                websocket_url=FirstBox.websocket_url()
-                                ),
+                                value="5000"),
+                            websocket_url=FirstBox.websocket_url(),
                             footer="5% increase compare to last week ",
                             tooltip_data=i.ToolTipData(
                                 label="my label", disable=False),
@@ -50,6 +49,7 @@ class FirstBox(Zen):
         while True:
             try:
                 data = await asyncio.wait_for(websocket.receive_text(), timeout=1)
+                print(data)
             except:
                 pass
             value = random.choice(["100", "200", "300", "400"])
@@ -59,8 +59,8 @@ class FirstBox(Zen):
                              box_data=i.BoxData(
                                         icon=icon, 
                                         name=name, 
-                                        value=value, 
-                                        websocket_url=FirstBox.websocket_url())
+                                        value=value),
+                             websocket_url=FirstBox.websocket_url()
                             )
             await websocket.send_text(dd.json())
             time.sleep(10)
