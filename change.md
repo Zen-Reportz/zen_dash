@@ -1,4 +1,4 @@
-# 0.4.20
+# 0.4.22
 - Added pythonic way creating html code
 ```python
 from zen_dash import tag as t

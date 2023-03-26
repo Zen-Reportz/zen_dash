@@ -35,14 +35,14 @@ class TAG:
             return f'<{self.tag} id="{self.id}" style="{self.style}" {others} >{self.childern}</{self.tag}>'
         if isinstance(self.childern, TAG):
            
-            return f'<{self.tag} id="{self.id}" style="{self.style}" {others} >{self.childern.complie()}</{self.tag}>'
+            return f'<{self.tag} id="{self.id}" style="{self.style}" {others} >{self.childern.compile()}</{self.tag}>'
         elif isinstance(self.childern, list):
             d = [ ]
             for dd in self.childern:
                 if isinstance(dd, str):
                     d.append(dd)
                 elif isinstance(dd, TAG):
-                    d.append(dd.complie())
+                    d.append(dd.compile())
                 else:
                     raise Exception('data need to be str or TAG type')
             d = ' '.join(d)
