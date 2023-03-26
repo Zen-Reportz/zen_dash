@@ -25,5 +25,4 @@ async def d3():
 @router.post(v.NewMethod.url(), response_model=i.ReturnData)
 async def d3():
     t = v.NewMethod.view()
-    print(t)
     return t
