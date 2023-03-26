@@ -1,3 +1,4 @@
+from zen_dash import tag as t
 CustomHTMLData = """
     <mat-grid-list  cols="2" rowheight="3:1" class="mat-grid-list test" ng-reflect-cols="2" ng-reflect-row-height="3:1" style="padding-bottom: calc(33.3333% + 0px); background-color:red">
         <div style="background-color:red">
@@ -58,3 +59,14 @@ CustomHTML2Data = """
         <mat-card-footer  class="mat-card-footer ng-star-inserted" style="font-size: 10px; text-align: center;"> 5% increase compare to last week  
         </mat-card-footer>
 </mat-card>"""
+
+
+NEWMETHOD = t.CENTER(childern=[
+                         t.H1(childern=[
+                                 'Welcome to ',
+                                 t.U(
+                                     style={'color': 'red'},
+                                     childern=t.A(childern='Zen Dash', other_attributes={'href': 'https://github.com/Zen-Reportz/zen_dash'}))
+                             ]
+                         )
+                     ])

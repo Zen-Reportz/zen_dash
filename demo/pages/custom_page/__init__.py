@@ -11,6 +11,8 @@ custom_page =  p.Page(
                       p.Instance(url=view.FullCustomHTML.full_url())]),
             p.Row(
                 data=[p.Instance(url=view.IFrame.full_url())]),
+            p.Row(
+                data=[p.Instance(url=view.NewMethod.full_url())]),
 
 
         ])

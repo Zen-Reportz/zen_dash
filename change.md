@@ -1,3 +1,29 @@
+# 0.4.20
+- Added pythonic way creating html code
+```python
+from zen_dash import tag as t
+
+NEWMETHOD = t.CENTER(childern=[
+                         t.H1(childern=[
+                                 'Welcome to ',
+                                 t.U(
+                                     style={'color': 'red'},
+                                     childern=t.A(childern='Zen Dash', other_attributes={'href': 'https://github.com/Zen-Reportz/zen_dash'}))
+                             ]
+                         )
+                     ])
+```
+will generate when you compile
+```html
+<center >
+    <h1>Welcome to 
+        <u style=" color:red;"  >
+            <a href="https://github.com/Zen-Reportz/zen_dash" >Zen Dash</a>
+        </u>
+    </h1>
+</center>
+```
+
 # 0.4.19
 - Fixed double scrolls
 

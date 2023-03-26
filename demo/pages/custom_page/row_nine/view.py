@@ -1,4 +1,4 @@
-from pages.custom_page.row_nine.customer_html import CustomHTMLData, CustomHTML2Data
+from pages.custom_page.row_nine.customer_html import NEWMETHOD, CustomHTMLData, CustomHTML2Data
 from pages.table_page.row_nine.table import TableDataInfo
 from zen_dash import Zen
 from zen_dash.flex_data import FlexData
@@ -59,5 +59,22 @@ class FullCustomHTML(Zen):
         return i.ReturnData(type=i.InstanceType.CUSTOM_HTML,
                             custom_html_data=i.CustomHTML(
                                 name="test", full_custom=True, html=CustomHTML2Data)
+                            )
+
+
+class NewMethod(Zen):
+    @staticmethod
+    def full_url() -> str:
+        return f"{prefix}/new_method"
+
+    @staticmethod
+    def url() -> str:
+        return "/new_method"
+
+    @staticmethod
+    def view():
+        return i.ReturnData(type=i.InstanceType.CUSTOM_HTML,
+                            custom_html_data=i.CustomHTML(
+                                name="test", full_custom=False, html=NEWMETHOD.compile())
                             )
 

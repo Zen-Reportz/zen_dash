@@ -22,3 +22,8 @@ async def d3():
 async def d3():
     return v.FullCustomHTML.view()
 
+@router.post(v.NewMethod.url(), response_model=i.ReturnData)
+async def d3():
+    t = v.NewMethod.view()
+    print(t)
+    return t
