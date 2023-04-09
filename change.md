@@ -1,3 +1,10 @@
+# 0.5.1
+- Working websocket 
+## Breaking change
+- adding tab_number in ZenPage
+- added subtab_number in ZenPage
+- added new method of render page
+- added websocket_calls and pydantic_class in Zen Page to support websocket
 # 0.5.0
 ## Beta release Websocket
 - working websocket for Box
