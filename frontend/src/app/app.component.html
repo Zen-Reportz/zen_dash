@@ -5,7 +5,7 @@
   <span>{{ title }}</span>
 
   <div fxFlex fxLayoutAlign="end end">
-    <span *ngIf="show_right_sidebar === 'true'">
+    <span *ngIf="call.show_right_sidebar()">
       <button mat-icon-button (click)="snav2.toggle()">
         <mat-icon>menu</mat-icon>
       </button>

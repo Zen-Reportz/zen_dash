@@ -1,5 +1,6 @@
 from enum import Enum, unique
 import json
+from json import JSONEncoder
 from pydantic import BaseConfig, ValidationError, root_validator, validator
 from typing import List, Optional, Dict, Union
 from zen_dash.encoder import JsonEncoder
@@ -8,7 +9,11 @@ from zen_dash.support import BaseUpdate
 
 BaseConfig.arbitrary_types_allowed = True  # change #1
 
-
+class JsonEncoder(JSONEncoder):
+        def default(self, o):
+            if isinstance(o, Enum):
+                return o.value
+            return o   
 
 class InstanceType(Enum):
     """ Docstring for class InstanceType
@@ -258,13 +263,9 @@ class ReturnData(BaseUpdate):
     dialog_data: Optional[DialogBox]
     button_data: Optional[ButtonData]
     form_data: Optional[FormData]
-    websocket_url: Optional[str]
 
     @root_validator
     def validator_type_match(cls, field_values):
-        if (field_values["type"] != InstanceType.BOX) and (field_values["websocket_url"] is not None):
-            raise ValueError("Websocket is only supported for Box Data")
-
         if (field_values["type"] == InstanceType.BOX) and (field_values["box_data"] is None):
             raise ValueError("You have selected InstanceType.BOX, and box_data is missing")
         elif (field_values["type"] == InstanceType.DATE) and (field_values["date_data"] is None):

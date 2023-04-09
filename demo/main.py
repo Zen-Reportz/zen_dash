@@ -1,4 +1,5 @@
 import asyncio
+import json
 from typing import Optional
 from fastapi import FastAPI, Request, Response, WebSocket
 from fastapi.responses import HTMLResponse
@@ -6,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import pkg_resources
 from pages.box_page import BOXPAGE
-from zen_dash import sidebar as s
+from zen_dash import Configuration, get_page_dict, sidebar as s
 from zen_dash import page as p
 from zen_dash import scripts as sc
 from pydantic import BaseConfig
@@ -38,6 +39,7 @@ from pages.custom_page import row_nine as crn
 
 import filters as f
 from filters import view as fv
+from zen_dash.websocket import PageInfo, PageW, run_websocket_data, send_data
 BaseConfig.arbitrary_types_allowed = True  # change #1
 
 app = FastAPI()
@@ -71,10 +73,14 @@ templates = Jinja2Templates(directory=folder)
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request, res: Response):
     tr = templates.TemplateResponse("index.html", {"request": request})
-    tr.set_cookie("retry_count", "5")
-    tr.set_cookie("show_right_sidebar", "true")
     return tr
 
+@app.get("/backend/configuration", response_model=Configuration)
+async def config():
+    print("config")
+    import time
+    time.sleep(100)
+    return Configuration(activate_websocket=True)
 
 @app.get("/backend/title")
 async def title():
@@ -83,7 +89,6 @@ async def title():
 
 @app.post("/backend/document")
 async def save_doc(request: Request):
-    print(await request.json())
     return "yes"
 
 
@@ -107,9 +112,13 @@ async def scripts(request: Request):
     ])
 
 
-@app.websocket(v.FirstBox.websocket_url())
+@app.websocket("/backend/ws")
 async def websocket_func(websocket: WebSocket):
-    await v.FirstBox.websocket(websocket)
+    p = [BOXPAGE]
+    await websocket.accept()
+    while True:
+        await send_data(websocket, p)
+
     
 
 @app.get("/backend/sidebar", response_model=s.Sidebar)
@@ -142,23 +151,14 @@ async def sidebar():
     )
     return x
 
-
-# fxFlex_md: Optional[str] = "40%"
-# fxFlex_lt_md: Optional[str] = "100%"
-
+PAGEDICT = get_page_dict([INPUTZENPAGE, TABLEPAGE, CHARTPAGE, BOXPAGE, CUSTOMPAGE])
 
 @app.get("/backend/page_detail", response_model=p.Page)
 async def page_detail(fragment: Optional[str]):
-    if fragment == "page_0":
-        return INPUTZENPAGE.page
-    elif fragment == "page_1_0":
-        return TABLEPAGE.page
-    elif fragment == "page_1_1":
-        return CHARTPAGE.page
-    elif fragment == "page_1_2":
-        return BOXPAGE.page
-    elif fragment == "page_1_3":
-        return CUSTOMPAGE.page
-
+    p = PAGEDICT.get(fragment)
+    if p:
+        return p.page
+    else:
+        raise Exception("Page is not define")
 
 app.mount("/", StaticFiles(directory=folder), name="static")

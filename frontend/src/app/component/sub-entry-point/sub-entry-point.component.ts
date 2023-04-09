@@ -58,10 +58,17 @@ export class SubEntryPointComponent implements OnInit {
     this.page = this.ds.get_page()
 
     this.ds.input_emitter.subscribe((rr:ResponseReturn) => {
+
       if (rr.lookup !== this.look_up){
         return
       }
+
+      // console.log(1)
+      // console.log(rr.lookup)
+      // console.log(this.look_up)
+      // console.log(2)
       if (rr.message !== undefined){
+        // console.log("message is not undefined")
         this.loading = true;
         this.failed = true
         this.error = rr.message

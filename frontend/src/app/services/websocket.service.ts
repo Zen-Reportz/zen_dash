@@ -1,13 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { DataService } from './data.service';
+import { ResponseData } from '../shared/application_data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WebsocketService {
-  subjects: Map<string, Map<string, WebSocketSubject<unknown>>> = new Map();
+  subject!: WebSocketSubject<unknown> | undefined
   constructor(
     private aRoute: ActivatedRoute,
     private ds: DataService,
@@ -16,8 +17,20 @@ export class WebsocketService {
 
   }
 
-  ws_or_wss(){
 
+  request_change(){
+      let data = this.ds.get_all()
+      if (this.subject !== undefined){
+        this.subject.next(data);
+      } else {
+        console.log("websocket is not present")
+      }
+
+
+
+  }
+
+  ws_or_wss(){
     if (window.location.href.split("/?")[0].includes("https")){
       let url =  window.location.href.split("?")[0].split("https://")[1]
       url = url.substring(0,url.length-1);
@@ -27,92 +40,63 @@ export class WebsocketService {
       url = url.substring(0,url.length-1);
       return "ws://" + url
     }
-
   }
+
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
+  save_data(message:any, ds:DataService){
 
-  _reconnect(url: string, page: string, f: any, lookup: string){
 
-    (async () => {
-      await this.delay(1000);
-    })()
-    console.log("disconnected")
-    let current_page = this.ds.get_page()
-    if (current_page === page){
-      this.connect(url, page, f,lookup)
-      console.log("connected")
+
+    for (const [key, value] of Object.entries(message)) {
+
+      let parsed_value = JSON.parse(value as string)  as ResponseData
+      ds.input_emitter.emit({"calling": true, "lookup": key, "t": undefined, "message": undefined})
+
+      let p = new Promise(resolve => setTimeout(resolve, 2000))
+      p.then(() => {
+        ds.all_input.delete(key);
+        ds.all_input.set(key, parsed_value);
+        ds.input_emitter.emit({"calling": false, "lookup": key, "t": parsed_value, "message": undefined})
+      })
+
     }
+
   }
 
 
-  connect(url: string, page: string, f: any,  lookup: string) {
 
 
-    // this.close(this.current_page);
-    if (url.substring(0,3) === "wss") {
+  connect(url: string, error: any=undefined) {
 
-    } else if (url.substring(0, 2) === "ws") {
+    if (error === "complete"){
+      delete this.subject
+    }
+    if (error !== undefined){
 
-    } else {
-      url = this.ws_or_wss() + url
+      console.log(error)
     }
 
+    let final_url = this.ws_or_wss() + url
     let data = this.ds.get_all()
 
+    let p = new Promise(resolve => setTimeout(resolve, 10000))
 
-    if (this.subjects.get(page) === undefined) {
-      this.subjects.set(page, new Map<string, WebSocketSubject<unknown>>());
-    }
-    let p = this.subjects.get(page) as Map<string, WebSocketSubject<unknown>>;
-    // if (p.get(url)!== undefined){
+    p.then(() => {
+      this.subject = webSocket(final_url);
 
-    //   p.delete(url)
-    // }
-    const subject = webSocket(url);
-
-    subject.subscribe({
-      next: (msg) => f(msg, this.ds, lookup), // Called whenever there is a message from the server.
-      error: (err) => this._reconnect(url, page, f, lookup), // Called if at any point WebSocket API signals some kind of error.
-      complete: () => this._reconnect(url, page, f, lookup), // Called when connection is closed (for whatever reason).
-    });
-    subject.next(data);
-    p.set(url, subject);
-    this.aRoute.queryParamMap.subscribe((fragment) => {
-      // this make sure if there are no other websocket, it will be closed when page changes
-      let new_page = this.ds.get_page();
-      if (page !== new_page){
-        subject.complete()
-      }
-
-    });
-  }
-
-  // close(page: string) {
-  //   let p = this.subjects.get(page) as Map<string, WebSocketSubject<unknown>>;
-  //   if (p !== undefined) {
-  //     p.forEach((value: WebSocketSubject<unknown>, key: string) => {
-  //       console.log(1)
-  //       value.unsubscribe()
-  //       value.complete();
-  //       console.log(value.closed)
-  //       console.log(2)
-
-  //     });
-  //   }
-
-  // }
-
-  send(page: string) {
-    let p = this.subjects.get(page) as Map<string, WebSocketSubject<unknown>>;
-    let data = this.ds.get_all()
-
-    if (p !== undefined) {
-      p.forEach((value: WebSocketSubject<unknown>, key: string) => {
-        value.next(data);
+      this.subject.subscribe({
+        next: (msg) => this.save_data(msg, this.ds), // Called whenever there is a message from the server.
+        error: (err) => this.connect(final_url, err), // Called if at any point WebSocket API signals some kind of error.
+        complete: () => this.connect(final_url, "complete"), // Called when connection is closed (for whatever reason).
       });
-    }
+      this.subject.next(data);
+
+    })
+
+
   }
+
 }

@@ -82,5 +82,7 @@ inputPage = p.Page(
 INPUTZENPAGE = ZenPage(
     name= "Inputs",
     icon= "delete",
-    page= inputPage
+    page= inputPage,
+    tab_number=1,
+    subtab_number=0
 )

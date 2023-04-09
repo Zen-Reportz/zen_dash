@@ -1,4 +1,6 @@
 import asyncio
+
+from pydantic import BaseModel
 from pages.chart_page.row_eight.view import HighchartStock
 from zen_dash import instances as i
 from zen_dash import page as p
@@ -11,6 +13,8 @@ from fastapi.websockets import WebSocket
 
 prefix = "/backend/box_page/row_one"
 
+class BoxInput(BaseModel):
+    page: str
 
 class FirstBox(Zen):
     @staticmethod
@@ -22,49 +26,23 @@ class FirstBox(Zen):
         return "/first_box"
 
     @staticmethod
-    def view():
+    async def view(b: BoxInput):
+        await asyncio.sleep(10)
         dialog_data = i.DialogBox(
             url=FirstBoxDialog.full_url(), height="70%", width="70%")
-
+        import random
+        name = random.choice(["Users", "Spent"])
+        Value = random.choice(["5009", "200"])
         return i.ReturnData(type=i.InstanceType.BOX,
                             box_data=i.BoxData(
                                 icon="person", 
-                                name="Users", 
-                                value="5000"),
-                            websocket_url=FirstBox.websocket_url(),
+                                name=name, 
+                                value=Value),
                             footer="5% increase compare to last week ",
                             tooltip_data=i.ToolTipData(
                                 label="my label", disable=False),
                             dialog_data=dialog_data,
                             )
-
-    @staticmethod
-    def websocket_url() -> str:
-        return "/backend/websocket/first_box"
-
-    @staticmethod
-    async def websocket(websocket: WebSocket):
-        await websocket.accept()
-        data = None
-        while True:
-            try:
-                data = await asyncio.wait_for(websocket.receive_text(), timeout=1)
-                print(data)
-            except:
-                pass
-            value = random.choice(["100", "200", "300", "400"])
-            name = random.choice(["Users", "Unique Users", "Volume", "Money"])
-            icon = random.choice(["person", "home", "percent"])
-            dd = i.ReturnData(type=i.InstanceType.BOX, 
-                             box_data=i.BoxData(
-                                        icon=icon, 
-                                        name=name, 
-                                        value=value),
-                             websocket_url=FirstBox.websocket_url()
-                            )
-            await websocket.send_text(dd.json())
-            time.sleep(10)
-
 
 class FirstBoxDialog(Zen):
     @staticmethod
@@ -76,7 +54,7 @@ class FirstBoxDialog(Zen):
         return '/first_box_dialog'
 
     @staticmethod
-    def view():
+    async def view(b: BoxInput):
         return p.Page(
             rows=[
                 p.Row(data=[
@@ -93,7 +71,7 @@ class SecondBox(Zen):
         return "/second_box"
 
     @staticmethod
-    def view():
+    async def view(b:BoxInput):
         return i.ReturnData(type=i.InstanceType.BOX,
                             box_data=i.BoxData(
                                 icon="percent", name="User Spent", value="$5000"),
@@ -110,7 +88,7 @@ class ThirdBox(Zen):
         return "/third_box"
 
     @staticmethod
-    def view():
+    async def view(b:BoxInput):
         return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="attach_money", name="User Spent (last hour)", value="$400"))
 
 
@@ -124,5 +102,5 @@ class ForthBox(Zen):
         return '/forth_box'
 
     @staticmethod
-    def view():
+    async def view(b:BoxInput):
         return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="attach_money", name="User Spent Total", value="$2000"))

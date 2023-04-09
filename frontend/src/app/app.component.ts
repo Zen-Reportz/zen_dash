@@ -11,6 +11,7 @@ import { DomSanitizer, Title } from '@angular/platform-browser';
 import { CustomScripts } from './shared/application_data';
 import { Clipboard } from '@angular/cdk/clipboard';
 import {CookieService} from 'ngx-cookie-service';
+import { WebsocketService } from './services/websocket.service';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private _mobileQueryListener: () => void;
   checked = false;
   runRefresh!: any;
-  show_right_sidebar!: string
+  show_right_sidebar!: boolean
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -36,59 +37,84 @@ export class AppComponent implements OnInit, OnDestroy {
     public ds: DataService,
     private _snackBar: MatSnackBar,
     private aRoute: ActivatedRoute,
-    private call: CallServiceService,
+    public call: CallServiceService,
     private titleService: Title,
     private clipboard: Clipboard,
-    private cs: CookieService
-  ) {
-    this.ds.data_setter.subscribe((t) => {
-      this.color = 'warn';
-    });
+    private ws: WebsocketService  ) {
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
 
-    this.aRoute.queryParamMap.subscribe((fragment) => {
-
-      let page = this.ds.get_page();
-      // this.ds.refresh.emit('PageRefresh');
-      if (this.ds.data['global'] === undefined) {
-        this.ds.data['global'] = {};
-      }
-
-      this.ds.data['global']['page'] = page;
-      this.color = 'primary';
-    });
   }
 
   ngOnDestroy() {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  ngOnInit() {
 
+  setTitle(){
+    this.http
+    .get<string>(this.call.my_url() + 'backend/title')
+    .subscribe((data) => {
+      this.titleService.setTitle(data);
+      this.title = data;
+    });
+  }
+
+  setGlobals(){
+    this.ws.request_change()
+    let page = this.ds.get_page();
+    if (this.ds.data['global'] === undefined) {
+      this.ds.data['global'] = {};
+    }
+
+    this.ds.data['global']['page'] = page;
+    this.color = 'primary';
+  }
+
+  sendWSRequest(){
+    if (this.call.config.activate_websocket) {
+      this.ws.request_change()
+    }
+  }
+
+  trigger_load(){
     this._snackBar.openFromComponent(LoadingComponent, {
       duration: 5 * 1000,
+      panelClass: ['full_width'],
       data: { message: 'API called Sucessfully ', status: 'loading' },
     });
+  }
 
-    this.show_right_sidebar = this.cs.get("show_right_sidebar")
+  ngOnInit() {
+    this.call.pullConfiguration()
 
+    this.ds.data_setter.subscribe((t) => {
+      this.color = 'warn';
+    });
+
+    this.aRoute.queryParamMap.subscribe((fragment) => {
+      this.setGlobals()
+    });
+    this.trigger_load()
+
+    this.show_right_sidebar = this.call.config.show_right_sidebar
 
     this.getScripts();
-    this.http
-      .get<string>(this.call.my_url() + 'backend/title')
-      .subscribe((data) => {
-        this.titleService.setTitle(data);
-        this.title = data;
-      });
+    this.setTitle()
+
   }
 
   refresh_data() {
     this.color = 'primary';
 
-    this.ds.refresh.emit('RefreshButton');
+    if (this.call.config.activate_websocket){
+      this.ws.request_change()
+    } else {
+      this.ds.refresh.emit('RefreshButton');
+    }
+
 
     this.ds.save_default();
     this._snackBar.openFromComponent(LoadingComponent, {
@@ -194,13 +220,26 @@ export class AppComponent implements OnInit, OnDestroy {
       );
   }
 
-  call_refresh(ds: any) {
-    ds.refresh.emit("AutoRefresh");
+  call_refresh(call: CallServiceService, ds: DataService, ws: WebsocketService) {
+    console.log("call refresh")
+    console.log(call.config.activate_websocket)
+    if (call.config.activate_websocket){
+      ws.request_change()
+    } else {
+      ds.refresh.emit("AutoRefresh");
+    }
+
   }
 
   set_auto(event: any) {
+    console.log(event)
     if (event.checked) {
-      this.runRefresh = setInterval(this.call_refresh, 5 * 60 * 1000, this.ds);
+      console.log("123")
+      this.runRefresh = setInterval(this.call_refresh,
+        1 * 60 * 1000,
+        this.call,
+        this.ds,
+        this.ws);
     } else {
       clearInterval(this.runRefresh);
     }

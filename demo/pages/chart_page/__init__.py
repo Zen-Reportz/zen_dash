@@ -19,5 +19,7 @@ chart_page = p.Page(
 CHARTPAGE = ZenPage(
     name= "Charts",
     icon= "home",
-    page= chart_page
+    page= chart_page,
+    tab_number=1,
+    subtab_number=1
 )

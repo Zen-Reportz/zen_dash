@@ -1,7 +1,7 @@
-<span *ngIf="data['status'] === 'success'">
+<span *ngIf="data['status'] === 'success'" style=" width: 100%; display: inline-block;">
   <span class="success"> {{ data["message"] }}</span>
   <br>
-  <span class="success"> Brought you by Zen Reportz</span>
+  <span class="success"> Built using Zen Dash </span>
 </span>
 
 <span *ngIf="data['status'] === 'warn'">
@@ -12,7 +12,7 @@
   <span class="error"> {{ data["message"] }}</span>
 </span>
 
-<span *ngIf="data['status'] === 'loading'">
-  <span class="success"> Brought you by Zen Reportz</span>
+<span *ngIf="data['status'] === 'loading'" style="width: 100%; display: inline-block;">
+  <span class="success"> Built using Zen Dash </span>
 </span>
 
