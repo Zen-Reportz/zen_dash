@@ -1,4 +1,4 @@
-from objects.instances import *
+from zen_dash.objects.instances import *
 import warnings
 
 warnings.warn("""
