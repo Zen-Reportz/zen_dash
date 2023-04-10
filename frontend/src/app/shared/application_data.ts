@@ -299,6 +299,7 @@ export class UpdateReturnData{
   type!: string
   simple_fitler_data: string[] | undefined
   box_data: BoxData | undefined
+  button_result: string | undefined
 }
 
 export class ToolTipData {

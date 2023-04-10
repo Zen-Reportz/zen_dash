@@ -37,9 +37,8 @@ export class ApiCallService {
     private callService: CallServiceService,
     public dialog: MatDialog  ) {
     this.call_this.subscribe((ct) => {
-      this.getData(ct.forced, ct.url, ct.look_up, ct.page, ct.isSidebar)
+      this.getData(ct.forced, ct.url, ct.look_up, ct.page, ct.isSidebar, '')
     })
-
 
   }
 
@@ -127,26 +126,22 @@ export class ApiCallService {
         // console.log("called" + url + look_up)
   }
 
-  async getData(forced:boolean, url:string, look_up: string, page:string, isSidebar:boolean) {
-    // console.log(forced)
-    // console.log(url)
-    // console.log(look_up)
-    // console.log(page)
-    // console.log(isSidebar)
+  async getData(forced:boolean, url:string, look_up: string, page:string, isSidebar:boolean, refresh_reason:string) {
     let t = this.ds.all_input.get(look_up)
-    // console.log(t)
     if (t !== undefined && !forced) {
       this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
-      console.log("No call" + url + look_up)
+      // console.log("No call" + url + look_up)
       return
     }
+    if (this.input_types.includes(t?.type as string)){
+      if (!((refresh_reason === 'Reactive') || (refresh_reason === 'SpecificReactive'))){
+        console.log("hi")
+        this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
+        return
 
-    // if (this.input_types.includes(t?.type as string)){
-    //   console.log(this.input_types.includes(t?.type as string))
-    //   console.log("No call 1" + url + look_up)
-    //   this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
-    //   return
-    // }
+      }
+
+    }
 
 
     if (this.subscription_lookup[look_up] !== undefined) {
@@ -205,7 +200,7 @@ export class ApiCallService {
       } else {
         return
       }
-      this.getData(force, url, look_up, page, isSidebar);
+      this.getData(force, url, look_up, page, isSidebar, t);
 
     }
   }

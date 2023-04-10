@@ -134,13 +134,11 @@ export class SubEntryPointComponent implements OnInit {
   }
 
   force_refresh(){
-    this.api.getData(true, this.url, this.look_up, this.page, this.isSidebar);
-
+    this.api.getData(true, this.url, this.look_up, this.page, this.isSidebar, '');
   }
 
 
   openDialog(){
-
     if (this.dialog_data){
       const dialogRef = this.dialog.open(DialogComponent, {
         height: this.dialog_data.height,

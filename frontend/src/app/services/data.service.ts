@@ -72,6 +72,7 @@ export class DataService {
 
 
     this.data_setter.subscribe((t) => {
+      console.log(t)
       this.reset_path(activatedRoute)
 
 
@@ -299,7 +300,7 @@ export class DataService {
       // case 'highchart':
       //   break;
       default:
-        console.log(input_data.type);
+        console.error(input_data.type);
     }
   }
 

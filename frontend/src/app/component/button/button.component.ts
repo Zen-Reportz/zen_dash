@@ -1,4 +1,4 @@
-import { ButtonData, MEData } from './../../shared/application_data';
+import { ButtonData, MEData, UpdateReturnData } from './../../shared/application_data';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from 'src/app/services/data.service';
@@ -20,11 +20,17 @@ export class ButtonComponent implements OnInit {
     private callService: CallServiceService,
     private _snackBar: MatSnackBar) { }
 
-  reactiveity(type: string){
+  reactiveity(type: string, value: string = ""){
     let m = new MEData();
     m.page = this.ds.dataLookup(false);
     m.key = this.ds.all_input.get(this.url)?.button_data?.name as string + "_" +type
-    m.value = this.ds.makeid(2);
+
+    if (value === ""){
+      m.value = this.ds.makeid(2);
+    } else {
+      m.value = value
+    }
+
     m.url = this.url + "_" +type;
     this.ds.data_setter.emit(m);
 
@@ -45,6 +51,13 @@ export class ButtonComponent implements OnInit {
     let p = this.callService.second_call_response(this.data.url, this.data.name, '');
     this.second_call = p.subscribe(
       (res) => {
+        try {
+          var tt : UpdateReturnData = res
+          this.reactiveity("result", tt.button_result)
+        } catch {
+
+        }
+
         this._snackBar.openFromComponent(LoadingComponent, {
           duration: 5 * 1000,
           data: { message: 'API called Sucessfully ', status: 'success' },

@@ -30,13 +30,13 @@
 <mat-sidenav-container class="app-container">
   <mat-sidenav #snav [mode]="'over'" [style.width]="mySize" class="app-sidenav">
     <mat-nav-list>
-      <app-sidebar (size)="set_size($event)" [url]="'backend/sidebar'"></app-sidebar>
+      <app-sidebar (size)="set_size($event, false)" [url]="'backend/sidebar'"></app-sidebar>
     </mat-nav-list>
 
   </mat-sidenav>
-  <mat-sidenav #snav2 [position]="'end'" [mode]="'over'" [style.width]="mySize" class="app-sidenav">
+  <mat-sidenav #snav2 [position]="'end'" [mode]="'over'" [style.width]="mySize2" class="app-sidenav">
     <mat-nav-list>
-      <app-sidebar (size)="set_size($event)" [url]="'backend/sidebar2'"></app-sidebar>
+      <app-sidebar (size)="set_size($event, true)" [url]="'backend/sidebar2'"></app-sidebar>
     </mat-nav-list>
 
   </mat-sidenav>

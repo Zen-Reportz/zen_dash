@@ -10,6 +10,7 @@ Subpackages
    zen_dash.cli
    zen_dash.project_management
    zen_dash.support
+   zen_dash.tag
 
 Submodules
 ----------

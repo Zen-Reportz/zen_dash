@@ -15,5 +15,5 @@ async def form():
 
 @router.post(v.Form.server_url())
 async def form_submit(req: Request):
-    print(await req.json())
+    v.Form.server()
     

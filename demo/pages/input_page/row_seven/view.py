@@ -129,4 +129,8 @@ class Button(Zen):
 
     @staticmethod
     def server() -> str:
-        print("working")
+        return i.UpdateReturnData(
+            title="button data",
+            type=i.UpdateInstanceType.BUTTON_RESULT,
+            button_result="My Result"
+        )
