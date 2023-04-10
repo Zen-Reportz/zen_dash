@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from pages.table_page.row_two import view as v
-from zen_dash import instances as i
-from zen_dash.flex_data import FlexData
+from zen_dash.objects import instances as i
+from zen_dash.objects.flex_data import FlexData
 
 router = APIRouter(
     prefix=v.prefix,

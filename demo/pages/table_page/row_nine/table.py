@@ -1,4 +1,4 @@
-from zen_dash import instances as i
+from zen_dash.objects import instances as i
 
 TableDataInfo= {
     "columns":[i.TableColumn(columnDef="name", header="Name"),

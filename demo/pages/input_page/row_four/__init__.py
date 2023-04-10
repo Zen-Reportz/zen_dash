@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from pages.input_page.row_four import view as v
-from zen_dash import instances as i
+from zen_dash.objects import instances as i
 
 router = APIRouter(
     prefix=v.prefix,

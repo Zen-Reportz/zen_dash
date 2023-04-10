@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Request
-from zen_dash import instances as i
+from zen_dash.objects import instances as i
 from filters import view as v
 
 

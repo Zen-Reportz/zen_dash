@@ -5,7 +5,7 @@ from typing import List, Type
 from fastapi import WebSocket
 from pydantic import BaseModel, root_validator
 from zen_dash import ZenPage
-from zen_dash.encoder import JsonEncoder
+from zen_dash.support.encoder import JsonEncoder
 
 async def consumer(queue):
     
@@ -49,15 +49,22 @@ async def send_data(websocket: WebSocket, pages: List[ZenPage], myencoder=JsonEn
             await websocket.send_json({key: v1})
 
 async def run_func(d, wc,p):
-    v = await wc.view(d)
+    if d is None:
+        v = await wc.view()
+    else:
+        v = await wc.view(d)
     return f"{wc.full_url()}$ZenLookup${p}", v
 
 async def run_websocket_data(page:Type[ZenPage], data:dict):
     p = data["page"]
-    d = page.pydantic_class(**data)
+    if page.pydantic_class is None:
+        calls = [ run_func(None, wc, p) for wc in page.websocket_calls]
+    else:    
+        d = page.pydantic_class(**data)
+        calls = [ run_func(d, wc, p) for wc in page.websocket_calls]
     
 
-    calls = [ run_func(d, wc, p) for wc in page.websocket_calls]
+    
     for coro in asyncio.as_completed(calls):
         result = await coro
         yield result

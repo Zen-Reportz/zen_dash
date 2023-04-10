@@ -1,5 +1,5 @@
 from pages.chart_page.row_eight.view import HighchartStock
-from zen_dash import instances as i
+from zen_dash.objects import instances as i
 from zen_dash import page as p
 from zen_dash import Zen
 import random
@@ -20,11 +20,11 @@ class DateReactive(Zen):
     def view():
         t = [i.ReturnData(type=i.InstanceType.DATE,
                           date_data=i.DateTimeData(
-                              label="Select Date Range", name="multi_date", first_date="2020-11-24", second_date="2022-11-24"),
-                          reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data']), flex=i.FlexData(fxFlex='25%', fxFlex_md='50%', fxFlex_sm='100%', fxFlex_xs='100%')),
+                              label="Select Date Range 1", name="multi_date", first_date="2020-11-24", second_date="2022-11-24"),
+                          reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data'])),
              i.ReturnData(type=i.InstanceType.DATE,
                           date_data=i.DateTimeData(
-                              label="Select Date Range", name="multi_date", first_date="2020-11-10", second_date="2022-03-24"),
+                              label="Select Date Range 2", name="multi_date", first_date="2020-11-10", second_date="2022-03-24"),
                           reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data'])),
              ]
         return random.choice(t)
@@ -52,11 +52,11 @@ class Date(Zen):
 
         t = [i.ReturnData(type=i.InstanceType.DATE,
                           date_data=i.DateTimeData(
-                              label="Select Date Range", name="multi_date", first_date="2020-11-24", second_date="2022-11-24"),
-                          reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data']), flex=i.FlexData(fxFlex='25%', fxFlex_md='50%', fxFlex_sm='100%', fxFlex_xs='100%')),
+                              label="Select Date Range", name="multi_date", first_date="2021-01-20", second_date="2023-01-20"),
+                          reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data'])),
              i.ReturnData(type=i.InstanceType.DATE,
                           date_data=i.DateTimeData(
-                              label="Select Date Range", name="multi_date", first_date="2020-11-10", second_date="2022-03-24"),
+                              label="Select Date Range", name="multi_date", first_date="2020-11-10", second_date="2022-03-22"),
                           reactive=i.ReactiveData(hidden=False, reactive_ids=['single_toggle_data']))]
         return random.choice(t)
 

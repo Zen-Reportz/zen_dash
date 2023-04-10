@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request
 from fastapi.websockets import WebSocket
 from pages.box_page.row_one import view as v
-from zen_dash import instances as i
+from zen_dash.objects import instances as i
 from zen_dash import page as p
 router = APIRouter(
     prefix=v.prefix,

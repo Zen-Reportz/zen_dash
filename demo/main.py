@@ -7,9 +7,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import pkg_resources
 from pages.box_page import BOXPAGE
-from zen_dash import Configuration, get_page_dict, sidebar as s
 from zen_dash import page as p
-from zen_dash import scripts as sc
+from zen_dash.objects import Configuration, scripts as sc, sidebar as s
 from pydantic import BaseConfig
 from fastapi.middleware.gzip import GZipMiddleware
 from pages.box_page.row_one import view as v
@@ -77,9 +76,6 @@ async def root(request: Request, res: Response):
 
 @app.get("/backend/configuration", response_model=Configuration)
 async def config():
-    print("config")
-    import time
-    time.sleep(100)
     return Configuration(activate_websocket=True)
 
 @app.get("/backend/title")
@@ -114,7 +110,7 @@ async def scripts(request: Request):
 
 @app.websocket("/backend/ws")
 async def websocket_func(websocket: WebSocket):
-    p = [BOXPAGE]
+    p = [BOXPAGE, CHARTPAGE, TABLEPAGE, CUSTOMPAGE]
     await websocket.accept()
     while True:
         await send_data(websocket, p)
@@ -151,14 +147,9 @@ async def sidebar():
     )
     return x
 
-PAGEDICT = get_page_dict([INPUTZENPAGE, TABLEPAGE, CHARTPAGE, BOXPAGE, CUSTOMPAGE])
 
 @app.get("/backend/page_detail", response_model=p.Page)
 async def page_detail(fragment: Optional[str]):
-    p = PAGEDICT.get(fragment)
-    if p:
-        return p.page
-    else:
-        raise Exception("Page is not define")
+    return p.RenderPage([INPUTZENPAGE, TABLEPAGE, CHARTPAGE, BOXPAGE, CUSTOMPAGE], fragment)
 
 app.mount("/", StaticFiles(directory=folder), name="static")

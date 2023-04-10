@@ -1,5 +1,5 @@
 import click
-from zen_dash import project_management as pm
+from zen_dash.cli import project_management as pm
 
 
 @click.command()

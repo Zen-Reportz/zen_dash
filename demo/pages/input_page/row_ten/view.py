@@ -1,5 +1,5 @@
 from zen_dash import Zen
-from zen_dash import instances as i
+from zen_dash.objects import instances as i
 from pages.input_page.row_ten.form import formdata, formSchema, formUISchema
 
 prefix="/backend/input_page/row_ten"

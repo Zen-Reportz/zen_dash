@@ -1,6 +1,8 @@
 from pages.chart_page.row_eight.highchart_data import HighChart2Config, HighChartConfig, HighChartStockConfig
-from zen_dash import Zen, instances as i
+from zen_dash import Zen
 from fastapi.responses import FileResponse
+
+from zen_dash.objects import instances as i
 
 prefix = "/backend/chart_page/row_eight"
 
