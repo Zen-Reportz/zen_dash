@@ -5,6 +5,7 @@
 - added subtab_number in ZenPage
 - added new method of render page
 - added websocket_calls and pydantic_class in Zen Page to support websocket
+- fix bug with reactivity
 # 0.5.0
 ## Beta release Websocket
 - working websocket for Box
