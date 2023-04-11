@@ -10,3 +10,4 @@ frontend/.vscode/**
 **/venv/**
 **/demo_venv/**
 publish.sh
+.idea/*
