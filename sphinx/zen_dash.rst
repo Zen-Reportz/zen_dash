@@ -8,9 +8,10 @@ Subpackages
    :maxdepth: 4
 
    zen_dash.cli
-   zen_dash.project_management
+   zen_dash.objects
    zen_dash.support
    zen_dash.tag
+   zen_dash.websocket
 
 Submodules
 ----------
@@ -35,6 +36,14 @@ zen\_dash.page module
 ---------------------
 
 .. automodule:: zen_dash.page
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+zen\_dash.route module
+----------------------
+
+.. automodule:: zen_dash.route
    :members:
    :undoc-members:
    :show-inheritance:

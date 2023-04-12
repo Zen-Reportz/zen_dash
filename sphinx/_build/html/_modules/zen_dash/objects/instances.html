@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zen_dash.objects.instances &mdash; zen-dash  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> zen-dash
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">zen_dash</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">zen-dash</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../objects.html">zen_dash.objects</a> &raquo;</li>
+      <li>zen_dash.objects.instances</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for zen_dash.objects.instances</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">unique</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">JSONEncoder</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseConfig</span><span class="p">,</span> <span class="n">ValidationError</span><span class="p">,</span> <span class="n">root_validator</span><span class="p">,</span> <span class="n">validator</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">zen_dash.support.encoder</span> <span class="kn">import</span> <span class="n">JsonEncoder</span>
+<span class="kn">from</span> <span class="nn">zen_dash.objects.flex_data</span> <span class="kn">import</span> <span class="n">FlexData</span>
+<span class="kn">from</span> <span class="nn">zen_dash.support</span> <span class="kn">import</span> <span class="n">BaseUpdate</span>
+
+<span class="n">BaseConfig</span><span class="o">.</span><span class="n">arbitrary_types_allowed</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># change #1</span>
+
+<div class="viewcode-block" id="InstanceType"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.InstanceType">[docs]</a><span class="k">class</span> <span class="nc">InstanceType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Docstring for class InstanceType</span>
+<span class="sd">    Instance Type required for ReturnData</span>
+
+<span class="sd">    :return: Instance Type for Enum</span>
+<span class="sd">    :rtype: Enum</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">DATE</span><span class="o">=</span> <span class="s2">&quot;date&quot;</span>
+    <span class="n">BOX</span> <span class="o">=</span> <span class="s2">&quot;box&quot;</span>
+    <span class="n">TABLE</span> <span class="o">=</span> <span class="s2">&quot;table&quot;</span>
+    <span class="n">CHART</span> <span class="o">=</span> <span class="s2">&quot;chart&quot;</span>
+    <span class="n">CHECKBOX</span> <span class="o">=</span> <span class="s2">&quot;checkbox&quot;</span>
+    <span class="n">RADIO</span> <span class="o">=</span> <span class="s2">&quot;radio&quot;</span>
+    <span class="n">SIMPLE_FILTER</span> <span class="o">=</span> <span class="s2">&quot;simple_filter&quot;</span>
+    <span class="n">SIMPLE_SERVER_FILTER</span> <span class="o">=</span> <span class="s2">&quot;simple_server_filter&quot;</span>
+    <span class="n">GROUP_FILTER</span> <span class="o">=</span> <span class="s2">&quot;group_filter&quot;</span>
+    <span class="n">SLIDER</span> <span class="o">=</span> <span class="s2">&quot;slider&quot;</span>
+    <span class="n">BUTTON_TOGGLE</span> <span class="o">=</span> <span class="s2">&quot;button_toggle&quot;</span>
+    <span class="n">TOGGLE</span> <span class="o">=</span> <span class="s2">&quot;toggle&quot;</span>
+    <span class="n">MULTI_LIST</span> <span class="o">=</span> <span class="s2">&quot;multi_list&quot;</span>
+    <span class="n">MULTI_TABS</span> <span class="o">=</span> <span class="s2">&quot;multi_tabs&quot;</span>
+    <span class="n">MULTI_EXPAND</span> <span class="o">=</span> <span class="s2">&quot;multi_expand&quot;</span>
+    <span class="n">INPUT</span> <span class="o">=</span> <span class="s2">&quot;input&quot;</span>
+    <span class="n">DOWNLOAD</span> <span class="o">=</span> <span class="s2">&quot;download&quot;</span>
+    <span class="n">UPLOAD</span> <span class="o">=</span> <span class="s2">&quot;upload&quot;</span>
+    <span class="n">IMAGE</span> <span class="o">=</span> <span class="s2">&quot;image&quot;</span>
+    <span class="n">HIGHCHART</span> <span class="o">=</span> <span class="s2">&quot;highchart&quot;</span>
+    <span class="n">IFRAME</span> <span class="o">=</span> <span class="s2">&quot;iframe&quot;</span>
+    <span class="n">CUSTOM_HTML</span><span class="o">=</span><span class="s2">&quot;custom_html&quot;</span>
+    <span class="n">BUTTON</span> <span class="o">=</span> <span class="s2">&quot;button&quot;</span>
+    <span class="n">FORM</span> <span class="o">=</span> <span class="s2">&quot;form&quot;</span></div>
+
+<div class="viewcode-block" id="BoxData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.BoxData">[docs]</a><span class="k">class</span> <span class="nc">BoxData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">icon</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">value</span><span class="p">:</span> <span class="nb">str</span></div>
+    
+
+<div class="viewcode-block" id="DateTimeData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.DateTimeData">[docs]</a><span class="k">class</span> <span class="nc">DateTimeData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">first_date</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">second_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="TableColumn"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.TableColumn">[docs]</a><span class="k">class</span> <span class="nc">TableColumn</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">columnDef</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">header</span><span class="p">:</span> <span class="nb">str</span></div>
+
+<div class="viewcode-block" id="TableData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.TableData">[docs]</a><span class="k">class</span> <span class="nc">TableData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">TableColumn</span><span class="p">]</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">items_per_page_options</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+    <span class="n">items_per_page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">allow_download</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span></div>
+    
+<div class="viewcode-block" id="ChartData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ChartData">[docs]</a><span class="k">class</span> <span class="nc">ChartData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span></div>
+
+<div class="viewcode-block" id="CheckBoxInstance"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.CheckBoxInstance">[docs]</a><span class="k">class</span> <span class="nc">CheckBoxInstance</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">selected</span><span class="p">:</span> <span class="nb">bool</span></div>
+    
+<div class="viewcode-block" id="Style"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.Style">[docs]</a><span class="k">class</span> <span class="nc">Style</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">horizontal</span> <span class="o">=</span> <span class="s2">&quot;Horizontal&quot;</span>
+    <span class="n">vertical</span> <span class="o">=</span> <span class="s2">&quot;Vertical&quot;</span></div>
+
+<div class="viewcode-block" id="CheckBoxData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.CheckBoxData">[docs]</a><span class="k">class</span> <span class="nc">CheckBoxData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CheckBoxInstance</span><span class="p">]</span>
+    <span class="n">style</span><span class="p">:</span> <span class="n">Style</span> <span class="o">=</span> <span class="n">Style</span><span class="o">.</span><span class="n">horizontal</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span></div>
+
+<div class="viewcode-block" id="RadioData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.RadioData">[docs]</a><span class="k">class</span> <span class="nc">RadioData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">style</span><span class="p">:</span> <span class="n">Style</span> <span class="o">=</span> <span class="n">Style</span><span class="o">.</span><span class="n">horizontal</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">selected</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="SliderData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.SliderData">[docs]</a><span class="k">class</span> <span class="nc">SliderData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="nb">max</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="nb">min</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">step</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">thumbLabel</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">invert</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">vertical</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="ButtonToggleInstance"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ButtonToggleInstance">[docs]</a><span class="k">class</span> <span class="nc">ButtonToggleInstance</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">selected</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="ButtonToggleData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ButtonToggleData">[docs]</a><span class="k">class</span> <span class="nc">ButtonToggleData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">multi</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ButtonToggleInstance</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="GroupedFilterDataInstance"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.GroupedFilterDataInstance">[docs]</a><span class="k">class</span> <span class="nc">GroupedFilterDataInstance</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">group_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="InputData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.InputData">[docs]</a><span class="k">class</span> <span class="nc">InputData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="GroupedFilterData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.GroupedFilterData">[docs]</a><span class="k">class</span> <span class="nc">GroupedFilterData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">multi</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">GroupedFilterDataInstance</span><span class="p">]</span>
+    <span class="n">selected</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="SimpleFilterData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.SimpleFilterData">[docs]</a><span class="k">class</span> <span class="nc">SimpleFilterData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">multi</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">selected</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+<div class="viewcode-block" id="SimpleServerSideFilterData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.SimpleServerSideFilterData">[docs]</a><span class="k">class</span> <span class="nc">SimpleServerSideFilterData</span><span class="p">(</span><span class="n">SimpleFilterData</span><span class="p">):</span>
+    <span class="n">url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="ToggleData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ToggleData">[docs]</a><span class="k">class</span> <span class="nc">ToggleData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">checked</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="MultiURLInfo"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.MultiURLInfo">[docs]</a><span class="k">class</span> <span class="nc">MultiURLInfo</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">with_card</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span></div>
+
+<div class="viewcode-block" id="MultiData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.MultiData">[docs]</a><span class="k">class</span> <span class="nc">MultiData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">urls</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MultiURLInfo</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="ReactiveData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ReactiveData">[docs]</a><span class="k">class</span> <span class="nc">ReactiveData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">full_rective</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">reactive_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">hidden</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="DownloadData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.DownloadData">[docs]</a><span class="k">class</span> <span class="nc">DownloadData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span></div>
+
+<div class="viewcode-block" id="ImageData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ImageData">[docs]</a><span class="k">class</span> <span class="nc">ImageData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">str</span></div>
+
+<div class="viewcode-block" id="UploadData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.UploadData">[docs]</a><span class="k">class</span> <span class="nc">UploadData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">multi</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span>  <span class="kc">False</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span></div>
+
+<div class="viewcode-block" id="HighChartType"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.HighChartType">[docs]</a><span class="k">class</span> <span class="nc">HighChartType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">CHART</span> <span class="o">=</span> <span class="s2">&quot;chart&quot;</span>
+    <span class="n">STOCK</span> <span class="o">=</span> <span class="s2">&quot;stock&quot;</span>
+    <span class="n">MAP</span> <span class="o">=</span> <span class="s2">&quot;map&quot;</span></div>
+
+<div class="viewcode-block" id="HighChartData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.HighChartData">[docs]</a><span class="k">class</span> <span class="nc">HighChartData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">HighChartType</span> <span class="o">=</span> <span class="n">HighChartType</span><span class="o">.</span><span class="n">CHART</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span></div>
+
+<div class="viewcode-block" id="IframeData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.IframeData">[docs]</a><span class="k">class</span> <span class="nc">IframeData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1100&quot;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;400&quot;</span></div>
+
+<div class="viewcode-block" id="ToolTipData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ToolTipData">[docs]</a><span class="k">class</span> <span class="nc">ToolTipData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span></div>
+
+<div class="viewcode-block" id="DialogBox"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.DialogBox">[docs]</a><span class="k">class</span> <span class="nc">DialogBox</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">height</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;60%&#39;</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;60%&#39;</span></div>
+
+<div class="viewcode-block" id="CustomHTML"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.CustomHTML">[docs]</a><span class="k">class</span> <span class="nc">CustomHTML</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">html</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">full_custom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">script</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="ButtonData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ButtonData">[docs]</a><span class="k">class</span> <span class="nc">ButtonData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span></div>
+
+<div class="viewcode-block" id="SubmitFormData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.SubmitFormData">[docs]</a><span class="k">class</span> <span class="nc">SubmitFormData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span></div>
+
+<div class="viewcode-block" id="FormData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.FormData">[docs]</a><span class="k">class</span> <span class="nc">FormData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">submit_info</span><span class="p">:</span> <span class="n">SubmitFormData</span>
+    <span class="n">form_schema</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="n">ui_schema</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span></div>
+
+
+<div class="viewcode-block" id="ReturnData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ReturnData">[docs]</a><span class="k">class</span> <span class="nc">ReturnData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main return object use for everything except /backend/page_detail, /backend/sidebar, and /backend/title</span>
+<span class="sd">    depdning upon which type (InstanceType) you select, you have to select corsponding return value </span>
+
+<span class="sd">    for example, if you select BOX as input, you have to choose box_data as one of  input.</span>
+
+<span class="sd">    Example: i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon=&quot;attach_money&quot;, name=&quot;User Spent&quot;, value=&quot;$5000&quot;), footer=&quot;10% increase compare to last week &quot;)</span>
+
+<span class="sd">    :param type: InstanceType this will dectate what type of output will be render</span>
+<span class="sd">    :param title: Optional[str] tile of mat box in which output will be render</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">type</span><span class="p">:</span><span class="n">InstanceType</span>
+    <span class="n">title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">chart_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ChartData</span><span class="p">]</span>
+    <span class="n">box_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BoxData</span><span class="p">]</span>
+    <span class="n">date_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DateTimeData</span><span class="p">]</span>
+    <span class="n">checkbox_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CheckBoxData</span><span class="p">]</span>
+    <span class="n">radio_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">RadioData</span><span class="p">]</span>
+    <span class="n">slider_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SliderData</span><span class="p">]</span>
+    <span class="n">button_toggle_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ButtonToggleData</span><span class="p">]</span>
+    <span class="n">table_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TableData</span><span class="p">]</span>
+    <span class="n">toggle_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ToggleData</span><span class="p">]</span>
+    <span class="n">multi_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MultiData</span><span class="p">]</span>
+    <span class="n">simple_filter_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SimpleFilterData</span><span class="p">]</span> 
+    <span class="n">simple_server_filter_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SimpleServerSideFilterData</span><span class="p">]</span> 
+    <span class="n">group_filter_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">GroupedFilterData</span> <span class="p">]</span>
+    <span class="n">input_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">InputData</span><span class="p">]</span>
+    <span class="n">download_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DownloadData</span><span class="p">]</span>
+    <span class="n">upload_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">UploadData</span><span class="p">]</span>
+    <span class="n">image_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ImageData</span><span class="p">]</span>
+    <span class="n">highchart_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">HighChartData</span><span class="p">]</span>
+    <span class="n">iframe_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">IframeData</span><span class="p">]</span>
+    <span class="n">custom_html_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CustomHTML</span><span class="p">]</span>
+    <span class="n">footer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="n">flex</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FlexData</span><span class="p">]</span> <span class="o">=</span> <span class="n">FlexData</span><span class="p">()</span>
+    <span class="n">reactive</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReactiveData</span><span class="p">]</span> <span class="o">=</span> <span class="n">ReactiveData</span><span class="p">()</span>
+    <span class="n">tooltip_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ToolTipData</span><span class="p">]</span>
+    <span class="n">dialog_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DialogBox</span><span class="p">]</span>
+    <span class="n">button_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ButtonData</span><span class="p">]</span>
+    <span class="n">form_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FormData</span><span class="p">]</span>
+
+<div class="viewcode-block" id="ReturnData.validator_type_match"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ReturnData.validator_type_match">[docs]</a>    <span class="nd">@root_validator</span>
+    <span class="k">def</span> <span class="nf">validator_type_match</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">field_values</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">BOX</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;box_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.BOX, and box_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">DATE</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;date_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.DATE, and date_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">TABLE</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;table_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.TABLE, and table_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">CHART</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;chart_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.CHART, and chart_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">CHECKBOX</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;checkbox_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.CHECKBOX, and checkbox_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">RADIO</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;radio_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.RADIO, and radio_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">SIMPLE_FILTER</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;simple_filter_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.SIMPLE_FILTER, and simple_filter_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">SIMPLE_SERVER_FILTER</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;simple_server_filter_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.SIMPLE_SERVER_FILTER, and simple_server_filter_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">GROUP_FILTER</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;group_filter_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.GROUP_FILTER, and group_filter_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">SLIDER</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;slider_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.SLIDER, and slider_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">BUTTON_TOGGLE</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;button_toggle_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.BUTTON_TOGGLE, and button_toggle_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">TOGGLE</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;toggle_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.TOGGLE, and toggle_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">MULTI_LIST</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;multi_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.MULTI_LIST, and multi_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">MULTI_TABS</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;multi_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.MULTI_TABS, and multi_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">MULTI_EXPAND</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;multi_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.MULTI_EXPAND, and multi_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">INPUT</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;input_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.INPUT, and input_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">DOWNLOAD</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;download_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.DOWNLOAD, and download_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">UPLOAD</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;upload_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.UPLOAD, and upload_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">IMAGE</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;image_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.IMAGE, and image_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">IFRAME</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;iframe_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.IFRAME, and iframe_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">HIGHCHART</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;highchart_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.HIGHCHART, and highchart_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">CUSTOM_HTML</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;custom_html_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.CUSTOM_HTML, and custom_html_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">BUTTON</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;button_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.BUTTON, and button_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">FORM</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;form_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.FORM, and form_data is missing&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">field_values</span></div></div>
+
+<div class="viewcode-block" id="UpdateInstanceType"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.UpdateInstanceType">[docs]</a><span class="nd">@unique</span>
+<span class="k">class</span> <span class="nc">UpdateInstanceType</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Docstring for class UpdateInstanceType</span>
+<span class="sd">    Instance Type required for UpdateReturnData</span>
+
+<span class="sd">    :return: Update Instance Type for Enum</span>
+<span class="sd">    :rtype: Enum</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">SIMPLE_FILTER</span> <span class="o">=</span> <span class="s2">&quot;simple_filter&quot;</span>
+    <span class="n">BOX</span> <span class="o">=</span> <span class="s2">&quot;box&quot;</span></div>
+
+
+
+
+<div class="viewcode-block" id="UpdateReturnData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData">[docs]</a><span class="k">class</span> <span class="nc">UpdateReturnData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="n">UpdateInstanceType</span>
+    <span class="n">simple_fitler_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+    <span class="n">box_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BoxData</span><span class="p">]</span>
+
+<div class="viewcode-block" id="UpdateReturnData.validator_type_match"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData.validator_type_match">[docs]</a>    <span class="nd">@root_validator</span>
+    <span class="k">def</span> <span class="nf">validator_type_match</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">field_values</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">UpdateInstanceType</span><span class="o">.</span><span class="n">BOX</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;box_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.BOX, and box_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">SIMPLE_FILTER</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;simple_fitler_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.SIMPLE_FILTER, and simple_fitler_data is missing&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">field_values</span></div>
+
+<div class="viewcode-block" id="UpdateReturnData.json"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData.json">[docs]</a>    <span class="k">def</span> <span class="nf">json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">JsonEncoder</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, zen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

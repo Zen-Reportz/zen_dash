@@ -1,15 +1,14 @@
-# 0.5.2
+# 0.5.3
 - Simplified websocket 
 - Added RenderPage exception tab number is missing
 
-# 0.5.1
+# 0.5.2
 - Working websocket 
 ## Breaking change
-- adding tab_number in ZenPage
-- added subtab_number in ZenPage
 - added new method of render page
+
+# 0.5.1
 - added websocket_calls and pydantic_class in Zen Page to support websocket
-- fix bug with reactivity
 
 # 0.5.0
 ## Beta release Websocket
