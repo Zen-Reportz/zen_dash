@@ -30,12 +30,12 @@ export class ApiCallService {
   data_type = ['box', 'table', 'chart', 'image', 'highchart', 'custom_html'];
   call_this = new EventEmitter<CallInfo>()
   call_api = {}
+  data_ :any = {}
 
   constructor(
     private ds: DataService,
     private callService: CallServiceService,
-    public dialog: MatDialog
-  ) {
+    public dialog: MatDialog  ) {
     this.call_this.subscribe((ct) => {
       this.getData(ct.forced, ct.url, ct.look_up, ct.page, ct.isSidebar, '')
     })
@@ -113,6 +113,18 @@ export class ApiCallService {
     return name
   }
 
+  updateData(isSidebar:boolean, url:string, page:string, t:ResponseData, look_up:string){
+    this.saveData(isSidebar, url, page)
+    let reactive = t?.reactive as ReactiveData;
+    let type = t?.type as string;
+    let name = this.set_name(t)
+
+    this.unsubscribe(look_up);
+    this.subscribe(type, look_up, url, reactive, name, page, isSidebar);
+    this.ds.all_input.set(look_up, t);
+    this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
+        // console.log("called" + url + look_up)
+  }
 
   async getData(forced:boolean, url:string, look_up: string, page:string, isSidebar:boolean, refresh_reason:string) {
     let t = this.ds.all_input.get(look_up)
@@ -148,15 +160,8 @@ export class ApiCallService {
     this.ds.all_input.delete(look_up);
     this.subscription_lookup[look_up] =  await p.subscribe({
       next: (t: ResponseData) => {
-        this.saveData(isSidebar, url, page)
-        let reactive = t?.reactive as ReactiveData;
-        let type = t?.type as string;
-        let name = this.set_name(t)
 
-        this.unsubscribe(look_up);
-        this.subscribe(type, look_up, url, reactive, name, page, isSidebar);
-        this.ds.all_input.set(look_up, t);
-        this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
+        this.updateData(isSidebar, url, page, t, look_up)
         // console.log("called" + url + look_up)
         return
       },
@@ -249,7 +254,7 @@ export class ApiCallService {
 
     let look_up = this.lookup(isSidebar, url)
     let pull = false;
-    let d = sessionStorage.getItem(look_up);
+    let d = this.data_[look_up] //sessionStorage.getItem(look_up);
     let dd = {
       global: this.ds.data['global'],
       page: this.ds.data[page],
@@ -297,7 +302,8 @@ export class ApiCallService {
     let current_data = JSON.stringify(dd);
     // console.log(current_data)
     // console.log(this.ds.get_all())
-    sessionStorage.setItem(look_up, current_data);
+    // sessionStorage.setItem(look_up, current_data);
+    this.data_[look_up] = current_data
 
   }
 }

@@ -1,7 +1,7 @@
 from zen_dash import Zen
-from zen_dash import instances as i
+from zen_dash.objects import instances as i
 from pages.input_page.row_five import view as rfv
-from zen_dash.flex_data import FlexData
+from zen_dash.objects.flex_data import FlexData
 
 prefix="/backend/input_page/row_six"
 

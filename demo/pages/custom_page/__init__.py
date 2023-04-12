@@ -21,5 +21,7 @@ custom_page =  p.Page(
 CUSTOMPAGE = ZenPage(
     name= "Custom",
     icon= "home",
-    page= custom_page
+    page= custom_page,
+    tab_number=1,
+    subtab_number=3
 )

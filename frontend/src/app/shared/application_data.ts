@@ -291,12 +291,14 @@ export class ResponseData{
   tooltip_data: ToolTipData | undefined
   dialog_data: DialogData | undefined
   form_data: FormCustomData | undefined
+  websocket_url: string | undefined
 }
 
 
 export class UpdateReturnData{
   type!: string
   simple_fitler_data: string[] | undefined
+  box_data: BoxData | undefined
   button_result: string | undefined
 }
 

@@ -162,7 +162,7 @@ export class DataService {
   }
 
   input_lookup(page: string, url: string) {
-    return url + '--' + page;
+    return url + '$ZenLookup$' + page;
   }
 
   trueTypeOf(obj: any) {
@@ -176,6 +176,9 @@ export class DataService {
       return this.get_page();
     }
   }
+
+
+
 
   save_instance(input_data: ResponseData, value: any, url: string) {
     switch (input_data.type) {

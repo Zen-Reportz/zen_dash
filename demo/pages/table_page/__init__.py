@@ -24,5 +24,7 @@ table_page = p.Page(
 TABLEPAGE = ZenPage(
     name= "Table",
     icon= "home",
-    page= table_page
+    page= table_page,
+    tab_number=1,
+    subtab_number=0
 )

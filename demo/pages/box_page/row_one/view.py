@@ -1,11 +1,20 @@
+import asyncio
+
+from pydantic import BaseModel
 from pages.chart_page.row_eight.view import HighchartStock
-from zen_dash import instances as i
+from zen_dash.objects import instances as i
 from zen_dash import page as p
 from zen_dash import Zen
+from zen_dash.support.encoder import JsonEncoder
 import random
+import json
+import time
+from fastapi.websockets import WebSocket
 
 prefix = "/backend/box_page/row_one"
 
+class BoxInput(BaseModel):
+    page: str
 
 class FirstBox(Zen):
     @staticmethod
@@ -17,17 +26,23 @@ class FirstBox(Zen):
         return "/first_box"
 
     @staticmethod
-    def view():
-        dialog_data = i.DialogBox(url=FirstBoxDialog.full_url(), height="70%", width="70%")
-
-        return i.ReturnData(type=i.InstanceType.BOX, 
-                        box_data=i.BoxData(icon="person", name="Users", value="5000"),
-                        footer="5% increase compare to last week ", 
-                        tooltip_data=i.ToolTipData(label="my label", disable=False), 
-                        dialog_data=dialog_data,
-                        )
-    
-
+    async def view(b: BoxInput):
+        await asyncio.sleep(10)
+        dialog_data = i.DialogBox(
+            url=FirstBoxDialog.full_url(), height="70%", width="70%")
+        import random
+        name = random.choice(["Users", "Spent"])
+        Value = random.choice(["5009", "200"])
+        return i.ReturnData(type=i.InstanceType.BOX,
+                            box_data=i.BoxData(
+                                icon="person", 
+                                name=name, 
+                                value=Value),
+                            footer="5% increase compare to last week ",
+                            tooltip_data=i.ToolTipData(
+                                label="my label", disable=False),
+                            dialog_data=dialog_data,
+                            )
 
 class FirstBoxDialog(Zen):
     @staticmethod
@@ -39,7 +54,7 @@ class FirstBoxDialog(Zen):
         return '/first_box_dialog'
 
     @staticmethod
-    def view():
+    async def view(b: BoxInput):
         return p.Page(
             rows=[
                 p.Row(data=[
@@ -56,8 +71,11 @@ class SecondBox(Zen):
         return "/second_box"
 
     @staticmethod
-    def view():
-        return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="percent", name="User Spent", value="$5000"), footer="10% increase compare to last week ")
+    async def view(b:BoxInput):
+        return i.ReturnData(type=i.InstanceType.BOX,
+                            box_data=i.BoxData(
+                                icon="percent", name="User Spent", value="$5000"),
+                            footer="10% increase compare to last week ")
 
 
 class ThirdBox(Zen):
@@ -70,7 +88,7 @@ class ThirdBox(Zen):
         return "/third_box"
 
     @staticmethod
-    def view():
+    async def view(b:BoxInput):
         return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="attach_money", name="User Spent (last hour)", value="$400"))
 
 
@@ -84,6 +102,5 @@ class ForthBox(Zen):
         return '/forth_box'
 
     @staticmethod
-    def view():
+    async def view(b:BoxInput):
         return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="attach_money", name="User Spent Total", value="$2000"))
-

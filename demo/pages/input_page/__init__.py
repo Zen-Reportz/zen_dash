@@ -9,7 +9,7 @@ from pages.input_page.row_ten import view as rtv
 
 
 from filters import view as fv
-from zen_dash.flex_data import FlexData
+from zen_dash.objects.flex_data import FlexData
 from zen_dash import ZenPage
 
 inputPage = p.Page(
@@ -82,5 +82,6 @@ inputPage = p.Page(
 INPUTZENPAGE = ZenPage(
     name= "Inputs",
     icon= "delete",
-    page= inputPage
+    page= inputPage,
+    tab_number=0
 )

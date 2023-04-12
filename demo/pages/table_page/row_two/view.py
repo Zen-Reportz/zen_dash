@@ -1,8 +1,8 @@
 
 from pages.table_page.row_two import table
 from zen_dash import Zen
-from zen_dash.flex_data import FlexData
-from zen_dash import instances as i
+from zen_dash.objects.flex_data import FlexData
+from zen_dash.objects import instances as i
 
 
 prefix="/backend/table_page/row_two"

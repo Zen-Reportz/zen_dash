@@ -4,7 +4,7 @@ from fastapi import UploadFile
 
 from fastapi.responses import FileResponse
 
-from zen_dash import instances as i
+from zen_dash.objects import instances as i
 from zen_dash import Zen
 prefix = "/backend/input_page/row_seven"
 

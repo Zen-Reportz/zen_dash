@@ -1,6 +1,6 @@
 import random
 
-from zen_dash import instances as i
+from zen_dash.objects import instances as i
 from zen_dash import Zen
 import asyncio
 
@@ -20,7 +20,6 @@ class ButtonToggle(Zen):
 
     @staticmethod
     async def view(query_params):
-        await asyncio.sleep(10)
         flex = i.FlexData()
         red = random.choice(['red', 'light_red'])
         if query_params:

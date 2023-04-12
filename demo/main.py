@@ -1,15 +1,17 @@
+import asyncio
+import json
 from typing import Optional
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request, Response, WebSocket
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import pkg_resources
 from pages.box_page import BOXPAGE
-from zen_dash import sidebar as s
 from zen_dash import page as p
-from zen_dash import scripts as sc
+from zen_dash.objects import Configuration, scripts as sc, sidebar as s
 from pydantic import BaseConfig
 from fastapi.middleware.gzip import GZipMiddleware
+from pages.box_page.row_one import view as v
 
 from pages.input_page import INPUTZENPAGE
 from pages.chart_page import CHARTPAGE
@@ -36,6 +38,7 @@ from pages.custom_page import row_nine as crn
 
 import filters as f
 from filters import view as fv
+from zen_dash.websocket import send_data
 BaseConfig.arbitrary_types_allowed = True  # change #1
 
 app = FastAPI()
@@ -69,10 +72,11 @@ templates = Jinja2Templates(directory=folder)
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request, res: Response):
     tr = templates.TemplateResponse("index.html", {"request": request})
-    tr.set_cookie("retry_count", "5")
-    tr.set_cookie("show_right_sidebar","true")
     return tr
 
+@app.get("/backend/configuration", response_model=Configuration)
+async def config():
+    return Configuration(activate_websocket=True)
 
 @app.get("/backend/title")
 async def title():
@@ -104,55 +108,47 @@ async def scripts(request: Request):
     ])
 
 
+@app.websocket("/backend/ws")
+async def websocket_func(websocket: WebSocket):
+    p = [BOXPAGE, CHARTPAGE, TABLEPAGE, CUSTOMPAGE]
+    await websocket.accept()
+    while True:
+        await send_data(websocket, p)
+
+    
+
 @app.get("/backend/sidebar", response_model=s.Sidebar)
 async def sidebar():
-    x =  s.Sidebar(tabs=[
-        s.SidebarTab(label=INPUTZENPAGE.name, icon=INPUTZENPAGE.icon),
-        s.SidebarGroup(name="Data", subtabs=[
-            s.SidebarTab(label=TABLEPAGE.name, icon=TABLEPAGE.icon),
-            s.SidebarTab(label=CHARTPAGE.name, icon=CHARTPAGE.icon),
-            s.SidebarTab(label=BOXPAGE.name, icon=BOXPAGE.icon),
-            s.SidebarTab(label=CUSTOMPAGE.name, icon=CUSTOMPAGE.icon)
-        ])],
+    return s.Sidebar(tabs=[
+            s.SidebarTab(label=INPUTZENPAGE.name, icon=INPUTZENPAGE.icon),
+            s.SidebarGroup(name="Data", subtabs=[
+                s.SidebarTab(label=TABLEPAGE.name, icon=TABLEPAGE.icon),
+                s.SidebarTab(label=CHARTPAGE.name, icon=CHARTPAGE.icon),
+                s.SidebarTab(label=BOXPAGE.name, icon=BOXPAGE.icon),
+                s.SidebarTab(label=CUSTOMPAGE.name, icon=CUSTOMPAGE.icon)
+            ])],
         filters=[
-        s.FilterInfo(url=fv.SingleFilterGlobal.full_url()),
-        s.FilterInfo(
-            url=fv.SingleFilterServerGlobal.full_url())]
-    )
-    
-    return x
+            s.FilterInfo(url=fv.SingleFilterGlobal.full_url()),
+            s.FilterInfo(
+                url=fv.SingleFilterServerGlobal.full_url())]
 
+    )
 
 
 @app.get("/backend/sidebar2", response_model=s.Sidebar)
 async def sidebar():
-    x =  s.Sidebar(tabs=[
-        ],
+    return s.Sidebar(tabs=[
+        s.SidebarTab(label=INPUTZENPAGE.name, icon=INPUTZENPAGE.icon),
+    ],
         filters=[
         s.FilterInfo(url=fv.SingleFilterGlobal.full_url()),
         s.FilterInfo(
             url=fv.SingleFilterServerGlobal.full_url())]
     )
-    return x
-
-
-# fxFlex_md: Optional[str] = "40%"
-# fxFlex_lt_md: Optional[str] = "100%"
 
 
 @app.get("/backend/page_detail", response_model=p.Page)
 async def page_detail(fragment: Optional[str]):
-    if fragment == "page_0":
-        return INPUTZENPAGE.page
-    elif fragment == "page_1_0":
-        return TABLEPAGE.page
-    elif fragment == "page_1_1":
-        return CHARTPAGE.page
-    elif fragment == "page_1_2":
-        return BOXPAGE.page
-    elif fragment == "page_1_3":
-        return CUSTOMPAGE.page
-   
-   
+    return p.RenderPage([INPUTZENPAGE, TABLEPAGE, CHARTPAGE, BOXPAGE, CUSTOMPAGE], fragment)
 
 app.mount("/", StaticFiles(directory=folder), name="static")

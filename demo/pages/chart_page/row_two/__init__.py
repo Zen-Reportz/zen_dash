@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from pages.chart_page.row_two import view as v
-from zen_dash import instances as i
+from zen_dash.objects import instances as i
 
 router = APIRouter(
     prefix=v.prefix,

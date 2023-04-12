@@ -3,28 +3,58 @@ import { DataService } from './data.service';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ResponseData, UpdateReturnData } from '../shared/application_data';
 import { Observable, retry } from 'rxjs';
-import {CookieService} from 'ngx-cookie-service';
+import { WebsocketService } from './websocket.service';
+
+export class Configuration{
+  retry_count!: number
+  show_right_sidebar!: boolean
+  activate_websocket!: boolean
+}
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class CallServiceService {
-  constructor(private http: HttpClient, private dataService: DataService, private cs: CookieService) {
+  config: Configuration = {retry_count: 2, show_right_sidebar: false, activate_websocket: false}
+
+  constructor(private http: HttpClient,
+              private dataService: DataService,
+              private ws: WebsocketService  ) {
+
 
   }
+
+  pullConfiguration(url="/backend/configuration"){
+    let url_: string
+    if (url.includes('http')){
+      url_ = url
+    } else {
+      let first = this.my_url()
+      if (url[0] === "/"){
+        url = url.substring(1)
+      }
+      url_ = first + url
+    }
+    this.http.get<Configuration>(url=url).subscribe((data)=> {
+      this.config = data
+      if (this.config.activate_websocket){
+        this.ws.connect("/backend/ws")
+      }
+    })
+  }
+
+  show_right_sidebar(){
+    return this.config.show_right_sidebar
+  }
+
 
   get_retry(){
     let retry_this: any
     try {
-      retry_this = this.cs.get("retry_count")
-      if (retry_this === ""){
-        retry_this = 5
-      } else {
-        retry_this = parseInt(retry_this)
-      }
-
+      retry_this = this.config.retry_count
     } catch (error) {
-      retry_this = 5
+      retry_this = 2
     }
 
     return retry_this

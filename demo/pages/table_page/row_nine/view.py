@@ -1,7 +1,7 @@
 from pages.table_page.row_nine.table import TableDataInfo
 from zen_dash import Zen
-from zen_dash.flex_data import FlexData
-from zen_dash import instances as i
+from zen_dash.objects.flex_data import FlexData
+from zen_dash.objects import instances as i
 import uuid
 from jinja2 import Template
 

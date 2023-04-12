@@ -11,9 +11,14 @@ box_page = p.Page(
             ])
         ])
 
+box_websocket = [rev.FirstBox, rev.SecondBox, rev.ThirdBox, rev.ForthBox]
 
 BOXPAGE = ZenPage(
     name= "BoxPage",
     icon= "home",
-    page= box_page
+    page= box_page,
+    websocket_calls=box_websocket,
+    pydantic_class=rev.BoxInput,
+    tab_number=1,
+    subtab_number=2
 )
