@@ -26,4 +26,4 @@ class Sidebar(BaseUpdate):
         if not isinstance(v[0], SidebarTab):
             raise Exception("First tab can't be SidebarGroup")
         return v
-            
+

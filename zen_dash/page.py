@@ -7,6 +7,9 @@ from zen_dash.objects.page import Instance, Row, Page
 def get_page_dict(pages: List[ZenPage]):
     page_dict = {}
     for p in pages:
+        if p.tab_number is None:
+            raise Exception("Tab number is not define in Zen Page")
+        
         if p.subtab_number is None:
             page_number = f"page_{p.tab_number}"
         else:

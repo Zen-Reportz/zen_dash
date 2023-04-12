@@ -1,3 +1,7 @@
+# 0.5.2
+- Simplified websocket 
+- Added RenderPage exception tab number is missing
+
 # 0.5.1
 - Working websocket 
 ## Breaking change

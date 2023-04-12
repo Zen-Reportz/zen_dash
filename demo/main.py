@@ -38,7 +38,7 @@ from pages.custom_page import row_nine as crn
 
 import filters as f
 from filters import view as fv
-from zen_dash.websocket import PageInfo, PageW, run_websocket_data, send_data
+from zen_dash.websocket import send_data
 BaseConfig.arbitrary_types_allowed = True  # change #1
 
 app = FastAPI()
@@ -119,25 +119,25 @@ async def websocket_func(websocket: WebSocket):
 
 @app.get("/backend/sidebar", response_model=s.Sidebar)
 async def sidebar():
-    x = s.Sidebar(tabs=[
-        s.SidebarTab(label=INPUTZENPAGE.name, icon=INPUTZENPAGE.icon),
-        s.SidebarGroup(name="Data", subtabs=[
-            s.SidebarTab(label=TABLEPAGE.name, icon=TABLEPAGE.icon),
-            s.SidebarTab(label=CHARTPAGE.name, icon=CHARTPAGE.icon),
-            s.SidebarTab(label=BOXPAGE.name, icon=BOXPAGE.icon),
-            s.SidebarTab(label=CUSTOMPAGE.name, icon=CUSTOMPAGE.icon)
-        ])],
+    return s.Sidebar(tabs=[
+            s.SidebarTab(label=INPUTZENPAGE.name, icon=INPUTZENPAGE.icon),
+            s.SidebarGroup(name="Data", subtabs=[
+                s.SidebarTab(label=TABLEPAGE.name, icon=TABLEPAGE.icon),
+                s.SidebarTab(label=CHARTPAGE.name, icon=CHARTPAGE.icon),
+                s.SidebarTab(label=BOXPAGE.name, icon=BOXPAGE.icon),
+                s.SidebarTab(label=CUSTOMPAGE.name, icon=CUSTOMPAGE.icon)
+            ])],
         filters=[
-        s.FilterInfo(url=fv.SingleFilterGlobal.full_url()),
-        s.FilterInfo(
-            url=fv.SingleFilterServerGlobal.full_url())]
+            s.FilterInfo(url=fv.SingleFilterGlobal.full_url()),
+            s.FilterInfo(
+                url=fv.SingleFilterServerGlobal.full_url())]
+
     )
-    return x
 
 
 @app.get("/backend/sidebar2", response_model=s.Sidebar)
 async def sidebar():
-    x = s.Sidebar(tabs=[
+    return s.Sidebar(tabs=[
         s.SidebarTab(label=INPUTZENPAGE.name, icon=INPUTZENPAGE.icon),
     ],
         filters=[
@@ -145,7 +145,6 @@ async def sidebar():
         s.FilterInfo(
             url=fv.SingleFilterServerGlobal.full_url())]
     )
-    return x
 
 
 @app.get("/backend/page_detail", response_model=p.Page)

@@ -41,7 +41,7 @@ class ZenPage(BaseModel):
     page: Page
     websocket_calls: List[Type[Zen]] = []
     pydantic_class: Type[BaseModel] = None
-    tab_number: int
+    tab_number: Optional[int]
     subtab_number: Optional[int]
 
 
