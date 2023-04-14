@@ -10,6 +10,9 @@ Zen Dash, a python package, simplifies the building analytics/BI dashboard proce
 # How to run demo
 Learn more about how to run demo here: [Link](https://github.com/Zen-Reportz/zen_dash/wiki/How-can-I-run-demo-%3F)
 
+# How to create zen dash
+Learn more about how to crate zen dash: [Link](https://github.com/Zen-Reportz/zen_dash/wiki/How-to-create-new-zen-dash)
+
 # How to Contribute
 Please visit this page to learn how to contribute: [Link](https://github.com/Zen-Reportz/zen_dash/blob/main/how_to_contribute.md)
 
