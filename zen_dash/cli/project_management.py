@@ -9,7 +9,6 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import pkg_resources
-from zen_dash import instances as i
 from zen_dash import sidebar as s
 from zen_dash import page as p
 from zen_dash import scripts as sc
@@ -17,7 +16,6 @@ from pydantic import BaseConfig
 from fastapi.middleware.gzip import GZipMiddleware
 from app import global_filter as gf
 from app import page 
-from zen_dash.flex_data import FlexData
 
 BaseConfig.arbitrary_types_allowed = True  # change #1
 
@@ -40,35 +38,18 @@ async def title():
     return 'Zen Dash Dashboard'
 
 
-@app.post("/backend/document")
-async def save_doc(request: Request):
-    # TODO write saving functionality
-    return "yes"
-
-
-@app.post("/backend/scripts", response_model=sc.CustomScripts)
-async def scripts(request: Request):
-    return sc.CustomScripts(scripts=[])
-
 
 @app.get("/backend/sidebar", response_model=s.Sidebar)
 async def sidebar():
     return s.Sidebar(tabs=[ s.SidebarTab(label="First Page", icon='home') ],
-                     filters=[ s.FilterInfo(url="/backend/global_filters/simple_filter") ]
+                     filters=[ s.FilterInfo(url=gf.SingleFilter.full_url()) ]
                      )
 
 
 @app.get("/backend/page_detail", response_model=p.Page)
 async def page_detail(fragment: str):
-    if fragment in ("page_0"):
-        p1 = p.Page(
-            rows=[
-                p.Row(data=[
-                    p.Instance(url="/backend/page/box"),
-                ])
-            ])
+    return p.RenderPage([page.BOXPAGE], fragment)
 
-        return p1
 
 
 app.mount("/", StaticFiles(directory=folder), name="static")
@@ -78,43 +59,104 @@ app.mount("/", StaticFiles(directory=folder), name="static")
 page_data = """
 from fastapi import APIRouter
 from zen_dash import instances as i
-from fastapi.responses import FileResponse
+from zen_dash import Zen
+from zen_dash import ZenPage, page as p
 
+prefix="/backend/page"
+
+
+class FirstBox(Zen):
+    @staticmethod
+    def full_url() -> str:
+        return f"{prefix}/first_box"
+
+    @staticmethod
+    def url() -> str:
+        return "/first_box"
+
+    @staticmethod
+    async def view():
+        import random
+        name = random.choice(["Users", "Spent"])
+        Value = random.choice(["5009", "200"])
+        return i.ReturnData(type=i.InstanceType.BOX,
+                            box_data=i.BoxData(
+                                icon="person", 
+                                name=name, 
+                                value=Value),
+                            footer="5% increase compare to last week ",
+                            tooltip_data=i.ToolTipData(
+                                label="my label", disable=False),
+                            )
 
 router = APIRouter(
-    prefix="/backend/page",
+    prefix=prefix,
     tags=["page"],
     responses={404: {"description": "Not found"}},
 )
 
-@router.post("/box", response_model=i.ReturnData)
+@router.post(FirstBox.url(), response_model=i.ReturnData)
 async def d3():
-    return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="percent", name="User Spent", value="$5000"), footer="10% increase compare to last week ")
+    return await FirstBox.view()
+                            
+
+box_page = p.Page(
+        rows=[
+            p.Row(data=[  
+                p.Instance(url=FirstBox.full_url())
+            ])
+        ])
+
+
+BOXPAGE = ZenPage(
+    name= "BoxPage",
+    icon= "home",
+    page= box_page,
+    tab_number=0
+)
     """
 
 create_global_filter = """
-from fastapi import APIRouter, Request
+from fastapi import APIRouter
 from zen_dash import instances as i
+from zen_dash import Zen
 
+prefix="/backend/global_filters"
 router = APIRouter(
-    prefix="/backend/global_filters",
+    prefix=prefix,
     tags=["filters"],
     responses={404: {"description": "Not found"}},
 )
 
 
-@router.post("/simple_filter", response_model=i.ReturnData)
-async def single_filter():
-    s = i.ReturnData(
-        title="Simple Filter",
-        type=i.InstanceType.SIMPLE_FILTER,
-        simple_filter_data=i.SimpleFilterData(
-            name="simple_filter",
-            data=["Test 1", "My 2"],
-            selected=['Test 1'])
-    )
 
-    return s
+class SingleFilter(Zen):
+    @staticmethod
+    def full_url() -> str:
+        return f"{prefix}/single_filter"
+
+    @staticmethod
+    def url() -> str:
+        return f"/single_filter"
+
+    @staticmethod
+    def view():
+        s = i.ReturnData(
+            title="Simple Filter",
+            type=i.InstanceType.SIMPLE_FILTER,
+            simple_filter_data=i.SimpleFilterData(
+                name="simple_filter",
+                data=["Test 1", "My 2"],
+                selected=['Test 1'])
+        )
+
+        return s
+
+        
+@router.post(SingleFilter.url(), response_model=i.ReturnData)
+async def d3():
+    return SingleFilter.view()
+                            
 
 """
 
@@ -135,7 +177,7 @@ uvicorn
 
 
 
-def create_project(location):
+def create_zen(location):
     if location == ".":
         build_location = pathlib.Path()
     elif location[0] == "/":

@@ -1,3 +1,9 @@
+# 0.5.4
+
+- Updated create_project to reflect new changes
+- run following to create zen dash project 
+
+  ```create_zen ~/Desktop/test```
 # 0.5.3
 - Simplified websocket 
 - Added RenderPage exception tab number is missing
