@@ -20,11 +20,14 @@ table_page = p.Page(
             ])
     ])
 
+Table_websocket = [prtwv.Table]
+
 
 TABLEPAGE = ZenPage(
     name= "Table",
     icon= "home",
     page= table_page,
+    websocket_calls=Table_websocket,
     tab_number=1,
     subtab_number=0
 )

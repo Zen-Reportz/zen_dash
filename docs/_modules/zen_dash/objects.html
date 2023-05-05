@@ -112,11 +112,14 @@
     <span class="n">subtab_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span></div>
 
 
+<div class="viewcode-block" id="WebSocketConfig"><a class="viewcode-back" href="../../zen_dash.objects.html#zen_dash.objects.WebSocketConfig">[docs]</a><span class="k">class</span> <span class="nc">WebSocketConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">acitve</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">refresh_seconds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="o">*</span><span class="mi">60</span></div>
 
 <div class="viewcode-block" id="Configuration"><a class="viewcode-back" href="../../zen_dash.objects.html#zen_dash.objects.Configuration">[docs]</a><span class="k">class</span> <span class="nc">Configuration</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">retry_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="n">show_right_sidebar</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">activate_websocket</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></div>
+    <span class="n">websocket</span><span class="p">:</span> <span class="n">WebSocketConfig</span> <span class="o">=</span> <span class="n">WebSocketConfig</span><span class="p">()</span></div>
 </pre></div>
 
            </div>

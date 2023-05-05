@@ -13,4 +13,4 @@ flex=FlexData(fxFlex="50%", fxFlex_md="50%", fxFlex_sm="110%", fxFlex_xs="110%")
 
 @router.post(v.Table.url(), response_model=i.ReturnData)
 async def prf():
-    return v.Table.view()
+    return  await v.Table.view()
