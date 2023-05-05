@@ -1,9 +1,12 @@
+# 0.5.5
+- added table in websocket support
+## Breaking change
+- added websocket configuration as it own pydantic class
+
 # 0.5.4
 - Updated create_project to reflect new changes
 - run following to create zen dash project 
   ```create_zen ~/Desktop/test```
-## Breaking change
-- added websocket configuration as it own pydantic class
 
 # 0.5.3
 - Simplified websocket 
