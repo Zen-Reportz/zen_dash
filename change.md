@@ -1,3 +1,10 @@
+# 0.5.6
+- allow refresh and rate from server as well
+## Breaking change
+- added refresh configuration as it own pydantic class
+- allow to refresh rate_in_seconds to configure refresh rate 
+
+ 
 # 0.5.5
 - added table in websocket support
 ## Breaking change

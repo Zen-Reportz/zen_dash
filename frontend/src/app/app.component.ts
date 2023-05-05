@@ -75,7 +75,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   sendWSRequest(){
-    if (this.call.config.activate_websocket) {
+    if (this.call.config.websocket.active) {
       this.ws.request_change()
     }
   }
@@ -105,12 +105,18 @@ export class AppComponent implements OnInit, OnDestroy {
     this.getScripts();
     this.setTitle()
 
+    this.call.refresh_listener.subscribe(refresh => {
+      this.checked = true
+      let event = {"checked": true}
+      this.set_auto(event)
+    })
+
   }
 
   refresh_data() {
     this.color = 'primary';
 
-    if (this.call.config.activate_websocket){
+    if (this.call.config.websocket.active){
       this.ws.request_change()
     } else {
       this.ds.refresh.emit('RefreshButton');
@@ -228,8 +234,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   call_refresh(call: CallServiceService, ds: DataService, ws: WebsocketService) {
     console.log("call refresh")
-    console.log(call.config.activate_websocket)
-    if (call.config.activate_websocket){
+    if (call.config.websocket.active){
       ws.request_change()
     } else {
       ds.refresh.emit("AutoRefresh");
@@ -238,11 +243,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   set_auto(event: any) {
-    console.log(event)
     if (event.checked) {
-      console.log("123")
       this.runRefresh = setInterval(this.call_refresh,
-        1 * 60 * 1000,
+        this.call.config.refresh.rate_in_seconds * 1000,
         this.call,
         this.ds,
         this.ws);

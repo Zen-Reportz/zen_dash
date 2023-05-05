@@ -44,12 +44,15 @@ class ZenPage(BaseModel):
     tab_number: Optional[int]
     subtab_number: Optional[int]
 
+class RefreshInfo(BaseModel):
+    refresh: bool = False
+    rate_in_seconds: int =  5*60
 
 class WebSocketConfig(BaseModel):
-    acitve: bool = False
-    refresh_seconds: int = 5*60
+    active: bool = False
 
 class Configuration(BaseModel):
     retry_count: int = 2
     show_right_sidebar: bool = False
+    refresh: RefreshInfo =  RefreshInfo()
     websocket: WebSocketConfig = WebSocketConfig()

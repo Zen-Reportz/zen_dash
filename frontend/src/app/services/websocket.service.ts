@@ -23,7 +23,7 @@ export class WebsocketService {
       if (this.subject !== undefined){
         this.subject.next(data);
       } else {
-        console.log("websocket is not present")
+        // console.log("websocket is not present")
       }
 
 

@@ -1,14 +1,25 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { DataService } from './data.service';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ResponseData, UpdateReturnData } from '../shared/application_data';
 import { Observable, retry } from 'rxjs';
 import { WebsocketService } from './websocket.service';
 
+
+export class RefreshInfo {
+  refresh!: boolean
+  rate_in_seconds!: number
+}
+
+export class WebSocketConfig {
+  active!: boolean
+}
+
 export class Configuration{
   retry_count!: number
   show_right_sidebar!: boolean
-  activate_websocket!: boolean
+  refresh !: RefreshInfo
+  websocket!: WebSocketConfig
 }
 
 
@@ -16,7 +27,12 @@ export class Configuration{
   providedIn: 'root',
 })
 export class CallServiceService {
-  config: Configuration = {retry_count: 2, show_right_sidebar: false, activate_websocket: false}
+
+  refresh_listener = new EventEmitter<boolean>()
+  config: Configuration = {retry_count: 2,
+                           show_right_sidebar: false,
+                           refresh: {refresh: true, rate_in_seconds: 5*60},
+                           websocket: {active: false}}
 
   constructor(private http: HttpClient,
               private dataService: DataService,
@@ -38,9 +54,15 @@ export class CallServiceService {
     }
     this.http.get<Configuration>(url=url).subscribe((data)=> {
       this.config = data
-      if (this.config.activate_websocket){
+
+      if (this.config.websocket.active){
         this.ws.connect("/backend/ws")
       }
+      if (this.config.refresh.refresh) {
+        this.refresh_listener.emit(true)
+      }
+
+
     })
   }
 

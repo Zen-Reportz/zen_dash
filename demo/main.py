@@ -8,7 +8,7 @@ from fastapi.templating import Jinja2Templates
 import pkg_resources
 from pages.box_page import BOXPAGE
 from zen_dash import page as p
-from zen_dash.objects import Configuration, scripts as sc, sidebar as s
+from zen_dash.objects import Configuration, RefreshInfo,WebSocketConfig, scripts as sc, sidebar as s
 from pydantic import BaseConfig
 from fastapi.middleware.gzip import GZipMiddleware
 from pages.box_page.row_one import view as v
@@ -76,7 +76,8 @@ async def root(request: Request, res: Response):
 
 @app.get("/backend/configuration", response_model=Configuration)
 async def config():
-    return Configuration(activate_websocket=True)
+    return Configuration(websocket=WebSocketConfig(active=True), 
+                         refresh=RefreshInfo(refresh=True, rate_in_seconds=1*60))
 
 @app.get("/backend/title")
 async def title():
@@ -110,6 +111,7 @@ async def scripts(request: Request):
 
 @app.websocket("/backend/ws")
 async def websocket_func(websocket: WebSocket):
+    print("hi")
     p = [BOXPAGE, CHARTPAGE, TABLEPAGE, CUSTOMPAGE]
     await websocket.accept()
     while True:
