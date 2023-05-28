@@ -1,6 +1,6 @@
 
 <mat-card *ngIf="!ds.isFullCustom(look_up)">
-  <script #script></script>
+  <!-- <app-script-hack>{{script_code}}</app-script-hack> -->
   <mat-card-header style="display: flex;
   justify-content: center;
   align-items: center;" >
@@ -21,6 +21,6 @@
 </mat-card>
 
 <span *ngIf="ds.isFullCustom(look_up)">
-  <app-custom-html [url]="look_up"
+  <app-custom-html [url]="url"
   ></app-custom-html>
 </span>

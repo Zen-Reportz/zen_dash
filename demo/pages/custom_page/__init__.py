@@ -23,5 +23,6 @@ CUSTOMPAGE = ZenPage(
     icon= "home",
     page= custom_page,
     tab_number=1,
-    subtab_number=3
+    subtab_number=3,
+    websocket_calls=[view.NewMethod]
 )

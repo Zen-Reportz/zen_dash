@@ -9,10 +9,15 @@ class TAG:
         self.childern = childern
         self.other_attributes = other_attributes
 
+    @property
+    def get_id(self):
+        if self.id is None:
+            return ''        
+        else:
+            return "id='{self.id}'"
+
     def compile(self):
-        if not self.id:
-            self.id = uuid4().hex
-        
+       
         if not self.style:
             self.style = ""
         elif isinstance(self.style, str):
@@ -32,10 +37,10 @@ class TAG:
         for key, value in self.other_attributes.items():
             others += f' {key}="{value}"'
         if isinstance(self.childern, str):
-            return f'<{self.tag} id="{self.id}" style="{self.style}" {others} >{self.childern}</{self.tag}>'
+            return f'<{self.tag} {self.get_id} style="{self.style}" {others} >{self.childern}</{self.tag}>'
         if isinstance(self.childern, TAG):
            
-            return f'<{self.tag} id="{self.id}" style="{self.style}" {others} >{self.childern.compile()}</{self.tag}>'
+            return f'<{self.tag} {self.get_id} style="{self.style}" {others} >{self.childern.compile()}</{self.tag}>'
         elif isinstance(self.childern, list):
             d = [ ]
             for dd in self.childern:
@@ -49,7 +54,7 @@ class TAG:
             t = ''
             for key, value in self.other_attributes.items():
                 t += f' {key}="{value}"'
-            return f'<{self.tag} id="{self.id}" style="{self.style}" {others}>{d}</{self.tag}>'
+            return f'<{self.tag} {self.get_id} style="{self.style}" {others}>{d}</{self.tag}>'
         else:
             raise Exception('data need to be str or TAG type')
 

@@ -87,6 +87,7 @@ import { FormComponent } from './component/form/form.component';
 import { JsonFormsModule } from '@jsonforms/angular';
 import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
 import {CookieService} from 'ngx-cookie-service';
+import { ScriptHackComponent } from './component/script-hack/script-hack.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +120,7 @@ import {CookieService} from 'ngx-cookie-service';
     CustomHtmlComponent,
     ButtonComponent,
     FormComponent,
+    ScriptHackComponent,
   ],
   imports: [
     FlexLayoutModule,

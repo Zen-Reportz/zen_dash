@@ -18,6 +18,7 @@ export class EntryPointComponent implements OnInit, AfterViewInit {
   footer!: string;
   title!: string;
   look_up!: string;
+  script_code: string = ""
   @ViewChild('script') script!: ElementRef;
 
 

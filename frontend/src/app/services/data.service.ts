@@ -115,7 +115,7 @@ export class DataService {
     }
 
 
-    let convMap: any = {};
+    let convMap: any = {"url": window.location.href};
 
     let page_data: any
     try {

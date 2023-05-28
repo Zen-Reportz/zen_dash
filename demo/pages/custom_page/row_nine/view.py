@@ -72,7 +72,7 @@ class NewMethod(Zen):
         return "/new_method"
 
     @staticmethod
-    def view():
+    async def view():
         return i.ReturnData(type=i.InstanceType.CUSTOM_HTML,
                             custom_html_data=i.CustomHTML(
                                 name="test", full_custom=False, html=NEWMETHOD.compile())

@@ -24,5 +24,5 @@ async def d3():
 
 @router.post(v.NewMethod.url(), response_model=i.ReturnData)
 async def d3():
-    t = v.NewMethod.view()
+    t = await v.NewMethod.view()
     return t

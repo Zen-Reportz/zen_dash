@@ -1,3 +1,6 @@
+# 0.5.7
+- allow custom page to leverage websocket
+- passing raw url to request
 # 0.5.6
 - allow refresh and rate from server as well
 ## Breaking change
