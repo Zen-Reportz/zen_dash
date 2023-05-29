@@ -1,3 +1,6 @@
+# 0.5.8
+- fixed ID in tag
+- dont generete random ids unless passed 
 # 0.5.7
 - allow custom page to leverage websocket
 - passing raw url to request

@@ -14,7 +14,7 @@ class TAG:
         if self.id is None:
             return ''        
         else:
-            return "id='{self.id}'"
+            return f"id='{self.id}'"
 
     def compile(self):
        
