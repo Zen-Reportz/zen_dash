@@ -1,3 +1,5 @@
+# 0.5.10
+- fixed bug json form server select
 # 0.5.9
 - Sidebar without tabs requirements (#47)
 - allow server side filter rendering (#48)
