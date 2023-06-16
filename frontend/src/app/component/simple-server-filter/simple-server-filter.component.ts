@@ -25,27 +25,12 @@ export class SimpleServerFilterComponent implements OnInit {
   data!: string[];
   server_url!: string;
   name!: string;
-
   compareFn = (a: any, b: any) => a && b && a.id === b.id;
-
-  /** list of banks */
   protected items: string[] = [];
-
-  /** control for the selected bank for server side filtering */
   public ServerSideCtrl: UntypedFormControl = new UntypedFormControl();
-
-  /** control for filter for server side. */
   public ServerSideFilteringCtrl: UntypedFormControl = new UntypedFormControl();
-
-  /** indicate search operation is in progress */
   public searching = false;
-
-  /** list of banks filtered after simulating server side search */
-  public filteredServerSideBanks: ReplaySubject<string[]> = new ReplaySubject<
-    string[]
-  >(1);
-
-  /** Subject that emits when the component has been destroyed. */
+  public filteredServerSideBanks: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
   protected _onDestroy = new Subject<void>();
 
   constructor(

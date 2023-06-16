@@ -5,6 +5,14 @@ import { DataService } from 'src/app/services/data.service';
 import { CallServiceService } from 'src/app/services/call-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingComponent } from '../loading/loading.component';
+import { and, createAjv, isControl, optionIs, rankWith, schemaTypeIs, scopeEndsWith, Tester, schemaMatches } from '@jsonforms/core';
+import { JsonFormsServerSideComponent } from '../json-forms-server-side/json-forms-server-side.component';
+const serverTester: Tester = and(
+  schemaTypeIs('string'),
+  schemaMatches(schema => schema.hasOwnProperty('url'))
+
+  );
+
 
 @Component({
   selector: 'app-form',
@@ -22,6 +30,8 @@ export class FormComponent implements OnInit {
   show = false
   renderers = [
     ...angularMaterialRenderers,
+    { tester: rankWith(5, serverTester), renderer: JsonFormsServerSideComponent },
+
   ]
   constructor(private ds: DataService,
     private callService: CallServiceService,

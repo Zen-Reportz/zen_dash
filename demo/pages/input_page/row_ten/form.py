@@ -1,4 +1,7 @@
 
+from demo.filters.view import SingleFilterServer
+
+
 formdata  ={ "orders": [
             {
             "customer": {
@@ -40,7 +43,7 @@ formSchema = {
           "properties": {
             "id": { "type": "string" },
             "name": { "type": "string"},
-            "department": { "type": "string" },
+            "department": { "type": "string", "url": SingleFilterServer.server_full_url(), "multi": "true", "search_name": "department_search"},
             "emailAddress": { "type": "string", "format": "email" }
           }
         },

@@ -1,3 +1,7 @@
+# 0.5.9
+- Sidebar without tabs requirements (#47)
+- allow server side filter rendering (#48)
+
 # 0.5.8
 - fixed ID in tag
 - dont generete random ids unless passed 

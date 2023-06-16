@@ -1,6 +1,7 @@
 <span *ngIf="side_data !== undefined">
   <mat-selection-list [multiple]="false">
-    <span *ngFor="let tab of getSideData(); let i = index">
+    <span *ngIf="isSideData()">
+      <span *ngFor="let tab of getSideData(); let i = index">
       <p *ngIf="tab.icon; then thenBlock2 else elseBlock2"></p>
       <ng-template #thenBlock2>
         <mat-list-option [selected]="'page_' + i === page">
@@ -27,6 +28,7 @@
         </mat-expansion-panel>
       </ng-template>
     </span>
+  </span>
   </mat-selection-list>
   <br>
   <br>

@@ -1,0 +1,33 @@
+<mat-form-field appearance="fill">
+  <mat-select
+    [formControl]="form"
+    [multiple]="isMulti()"
+    #dataSelect
+
+  >
+    <!-- place ngx-mat-select-search inside mat-option to allow opening without initial selection -->
+    <mat-option>
+      <ngx-mat-select-search
+        [formControl]="ServerSideFilteringCtrl"
+        [searching]="searching"
+      >
+      </ngx-mat-select-search>
+    </mat-option>
+
+    <mat-option
+      *ngFor="let it of filteredServerSideBanks | async"
+      [value]="it"
+    >
+      {{ it }}
+    </mat-option>
+    <!-- <ng-container *ngIf="!ServerSideFilteringCtrl.value">
+      <mat-option
+        *ngFor="let it of ServerSideCtrl.value"
+        [value]="it"
+        style="display: none"
+      >
+        {{ it }}
+      </mat-option>
+    </ng-container> -->
+  </mat-select>
+</mat-form-field>

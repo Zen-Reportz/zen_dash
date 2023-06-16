@@ -76,7 +76,7 @@ async def root(request: Request, res: Response):
 
 @app.get("/backend/configuration", response_model=Configuration)
 async def config():
-    return Configuration(websocket=WebSocketConfig(active=True), 
+    return Configuration(websocket=WebSocketConfig(active=False), 
                          refresh=RefreshInfo(refresh=True, rate_in_seconds=1*60))
 
 @app.get("/backend/title")
@@ -128,7 +128,8 @@ async def sidebar():
                 s.SidebarTab(label=CHARTPAGE.name, icon=CHARTPAGE.icon),
                 s.SidebarTab(label=BOXPAGE.name, icon=BOXPAGE.icon),
                 s.SidebarTab(label=CUSTOMPAGE.name, icon=CUSTOMPAGE.icon)
-            ])],
+            ])
+            ],
         filters=[
             s.FilterInfo(url=fv.SingleFilterGlobal.full_url()),
             s.FilterInfo(

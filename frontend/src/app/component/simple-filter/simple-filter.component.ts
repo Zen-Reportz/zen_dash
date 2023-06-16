@@ -24,7 +24,7 @@ export class SimpleFilterComponent implements OnInit {
 
   data: string[] | undefined;
   dataUrl: string | undefined;
-  dataCall: Subscription | undefined;
+  // dataCall: Subscription | undefined;
   compareFn = (a:any, b:any) => a && b && a.id === b.id;
 
 
@@ -141,7 +141,5 @@ export class SimpleFilterComponent implements OnInit {
     // }
   }
 
-  isServerSide(){
-    return this.dataUrl !== null
-  }
+
 }

@@ -23,7 +23,8 @@ class Sidebar(BaseUpdate):
 
     @validator('tabs')
     def first_cant_be_group(cls, v):
-        if not isinstance(v[0], SidebarTab):
-            raise Exception("First tab can't be SidebarGroup")
+        if len(v)> 1:
+            if not isinstance(v[0], SidebarTab):
+                raise Exception("First tab can't be SidebarGroup")
         return v
 

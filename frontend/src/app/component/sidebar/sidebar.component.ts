@@ -57,6 +57,10 @@ export class SidebarComponent implements OnInit {
     return this.side_data?.tabs as any
   }
 
+  isSideData(){
+    return this.side_data?.tabs.length > 0
+  }
+
   setFlex(url: string, flexData: FlexData){
     this.flexData.set(url, flexData)
   }
