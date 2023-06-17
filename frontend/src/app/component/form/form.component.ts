@@ -63,27 +63,42 @@ export class FormComponent implements OnInit {
     // console.log(m)
     this.reactiveity("triggered")
 
-    let p = this.callService.call_response(this.data.submit_info.url, undefined,
+    let p = this.callService.second_call_response(this.data.submit_info.url, undefined,
       undefined);
     this.call = p.subscribe(
       (res) => {
         this.reactiveity("success")
-
+        let duration = res.display?.duration as number
+        let isMessage = !((res.display?.message === undefined) ||(res.display?.message === null))
+        let message = 'API called Sucessfully '
+        if (isMessage){
+          message = res.display?.message as string
+        }
+        let staus = res.display?.status as string
         this._snackBar.openFromComponent(LoadingComponent, {
-          duration: 5 * 1000,
-          data: { message: 'API called Sucessfully ', status: 'success' },
+          duration: duration * 1000,
+          data: { message: message, status: staus },
         });
-
 
         this.show = false
 
       },
       (error) => {
         this.reactiveity("failed")
+        let duration = error.error.display?.duration as number
+        if (duration === undefined) {
+          duration = 5
+        }
+
+        let isMessage = !((error.error.display?.message === undefined) ||(error.error.display?.message === null))
+        let message = 'API called Failed'
+        if (isMessage){
+          message = error.error.display?.message as string
+        }
 
         this.show = false
         this._snackBar.openFromComponent(LoadingComponent, {
-          duration: 5 * 1000,
+          duration: duration * 1000,
           data: { message: 'API called Failed', status: 'error' },
         });
       }

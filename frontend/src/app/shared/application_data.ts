@@ -294,12 +294,18 @@ export class ResponseData{
   websocket_url: string | undefined
 }
 
+export class Display {
+  duration! : number
+  message : string | undefined
+  status!: string
+}
 
 export class UpdateReturnData{
   type!: string
   simple_fitler_data: string[] | undefined
   box_data: BoxData | undefined
   button_result: string | undefined
+  display: Display | undefined
 }
 
 export class ToolTipData {

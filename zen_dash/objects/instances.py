@@ -322,14 +322,25 @@ class UpdateInstanceType(str, Enum):
     """
     SIMPLE_FILTER = "simple_filter"
     BOX = "box"
+    FORM = "form"
 
 
+class DisplayStatus(Enum):
+    WARN= "warn"
+    SUCCESS = "success"
+    ERROR = "error"
 
+
+class Display(BaseUpdate):
+    duration: int = 5
+    message: Optional[str ]
+    status: DisplayStatus = DisplayStatus.SUCCESS
 
 class UpdateReturnData(BaseUpdate):
     type: UpdateInstanceType
     simple_fitler_data: Optional[List[str]]
     box_data: Optional[BoxData]
+    display: Optional[Display]
 
     @root_validator
     def validator_type_match(cls, field_values):
@@ -337,6 +348,12 @@ class UpdateReturnData(BaseUpdate):
             raise ValueError("You have selected InstanceType.BOX, and box_data is missing")
         elif (field_values["type"] == InstanceType.SIMPLE_FILTER) and (field_values["simple_fitler_data"] is None):
             raise ValueError("You have selected InstanceType.SIMPLE_FILTER, and simple_fitler_data is missing")
+        if (field_values["type"] == UpdateInstanceType.FORM):
+            if (field_values["display"] is None):
+                raise ValueError("You have selected InstanceType.FORM, and display is missing")
+        else:
+            if (field_values["display"] is not None):
+                raise ValueError("Currently display is supporeted for Form only")
         
         return field_values
 

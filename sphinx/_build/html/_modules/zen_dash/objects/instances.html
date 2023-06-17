@@ -389,15 +389,26 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">SIMPLE_FILTER</span> <span class="o">=</span> <span class="s2">&quot;simple_filter&quot;</span>
-    <span class="n">BOX</span> <span class="o">=</span> <span class="s2">&quot;box&quot;</span></div>
+    <span class="n">BOX</span> <span class="o">=</span> <span class="s2">&quot;box&quot;</span>
+    <span class="n">FORM</span> <span class="o">=</span> <span class="s2">&quot;form&quot;</span></div>
 
 
+<div class="viewcode-block" id="DisplayStatus"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.DisplayStatus">[docs]</a><span class="k">class</span> <span class="nc">DisplayStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">WARN</span><span class="o">=</span> <span class="s2">&quot;warn&quot;</span>
+    <span class="n">SUCCESS</span> <span class="o">=</span> <span class="s2">&quot;success&quot;</span>
+    <span class="n">ERROR</span> <span class="o">=</span> <span class="s2">&quot;error&quot;</span></div>
 
+
+<div class="viewcode-block" id="Display"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.Display">[docs]</a><span class="k">class</span> <span class="nc">Display</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">message</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span> <span class="p">]</span>
+    <span class="n">status</span><span class="p">:</span> <span class="n">DisplayStatus</span> <span class="o">=</span> <span class="n">DisplayStatus</span><span class="o">.</span><span class="n">SUCCESS</span></div>
 
 <div class="viewcode-block" id="UpdateReturnData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData">[docs]</a><span class="k">class</span> <span class="nc">UpdateReturnData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
     <span class="nb">type</span><span class="p">:</span> <span class="n">UpdateInstanceType</span>
     <span class="n">simple_fitler_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
     <span class="n">box_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BoxData</span><span class="p">]</span>
+    <span class="n">display</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Display</span><span class="p">]</span>
 
 <div class="viewcode-block" id="UpdateReturnData.validator_type_match"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData.validator_type_match">[docs]</a>    <span class="nd">@root_validator</span>
     <span class="k">def</span> <span class="nf">validator_type_match</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">field_values</span><span class="p">):</span>
@@ -405,6 +416,12 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.BOX, and box_data is missing&quot;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">SIMPLE_FILTER</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;simple_fitler_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.SIMPLE_FILTER, and simple_fitler_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">UpdateInstanceType</span><span class="o">.</span><span class="n">FORM</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;display&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.FORM, and display is missing&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;display&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Currently display is supporeted for Form only&quot;</span><span class="p">)</span>
         
         <span class="k">return</span> <span class="n">field_values</span></div>
 

@@ -122,7 +122,7 @@ export class CallServiceService {
     return p;
   }
 
-  second_call_response(url: string, search_key: string, search_value: string ) {
+  second_call_response(url: string, search_key: string |undefined, search_value: string |undefined) {
 
     let url_: string
     if (url.includes('http')){
@@ -137,7 +137,11 @@ export class CallServiceService {
 
     let convMap = this.dataService.get_all()
 
-    convMap[search_key] = search_value
+    if (search_key !== undefined) {
+      convMap[search_key] = search_value
+    }
+
+
 
     let p: Observable<UpdateReturnData>
 
