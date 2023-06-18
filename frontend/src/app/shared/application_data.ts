@@ -246,6 +246,7 @@ export class CustomHTML {
 export class ButtonData {
   url!: string
   name!: string
+  redirect!: boolean
 }
 
 export class SubmitFormData{

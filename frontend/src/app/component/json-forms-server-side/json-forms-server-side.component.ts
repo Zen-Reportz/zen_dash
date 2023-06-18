@@ -1,7 +1,3 @@
-import {debounceTime, finalize, tap} from 'rxjs/operators';
-import {switchMap} from 'rxjs/operators';
-import {delay} from 'rxjs/operators';
-import {of} from 'rxjs';
 import {AutocompleteControlRenderer} from '@jsonforms/angular-material';
 import {Observable} from 'rxjs';
 import {Component} from '@angular/core';
@@ -18,6 +14,7 @@ import { UpdateReturnData } from 'src/app/shared/application_data';
 export class JsonFormsServerSideComponent extends AutocompleteControlRenderer {
   url: string = ''
   name: string = ''
+  current_value: string = ''
 
   constructor(private callService: CallServiceService, jsonformsService: JsonFormsAngularService){
     super(jsonformsService);
@@ -34,16 +31,16 @@ export class JsonFormsServerSideComponent extends AutocompleteControlRenderer {
 
     this.url =  this.scopedSchema["url" as keyof typeof this.scopedSchema]
     this.name =  this.scopedSchema["search_name" as keyof typeof this.scopedSchema]
-    this.form.valueChanges
-      .pipe(
-        debounceTime(300),
-        tap(() => this.isLoading = true),
-        switchMap(value => this.fetchSuggestions(value)
-          .pipe(
-            finalize(() => this.isLoading = false)
-          )
+
+    this.form.valueChanges.subscribe(x => {
+      if (x !== this.current_value){
+
+        this.current_value = x
+        this.fetchSuggestions(x).subscribe(
+          (options: UpdateReturnData) => this.options = options.simple_fitler_data as string[]
         )
-      )
-      .subscribe((options: UpdateReturnData) => this.options = options.simple_fitler_data as string[]);
+      }
+      })
+
   }
 }

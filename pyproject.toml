@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "zen_dash"
-version = "0.5.11"
+version = "0.5.12"
 license = "MIT"
 description = "Simple yet scable and production ready python dashboard that is better than shiny application for business."
 readme = "README.md"
@@ -35,7 +35,7 @@ autopep8 = "^1.6.0"
 Sphinx = "^5.0.2"
 
 [build-system]
-requires = ["poetry-core @ git+https://github.com/python-poetry/poetry-core.git@master"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]

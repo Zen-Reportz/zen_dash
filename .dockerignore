@@ -1,0 +1,3 @@
+demo_venv/*
+**/.venv/**
+**/demo_venv/**

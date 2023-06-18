@@ -134,3 +134,23 @@ class Button(Zen):
             type=i.UpdateInstanceType.BUTTON_RESULT,
             button_result="My Result"
         )
+
+
+class ButtonRedirect(Zen):
+
+    @staticmethod
+    def full_url() -> str:
+        return f"{prefix}/google_button"
+
+    @staticmethod
+    def url() -> str:
+        return "/google_button"
+
+    @staticmethod
+    def view():
+        return i.ReturnData(
+            title="button data",
+            type=i.InstanceType.BUTTON,
+            button_data=i.ButtonData(
+                url="https://google.com", name="Take me to the Google", redirect=True)
+        )

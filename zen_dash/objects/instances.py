@@ -201,6 +201,7 @@ class CustomHTML(BaseUpdate):
 class ButtonData(BaseUpdate):
     url: str
     name: str
+    redirect: bool = False
 
 class SubmitFormData(BaseUpdate):
     name: str

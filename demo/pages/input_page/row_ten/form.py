@@ -1,5 +1,5 @@
 
-from demo.filters.view import SingleFilterServer
+from filters.view import SingleFilterServer
 
 
 formdata  ={ "orders": [

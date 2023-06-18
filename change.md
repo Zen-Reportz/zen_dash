@@ -1,3 +1,8 @@
+# 0.5.11
+- added dockerfile for local build
+- speed up json form server select 
+- adding little more space after submit button in json form
+- Button redirect now possible 
 # 0.5.10
 - fixed bug json form server select
 # 0.5.9

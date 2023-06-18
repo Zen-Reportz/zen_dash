@@ -42,3 +42,8 @@ async def d3():
 async def d3():
     return v.Button.server()
     # return 
+
+
+@router.post(v.ButtonRedirect.url(), response_model=i.ReturnData)
+async def buttonredirect():
+    return v.ButtonRedirect.view()

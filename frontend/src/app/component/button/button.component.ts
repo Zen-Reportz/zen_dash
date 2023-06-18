@@ -43,8 +43,17 @@ export class ButtonComponent implements OnInit {
   trigger(){
 
     this.reactiveity("triggered")
-    if (this.second_call !== undefined) {
-      this.second_call.unsubscribe();
+
+    if (this.data.redirect){
+      console.log("hoi")
+      console.log(this.data.url)
+      window.open(this.data.url, "_black")
+    }
+    else {
+      if (this.second_call !== undefined) {
+        this.second_call.unsubscribe();
+      }
+
     }
 
 
