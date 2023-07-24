@@ -1,3 +1,6 @@
+# 0.6.0
+- added login option SSO and User login (See demo)
+
 # 0.5.11
 - added dockerfile for local build
 - speed up json form server select 

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "zen_dash"
-version = "0.5.12"
+version = "0.6.0"
 license = "MIT"
 description = "Simple yet scable and production ready python dashboard that is better than shiny application for business."
 readme = "README.md"
@@ -26,6 +26,7 @@ click = "^8.1.3"
 websocket = "^0.2.1"
 websockets = "^10.4"
 fastapi = "^0.92.0"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

@@ -341,3 +341,8 @@ export class CallInfo{
   page!: string
   isSidebar!: boolean
 }
+
+
+export class ErrorData {
+  error!: string
+}

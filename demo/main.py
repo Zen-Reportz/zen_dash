@@ -8,11 +8,12 @@ from fastapi.templating import Jinja2Templates
 import pkg_resources
 from pages.box_page import BOXPAGE
 from zen_dash import page as p
-from zen_dash.objects import Configuration, RefreshInfo,WebSocketConfig, scripts as sc, sidebar as s
+from zen_dash.auth import login_support, Env
+from zen_dash.objects import Auth, Configuration, RefreshInfo,WebSocketConfig, scripts as sc, sidebar as s
 from pydantic import BaseConfig
 from fastapi.middleware.gzip import GZipMiddleware
 from pages.box_page.row_one import view as v
-
+from fastapi.responses import RedirectResponse
 from pages.input_page import INPUTZENPAGE
 from pages.chart_page import CHARTPAGE
 from pages.table_page import TABLEPAGE
@@ -58,6 +59,7 @@ app.include_router(bro.router)
 app.include_router(crn.router)
 
 app.add_middleware(GZipMiddleware, minimum_size=1000)
+SECRET_KEY = "skdhak8dhjkasdi7ihsfadsadasd"
 
 
 # Could be any dot-separated package/module name or a "Requirement"
@@ -77,7 +79,8 @@ async def root(request: Request, res: Response):
 @app.get("/backend/configuration", response_model=Configuration)
 async def config():
     return Configuration(websocket=WebSocketConfig(active=False), 
-                         refresh=RefreshInfo(refresh=True, rate_in_seconds=1*60))
+                         refresh=RefreshInfo(refresh=False, rate_in_seconds=1*60), 
+                         auth=Auth(SSO=True))
 
 @app.get("/backend/title")
 async def title():
@@ -88,6 +91,15 @@ async def title():
 async def save_doc(request: Request):
     return "yes"
 
+@app.get("/auth/login")
+async def redirect_func(request: Request):
+    return RedirectResponse(request.url_for('auth_callback'))
+
+@app.get("/auth/callback", response_class=RedirectResponse)
+async def auth_callback(request: Request):
+    response = RedirectResponse(request.url_for('root'))
+    login_support(response=response, data={"user":"zen"}, secret_key=SECRET_KEY, env=Env.LOCAL)
+    return response
 
 @app.post("/backend/scripts", response_model=sc.CustomScripts)
 async def scripts(request: Request):

@@ -1,4 +1,4 @@
-import { FormCustomData, MEData } from './../../shared/application_data';
+import { FormCustomData, MEData, UpdateReturnData } from './../../shared/application_data';
 import { Component, Input, OnInit } from '@angular/core';
 import { angularMaterialRenderers } from '@jsonforms/angular-material';
 import { DataService } from 'src/app/services/data.service';
@@ -67,14 +67,16 @@ export class FormComponent implements OnInit {
       undefined);
     this.call = p.subscribe(
       (res) => {
+        console.log(res)
+        let r = res as UpdateReturnData
         this.reactiveity("success")
-        let duration = res.display?.duration as number
-        let isMessage = !((res.display?.message === undefined) ||(res.display?.message === null))
+        let duration = r.display?.duration as number
+        let isMessage = !((r.display?.message === undefined) ||(r.display?.message === null))
         let message = 'API called Sucessfully '
         if (isMessage){
-          message = res.display?.message as string
+          message = r.display?.message as string
         }
-        let staus = res.display?.status as string
+        let staus = r.display?.status as string
         this._snackBar.openFromComponent(LoadingComponent, {
           duration: duration * 1000,
           data: { message: message, status: staus },

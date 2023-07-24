@@ -5,6 +5,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CallServiceService } from 'src/app/services/call-service.service';
 import { SidebarData } from 'src/app/shared/application_data';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -23,7 +24,8 @@ export class SidebarComponent implements OnInit {
 
   constructor(private http: HttpClient,
     private aRoute: ActivatedRoute,
-    private call: CallServiceService,
+    public call: CallServiceService,
+    public auth: AuthService,
     private ds: DataService) {
     this.aRoute.queryParamMap.subscribe((fragment) => {
       this.page = fragment.get('page');

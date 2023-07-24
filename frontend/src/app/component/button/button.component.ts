@@ -45,9 +45,9 @@ export class ButtonComponent implements OnInit {
     this.reactiveity("triggered")
 
     if (this.data.redirect){
-      console.log("hoi")
       console.log(this.data.url)
       window.open(this.data.url, "_black")
+      return
     }
     else {
       if (this.second_call !== undefined) {
@@ -61,18 +61,23 @@ export class ButtonComponent implements OnInit {
     this.second_call = p.subscribe(
       (res) => {
         try {
-          var tt : UpdateReturnData = res
+          var tt = res as UpdateReturnData
           this.reactiveity("result", tt.button_result)
+          this._snackBar.openFromComponent(LoadingComponent, {
+            duration: tt.display?.duration as number*1000,
+            data: { message: tt.display?.message, status: tt.display?.status },
+          });
+          this.reactiveity("success")
+          this.show = false
         } catch {
+          this._snackBar.openFromComponent(LoadingComponent, {
+            duration: 5000,
+            data: { message: "backend failed", status: 'error' },
+          });
 
         }
 
-        this._snackBar.openFromComponent(LoadingComponent, {
-          duration: 5 * 1000,
-          data: { message: 'API called Sucessfully ', status: 'success' },
-        });
-        this.reactiveity("success")
-        this.show = false
+
 
       },
       (error) => {

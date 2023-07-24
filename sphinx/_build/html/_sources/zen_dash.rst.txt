@@ -7,6 +7,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
+   zen_dash.auth
    zen_dash.cli
    zen_dash.objects
    zen_dash.support

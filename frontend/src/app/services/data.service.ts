@@ -22,6 +22,7 @@ export class DataService {
   side_data!: SidebarData;
   defaul_page: string = 'page_0'
   data_state!: number
+  LoginRequired!: boolean
 
 
   all_input = new Map<string, ResponseData>();
@@ -176,7 +177,9 @@ export class DataService {
     }
   }
 
-
+  reset_data(){
+    this.all_input = new Map<string, ResponseData>();
+  }
 
 
   save_instance(input_data: ResponseData, value: any, url: string) {
@@ -306,7 +309,7 @@ export class DataService {
   save_default() {
     let page = this.get_page();
     for (const [url, value] of Object.entries(this.data['global'])) {
-      // console.log(url + value)
+      console.log(url + value)
       try {
         if (url !== 'page') {
           let d: any = value;

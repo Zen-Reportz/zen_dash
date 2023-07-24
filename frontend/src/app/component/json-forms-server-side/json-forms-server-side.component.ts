@@ -19,7 +19,7 @@ export class JsonFormsServerSideComponent extends AutocompleteControlRenderer {
   constructor(private callService: CallServiceService, jsonformsService: JsonFormsAngularService){
     super(jsonformsService);
   }
-  fetchSuggestions = (input: string): Observable<UpdateReturnData> => {
+  fetchSuggestions = (input: string): Observable<UpdateReturnData> | Observable<unknown> => {
     let p = this.callService.second_call_response(this.url, this.name, input);
     return p;
   };
@@ -37,7 +37,10 @@ export class JsonFormsServerSideComponent extends AutocompleteControlRenderer {
 
         this.current_value = x
         this.fetchSuggestions(x).subscribe(
-          (options: UpdateReturnData) => this.options = options.simple_fitler_data as string[]
+          (options) => {
+            let d = options as UpdateReturnData
+            this.options = d.simple_fitler_data as string[]
+          }
         )
       }
       })

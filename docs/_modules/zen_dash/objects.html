@@ -66,7 +66,7 @@
              
   <h1>Source code for zen_dash.objects</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span>
-<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">root_validator</span>
 
 <span class="kn">from</span> <span class="nn">zen_dash.objects.page</span> <span class="kn">import</span> <span class="n">Page</span>
 
@@ -118,11 +118,17 @@
 <div class="viewcode-block" id="WebSocketConfig"><a class="viewcode-back" href="../../zen_dash.objects.html#zen_dash.objects.WebSocketConfig">[docs]</a><span class="k">class</span> <span class="nc">WebSocketConfig</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">active</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></div>
 
+<div class="viewcode-block" id="Auth"><a class="viewcode-back" href="../../zen_dash.objects.html#zen_dash.objects.Auth">[docs]</a><span class="k">class</span> <span class="nc">Auth</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">SSO</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">UP_Login</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></div>
+    
+
 <div class="viewcode-block" id="Configuration"><a class="viewcode-back" href="../../zen_dash.objects.html#zen_dash.objects.Configuration">[docs]</a><span class="k">class</span> <span class="nc">Configuration</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">retry_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="n">show_right_sidebar</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">refresh</span><span class="p">:</span> <span class="n">RefreshInfo</span> <span class="o">=</span>  <span class="n">RefreshInfo</span><span class="p">()</span>
-    <span class="n">websocket</span><span class="p">:</span> <span class="n">WebSocketConfig</span> <span class="o">=</span> <span class="n">WebSocketConfig</span><span class="p">()</span></div>
+    <span class="n">websocket</span><span class="p">:</span> <span class="n">WebSocketConfig</span> <span class="o">=</span> <span class="n">WebSocketConfig</span><span class="p">()</span>
+    <span class="n">auth</span><span class="p">:</span> <span class="n">Auth</span> <span class="o">=</span> <span class="n">Auth</span><span class="p">()</span> </div>
 </pre></div>
 
            </div>

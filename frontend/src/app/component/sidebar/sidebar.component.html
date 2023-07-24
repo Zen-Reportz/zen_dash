@@ -1,3 +1,4 @@
+<span *ngIf="!((call.config.auth.SSO || call.config.auth.UP_Login) && auth.not_logged())">
 <span *ngIf="side_data !== undefined">
   <mat-selection-list [multiple]="false">
     <span *ngIf="isSideData()">
@@ -38,4 +39,5 @@
       (rd)="setReactivity(f.url, $event)" [isSidebar]=true></app-entry-point> <br>
   </ng-container>
   <br>
+</span>
 </span>

@@ -132,7 +132,10 @@ class Button(Zen):
         return i.UpdateReturnData(
             title="button data",
             type=i.UpdateInstanceType.BUTTON_RESULT,
-            button_result="My Result"
+            display=i.Display(
+                message="my submit",
+                status=i.DisplayStatus.SUCCESS,
+            )
         )
 
 

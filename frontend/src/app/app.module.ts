@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing-module';
 import { RouterModule } from '@angular/router';
 import { PageComponent } from './page/page.component';
@@ -89,6 +89,8 @@ import { JsonFormsAngularMaterialModule } from '@jsonforms/angular-material';
 import {CookieService} from 'ngx-cookie-service';
 import { ScriptHackComponent } from './component/script-hack/script-hack.component';
 import { JsonFormsServerSideComponent } from './component/json-forms-server-side/json-forms-server-side.component';
+import { LoginComponent } from './component/login/login.component';
+import { PostInterceptor, CookieServiceDelete } from './shared/http_interceptor';
 
 @NgModule({
   declarations: [
@@ -123,6 +125,7 @@ import { JsonFormsServerSideComponent } from './component/json-forms-server-side
     FormComponent,
     ScriptHackComponent,
     JsonFormsServerSideComponent,
+    LoginComponent,
   ],
   imports: [
     FlexLayoutModule,
@@ -189,7 +192,7 @@ import { JsonFormsServerSideComponent } from './component/json-forms-server-side
     JsonFormsModule,
     JsonFormsAngularMaterialModule,
   ],
-  providers: [CookieService],
+  providers: [CookieService, {provide:HTTP_INTERCEPTORS, useClass: PostInterceptor,multi: true }, CookieServiceDelete],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

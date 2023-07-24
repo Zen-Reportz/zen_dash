@@ -391,7 +391,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">SIMPLE_FILTER</span> <span class="o">=</span> <span class="s2">&quot;simple_filter&quot;</span>
     <span class="n">BOX</span> <span class="o">=</span> <span class="s2">&quot;box&quot;</span>
-    <span class="n">FORM</span> <span class="o">=</span> <span class="s2">&quot;form&quot;</span></div>
+    <span class="n">FORM</span> <span class="o">=</span> <span class="s2">&quot;form&quot;</span>
+    <span class="n">BUTTON_RESULT</span> <span class="o">=</span> <span class="s2">&quot;button_result&quot;</span></div>
 
 
 <div class="viewcode-block" id="DisplayStatus"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.DisplayStatus">[docs]</a><span class="k">class</span> <span class="nc">DisplayStatus</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
@@ -414,15 +415,16 @@
 <div class="viewcode-block" id="UpdateReturnData.validator_type_match"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData.validator_type_match">[docs]</a>    <span class="nd">@root_validator</span>
     <span class="k">def</span> <span class="nf">validator_type_match</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">field_values</span><span class="p">):</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">UpdateInstanceType</span><span class="o">.</span><span class="n">BOX</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;box_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.BOX, and box_data is missing&quot;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">SIMPLE_FILTER</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;simple_fitler_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.SIMPLE_FILTER, and simple_fitler_data is missing&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected UpdateInstanceType.BOX, and box_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">UpdateInstanceType</span><span class="o">.</span><span class="n">SIMPLE_FILTER</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;simple_fitler_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected UpdateInstanceType.SIMPLE_FILTER, and simple_fitler_data is missing&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">UpdateInstanceType</span><span class="o">.</span><span class="n">BUTTON_RESULT</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;display&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected UpdateInstanceType.BUTTON_RESULT, and display is missing&quot;</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">UpdateInstanceType</span><span class="o">.</span><span class="n">FORM</span><span class="p">):</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;display&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.FORM, and display is missing&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;display&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Currently display is supporeted for Form only&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected UpdateInstanceType.FORM, and display is missing&quot;</span><span class="p">)</span>
         
         <span class="k">return</span> <span class="n">field_values</span></div>
 

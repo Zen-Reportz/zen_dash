@@ -1,7 +1,7 @@
 import { CallServiceService } from './../../services/call-service.service';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, UntypedFormControl } from '@angular/forms';
-import { ReplaySubject, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import {
   debounceTime,
   delay,
@@ -11,7 +11,7 @@ import {
   takeUntil,
 } from 'rxjs/operators';
 import { DataService } from 'src/app/services/data.service';
-import { MEData } from 'src/app/shared/application_data';
+import { MEData, UpdateReturnData } from 'src/app/shared/application_data';
 
 @Component({
   selector: 'app-simple-server-filter',
@@ -59,10 +59,11 @@ export class SimpleServerFilterComponent implements OnInit {
       )
       .subscribe((search) => {
         // create new object instances
-        let p = this.pullData(search);
+        let p = this.pullData(search) as Observable<UpdateReturnData>
 
         p.subscribe(
           (data) => {
+
             this.searching = false;
             let selected = this.ServerSideCtrl.value
 
@@ -128,7 +129,7 @@ export class SimpleServerFilterComponent implements OnInit {
   }
 
   pullData(value: string) {
-    let p = this.callService.second_call_response(this.server_url, this.name, value);
+    let p = this.callService.second_call_response(this.server_url, this.name, value) as  Observable<UpdateReturnData> | Observable<unknown>
     return p;
   }
 

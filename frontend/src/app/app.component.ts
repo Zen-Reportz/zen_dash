@@ -12,6 +12,7 @@ import { CustomScripts } from './shared/application_data';
 import { Clipboard } from '@angular/cdk/clipboard';
 import {CookieService} from 'ngx-cookie-service';
 import { WebsocketService } from './services/websocket.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -41,7 +42,9 @@ export class AppComponent implements OnInit, OnDestroy {
     public call: CallServiceService,
     private titleService: Title,
     private clipboard: Clipboard,
-    private ws: WebsocketService  ) {
+    private ws: WebsocketService,
+    public auth: AuthService
+    ) {
 
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();

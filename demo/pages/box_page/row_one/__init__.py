@@ -1,8 +1,9 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, HTTPException
 from fastapi.websockets import WebSocket
 from pages.box_page.row_one import view as v
 from zen_dash.objects import instances as i
 from zen_dash import page as p
+
 router = APIRouter(
     prefix=v.prefix,
     tags=["row_one"],
@@ -13,8 +14,11 @@ router = APIRouter(
 # async def websocket_get():
 #     pass
 
-@router.post(v.FirstBox.url(), response_model=i.ReturnData)
+@router.post(v.FirstBox.url())
 async def d3(b: v.BoxInput):
+    # x==3
+    # raise HTTPException(status_code=401, detail="failed to authenticate")
+
     return await v.FirstBox.view(b)
 
 

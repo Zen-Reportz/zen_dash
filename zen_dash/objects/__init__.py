@@ -1,5 +1,5 @@
 from typing import List, Optional, Type
-from pydantic import BaseModel
+from pydantic import BaseModel, root_validator
 
 from zen_dash.objects.page import Page
 
@@ -51,8 +51,14 @@ class RefreshInfo(BaseModel):
 class WebSocketConfig(BaseModel):
     active: bool = False
 
+class Auth(BaseModel):
+    SSO: bool = False
+    UP_Login: bool = False
+    
+
 class Configuration(BaseModel):
     retry_count: int = 2
     show_right_sidebar: bool = False
     refresh: RefreshInfo =  RefreshInfo()
     websocket: WebSocketConfig = WebSocketConfig()
+    auth: Auth = Auth() 

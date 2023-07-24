@@ -1,4 +1,4 @@
-import { CallInfo, MultiURLInfo, ReactiveData, ResponseReturn } from './../shared/application_data';
+import { CallInfo, ErrorData, MultiURLInfo, ReactiveData, ResponseReturn } from './../shared/application_data';
 import { EventEmitter, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CallServiceService } from './call-service.service';
@@ -135,7 +135,6 @@ export class ApiCallService {
     }
     if (this.input_types.includes(t?.type as string)){
       if (!((refresh_reason === 'Reactive') || (refresh_reason === 'SpecificReactive'))){
-        console.log("hi")
         this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
         return
 
@@ -153,14 +152,17 @@ export class ApiCallService {
       url,
       undefined,
       undefined
-    ) as Observable<ResponseData>;
+    ) as Observable<ResponseData> | Observable<unknown>
 
     this.ds.input_emitter.emit({"calling": true, "lookup": look_up, "t": undefined, "message": undefined})
     // console.log("calling" + url + look_up)
     this.ds.all_input.delete(look_up);
     this.subscription_lookup[look_up] =  await p.subscribe({
-      next: (t: ResponseData) => {
-
+      next: (t: any) => {
+        if (t?.error !== undefined) {
+          this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": undefined, "message": t.error});
+          return
+        }
         this.updateData(isSidebar, url, page, t, look_up)
         // console.log("called" + url + look_up)
         return
