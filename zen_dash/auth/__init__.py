@@ -1,26 +1,18 @@
 from datetime import datetime, timedelta
 from typing import Union
-from fastapi.responses import JSONResponse
-from jose import JWTError, jwt
-from fastapi import Response, Request, HTTPException
-from enum import Enum
+from jose import jwt
+from fastapi import Cookie, Response, HTTPException
+import os
 
-class Env(Enum):
-    """ Docstring for class InstanceType
-    Instance Type required for ReturnData
-
-    :return: Instance Type for Enum
-    :rtype: Enum
-
-    """
-    LOCAL= False
-    PROD = True
-
-
-def login_support(response: Response, data: dict, secret_key: str, 
-                  env: Env, 
-                  algorithm:str="HS256", expires_delta: Union[timedelta, None] = None
+def login_support(response: Response, data: dict, 
+                  expires_delta: Union[timedelta, None] = None
                   ):
+    
+    secret_key = os.environ['SECRET_KEY']
+    algorithm = os.environ.get('ALGORITHM', 'HS256')
+    secure = os.environ.get('secure', True)
+
+    # algorithm:str="HS256", 
     to_encode = data.copy()
     if expires_delta:
         expire = (datetime.utcnow() + expires_delta).strftime('%s')
@@ -29,32 +21,25 @@ def login_support(response: Response, data: dict, secret_key: str,
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, secret_key, algorithm=algorithm)
     response.set_cookie("auth_token", encoded_jwt, expires=expire, 
-                        samesite='strict', secure=env.value )
+                        samesite='strict', secure=secure )
     return
 
+async def auth_required(auth_token:str =  Cookie(None)):
+    secret_key = os.environ['SECRET_KEY']
 
+    algorithm = os.environ.get('ALGORITHM', 'HS256')
 
-
-class LoginMiddleWare:
-    def __init__(self, secret_key:str, algorithm:str="HS256"):
-        self.secret_key = secret_key
-        self.algorithm = algorithm
-        pass 
-    
-    async def __call__(self, request: Request, call_next):
-        # do something with the request object
-        token = request.cookies.get('auth_token')
-        x = JSONResponse({"detail": "Authorized"}, status_code=401)
-        
-        if token is None:
+    x = HTTPException( status_code=401, detail="UnAuthorized")
+    if not auth_token:
+        print("User is Not logged in")
+        raise x
+    try:
+        jw = jwt.decode(auth_token,key=secret_key, algorithms=algorithm)
+        if datetime.fromtimestamp(int(jw.get("exp"))) < datetime.utcnow():
+            print("Token Expired")
             raise x
-        x.delete_cookie("auth_token")
-        try:
-            jw = jwt.decode(token,key=self.secret_key, algorithms=self.algorithm)
-            if datetime.fromtimestamp(jw.get("exp")) > datetime.utcnow():
-                return await call_next(request)
-            else:
-                raise x
 
-        except:
-            raise x
+    except Exception as e:
+        print("cant parsed JWT")
+        print(e)
+        raise x

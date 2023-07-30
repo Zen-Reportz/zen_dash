@@ -8,7 +8,7 @@ from fastapi.templating import Jinja2Templates
 import pkg_resources
 from pages.box_page import BOXPAGE
 from zen_dash import page as p
-from zen_dash.auth import login_support, Env
+from zen_dash.auth import login_support
 from zen_dash.objects import Auth, Configuration, RefreshInfo,WebSocketConfig, scripts as sc, sidebar as s
 from pydantic import BaseConfig
 from fastapi.middleware.gzip import GZipMiddleware
@@ -91,14 +91,14 @@ async def title():
 async def save_doc(request: Request):
     return "yes"
 
-@app.get("/auth/login")
+@app.get("/auth/login", response_class=RedirectResponse)
 async def redirect_func(request: Request):
     return RedirectResponse(request.url_for('auth_callback'))
 
 @app.get("/auth/callback", response_class=RedirectResponse)
 async def auth_callback(request: Request):
     response = RedirectResponse(request.url_for('root'))
-    login_support(response=response, data={"user":"zen"}, secret_key=SECRET_KEY, env=Env.LOCAL)
+    login_support(response=response, data={"user":"zen"})
     return response
 
 @app.post("/backend/scripts", response_model=sc.CustomScripts)

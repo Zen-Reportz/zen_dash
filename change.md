@@ -1,3 +1,10 @@
+# 0.6.1
+- Breaking change for Auth
+- SECRET_KEY (Random KEY for JWT token), and ALGORITHM is env varible required for auth
+- auth_required use as dependcy ```dependencies=[Depends(auth_required)]```
+- `/auth/login` and `/auth/callback` endpoints need to fill up for SSO
+- `/auth/up_login` endpoint to fill up auth
+
 # 0.6.0
 - added login option SSO and User login (See demo)
 

@@ -8,4 +8,4 @@ push: build_documentation publish
 	git add . && git commit -m "updated document document" && git push
 
 run_demo:
-	cd demo && sh demo.sh
+	cd demo && export SECRET_KEY=!akdR%s5h^1#EB7X94KtiQ33Dg && sh demo.sh

@@ -5,11 +5,6 @@ from pages.chart_page.row_eight.view import HighchartStock
 from zen_dash.objects import instances as i
 from zen_dash import page as p
 from zen_dash import Zen
-from zen_dash.support.encoder import JsonEncoder
-import random
-import json
-import time
-from fastapi.websockets import WebSocket
 
 prefix = "/backend/box_page/row_one"
 
