@@ -31,16 +31,16 @@ export class DatetimeComponent implements OnInit {
       this.single = false;
       this.form_data = new UntypedFormGroup({
         start: new UntypedFormControl(
-          new Date(this.data.first_date + 'T00:00:00')
+          new Date(this.data.first_date + 'T00:00:00Z')
         ),
         end: new UntypedFormControl(
-          new Date(this.data.second_date + 'T00:00:00')
+          new Date(this.data.second_date + 'T00:00:00Z')
         ),
       });
     } else {
       this.single = true;
       this.form_control = new UntypedFormControl(
-        new Date(this.data.first_date + 'T00:00:00')
+        new Date(this.data.first_date + 'T00:00:00Z')
       );
     }
   }

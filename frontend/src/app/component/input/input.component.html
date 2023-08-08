@@ -1,6 +1,6 @@
 <mat-form-field class="example-form-field" appearance="fill">
   <mat-label> {{ getLabel() }}</mat-label>
-  <input matInput type="text" [(ngModel)]="data" (ngModelChange)="saveData()" />
+  <input matInput type="text" #inputModel [(ngModel)]="data" (ngModelChange)="saveData()" (paste)="onPaste($event, inputModel)"/>
   <button
     *ngIf="data"
     matSuffix

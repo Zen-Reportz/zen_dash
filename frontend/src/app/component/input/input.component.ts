@@ -1,5 +1,6 @@
 import { MEData } from './../../shared/application_data';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { NgModel } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -10,8 +11,9 @@ import { DataService } from 'src/app/services/data.service';
 export class InputComponent implements OnInit {
   @Input() url!: string;
   @Input() isSidebar!: boolean;
-
+  @ViewChild('inputModel') inputModel!: NgModel
   data!: string;
+
 
   constructor(private ds: DataService) {}
 
@@ -53,5 +55,32 @@ export class InputComponent implements OnInit {
     m.page = this.ds.dataLookup(this.isSidebar);
     // this.ds.all_input.get(this.url)?.input_data.value = this.data
     this.ds.data_setter.emit(m);
+  }
+
+  onPaste(event: ClipboardEvent, inputElement: HTMLInputElement) {
+    event.preventDefault()
+    const selectionStart = inputElement.selectionStart
+    console.log(selectionStart)
+    const selectionEnd = inputElement.selectionEnd
+    console.log(selectionEnd)
+
+
+    if (event.clipboardData){
+      let pastedText = event.clipboardData.getData("text/plain")
+      console.log(pastedText)
+      if ((selectionStart !== null) && (selectionEnd !== null)) {
+        const bST = this.data.substring(0, selectionStart)
+        const aST = this.data.substring(selectionEnd)
+        console.log("bst")
+        console.log(this.data)
+        console.log(bST)
+        console.log(aST)
+        console.log("ast")
+        this.data = bST + pastedText + aST
+      } else {
+        this.data += pastedText
+      }
+    }
+    this.saveData()
   }
 }

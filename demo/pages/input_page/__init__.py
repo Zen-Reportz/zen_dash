@@ -11,10 +11,12 @@ from pages.input_page.row_ten import view as rtv
 from filters import view as fv
 from zen_dash.objects.flex_data import FlexData
 from zen_dash import ZenPage
+from pages.box_page.row_one import view as rev
 
 inputPage = p.Page(
             rows=[
                 p.Row(data=[
+                    p.Instance(url=rev.FirstBox.full_url()),
                     p.Instance(url=prov.Date.full_url()),
                     p.Instance(url=prov.SingleDate.full_url()),
                     p.Instance(url=prov.DateReactive.full_url())

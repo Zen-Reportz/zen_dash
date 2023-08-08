@@ -1,3 +1,7 @@
+# 0.6.2
+- fixing issue with datetime 
+- added support for paste for input
+
 # 0.6.1
 - Breaking change for Auth
 - SECRET_KEY (Random KEY for JWT token), and ALGORITHM is env varible required for auth
