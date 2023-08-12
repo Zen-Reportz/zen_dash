@@ -8,6 +8,7 @@ from zen_dash import Zen
 
 prefix = "/backend/box_page/row_one"
 
+
 class BoxInput(BaseModel):
     page: str
 
@@ -30,14 +31,15 @@ class FirstBox(Zen):
         Value = random.choice(["5009", "200"])
         return i.ReturnData(type=i.InstanceType.BOX,
                             box_data=i.BoxData(
-                                icon="person", 
-                                name=name, 
+                                icon="person",
+                                name=name,
                                 value=Value),
                             footer="5% increase compare to last week ",
                             tooltip_data=i.ToolTipData(
                                 label="my label", disable=False),
                             dialog_data=dialog_data,
                             )
+
 
 class FirstBoxDialog(Zen):
     @staticmethod
@@ -97,5 +99,5 @@ class ForthBox(Zen):
         return '/forth_box'
 
     @staticmethod
-    async def view(b:BoxInput):
+    async def view(b: BoxInput):
         return i.ReturnData(type=i.InstanceType.BOX, box_data=i.BoxData(icon="attach_money", name="User Spent Total", value="$2000"))

@@ -29,4 +29,8 @@
       </mat-card-content>
     </mat-card>
   </div>
+
+  <div *ngFor="let button of page?.floating_button_url">
+    <app-fab-button [url]="button.url"></app-fab-button>
+  </div>
 </div>

@@ -100,6 +100,29 @@ class UploadData(Zen):
         return t
 
 
+class FloatingButton(Zen):
+    @staticmethod
+    def full_url() -> str:
+        return f"{prefix}/floating_button"
+
+    @staticmethod
+    def url() -> str:
+        return "/floating_button"
+
+    @staticmethod
+    async def view():
+        return i.ReturnData(type=i.InstanceType.FLOATING_BUTTON,
+                            floating_button_data=i.ButtonFloating(
+                                url="https://google.com",
+                                name="test",
+                                icon="forward",
+                                redirect=True,
+                                style={"bottom": "16px", "left": "16px"},
+                                feb_style=i.FEBStyle.FEB,
+                                color=i.FEBColor.ACCENT,
+                                target_attribute=i.TargetAttribute.Blank)
+                            )
+
 class Button(Zen):
 
     @staticmethod
@@ -116,7 +139,8 @@ class Button(Zen):
             title="button data",
             type=i.InstanceType.BUTTON,
             button_data=i.ButtonData(
-                url=Button.server_full_url(), name="test")
+                url=Button.server_full_url(), name="test this"),
+            flex=i.FlexData(fxFlex="0%", fxFlex_md="0%")
         )
 
     @staticmethod

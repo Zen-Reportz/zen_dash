@@ -1,0 +1,21 @@
+<span *ngIf="get_type() === 'feb'">
+  <button mat-fab [color]="get_color()" [style]="get_style()" (click)="trigger()">
+    <mat-icon> {{get_icon()}} </mat-icon>
+  </button>
+</span>
+<span *ngIf="get_type() === 'mini_feb'">
+  <button mat-fab [color]="get_color()" [style]="get_style()" (click)="trigger()">
+    <mat-icon> {{get_icon()}} </mat-icon>
+  </button>
+</span>
+<span *ngIf="get_type() === 'icon'">
+  <button mat-fab [color]="get_color()" [style]="get_style()" (click)="trigger()">
+    <mat-icon> {{get_icon()}} </mat-icon>
+  </button>
+</span>
+
+<span *ngIf="show">
+  <br /><br /><br />
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</span>
+

@@ -63,8 +63,24 @@ export class Row{
   layoutGap!: string
 }
 
+export class ButtonFEB {
+  url!: string
+  name!: string
+  redirect!: boolean
+  feb_style!: string
+  style!: object
+  color!: string
+  icon!: string
+  target_attribute!: string
+}
+
+export class FloatingButtonURLs{
+  url!: string
+}
+
 export class Page{
   rows!: Row[]
+  floating_button_url!: FloatingButtonURLs[]
 }
 
 
@@ -247,6 +263,7 @@ export class ButtonData {
   url!: string
   name!: string
   redirect!: boolean
+  target_attribute!: string
 }
 
 export class SubmitFormData{
@@ -293,6 +310,7 @@ export class ResponseData{
   dialog_data: DialogData | undefined
   form_data: FormCustomData | undefined
   websocket_url: string | undefined
+  floating_button_data: ButtonFEB | undefined
 }
 
 export class Display {

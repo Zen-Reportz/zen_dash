@@ -41,6 +41,7 @@ class InstanceType(Enum):
     CUSTOM_HTML="custom_html"
     BUTTON = "button"
     FORM = "form"
+    FLOATING_BUTTON = "floating_button"
 
 class BoxData(BaseUpdate):
     icon: str
@@ -198,10 +199,17 @@ class CustomHTML(BaseUpdate):
     full_custom: bool = False
     script: Optional[str]
 
+class TargetAttribute(Enum):
+    Blank = "_blank"
+    PARENT = "_parent"
+    SELF = "_self"
+    TOP = "_top"
+
 class ButtonData(BaseUpdate):
     url: str
     name: str
     redirect: bool = False
+    target_attribute:TargetAttribute = TargetAttribute.Blank
 
 class SubmitFormData(BaseUpdate):
     name: str
@@ -213,6 +221,29 @@ class FormData(BaseUpdate):
     form_schema: Dict
     ui_schema: Dict
     data: Dict
+
+
+class FEBStyle(Enum):
+    FEB= "feb"
+    MINIFEB = "mini_feb"
+    ICON = "icon"
+
+class FEBColor(Enum):
+    PRIMARY = "primary"
+    ACCENT = "accent"
+    WARN = "warn"
+
+
+class ButtonFloating(BaseUpdate):
+    url: str
+    name: str
+    redirect: bool = False
+    style: Dict[str, str]
+    icon: str
+    feb_style: FEBStyle = FEBStyle.FEB
+    color: FEBColor = FEBColor.ACCENT
+    target_attribute:TargetAttribute = TargetAttribute.PARENT
+
 
 
 class ReturnData(BaseUpdate):
@@ -258,6 +289,7 @@ class ReturnData(BaseUpdate):
     dialog_data: Optional[DialogBox]
     button_data: Optional[ButtonData]
     form_data: Optional[FormData]
+    floating_button_data: Optional[ButtonFloating]
 
     @root_validator
     def validator_type_match(cls, field_values):
@@ -309,6 +341,14 @@ class ReturnData(BaseUpdate):
             raise ValueError("You have selected InstanceType.BUTTON, and button_data is missing")
         elif (field_values["type"] == InstanceType.FORM) and (field_values["form_data"] is None):
             raise ValueError("You have selected InstanceType.FORM, and form_data is missing")
+        elif (field_values["type"] == InstanceType.FLOATING_BUTTON) and (field_values["floating_button_data"] is None):
+            raise ValueError("You have selected InstanceType.FLOATING_BUTTON, and floating_button_data is missing")
+        elif (field_values["type"] == InstanceType.FLOATING_BUTTON) and (field_values["footer"] is not None):
+            raise ValueError("footer is not supported with InstanceType.FLOATING_BUTTON")
+        elif (field_values["type"] == InstanceType.FLOATING_BUTTON) and (field_values["tooltip_data"] is not None):
+            raise ValueError("tooltip_data is not supported with InstanceType.FLOATING_BUTTON")
+        elif (field_values["type"] == InstanceType.FLOATING_BUTTON) and (field_values["dialog_data"] is not None):
+            raise ValueError("dialog_data is not supported with InstanceType.FLOATING_BUTTON")
 
         return field_values
 

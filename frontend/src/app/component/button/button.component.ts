@@ -46,7 +46,7 @@ export class ButtonComponent implements OnInit {
 
     if (this.data.redirect){
       console.log(this.data.url)
-      window.open(this.data.url, "_black")
+      window.open(this.data.url, this.data.target_attribute)
       return
     }
     else {

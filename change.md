@@ -1,3 +1,8 @@
+# 0.6.3
+- added TargetAttribute in button
+- added floating_button_url in page (Example: demo/pages/input_page/__init__.py)
+- added ButtonFloating in response class (Example: demo/pages/input_page/row_seven/view.py)
+
 # 0.6.2
 - fixing issue with datetime 
 - added support for paste for input

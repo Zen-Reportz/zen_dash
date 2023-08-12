@@ -91,6 +91,7 @@ import { ScriptHackComponent } from './component/script-hack/script-hack.compone
 import { JsonFormsServerSideComponent } from './component/json-forms-server-side/json-forms-server-side.component';
 import { LoginComponent } from './component/login/login.component';
 import { PostInterceptor, CookieServiceDelete } from './shared/http_interceptor';
+import { FabButtonComponent } from './component/fab-button/fab-button.component';
 
 @NgModule({
   declarations: [
@@ -126,6 +127,7 @@ import { PostInterceptor, CookieServiceDelete } from './shared/http_interceptor'
     ScriptHackComponent,
     JsonFormsServerSideComponent,
     LoginComponent,
+    FabButtonComponent,
   ],
   imports: [
     FlexLayoutModule,

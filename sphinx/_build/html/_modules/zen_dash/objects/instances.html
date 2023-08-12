@@ -108,7 +108,8 @@
     <span class="n">IFRAME</span> <span class="o">=</span> <span class="s2">&quot;iframe&quot;</span>
     <span class="n">CUSTOM_HTML</span><span class="o">=</span><span class="s2">&quot;custom_html&quot;</span>
     <span class="n">BUTTON</span> <span class="o">=</span> <span class="s2">&quot;button&quot;</span>
-    <span class="n">FORM</span> <span class="o">=</span> <span class="s2">&quot;form&quot;</span></div>
+    <span class="n">FORM</span> <span class="o">=</span> <span class="s2">&quot;form&quot;</span>
+    <span class="n">FLOATING_BUTTON</span> <span class="o">=</span> <span class="s2">&quot;floating_button&quot;</span></div>
 
 <div class="viewcode-block" id="BoxData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.BoxData">[docs]</a><span class="k">class</span> <span class="nc">BoxData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
     <span class="n">icon</span><span class="p">:</span> <span class="nb">str</span>
@@ -266,10 +267,17 @@
     <span class="n">full_custom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">script</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
 
+<div class="viewcode-block" id="TargetAttribute"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.TargetAttribute">[docs]</a><span class="k">class</span> <span class="nc">TargetAttribute</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">Blank</span> <span class="o">=</span> <span class="s2">&quot;_blank&quot;</span>
+    <span class="n">PARENT</span> <span class="o">=</span> <span class="s2">&quot;_parent&quot;</span>
+    <span class="n">SELF</span> <span class="o">=</span> <span class="s2">&quot;_self&quot;</span>
+    <span class="n">TOP</span> <span class="o">=</span> <span class="s2">&quot;_top&quot;</span></div>
+
 <div class="viewcode-block" id="ButtonData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ButtonData">[docs]</a><span class="k">class</span> <span class="nc">ButtonData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">redirect</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></div>
+    <span class="n">redirect</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">target_attribute</span><span class="p">:</span><span class="n">TargetAttribute</span> <span class="o">=</span> <span class="n">TargetAttribute</span><span class="o">.</span><span class="n">Blank</span></div>
 
 <div class="viewcode-block" id="SubmitFormData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.SubmitFormData">[docs]</a><span class="k">class</span> <span class="nc">SubmitFormData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
@@ -281,6 +289,29 @@
     <span class="n">form_schema</span><span class="p">:</span> <span class="n">Dict</span>
     <span class="n">ui_schema</span><span class="p">:</span> <span class="n">Dict</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span></div>
+
+
+<div class="viewcode-block" id="FEBStyle"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.FEBStyle">[docs]</a><span class="k">class</span> <span class="nc">FEBStyle</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FEB</span><span class="o">=</span> <span class="s2">&quot;feb&quot;</span>
+    <span class="n">MINIFEB</span> <span class="o">=</span> <span class="s2">&quot;mini_feb&quot;</span>
+    <span class="n">ICON</span> <span class="o">=</span> <span class="s2">&quot;icon&quot;</span></div>
+
+<div class="viewcode-block" id="FEBColor"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.FEBColor">[docs]</a><span class="k">class</span> <span class="nc">FEBColor</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">PRIMARY</span> <span class="o">=</span> <span class="s2">&quot;primary&quot;</span>
+    <span class="n">ACCENT</span> <span class="o">=</span> <span class="s2">&quot;accent&quot;</span>
+    <span class="n">WARN</span> <span class="o">=</span> <span class="s2">&quot;warn&quot;</span></div>
+
+
+<div class="viewcode-block" id="ButtonFloating"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ButtonFloating">[docs]</a><span class="k">class</span> <span class="nc">ButtonFloating</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">redirect</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">style</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+    <span class="n">icon</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">feb_style</span><span class="p">:</span> <span class="n">FEBStyle</span> <span class="o">=</span> <span class="n">FEBStyle</span><span class="o">.</span><span class="n">FEB</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">FEBColor</span> <span class="o">=</span> <span class="n">FEBColor</span><span class="o">.</span><span class="n">ACCENT</span>
+    <span class="n">target_attribute</span><span class="p">:</span><span class="n">TargetAttribute</span> <span class="o">=</span> <span class="n">TargetAttribute</span><span class="o">.</span><span class="n">PARENT</span></div>
+
 
 
 <div class="viewcode-block" id="ReturnData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ReturnData">[docs]</a><span class="k">class</span> <span class="nc">ReturnData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
@@ -326,6 +357,7 @@
     <span class="n">dialog_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DialogBox</span><span class="p">]</span>
     <span class="n">button_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ButtonData</span><span class="p">]</span>
     <span class="n">form_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FormData</span><span class="p">]</span>
+    <span class="n">floating_button_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ButtonFloating</span><span class="p">]</span>
 
 <div class="viewcode-block" id="ReturnData.validator_type_match"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ReturnData.validator_type_match">[docs]</a>    <span class="nd">@root_validator</span>
     <span class="k">def</span> <span class="nf">validator_type_match</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">field_values</span><span class="p">):</span>
@@ -377,6 +409,14 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.BUTTON, and button_data is missing&quot;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">FORM</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;form_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.FORM, and form_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">FLOATING_BUTTON</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;floating_button_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.FLOATING_BUTTON, and floating_button_data is missing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">FLOATING_BUTTON</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;footer&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;footer is not supported with InstanceType.FLOATING_BUTTON&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">FLOATING_BUTTON</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;tooltip_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;tooltip_data is not supported with InstanceType.FLOATING_BUTTON&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">FLOATING_BUTTON</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;dialog_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dialog_data is not supported with InstanceType.FLOATING_BUTTON&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">field_values</span></div></div>
 
