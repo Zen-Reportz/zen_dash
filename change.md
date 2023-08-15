@@ -1,5 +1,7 @@
+# 0.6.5
+- fixed naming issue in floating_button(Example: demo/pages/input_page/__init__.py, demo/pages/input_page/row_seven/view.py)
 # 0.6.4
-- fix naming issue ing floating_button (Example: demo/pages/input_page/__init__.py, demo/pages/input_page/row_seven/view.py)
+- fix naming issue in floating_button (Example: demo/pages/input_page/__init__.py, demo/pages/input_page/row_seven/view.py)
 
 # 0.6.3
 - added TargetAttribute in button

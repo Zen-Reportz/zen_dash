@@ -45,9 +45,6 @@ export class FabButtonComponent implements OnInit {
   }
 
   get_type() {
-    console.log(this.look_up)
-    // console.log("/backend/input_page/row_seven/floating_button$ZenLookup$page_0")
-    console.log(this.ds.all_input.get(this.look_up)?.floating_button_data?.fab_style)
     return this.ds.all_input.get(this.look_up)?.floating_button_data?.fab_style;
   }
 

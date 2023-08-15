@@ -11,9 +11,9 @@ class Row(BaseUpdate):
     data: List[Instance]
     layoutGap: Optional[str] = "30px"
 
-class FEBURL(BaseUpdate):
+class FABURL(BaseUpdate):
     url: str
 
 class Page(BaseUpdate):
     rows: List[Row]
-    floating_button_url: List[FEBURL] = []
+    floating_button_url: List[FABURL] = []
