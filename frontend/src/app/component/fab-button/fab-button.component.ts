@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CallServiceService } from 'src/app/services/call-service.service';
 import { DataService } from 'src/app/services/data.service';
 import {
-  ButtonFEB,
+  ButtonFAB,
   MEData,
   UpdateReturnData,
 } from 'src/app/shared/application_data';
@@ -44,30 +44,29 @@ export class FabButtonComponent implements OnInit {
     });
   }
 
-  get_data() {
-    return this.ds.all_input.get(this.look_up)?.floating_button_data as ButtonFEB;
-  }
-
   get_type() {
-    return this.get_data().feb_style;
+    console.log(this.look_up)
+    // console.log("/backend/input_page/row_seven/floating_button$ZenLookup$page_0")
+    console.log(this.ds.all_input.get(this.look_up)?.floating_button_data?.fab_style)
+    return this.ds.all_input.get(this.look_up)?.floating_button_data?.fab_style;
   }
 
   get_color() {
-    return this.get_data().color;
+    return this.ds.all_input.get(this.look_up)?.floating_button_data?.color;
   }
 
   get_style() {
-    return this.get_data().style;
+    return this.ds.all_input.get(this.look_up)?.floating_button_data?.style;
   }
 
   get_icon() {
-    return this.get_data().icon;
+    return this.ds.all_input.get(this.look_up)?.floating_button_data?.icon;
   }
 
   reactiveity(type: string, value: string = '') {
     let m = new MEData();
     m.page = this.ds.dataLookup(false);
-    m.key = (this.get_data().name as string) + '_' + type;
+    m.key = (this.ds.all_input.get(this.look_up)?.floating_button_data?.name as string) + '_' + type;
 
     if (value === '') {
       m.value = this.ds.makeid(2);
@@ -82,8 +81,9 @@ export class FabButtonComponent implements OnInit {
   trigger() {
     this.reactiveity('triggered');
 
-    if (this.get_data().redirect) {
-      window.open(this.get_data().url, this.get_data().target_attribute);
+    if (this.ds.all_input.get(this.look_up)?.floating_button_data?.redirect) {
+      window.open(this.ds.all_input.get(this.look_up)?.floating_button_data?.url,
+      this.ds.all_input.get(this.look_up)?.floating_button_data?.target_attribute);
       return;
     } else {
       if (this.second_call !== undefined) {
@@ -92,8 +92,8 @@ export class FabButtonComponent implements OnInit {
     }
 
     let p = this.callService.second_call_response(
-      this.get_data().url as string,
-      this.get_data().name as string,
+      this.ds.all_input.get(this.look_up)?.floating_button_data?.url as string,
+      this.ds.all_input.get(this.look_up)?.floating_button_data?.name as string,
       ''
     );
 

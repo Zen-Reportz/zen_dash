@@ -118,8 +118,8 @@ class FloatingButton(Zen):
                                 icon="forward",
                                 redirect=True,
                                 style={"bottom": "16px", "left": "16px"},
-                                feb_style=i.FEBStyle.FEB,
-                                color=i.FEBColor.ACCENT,
+                                fab_style=i.FABStyle.FAB,
+                                color=i.FABColor.ACCENT,
                                 target_attribute=i.TargetAttribute.Blank)
                             )
 

@@ -4,7 +4,7 @@ build_documentation:
 publish:
 	sh publish.sh
 
-push: build_documentation
+push: build_documentation publish
 	git add . && git commit -m "updated document document" && git push
 
 run_demo:

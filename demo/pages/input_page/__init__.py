@@ -70,7 +70,7 @@ inputPage = p.Page(
         )
 
     ],
-    floating_button=[
+    floating_button_url=[
         p.FEBURL(url=porsv.FloatingButton.full_url())
     ])
 

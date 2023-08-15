@@ -63,11 +63,11 @@ export class Row{
   layoutGap!: string
 }
 
-export class ButtonFEB {
+export class ButtonFAB {
   url!: string
   name!: string
   redirect!: boolean
-  feb_style!: string
+  fab_style!: string
   style!: object
   color!: string
   icon!: string
@@ -310,7 +310,7 @@ export class ResponseData{
   dialog_data: DialogData | undefined
   form_data: FormCustomData | undefined
   websocket_url: string | undefined
-  floating_button_data: ButtonFEB | undefined
+  floating_button_data: ButtonFAB | undefined
 }
 
 export class Display {

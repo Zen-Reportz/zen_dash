@@ -223,12 +223,12 @@ class FormData(BaseUpdate):
     data: Dict
 
 
-class FEBStyle(Enum):
-    FEB= "feb"
-    MINIFEB = "mini_feb"
+class FABStyle(Enum):
+    FAB= "fab"
+    MINIFAB = "mini_fab"
     ICON = "icon"
 
-class FEBColor(Enum):
+class FABColor(Enum):
     PRIMARY = "primary"
     ACCENT = "accent"
     WARN = "warn"
@@ -240,8 +240,8 @@ class ButtonFloating(BaseUpdate):
     redirect: bool = False
     style: Dict[str, str]
     icon: str
-    feb_style: FEBStyle = FEBStyle.FEB
-    color: FEBColor = FEBColor.ACCENT
+    fab_style: FABStyle = FABStyle.FAB
+    color: FABColor = FABColor.ACCENT
     target_attribute:TargetAttribute = TargetAttribute.PARENT
 
 
