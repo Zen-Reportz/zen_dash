@@ -67,6 +67,7 @@
              
   <h1>Source code for zen_dash.objects.sidebar</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">zen_dash.objects</span> <span class="kn">import</span> <span class="n">ZenPage</span>
 
 <span class="kn">from</span> <span class="nn">zen_dash.support</span> <span class="kn">import</span> <span class="n">BaseUpdate</span>
 <span class="kn">from</span> <span class="nn">importlib.metadata</span> <span class="kn">import</span> <span class="n">version</span>
@@ -82,8 +83,9 @@
 
 <div class="viewcode-block" id="FilterInfo"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.sidebar.FilterInfo">[docs]</a><span class="k">class</span> <span class="nc">FilterInfo</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span></div>
-    
+
 <div class="viewcode-block" id="Sidebar"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.sidebar.Sidebar">[docs]</a><span class="k">class</span> <span class="nc">Sidebar</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+   
     <span class="n">tabs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">SidebarTab</span><span class="p">,</span> <span class="n">SidebarGroup</span><span class="p">]]</span>
     <span class="n">filters</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FilterInfo</span><span class="p">]</span>
     <span class="n">size</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;300px&#39;</span>
@@ -96,6 +98,77 @@
                 <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;First tab can&#39;t be SidebarGroup&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">v</span></div></div>
 
+
+<div class="viewcode-block" id="GroupSidebarList"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.sidebar.GroupSidebarList">[docs]</a><span class="k">class</span> <span class="nc">GroupSidebarList</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">sub_pages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ZenPage</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="SidebarList"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.sidebar.SidebarList">[docs]</a><span class="k">class</span> <span class="nc">SidebarList</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
+    <span class="n">pages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ZenPage</span><span class="p">]</span>
+    <span class="n">groupSidebar</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">GroupSidebarList</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="get_page_dict"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.sidebar.get_page_dict">[docs]</a><span class="k">def</span> <span class="nf">get_page_dict</span><span class="p">(</span><span class="n">pages</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ZenPage</span><span class="p">]):</span>
+    <span class="n">page_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pages</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">tab_number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Tab number is not define in Zen Page&quot;</span><span class="p">)</span>
+        
+        <span class="n">page_number</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">tab_number</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">subtab_number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            
+            <span class="n">page_dict</span><span class="p">[</span><span class="n">page_number</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">page_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">page_number</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">page_dict</span><span class="p">[</span><span class="n">page_number</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">page_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">page_number</span><span class="p">),</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">pass</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">page_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">page_number</span><span class="p">),</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Please Check tab_number and subtab_number&quot;</span><span class="p">)</span>
+            
+            <span class="n">sub_number</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">subtab_number</span>
+            <span class="n">page_dict</span><span class="p">[</span><span class="n">page_number</span><span class="p">][</span><span class="n">sub_number</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="k">return</span> <span class="n">page_dict</span></div>
+
+<div class="viewcode-block" id="RenderTabs"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.sidebar.RenderTabs">[docs]</a><span class="k">def</span> <span class="nf">RenderTabs</span><span class="p">(</span><span class="n">sidebar_list</span><span class="p">:</span> <span class="n">SidebarList</span><span class="p">):</span>
+    <span class="n">len_</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sidebar_list</span><span class="o">.</span><span class="n">pages</span><span class="p">)</span>
+    <span class="n">len_</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sidebar_list</span><span class="o">.</span><span class="n">groupSidebar</span><span class="p">)</span>
+    
+    <span class="n">tabs</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">len_</span><span class="p">)]</span>
+    
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">sidebar_list</span><span class="o">.</span><span class="n">pages</span><span class="p">:</span>
+        <span class="n">page_index</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">tab_number</span>
+        <span class="n">tabs</span><span class="p">[</span><span class="n">page_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">SidebarTab</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">icon</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">subtab</span> <span class="ow">in</span> <span class="n">sidebar_list</span><span class="o">.</span><span class="n">groupSidebar</span><span class="p">:</span>
+        <span class="n">sub_tab</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">subtab</span><span class="o">.</span><span class="n">sub_pages</span><span class="p">))]</span> 
+        <span class="k">for</span> <span class="n">sub_page</span> <span class="ow">in</span> <span class="n">subtab</span><span class="o">.</span><span class="n">sub_pages</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">sub_page</span><span class="o">.</span><span class="n">subtab_number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Please provde subpage for </span><span class="si">{</span><span class="n">sub_page</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">sub_page_index</span> <span class="o">=</span> <span class="n">sub_page</span><span class="o">.</span><span class="n">subtab_number</span>
+            <span class="n">sub_tab</span><span class="p">[</span><span class="n">sub_page_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">SidebarTab</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="n">sub_page</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="n">sub_page</span><span class="o">.</span><span class="n">icon</span><span class="p">)</span>
+        <span class="n">page_index</span> <span class="o">=</span> <span class="n">sub_page</span><span class="o">.</span><span class="n">tab_number</span>
+        <span class="n">tabs</span><span class="p">[</span><span class="n">page_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">SidebarGroup</span><span class="p">(</span><span class="n">name</span><span class="o">=</span> <span class="n">subtab</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">subtabs</span><span class="o">=</span><span class="n">sub_tab</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tabs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">SidebarTab</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">SidebarGroup</span><span class="p">):</span>
+            <span class="n">i</span><span class="p">:</span> <span class="n">SidebarGroup</span>
+            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">subtabs</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> tab doesn&#39;t have define subtab_number </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Missing Tab&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tabs</span></div>
+
+
+
+
+
+
+
+    
 </pre></div>
 
            </div>

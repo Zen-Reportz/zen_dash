@@ -133,15 +133,15 @@ async def websocket_func(websocket: WebSocket):
 
 @app.get("/backend/sidebar", response_model=s.Sidebar)
 async def sidebar():
-    return s.Sidebar(tabs=[
-            s.SidebarTab(label=INPUTZENPAGE.name, icon=INPUTZENPAGE.icon),
-            s.SidebarGroup(name="Data", subtabs=[
-                s.SidebarTab(label=TABLEPAGE.name, icon=TABLEPAGE.icon),
-                s.SidebarTab(label=CHARTPAGE.name, icon=CHARTPAGE.icon),
-                s.SidebarTab(label=BOXPAGE.name, icon=BOXPAGE.icon),
-                s.SidebarTab(label=CUSTOMPAGE.name, icon=CUSTOMPAGE.icon)
-            ])
-            ],
+    RT = s.SidebarList(
+        pages=[INPUTZENPAGE],
+        groupSidebar=[s.GroupSidebarList(
+            name="Data",
+            sub_pages=[TABLEPAGE, CHARTPAGE, BOXPAGE, CUSTOMPAGE]
+        )]
+    )
+
+    return s.Sidebar(tabs=s.RenderTabs(RT),
         filters=[
             s.FilterInfo(url=fv.SingleFilterGlobal.full_url()),
             s.FilterInfo(

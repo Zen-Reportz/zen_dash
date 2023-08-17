@@ -1,3 +1,6 @@
+# 0.6.6
+- Dynamic Sidebar defined (demo/main.py#L136)
+
 # 0.6.5
 - fixed naming issue in floating_button(Example: demo/pages/input_page/__init__.py, demo/pages/input_page/row_seven/view.py)
 # 0.6.4
