@@ -4,12 +4,12 @@
   </button>
 </span>
 <span *ngIf="get_type() === 'mini_fab'">
-  <button mat-fab [color]="get_color()" [style]="get_style()" (click)="trigger()">
+  <button mat-mini-fab [color]="get_color()" [style]="get_style()" (click)="trigger()">
     <mat-icon> {{get_icon()}} </mat-icon>
   </button>
 </span>
 <span *ngIf="get_type() === 'icon'">
-  <button mat-fab [color]="get_color()" [style]="get_style()" (click)="trigger()">
+  <button mat-icon-button [color]="get_color()" [style]="get_style()" (click)="trigger()">
     <mat-icon> {{get_icon()}} </mat-icon>
   </button>
 </span>

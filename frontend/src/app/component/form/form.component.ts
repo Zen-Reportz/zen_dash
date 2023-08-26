@@ -7,6 +7,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoadingComponent } from '../loading/loading.component';
 import { and, createAjv, isControl, optionIs, rankWith, schemaTypeIs, scopeEndsWith, Tester, schemaMatches } from '@jsonforms/core';
 import { JsonFormsServerSideComponent } from '../json-forms-server-side/json-forms-server-side.component';
+import { MatDialog } from '@angular/material/dialog';
+import { SupportDialogComponent } from '../support-dialog/support-dialog.component';
 const serverTester: Tester = and(
   schemaTypeIs('string'),
   schemaMatches(schema => schema.hasOwnProperty('url'))
@@ -35,13 +37,29 @@ export class FormComponent implements OnInit {
   ]
   constructor(private ds: DataService,
     private callService: CallServiceService,
-    private _snackBar: MatSnackBar) {}
+    private _snackBar: MatSnackBar,
+    public _dialog: MatDialog
+    ) {}
 
   ngOnInit(): void {
     this.data = this.ds.all_input.get(this.url)?.form_data as FormCustomData;
     this.formData = this.data.data
 
   }
+
+
+  open_dialog(tt: UpdateReturnData){
+    let dialogRef = this._dialog.open(SupportDialogComponent, {
+      width: tt?.display_dialog?.width,
+      height: tt?.display_dialog?.height,
+      data: {custom_html: tt?.display_dialog?.custom_message}
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
 
   reactiveity(type: string){
     let m = new MEData();
@@ -81,6 +99,9 @@ export class FormComponent implements OnInit {
           duration: duration * 1000,
           data: { message: message, status: staus },
         });
+        if (r.display_dialog !== undefined){
+          this.open_dialog(r)
+        }
 
         this.show = false
 

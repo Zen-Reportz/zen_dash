@@ -378,18 +378,31 @@ class Display(BaseUpdate):
     message: Optional[str ]
     status: DisplayStatus = DisplayStatus.SUCCESS
 
+class DisplayDialog(BaseUpdate):
+      height: str = '500px'
+      width: str = '500px'
+      custom_message: str
+
 class UpdateReturnData(BaseUpdate):
     type: UpdateInstanceType
     simple_fitler_data: Optional[List[str]]
     box_data: Optional[BoxData]
     display: Optional[Display]
+    display_dialog: Optional[DisplayDialog]
 
     @root_validator
     def validator_type_match(cls, field_values):
-        if (field_values["type"] == UpdateInstanceType.BOX) and (field_values["box_data"] is None):
-            raise ValueError("You have selected UpdateInstanceType.BOX, and box_data is missing")
-        elif (field_values["type"] == UpdateInstanceType.SIMPLE_FILTER) and (field_values["simple_fitler_data"] is None):
-            raise ValueError("You have selected UpdateInstanceType.SIMPLE_FILTER, and simple_fitler_data is missing")
+
+        if (field_values["type"] == UpdateInstanceType.BOX) :
+            if (field_values["box_data"] is None):
+                raise ValueError("You have selected UpdateInstanceType.BOX, and box_data is missing")
+            if (field_values["display_dialog"] is not None):
+                raise ValueError("You have selected UpdateInstanceType.BOX, and display_dialog is not supported")
+        elif (field_values["type"] == UpdateInstanceType.SIMPLE_FILTER) :
+            if (field_values["simple_fitler_data"] is None):
+                raise ValueError("You have selected UpdateInstanceType.SIMPLE_FILTER, and simple_fitler_data is missing")
+            if (field_values["display_dialog"] is not None):
+                raise ValueError("You have selected UpdateInstanceType.SIMPLE_FILTER, and display_dialog is not supported")
 
         elif (field_values["type"] == UpdateInstanceType.BUTTON_RESULT) and (field_values["display"] is None):
             raise ValueError("You have selected UpdateInstanceType.BUTTON_RESULT, and display is missing")

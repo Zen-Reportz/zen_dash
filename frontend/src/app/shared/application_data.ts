@@ -1,4 +1,3 @@
-import { Optional } from "@angular/core"
 
 export class MEData {
   key!: string
@@ -325,6 +324,13 @@ export class UpdateReturnData{
   box_data: BoxData | undefined
   button_result: string | undefined
   display: Display | undefined
+  display_dialog: DisplayDialog | undefined
+}
+
+export class DisplayDialog {
+  height!: string
+  width!: string
+  custom_message!: string
 }
 
 export class ToolTipData {

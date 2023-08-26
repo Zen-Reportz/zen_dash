@@ -4,6 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from 'src/app/services/data.service';
 import { CallServiceService } from 'src/app/services/call-service.service';
 import { LoadingComponent } from '../loading/loading.component';
+import { MatDialog } from '@angular/material/dialog';
+import { SupportDialogComponent } from '../support-dialog/support-dialog.component';
 
 @Component({
   selector: 'app-button',
@@ -18,7 +20,9 @@ export class ButtonComponent implements OnInit {
   second_call: any
   constructor( private ds: DataService,
     private callService: CallServiceService,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,
+    public _dialog: MatDialog
+    ) { }
 
   reactiveity(type: string, value: string = ""){
     let m = new MEData();
@@ -38,6 +42,18 @@ export class ButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = this.ds.all_input.get(this.url)?.button_data as ButtonData;
+  }
+
+  open_dialog(tt: UpdateReturnData){
+    let dialogRef = this._dialog.open(SupportDialogComponent, {
+      width: tt?.display_dialog?.width,
+      height: tt?.display_dialog?.height,
+      data: {custom_html: tt?.display_dialog?.custom_message}
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   trigger(){
@@ -69,6 +85,10 @@ export class ButtonComponent implements OnInit {
           });
           this.reactiveity("success")
           this.show = false
+
+          if (tt.display_dialog !== undefined){
+            this.open_dialog(tt)
+          }
         } catch {
           this._snackBar.openFromComponent(LoadingComponent, {
             duration: 5000,

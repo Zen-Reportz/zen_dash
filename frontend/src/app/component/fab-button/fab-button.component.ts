@@ -9,6 +9,8 @@ import {
 } from 'src/app/shared/application_data';
 import { LoadingComponent } from '../loading/loading.component';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SupportDialogComponent } from '../support-dialog/support-dialog.component';
 
 @Component({
   selector: 'app-fab-button',
@@ -27,7 +29,9 @@ export class FabButtonComponent implements OnInit {
     private ds: DataService,
     private callService: CallServiceService,
     private _snackBar: MatSnackBar,
-    private api: ApiCallService
+    private api: ApiCallService,
+    public _dialog: MatDialog
+
   ) {}
 
 
@@ -58,6 +62,18 @@ export class FabButtonComponent implements OnInit {
 
   get_icon() {
     return this.ds.all_input.get(this.look_up)?.floating_button_data?.icon;
+  }
+
+  open_dialog(tt: UpdateReturnData){
+    let dialogRef = this._dialog.open(SupportDialogComponent, {
+      width: tt?.display_dialog?.width,
+      height: tt?.display_dialog?.height,
+      data: {custom_html: tt?.display_dialog?.custom_message}
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   reactiveity(type: string, value: string = '') {
@@ -108,6 +124,10 @@ export class FabButtonComponent implements OnInit {
           });
           this.reactiveity('success');
           this.show = false;
+
+          if (tt.display_dialog !== undefined){
+            this.open_dialog(tt)
+          }
         } catch {
           this._snackBar.openFromComponent(LoadingComponent, {
             duration: 5000,

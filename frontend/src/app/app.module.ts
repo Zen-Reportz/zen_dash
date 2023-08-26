@@ -92,6 +92,7 @@ import { JsonFormsServerSideComponent } from './component/json-forms-server-side
 import { LoginComponent } from './component/login/login.component';
 import { PostInterceptor, CookieServiceDelete } from './shared/http_interceptor';
 import { FabButtonComponent } from './component/fab-button/fab-button.component';
+import { SupportDialogComponent } from './component/support-dialog/support-dialog.component';
 
 @NgModule({
   declarations: [
@@ -128,6 +129,7 @@ import { FabButtonComponent } from './component/fab-button/fab-button.component'
     JsonFormsServerSideComponent,
     LoginComponent,
     FabButtonComponent,
+    SupportDialogComponent,
   ],
   imports: [
     FlexLayoutModule,
