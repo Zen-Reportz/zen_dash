@@ -1,3 +1,5 @@
+# 0.6.9
+- remove angular material card from dialog box for UpdateReturnData 
 # 0.6.8
 - change name for dialog box for UpdateReturnData 
 # 0.6.7

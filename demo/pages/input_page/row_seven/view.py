@@ -161,8 +161,8 @@ class Button(Zen):
                 status=i.DisplayStatus.SUCCESS,
             ),
             display_dialog=i.DisplayDialog(
-                width='600px',
-                height="600px",
+                width='200px',
+                height="150px",
                 custom_message="<H1>Working </H1>"
             )
         )
