@@ -1,3 +1,5 @@
+# 0.6.8
+- change name for dialog box for UpdateReturnData 
 # 0.6.7
 - fixed floating_button icon, fab, mini-fab issue
 - added dialog box for UpdateReturnData (only supported for button, fab button, and json forms) (zen_dash/demo/pages/input_page/row_seven/view.py#L163)
