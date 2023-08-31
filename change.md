@@ -1,3 +1,5 @@
+# 0.6.10
+- fixed map issue (Example: demo/pages/chart_page/row_eight/view.py#L97)
 # 0.6.9
 - remove angular material card from dialog box for UpdateReturnData 
 # 0.6.8
