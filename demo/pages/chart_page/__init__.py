@@ -12,7 +12,11 @@ chart_page = p.Page(
                 p.Instance(url=rev.Highchart.full_url())]),
             p.Row(data=[
                 p.Instance(url=rev.HighchartStock.full_url())
-            ])
+            ]),
+            p.Row(data=[
+                p.Instance(url=rev.HighchartMap.full_url())
+            ]),
+
         ])
 
 
