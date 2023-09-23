@@ -5,6 +5,8 @@ from pages.chart_page.row_eight.view import HighchartStock
 from zen_dash.objects import instances as i
 from zen_dash import page as p
 from zen_dash import Zen
+from uuid import uuid4
+from random import randint
 
 prefix = "/backend/box_page/row_one"
 
@@ -23,12 +25,18 @@ class FirstBox(Zen):
 
     @staticmethod
     async def view(b: BoxInput):
-        await asyncio.sleep(10)
+        r = uuid4()
+        r1 = randint(20, 30)
+        print(f"sleeping {r}, sleeping {r1}")
+        await asyncio.sleep(r1)
+        print(f"sleeping done {r}")
         dialog_data = i.DialogBox(
             url=FirstBoxDialog.full_url(), height="70%", width="70%")
+        
         import random
-        name = random.choice(["Users", "Spent"])
-        Value = random.choice(["5009", "200"])
+        name = random.choice(["Users", "Spent", "Duration"])
+        Value = random.choice(["5009", "200", "50", "20"])
+        print(f"selected value is {name} {Value} {r}")
         return i.ReturnData(type=i.InstanceType.BOX,
                             box_data=i.BoxData(
                                 icon="person",

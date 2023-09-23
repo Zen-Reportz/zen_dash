@@ -27,7 +27,7 @@ export class ApiCallService {
 
   subscription_lookup: any = {}
   d: Map<string, Subscription> = new Map();
-  data_type = ['box', 'table', 'chart', 'image', 'highchart', 'custom_html'];
+  data_type = ['box', 'table', 'chart', 'image', 'highchart', 'custom_html', 'Loading'];
   call_this = new EventEmitter<CallInfo>()
   call_api = {}
   data_ :any = {}
@@ -119,8 +119,8 @@ export class ApiCallService {
     let type = t?.type as string;
     let name = this.set_name(t)
 
-    this.unsubscribe(look_up);
-    this.subscribe(type, look_up, url, reactive, name, page, isSidebar);
+    this.unsubscribe_this(look_up);
+    this.subscribe_this(type, look_up, url, reactive, name, page, isSidebar);
     this.ds.all_input.set(look_up, t);
     this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
         // console.log("called" + url + look_up)
@@ -141,11 +141,9 @@ export class ApiCallService {
       }
 
     }
-
-
     if (this.subscription_lookup[look_up] !== undefined) {
-      // console.log("unscribring it"+ url + look_up)
       this.subscription_lookup[look_up].unsubscribe();
+      this.subscription_lookup[look_up] = null
     }
 
     let p = this.callService.call_response(
@@ -157,6 +155,10 @@ export class ApiCallService {
     this.ds.input_emitter.emit({"calling": true, "lookup": look_up, "t": undefined, "message": undefined})
     // console.log("calling" + url + look_up)
     this.ds.all_input.delete(look_up);
+
+    this.unsubscribe_this(look_up);
+    this.subscribe_this("Loading", look_up, url, { full_reactive: true, reactive_ids: [], hidden: true}, 'Loading', page, isSidebar);
+
     this.subscription_lookup[look_up] =  await p.subscribe({
       next: (t: any) => {
         if (t?.error !== undefined) {
@@ -179,10 +181,10 @@ export class ApiCallService {
   }
 
 
-  unsubscribe(look_up: string) {
-    this.d.get('refresh_' + look_up,)?.unsubscribe();
-    this.d.get('reactive_' + look_up,)?.unsubscribe();
-    this.d.get('specific_reactive_' + look_up,)?.unsubscribe();
+  unsubscribe_this(look_up: string) {
+    this.d.get('refresh_' + look_up)?.unsubscribe();
+    this.d.get('reactive_' + look_up)?.unsubscribe();
+    this.d.get('specific_reactive_' + look_up)?.unsubscribe();
   }
 
   callGetData(look_up: string, url:string, page:string, t:string, isSidebar: boolean){
@@ -202,13 +204,17 @@ export class ApiCallService {
       } else {
         return
       }
+
       this.getData(force, url, look_up, page, isSidebar, t);
 
     }
   }
 
-  subscribe(type: string, look_up: string, url:string, reactive: ReactiveData, name: string, page:string, isSidebar:boolean) {
+  subscribe_this(type: string, look_up: string, url:string, reactive: ReactiveData, name: string, page:string, isSidebar:boolean) {
+    // this what we use to refresh data
+    console.log("subscribe this" + look_up + ' '+type)
     if (this.data_type.indexOf(type as string) >= 0) {
+      console.log("setting up subscribe")
       this.d.set(
         'refresh_' + look_up,
         this.ds.refresh.subscribe((t) => {

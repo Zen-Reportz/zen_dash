@@ -1,3 +1,5 @@
+# 0.6.11
+- Added feature to cancel api call in route even if not loaded.
 # 0.6.10
 - fixed map issue (Example: demo/pages/chart_page/row_eight/view.py#L97)
 # 0.6.9

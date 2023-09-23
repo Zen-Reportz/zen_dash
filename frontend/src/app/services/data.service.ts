@@ -309,7 +309,6 @@ export class DataService {
   save_default() {
     let page = this.get_page();
     for (const [url, value] of Object.entries(this.data['global'])) {
-      console.log(url + value)
       try {
         if (url !== 'page') {
           let d: any = value;
