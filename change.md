@@ -1,3 +1,5 @@
+# 0.6.12
+- fixing bug regarding reactivity in sidebar
 # 0.6.11
 - Added feature to cancel api call in route even if not loaded.
 # 0.6.10

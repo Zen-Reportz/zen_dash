@@ -189,7 +189,7 @@ export class ApiCallService {
 
   callGetData(look_up: string, url:string, page:string, t:string, isSidebar: boolean){
     let current_page= this.ds.get_page()
-    if (current_page === page){
+    if ((current_page === page) || isSidebar) {
       let force = false
       if (t === "PageRefresh"){
         force = true
@@ -214,7 +214,6 @@ export class ApiCallService {
     // this what we use to refresh data
     console.log("subscribe this" + look_up + ' '+type)
     if (this.data_type.indexOf(type as string) >= 0) {
-      console.log("setting up subscribe")
       this.d.set(
         'refresh_' + look_up,
         this.ds.refresh.subscribe((t) => {
@@ -222,7 +221,7 @@ export class ApiCallService {
         })
       );
     }
-
+    console.log(isSidebar)
     if (reactive.full_reactive) {
       this.d.set(
         'reactive_' + look_up,
