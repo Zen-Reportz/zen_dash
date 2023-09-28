@@ -26,22 +26,24 @@ export class DatetimeComponent implements OnInit {
 
   getData() {
     this.data = this.ds.all_input.get(this.url)?.date_data as DateData;
-
-    if (this.data.second_date as string) {
+    let first_date = this.data.first_date
+    if (!this.data.first_date.includes("T")){
+        first_date = this.data.first_date+ 'T00:00:00'
+    }
+    if (this.data.second_date) {
       this.single = false;
+      let second_date = this.data.second_date
+      if (!this.data.second_date.includes("T")){
+        second_date = this.data.second_date+ 'T00:00:00'
+      }
+
       this.form_data = new UntypedFormGroup({
-        start: new UntypedFormControl(
-          new Date(this.data.first_date + 'T00:00:00Z')
-        ),
-        end: new UntypedFormControl(
-          new Date(this.data.second_date + 'T00:00:00Z')
-        ),
+        start: new UntypedFormControl(new Date(first_date)),
+        end: new UntypedFormControl(new Date(second_date)),
       });
     } else {
       this.single = true;
-      this.form_control = new UntypedFormControl(
-        new Date(this.data.first_date + 'T00:00:00Z')
-      );
+      this.form_control = new UntypedFormControl(new Date(first_date));
     }
   }
 

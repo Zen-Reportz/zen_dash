@@ -1,3 +1,6 @@
+# 0.6.13
+- fixing date issue 
+- You can pass `date.today().isoformat()` or `datetime.now().isoformat()`
 # 0.6.12
 - fixing bug regarding reactivity in sidebar
 # 0.6.11

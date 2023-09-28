@@ -3,7 +3,7 @@ from zen_dash.objects import instances as i
 from zen_dash import page as p
 from zen_dash import Zen
 import random
-
+from datetime import datetime
 prefix = "/backend/input_page/row_one"
 
 
@@ -74,7 +74,7 @@ class SingleDate(Zen):
     def view():
         d = [i.ReturnData(type=i.InstanceType.DATE,
                           date_data=i.DateTimeData(
-                              label="Select Date", name="single_date", first_date="2020-02-10"),
+                              label="Select Date", name="single_date", first_date=datetime.now().isoformat() ),
                           reactive=i.ReactiveData(reactive_ids=['multi_toggle_data'])),
              i.ReturnData(type=i.InstanceType.DATE,
                           date_data=i.DateTimeData(

@@ -212,7 +212,6 @@ export class ApiCallService {
 
   subscribe_this(type: string, look_up: string, url:string, reactive: ReactiveData, name: string, page:string, isSidebar:boolean) {
     // this what we use to refresh data
-    console.log("subscribe this" + look_up + ' '+type)
     if (this.data_type.indexOf(type as string) >= 0) {
       this.d.set(
         'refresh_' + look_up,
@@ -221,7 +220,6 @@ export class ApiCallService {
         })
       );
     }
-    console.log(isSidebar)
     if (reactive.full_reactive) {
       this.d.set(
         'reactive_' + look_up,
