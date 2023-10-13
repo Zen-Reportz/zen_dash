@@ -1,4 +1,4 @@
-from typing import List, Optional, Type
+from typing import Dict, List, Optional, Type
 from pydantic import BaseModel, root_validator
 
 from zen_dash.objects.page import Page
@@ -43,6 +43,7 @@ class ZenPage(BaseModel):
     pydantic_class: Type[BaseModel] = None
     tab_number: Optional[int]
     subtab_number: Optional[int]
+    custom_name: Optional[str]
 
 class RefreshInfo(BaseModel):
     refresh: bool = False

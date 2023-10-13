@@ -123,7 +123,6 @@ async def scripts(request: Request):
 
 @app.websocket("/backend/ws")
 async def websocket_func(websocket: WebSocket):
-    print("hi")
     p = [BOXPAGE, CHARTPAGE, TABLEPAGE, CUSTOMPAGE]
     await websocket.accept()
     while True:

@@ -1,3 +1,14 @@
+# 0.6.14
+- Allow custom fragement as page 
+```python 
+INPUTZENPAGE = ZenPage(
+    name="Inputs",
+    icon="delete",
+    page=inputPage,
+    tab_number=0,
+    custom_name="my_page"
+)
+```
 # 0.6.13
 - fixing date issue 
 - You can pass `date.today().isoformat()` or `datetime.now().isoformat()`

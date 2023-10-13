@@ -30,6 +30,7 @@ export class PageComponent implements OnInit {
   ngOnInit(): void {
     new SetTitleService().set_title(this.aRoute, this.titleService, this.http);
     this.aRoute.queryParamMap.subscribe((fragment) => {
+
       let page = this.dataService.get_page()
       let params = new HttpParams().set('fragment', page);
 

@@ -6,6 +6,7 @@ from zen_dash.objects.page import Instance, Row, Page
 
 def get_page_dict(pages: List[ZenPage]):
     page_dict = {}
+    custom_dict = {}
     for p in pages:
         if p.tab_number is None:
             raise Exception("Tab number is not define in Zen Page")
@@ -20,12 +21,20 @@ def get_page_dict(pages: List[ZenPage]):
 
         else:
             page_dict[page_number] = p
-    return page_dict
+        
+        if p.custom_name is not None:
+            custom_dict[p.custom_name] = p
+    return page_dict, custom_dict
 
 def RenderPage(pages: List[ZenPage], fragment: str):
-    PAGEDICT = get_page_dict(pages)
+    PAGEDICT, CUSTOMDICT = get_page_dict(pages)
+    
     p = PAGEDICT.get(fragment)
+    p1 = CUSTOMDICT.get(fragment)
+
     if p:
         return p.page
+    elif p1:
+        return p1.page
     else:
         raise Exception("Page is not define")

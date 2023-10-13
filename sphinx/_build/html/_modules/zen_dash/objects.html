@@ -65,7 +65,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for zen_dash.objects</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span>
 <span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">root_validator</span>
 
 <span class="kn">from</span> <span class="nn">zen_dash.objects.page</span> <span class="kn">import</span> <span class="n">Page</span>
@@ -109,7 +109,8 @@
     <span class="n">websocket_calls</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Type</span><span class="p">[</span><span class="n">Zen</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">pydantic_class</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">BaseModel</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">tab_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
-    <span class="n">subtab_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span></div>
+    <span class="n">subtab_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="n">custom_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="RefreshInfo"><a class="viewcode-back" href="../../zen_dash.objects.html#zen_dash.objects.RefreshInfo">[docs]</a><span class="k">class</span> <span class="nc">RefreshInfo</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">refresh</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
