@@ -22,13 +22,12 @@ def get_page_dict(pages: List[ZenPage]):
         else:
             page_dict[page_number] = p
         
-        if p.custom_name is not None:
-            custom_dict[p.custom_name] = p
+        if p.custom_url is not None:
+            custom_dict[p.custom_url] = p
     return page_dict, custom_dict
 
 def RenderPage(pages: List[ZenPage], fragment: str):
     PAGEDICT, CUSTOMDICT = get_page_dict(pages)
-    
     p = PAGEDICT.get(fragment)
     p1 = CUSTOMDICT.get(fragment)
 

@@ -43,7 +43,7 @@ class ZenPage(BaseModel):
     pydantic_class: Type[BaseModel] = None
     tab_number: Optional[int]
     subtab_number: Optional[int]
-    custom_name: Optional[str]
+    custom_url: Optional[str]
 
 class RefreshInfo(BaseModel):
     refresh: bool = False

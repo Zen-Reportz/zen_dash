@@ -8,6 +8,7 @@ from pydantic import validator
 class SidebarTab(BaseUpdate):
     label: str
     icon: Optional[str] = 'Home'
+    custom_url: Optional[str]
 
 class SidebarGroup(BaseUpdate):
     name: str
@@ -70,7 +71,7 @@ def RenderTabs(sidebar_list: SidebarList):
     
     for p in sidebar_list.pages:
         page_index = p.tab_number
-        tabs[page_index] = SidebarTab(label=p.name, icon=p.icon)
+        tabs[page_index] = SidebarTab(label=p.name, icon=p.icon, custom_url=p.custom_url)
     
     for subtab in sidebar_list.groupSidebar:
         sub_tab = [None for i in range(len(subtab.sub_pages))] 
@@ -78,7 +79,7 @@ def RenderTabs(sidebar_list: SidebarList):
             if sub_page.subtab_number is None:
                 raise Exception(f"Please provde subpage for {sub_page.name}")
             sub_page_index = sub_page.subtab_number
-            sub_tab[sub_page_index] = SidebarTab(label=sub_page.name, icon=sub_page.icon)
+            sub_tab[sub_page_index] = SidebarTab(label=sub_page.name, icon=sub_page.icon, custom_url=sub_page.custom_url)
         page_index = sub_page.tab_number
         tabs[page_index] = SidebarGroup(name= subtab.name, subtabs=sub_tab)
 

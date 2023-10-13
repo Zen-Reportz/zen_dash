@@ -1,3 +1,5 @@
+# 0.6.15
+- Allow custom url as sidebar
 # 0.6.14
 - Allow custom fragement as page 
 ```python 
@@ -6,7 +8,7 @@ INPUTZENPAGE = ZenPage(
     icon="delete",
     page=inputPage,
     tab_number=0,
-    custom_name="my_page"
+    custom_url="my_page"
 )
 ```
 # 0.6.13

@@ -55,7 +55,8 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  getSideData(){
+  getSideData() {
+    console.log(this.side_data?.tabs as any)
     return this.side_data?.tabs as any
   }
 
@@ -70,4 +71,23 @@ export class SidebarComponent implements OnInit {
   setReactivity(url: string, reactiveData: ReactiveData){
     this.reactivityData.set(url, reactiveData)
   }
+
+  get_subpage_url(i:Number, j:Number, custom_url:string){
+    if (custom_url){
+      return {'page': custom_url}
+    } else {
+      return {'page': 'page_' + i + '_' + j}
+    }
+
+  }
+
+  get_page_url(i: Number, custom_url: string){
+    if (custom_url){
+      return {'page': custom_url}
+    } else {
+      return {'page': 'page_' + i}
+    }
+  }
+
+
 }
