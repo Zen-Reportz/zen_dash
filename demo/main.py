@@ -80,7 +80,7 @@ async def root(request: Request, res: Response):
 async def config():
     return Configuration(websocket=WebSocketConfig(active=False), 
                          refresh=RefreshInfo(refresh=False, rate_in_seconds=1*60), 
-                         auth=Auth(SSO=True))
+                         auth=Auth(SSO=False))
 
 @app.get("/backend/title")
 async def title():

@@ -8,7 +8,7 @@ from zen_dash import page as p
 router = APIRouter(
     prefix=v.prefix,
     tags=["row_one"],
-    dependencies=[Depends(auth_required)],
+    # dependencies=[Depends(auth_required)],
     responses={404: {"description": "Not found"}},
 )
 

@@ -34,3 +34,7 @@ async def d3():
 @router.post(v.HighchartMap.url(), response_model=i.ReturnData)
 async def d3():
     return v.HighchartMap.view()
+
+@router.post(v.HighchartStockWithLegend.url(), response_model=i.ReturnData)
+async def d3():
+    return v.HighchartStockWithLegend.view()

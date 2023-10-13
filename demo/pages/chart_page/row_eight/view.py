@@ -1,4 +1,4 @@
-from pages.chart_page.row_eight.highchart_data import HighChart2Config, HighChartConfig, HighChartMapConfig, HighChartStockConfig
+from pages.chart_page.row_eight.highchart_data import HighChart2Config, HighChartConfig, HighChartMapConfig, HighChartStockConfig, HighChartStockConfig2
 from zen_dash import Zen
 from fastapi.responses import FileResponse
 
@@ -119,3 +119,22 @@ class HighchartMap(Zen):
     
 
 
+
+class HighchartStockWithLegend(Zen):
+    @staticmethod
+    def full_url() -> str:
+        return f"{prefix}/highchart_stock_with_legend"
+
+    @staticmethod
+    def url() -> str:
+        return f"/highchart_stock_with_legend"
+
+    @staticmethod
+    def view():
+        return i.ReturnData(
+        type=i.InstanceType.HIGHCHART,
+        highchart_data=i.HighChartData(
+            type=i.HighChartType.STOCK,
+            config=HighChartStockConfig2
+        ), flex=i.FlexData(fxFlex="50%", fxFlex_md="50%", fxFlex_sm="100%", fxFlex_xs="100%")
+    )

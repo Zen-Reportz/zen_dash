@@ -16,6 +16,10 @@ chart_page = p.Page(
             p.Row(data=[
                 p.Instance(url=rev.HighchartMap.full_url())
             ]),
+             p.Row(data=[
+                p.Instance(url=rev.HighchartStockWithLegend.full_url())
+            ]),
+
 
         ])
 
