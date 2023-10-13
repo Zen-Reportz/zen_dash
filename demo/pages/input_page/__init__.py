@@ -78,6 +78,4 @@ INPUTZENPAGE = ZenPage(
     name="Inputs",
     icon="delete",
     page=inputPage,
-    tab_number=0,
-    custom_url="my_page"
-)
+    tab_number=0)
