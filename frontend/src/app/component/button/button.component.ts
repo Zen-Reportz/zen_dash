@@ -1,3 +1,4 @@
+import { ApiCallService } from 'src/app/services/api-call.service';
 import { ButtonData, MEData, UpdateReturnData } from './../../shared/application_data';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -21,7 +22,8 @@ export class ButtonComponent implements OnInit {
   constructor( private ds: DataService,
     private callService: CallServiceService,
     private _snackBar: MatSnackBar,
-    public _dialog: MatDialog
+    public _dialog: MatDialog,
+    public api_call_service: ApiCallService
     ) { }
 
   reactiveity(type: string, value: string = ""){
@@ -61,7 +63,7 @@ export class ButtonComponent implements OnInit {
     this.reactiveity("triggered")
 
     if (this.data.redirect){
-      console.log(this.data.url)
+      // console.log(this.data.url)
       window.open(this.data.url, this.data.target_attribute)
       return
     }
@@ -88,6 +90,10 @@ export class ButtonComponent implements OnInit {
 
           if (tt.display_dialog !== undefined){
             this.open_dialog(tt)
+          }
+
+          if (tt.ui_data !== undefined){
+            this.api_call_service.saveUIData(tt.ui_data)
           }
         } catch {
           this._snackBar.openFromComponent(LoadingComponent, {

@@ -46,6 +46,15 @@ class FirstBox(Zen):
                             tooltip_data=i.ToolTipData(
                                 label="my label", disable=False),
                             dialog_data=dialog_data,
+                            ui_data=[i.UIData(
+                                type=i.UIType.LOCALSTORAGE,
+                                action=i.UIAction.ADD,
+                                value="sdasd",
+                                key="my_key"), i.UIData(
+                                type=i.UIType.SESSION,
+                                action=i.UIAction.ADD,
+                                value="123213",
+                                key="my_key")]
                             )
 
 

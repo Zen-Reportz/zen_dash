@@ -10,6 +10,7 @@ import {
   map,
   takeUntil,
 } from 'rxjs/operators';
+import { ApiCallService } from 'src/app/services/api-call.service';
 import { DataService } from 'src/app/services/data.service';
 import { MEData, UpdateReturnData } from 'src/app/shared/application_data';
 
@@ -35,7 +36,8 @@ export class SimpleServerFilterComponent implements OnInit {
 
   constructor(
     private ds: DataService,
-    private callService: CallServiceService
+    private callService: CallServiceService,
+    private api_call_service: ApiCallService
   ) {}
 
   ngOnInit() {
@@ -76,7 +78,9 @@ export class SimpleServerFilterComponent implements OnInit {
               final_data = new_data
             }
 
-
+            if (data.ui_data !== undefined){
+              this.api_call_service.saveUIData(data.ui_data)
+            }
 
             this.filteredServerSideBanks.next(
               final_data

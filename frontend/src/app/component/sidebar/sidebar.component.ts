@@ -56,7 +56,7 @@ export class SidebarComponent implements OnInit {
   }
 
   getSideData() {
-    console.log(this.side_data?.tabs as any)
+    // console.log(this.side_data?.tabs as any)
     return this.side_data?.tabs as any
   }
 

@@ -4,6 +4,7 @@ import {Component} from '@angular/core';
 import { CallServiceService } from 'src/app/services/call-service.service';
 import { JsonFormsAngularService } from '@jsonforms/angular';
 import { UpdateReturnData } from 'src/app/shared/application_data';
+import { ApiCallService } from 'src/app/services/api-call.service';
 
 
 @Component({
@@ -16,7 +17,10 @@ export class JsonFormsServerSideComponent extends AutocompleteControlRenderer {
   name: string = ''
   current_value: string = ''
 
-  constructor(private callService: CallServiceService, jsonformsService: JsonFormsAngularService){
+  constructor(private callService: CallServiceService,
+    jsonformsService: JsonFormsAngularService,
+    public api_call_service: ApiCallService
+    ){
     super(jsonformsService);
   }
   fetchSuggestions = (input: string): Observable<UpdateReturnData> | Observable<unknown> => {
@@ -40,6 +44,10 @@ export class JsonFormsServerSideComponent extends AutocompleteControlRenderer {
           (options) => {
             let d = options as UpdateReturnData
             this.options = d.simple_fitler_data as string[]
+
+            if (d.ui_data !== undefined){
+              this.api_call_service.saveUIData(d.ui_data)
+            }
           }
         )
       }

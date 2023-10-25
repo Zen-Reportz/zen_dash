@@ -1,10 +1,10 @@
-import { CallInfo, ErrorData, MultiURLInfo, ReactiveData, ResponseReturn } from './../shared/application_data';
+import { CallInfo, ErrorData, MultiURLInfo, ReactiveData, ResponseReturn, UIData } from './../shared/application_data';
 import { EventEmitter, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CallServiceService } from './call-service.service';
 import { DataService } from './data.service';
 import { ResponseData } from '../shared/application_data';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, timestamp } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -123,7 +123,9 @@ export class ApiCallService {
     this.subscribe_this(type, look_up, url, reactive, name, page, isSidebar);
     this.ds.all_input.set(look_up, t);
     this.ds.input_emitter.emit({"calling": false, "lookup": look_up, "t": t, "message": undefined})
-        // console.log("called" + url + look_up)
+    if (t.ui_data !== undefined){
+      this.saveUIData(t.ui_data)
+    }
   }
 
   async getData(forced:boolean, url:string, look_up: string, page:string, isSidebar:boolean, refresh_reason:string) {
@@ -310,5 +312,27 @@ export class ApiCallService {
     // sessionStorage.setItem(look_up, current_data);
     this.data_[look_up] = current_data
 
+  }
+
+  saveUIData(data: UIData[]){
+    let t =  new Date().toTimeString()
+    for(let d of data){
+      if (d.action === "add") {
+        let temp = {"timestamp": t, "data": d.value}
+        if (d.type === "session"){
+          sessionStorage.setItem(d.key, JSON.stringify(temp))
+        } else {
+          localStorage.setItem(d.key, JSON.stringify(temp))
+        }
+      } else {
+        if (d.type === "session"){
+          sessionStorage.removeItem(d.key)
+        } else {
+          localStorage.removeItem(d.key)
+        }
+      }
+
+
+    }
   }
 }

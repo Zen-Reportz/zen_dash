@@ -9,6 +9,7 @@ import { and, createAjv, isControl, optionIs, rankWith, schemaTypeIs, scopeEndsW
 import { JsonFormsServerSideComponent } from '../json-forms-server-side/json-forms-server-side.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SupportDialogComponent } from '../support-dialog/support-dialog.component';
+import { ApiCallService } from 'src/app/services/api-call.service';
 const serverTester: Tester = and(
   schemaTypeIs('string'),
   schemaMatches(schema => schema.hasOwnProperty('url'))
@@ -38,7 +39,8 @@ export class FormComponent implements OnInit {
   constructor(private ds: DataService,
     private callService: CallServiceService,
     private _snackBar: MatSnackBar,
-    public _dialog: MatDialog
+    public _dialog: MatDialog,
+    public api_call_service: ApiCallService
     ) {}
 
   ngOnInit(): void {
@@ -85,7 +87,7 @@ export class FormComponent implements OnInit {
       undefined);
     this.call = p.subscribe(
       (res) => {
-        console.log(res)
+        // console.log(res)
         let r = res as UpdateReturnData
         this.reactiveity("success")
         let duration = r.display?.duration as number
@@ -101,6 +103,10 @@ export class FormComponent implements OnInit {
         });
         if (r.display_dialog !== undefined){
           this.open_dialog(r)
+        }
+
+        if (r.ui_data !== undefined){
+          this.api_call_service.saveUIData(r.ui_data)
         }
 
         this.show = false

@@ -60,22 +60,22 @@ export class InputComponent implements OnInit {
   onPaste(event: ClipboardEvent, inputElement: HTMLInputElement) {
     event.preventDefault()
     const selectionStart = inputElement.selectionStart
-    console.log(selectionStart)
+    // console.log(selectionStart)
     const selectionEnd = inputElement.selectionEnd
-    console.log(selectionEnd)
+    // console.log(selectionEnd)
 
 
     if (event.clipboardData){
       let pastedText = event.clipboardData.getData("text/plain")
-      console.log(pastedText)
+      // console.log(pastedText)
       if ((selectionStart !== null) && (selectionEnd !== null)) {
         const bST = this.data.substring(0, selectionStart)
         const aST = this.data.substring(selectionEnd)
-        console.log("bst")
-        console.log(this.data)
-        console.log(bST)
-        console.log(aST)
-        console.log("ast")
+        // console.log("bst")
+        // console.log(this.data)
+        // console.log(bST)
+        // console.log(aST)
+        // console.log("ast")
         this.data = bST + pastedText + aST
       } else {
         this.data += pastedText

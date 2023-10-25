@@ -30,7 +30,8 @@ export class FabButtonComponent implements OnInit {
     private callService: CallServiceService,
     private _snackBar: MatSnackBar,
     private api: ApiCallService,
-    public _dialog: MatDialog
+    public _dialog: MatDialog,
+    public api_call_service: ApiCallService
 
   ) {}
 
@@ -127,6 +128,9 @@ export class FabButtonComponent implements OnInit {
 
           if (tt.display_dialog !== undefined){
             this.open_dialog(tt)
+          }
+          if (tt.ui_data !== undefined){
+            this.api_call_service.saveUIData(tt.ui_data)
           }
         } catch {
           this._snackBar.openFromComponent(LoadingComponent, {

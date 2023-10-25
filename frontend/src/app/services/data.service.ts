@@ -115,7 +115,16 @@ export class DataService {
     }
 
 
-    let convMap: any = {"url": window.location.href};
+    let convMap: any = {};
+    Object.keys(localStorage).forEach((key) => {
+      convMap[key] = localStorage.getItem(key);
+    });
+
+    Object.keys(sessionStorage).forEach((key) => {
+      convMap[key] = sessionStorage.getItem(key);
+    });
+
+    convMap["url"] = window.location.href
 
     let page_data: any
     try {

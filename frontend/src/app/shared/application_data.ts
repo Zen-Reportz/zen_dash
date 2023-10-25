@@ -279,6 +279,13 @@ export class FormCustomData {
   data!: any
 }
 
+export class UIData{
+  type!: string
+  action!: string
+  value!: string
+  key!: string
+}
+
 export class ResponseData{
   type!: string
   reactive!: ReactiveData
@@ -311,6 +318,7 @@ export class ResponseData{
   form_data: FormCustomData | undefined
   websocket_url: string | undefined
   floating_button_data: ButtonFAB | undefined
+  ui_data: UIData[] | undefined
 }
 
 export class Display {
@@ -326,6 +334,8 @@ export class UpdateReturnData{
   button_result: string | undefined
   display: Display | undefined
   display_dialog: DisplayDialog | undefined
+  ui_data: UIData[] | undefined
+
 }
 
 export class DisplayDialog {

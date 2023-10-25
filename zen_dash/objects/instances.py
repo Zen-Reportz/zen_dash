@@ -244,7 +244,20 @@ class ButtonFloating(BaseUpdate):
     color: FABColor = FABColor.ACCENT
     target_attribute:TargetAttribute = TargetAttribute.PARENT
 
+class UIType(Enum):
+    SESSION = "session"
+    LOCALSTORAGE = "local_storage"
 
+class UIAction(Enum):
+    ADD = "add"
+    DELETE = "delete"
+
+
+class UIData(BaseUpdate):
+      type: UIType
+      action: UIAction
+      value: str
+      key: str
 
 class ReturnData(BaseUpdate):
     """
@@ -290,6 +303,7 @@ class ReturnData(BaseUpdate):
     button_data: Optional[ButtonData]
     form_data: Optional[FormData]
     floating_button_data: Optional[ButtonFloating]
+    ui_data: Optional[List[UIData]]
 
     @root_validator
     def validator_type_match(cls, field_values):
@@ -389,6 +403,7 @@ class UpdateReturnData(BaseUpdate):
     box_data: Optional[BoxData]
     display: Optional[Display]
     display_dialog: Optional[DisplayDialog]
+    ui_data: Optional[List[UIData]]
 
     @root_validator
     def validator_type_match(cls, field_values):

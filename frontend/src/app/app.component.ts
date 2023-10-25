@@ -236,7 +236,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   call_refresh(call: CallServiceService, ds: DataService, ws: WebsocketService) {
-    console.log("call refresh")
+    // console.log("call refresh")
     if (call.config.websocket.active){
       ws.request_change()
     } else {

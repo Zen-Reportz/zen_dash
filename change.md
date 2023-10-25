@@ -1,3 +1,16 @@
+# 0.6.16
+- allow to set session and local storage data though api call in ReturnData and UpdateReturnData 
+
+```python
+i.ReturnData(type=i.InstanceType.BOX,
+            box_data=i.BoxData(icon="person", name=name, value=Value),
+            footer="5% increase compare to last week ",
+            tooltip_data=i.ToolTipData(label="my label", disable=False),
+            dialog_data=dialog_data,
+            ui_data=[i.UIData(type=i.UIType.LOCALSTORAGE,action=i.UIAction.ADD, value="sdasd",key="key1"), 
+                     i.UIData(type=i.UIType.SESSION, action=i.UIAction.ADD, value="123213",key="key2")]
+                            )
+```
 # 0.6.15
 - Allow custom url as sidebar
 # 0.6.14
