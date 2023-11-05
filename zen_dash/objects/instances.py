@@ -397,13 +397,18 @@ class DisplayDialog(BaseUpdate):
       width: str = '500px'
       custom_message: str
 
+class ResponseFormData(BaseUpdate):
+    redirect_url: str
+
 class UpdateReturnData(BaseUpdate):
     type: UpdateInstanceType
     simple_fitler_data: Optional[List[str]]
     box_data: Optional[BoxData]
     display: Optional[Display]
     display_dialog: Optional[DisplayDialog]
+    response_form_data: Optional[ResponseFormData]
     ui_data: Optional[List[UIData]]
+
 
     @root_validator
     def validator_type_match(cls, field_values):
@@ -413,18 +418,22 @@ class UpdateReturnData(BaseUpdate):
                 raise ValueError("You have selected UpdateInstanceType.BOX, and box_data is missing")
             if (field_values["display_dialog"] is not None):
                 raise ValueError("You have selected UpdateInstanceType.BOX, and display_dialog is not supported")
+            if (field_values["display"] is not None):
+                raise ValueError("You have selected UpdateInstanceType.BOX, and display is not supported")
         elif (field_values["type"] == UpdateInstanceType.SIMPLE_FILTER) :
             if (field_values["simple_fitler_data"] is None):
                 raise ValueError("You have selected UpdateInstanceType.SIMPLE_FILTER, and simple_fitler_data is missing")
             if (field_values["display_dialog"] is not None):
                 raise ValueError("You have selected UpdateInstanceType.SIMPLE_FILTER, and display_dialog is not supported")
+            if (field_values["display"] is not None):
+                raise ValueError("You have selected UpdateInstanceType.SIMPLE_FILTER, and display is not supported")
 
-        elif (field_values["type"] == UpdateInstanceType.BUTTON_RESULT) and (field_values["display"] is None):
-            raise ValueError("You have selected UpdateInstanceType.BUTTON_RESULT, and display is missing")
+        # elif (field_values["type"] == UpdateInstanceType.BUTTON_RESULT) and (field_values["display"] is None):
+        #     raise ValueError("You have selected UpdateInstanceType.BUTTON_RESULT, and display is missing")
 
-        if (field_values["type"] == UpdateInstanceType.FORM):
-            if (field_values["display"] is None):
-                raise ValueError("You have selected UpdateInstanceType.FORM, and display is missing")
+        # elif (field_values["type"] == UpdateInstanceType.FORM):
+        #     if (field_values["response_form_data"] is None):
+        #         raise ValueError("You have selected UpdateInstanceType.FORM, and response_form_data is missing")
         
         return field_values
 

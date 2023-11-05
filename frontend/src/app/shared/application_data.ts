@@ -327,6 +327,10 @@ export class Display {
   status!: string
 }
 
+export class ReposeFormData{
+  redirect_url!: string
+}
+
 export class UpdateReturnData{
   type!: string
   simple_fitler_data: string[] | undefined
@@ -335,7 +339,7 @@ export class UpdateReturnData{
   display: Display | undefined
   display_dialog: DisplayDialog | undefined
   ui_data: UIData[] | undefined
-
+  response_form_data: ReposeFormData | undefined
 }
 
 export class DisplayDialog {

@@ -34,4 +34,7 @@ class Form(Zen):
 
     @staticmethod
     def server(data):
-        print(data)
+        return i.UpdateReturnData(
+            type=i.UpdateInstanceType.FORM,
+            response_form_data=i.ResponseFormData(redirect_url="http://localhost:4205?working=true")
+        )

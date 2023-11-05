@@ -1,3 +1,13 @@
+# 0.6.17
+- allowing form submit to redirect
+```python
+i.UpdateReturnData(
+            type=i.UpdateInstanceType.FORM,
+            response_form_data=i.ResponseFormData(redirect_url="http://localhost:4205?working=true")
+        )
+
+```
+
 # 0.6.16
 - allow to set session and local storage data though api call in ReturnData and UpdateReturnData 
 

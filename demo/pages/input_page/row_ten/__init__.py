@@ -16,9 +16,9 @@ async def form():
 @router.post(v.Form.server_url(), response_model=i.UpdateReturnData)
 async def form_submit(req: Request, response: Response):
     data = await req.json()
-    v.Form.server(data)
-    return i.UpdateReturnData(
-        type=i.UpdateInstanceType.FORM,
-        display=i.Display(duration=10, message="Failed to save", status=i.DisplayStatus.ERROR)
-    )
+    return v.Form.server(data)
+    # return i.UpdateReturnData(
+    #     type=i.UpdateInstanceType.FORM,
+    #     display=i.Display(duration=10, message="Failed to save", status=i.DisplayStatus.ERROR)
+    # )
     

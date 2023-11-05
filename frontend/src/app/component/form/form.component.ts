@@ -109,6 +109,11 @@ export class FormComponent implements OnInit {
           this.api_call_service.saveUIData(r.ui_data)
         }
 
+        if (r.response_form_data != undefined){
+          // window.open(r.response_form_data.redirect_url);
+          window.location.href = r.response_form_data.redirect_url
+        }
+
         this.show = false
 
       },
