@@ -1,3 +1,5 @@
+# 0.6.18
+- upgrade JSONForms to 3.1.0
 # 0.6.17
 - allowing form submit to redirect
 ```python
