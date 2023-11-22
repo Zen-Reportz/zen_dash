@@ -408,6 +408,7 @@ class UpdateReturnData(BaseUpdate):
     display_dialog: Optional[DisplayDialog]
     response_form_data: Optional[ResponseFormData]
     ui_data: Optional[List[UIData]]
+    button_data: Optional[ButtonData]
 
 
     @root_validator

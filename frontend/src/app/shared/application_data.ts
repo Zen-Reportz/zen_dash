@@ -335,11 +335,11 @@ export class UpdateReturnData{
   type!: string
   simple_fitler_data: string[] | undefined
   box_data: BoxData | undefined
-  button_result: string | undefined
   display: Display | undefined
   display_dialog: DisplayDialog | undefined
   ui_data: UIData[] | undefined
   response_form_data: ReposeFormData | undefined
+  button_data: ButtonData | undefined
 }
 
 export class DisplayDialog {

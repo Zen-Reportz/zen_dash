@@ -115,7 +115,7 @@ export class FabButtonComponent implements OnInit {
       (res) => {
         try {
           var tt = res as UpdateReturnData;
-          this.reactiveity('result', tt.button_result);
+          this.reactiveity('result', tt.button_data?.name);
           this._snackBar.openFromComponent(LoadingComponent, {
             duration: (tt.display?.duration as number) * 1000,
             data: {

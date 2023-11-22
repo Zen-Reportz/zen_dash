@@ -1,3 +1,25 @@
+# 0.6.19
+- depericated button_result in UpdateReturnData
+- added button_data in UpdateReturnData
+```python
+    i.UpdateReturnData(
+            title="button data",
+            type=i.UpdateInstanceType.BUTTON_RESULT,
+            button_data=i.ButtonData(
+                url="https://google.com", name="Take me to the Google", redirect=True
+
+            ),
+            display=i.Display(
+                message="my submit",
+                status=i.DisplayStatus.SUCCESS,
+            ),
+            display_dialog=i.DisplayDialog(
+                width='200px',
+                height="150px",
+                custom_message="<H1>Working </H1>"
+            )
+        )
+```
 # 0.6.18
 - upgrade JSONForms to 3.1.0
 # 0.6.17

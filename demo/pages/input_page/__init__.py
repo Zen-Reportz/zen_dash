@@ -62,7 +62,9 @@ inputPage = p.Page(
                 url=porsv.FileDownload.full_url()),
             p.Instance(url=porsv.UploadData.full_url()),
             p.Instance(url=porsv.Button.full_url()),
-            p.Instance(url=porsv.ButtonRedirect.full_url())]),
+            p.Instance(url=porsv.ButtonRedirect.full_url()),
+            p.Instance(url=porsv.ButtonRedirectServer.full_url())
+            ]),
         p.Row(
             data=[
                 p.Instance(url=rtv.Form.full_url()),

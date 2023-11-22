@@ -186,3 +186,53 @@ class ButtonRedirect(Zen):
             button_data=i.ButtonData(
                 url="https://google.com", name="Take me to the Google", redirect=True)
         )
+
+
+
+class ButtonRedirectServer(Zen):
+
+    @staticmethod
+    def full_url() -> str:
+        return f"{prefix}/button_redirect_server"
+
+    @staticmethod
+    def url() -> str:
+        return "/button_redirect_server"
+
+    @staticmethod
+    def view():
+        return i.ReturnData(
+            title="button Redirect from server",
+            type=i.InstanceType.BUTTON,
+            button_data=i.ButtonData(
+                url=ButtonRedirectServer.server_full_url(), name="test this"),
+            flex=i.FlexData(fxFlex="0%", fxFlex_md="0%")
+        )
+
+    @staticmethod
+    def server_full_url() -> str:
+        return f"{prefix}/button_redirect_server_result"
+
+    @staticmethod
+    def server_url() -> str:
+        return "/button_redirect_server_result"
+
+    @staticmethod
+    def server() -> str:
+        return i.UpdateReturnData(
+            title="button data",
+            type=i.UpdateInstanceType.BUTTON_RESULT,
+            button_data=i.ButtonData(
+                url="https://google.com", name="Take me to the Google", redirect=True
+
+            ),
+            display=i.Display(
+                message="my submit",
+                status=i.DisplayStatus.SUCCESS,
+            ),
+            display_dialog=i.DisplayDialog(
+                width='200px',
+                height="150px",
+                custom_message="<H1>Working </H1>"
+            )
+        )

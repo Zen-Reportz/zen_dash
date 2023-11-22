@@ -51,3 +51,12 @@ async def buttonredirect():
 @router.post(v.FloatingButton.url(), response_model=i.ReturnData)
 async def floatbuttonredirect():
     return await v.FloatingButton.view()
+
+@router.post(v.ButtonRedirectServer.url(), response_model=i.ReturnData)
+async def d3():
+    return v.ButtonRedirectServer.view()
+
+
+@router.post(v.ButtonRedirectServer.server_url(), response_model=i.UpdateReturnData)
+async def d3():
+    return v.ButtonRedirectServer.server()
