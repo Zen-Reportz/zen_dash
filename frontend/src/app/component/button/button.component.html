@@ -1,4 +1,34 @@
-<button mat-raised-button color="primary" (click)="trigger()">{{data.name}}</button>
+<span *ngIf="get_type() === 'basic'">
+  <button mat-button [color]="get_color()" [style]="get_style()" (click)="trigger()">
+    {{data.name}}
+  </button>
+</span>
+<span *ngIf="get_type() === 'raised'">
+  <button  mat-raised-button [color]="get_color()" [style]="get_style()" (click)="trigger()">
+    {{data.name}}
+  </button>
+</span>
+<span *ngIf="get_type() === 'stroked'">
+  <button  mat-stroked-button [color]="get_color()" [style]="get_style()" (click)="trigger()">
+    {{data.name}}
+  </button>
+</span>
+<span *ngIf="get_type() === 'fab'">
+  <button mat-fab [color]="get_color()" [style]="get_style()" (click)="trigger()">
+    <mat-icon> {{get_icon()}} </mat-icon>
+  </button>
+</span>
+<span *ngIf="get_type() === 'mini_fab'">
+  <button mat-mini-fab [color]="get_color()" [style]="get_style()" (click)="trigger()">
+    <mat-icon> {{get_icon()}} </mat-icon>
+  </button>
+</span>
+<span *ngIf="get_type() === 'icon'">
+  <button mat-icon-button [color]="get_color()" [style]="get_style()" (click)="trigger()">
+    <mat-icon> {{get_icon()}} </mat-icon>
+  </button>
+</span>
+
 <span *ngIf="show">
   <br /><br /><br />
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>

@@ -96,8 +96,9 @@ export class FabButtonComponent implements OnInit {
     this.reactiveity('triggered');
 
     if (this.ds.all_input.get(this.look_up)?.floating_button_data?.redirect) {
-      window.open(this.ds.all_input.get(this.look_up)?.floating_button_data?.url,
-      this.ds.all_input.get(this.look_up)?.floating_button_data?.target_attribute);
+      let url = this.ds.all_input.get(this.look_up)?.floating_button_data?.url
+      let attribute = this.ds.all_input.get(this.look_up)?.floating_button_data?.target_attribute
+      window.open(url, attribute);
       return;
     } else {
       if (this.second_call !== undefined) {
@@ -131,6 +132,13 @@ export class FabButtonComponent implements OnInit {
           }
           if (tt.ui_data !== undefined){
             this.api_call_service.saveUIData(tt.ui_data)
+          }
+
+          if (tt.button_data !== undefined) {
+            if (tt.button_data.redirect) {
+              // console.log(this.data.url)
+              window.open(tt.button_data.url, tt.button_data.target_attribute);
+            }
           }
         } catch {
           this._snackBar.openFromComponent(LoadingComponent, {

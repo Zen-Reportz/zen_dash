@@ -205,6 +205,7 @@ class ButtonRedirectServer(Zen):
             title="button Redirect from server",
             type=i.InstanceType.BUTTON,
             button_data=i.ButtonData(
+                color=i.ButtonColor.ACCENT,
                 url=ButtonRedirectServer.server_full_url(), name="test this"),
             flex=i.FlexData(fxFlex="0%", fxFlex_md="0%")
         )

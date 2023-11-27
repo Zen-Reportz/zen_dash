@@ -264,6 +264,10 @@ export class ButtonData {
   name!: string
   redirect!: boolean
   target_attribute!: string
+  color!: string
+  style: string | undefined
+  button_type!: string
+  icon: string | undefined
 }
 
 export class SubmitFormData{

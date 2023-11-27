@@ -205,11 +205,32 @@ class TargetAttribute(Enum):
     SELF = "_self"
     TOP = "_top"
 
+
+class ButtonType(Enum):
+    BASIC = "basic"
+    RAISED = "raised"
+    STROKED = "stroked"
+    FLAT = "flat"
+    FAB= "fab"
+    MINIFAB = "mini_fab"
+    ICON = "icon"
+
+class ButtonColor(Enum):
+    PRIMARY = "primary"
+    ACCENT = "accent"
+    WARN = "warn"
+
+
 class ButtonData(BaseUpdate):
     url: str
     name: str
     redirect: bool = False
     target_attribute:TargetAttribute = TargetAttribute.Blank
+    color: ButtonColor = ButtonColor.PRIMARY
+    button_type: ButtonType = ButtonType.RAISED
+    style: Optional[Dict[str, str]]
+    icon: Optional[str]
+
 
 class SubmitFormData(BaseUpdate):
     name: str
@@ -351,8 +372,18 @@ class ReturnData(BaseUpdate):
             raise ValueError("You have selected InstanceType.HIGHCHART, and highchart_data is missing")
         elif (field_values["type"] == InstanceType.CUSTOM_HTML) and (field_values["custom_html_data"] is None):
             raise ValueError("You have selected InstanceType.CUSTOM_HTML, and custom_html_data is missing")
+        
+        elif (field_values["type"] == InstanceType.BUTTON) and (field_values["button_data"] is not None):
+            if ((field_values["button_data"].button_type.value not in (ButtonType.FAB.value, ButtonType.MINIFAB.value, ButtonType.ICON.value)) &
+               (field_values["button_data"].icon is not None)):
+                raise ValueError("ICON is not supported for selected button style")   
+            if ((field_values["button_data"].button_type in (ButtonType.FAB, ButtonType.MINIFAB, ButtonType.ICON)) &
+               (field_values["button_data"].icon is None)):
+                raise ValueError("ICON is need for selected button style")   
         elif (field_values["type"] == InstanceType.BUTTON) and (field_values["button_data"] is None):
+            
             raise ValueError("You have selected InstanceType.BUTTON, and button_data is missing")
+            
         elif (field_values["type"] == InstanceType.FORM) and (field_values["form_data"] is None):
             raise ValueError("You have selected InstanceType.FORM, and form_data is missing")
         elif (field_values["type"] == InstanceType.FLOATING_BUTTON) and (field_values["floating_button_data"] is None):

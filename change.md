@@ -1,5 +1,19 @@
+# 0.6.20
+- Allow user to select Button Type and Color in Button Data and allow inline css
+```python
+return i.ReturnData(
+            title="button Redirect from server",
+            type=i.InstanceType.BUTTON,
+            button_data=i.ButtonData(
+                color=i.ButtonColor.ACCENT,
+                url=ButtonRedirectServer.server_full_url(), name="test this"),
+            flex=i.FlexData(fxFlex="0%", fxFlex_md="0%")
+        )
+```
+
+
 # 0.6.19
-- depericated button_result in UpdateReturnData
+- *Breaking Change*: depericated button_result in UpdateReturnData
 - added button_data in UpdateReturnData
 ```python
     i.UpdateReturnData(

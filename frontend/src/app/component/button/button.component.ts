@@ -65,6 +65,24 @@ export class ButtonComponent implements OnInit {
     });
   }
 
+  get_type(){
+    return this.data.button_type
+  }
+
+
+  get_color() {
+    return this.data.color;
+  }
+
+  get_style() {
+    return this.data?.style;
+  }
+
+  get_icon() {
+    return this.data?.icon;
+  }
+
+
   trigger() {
     this.reactiveity('triggered');
 
@@ -112,9 +130,7 @@ export class ButtonComponent implements OnInit {
             this.api_call_service.saveUIData(tt.ui_data);
           }
 
-          console.log(tt.button_data )
           if (tt.button_data !== undefined) {
-            console.log("hi")
             if (tt.button_data.redirect) {
               // console.log(this.data.url)
               window.open(tt.button_data.url, tt.button_data.target_attribute);
