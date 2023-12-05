@@ -1,3 +1,6 @@
+# 0.6.21
+- Added Funnel and Gantt chart for Highchart
+
 # 0.6.20
 - Allow user to select Button Type and Color in Button Data and allow inline css
 ```python

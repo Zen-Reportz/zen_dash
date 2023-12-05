@@ -76,7 +76,9 @@ import { AppDownloadComponent } from './component/app-download/app-download.comp
 import { AppUploadComponent } from './component/app-upload/app-upload.component';
 import { AppImageComponent } from './component/app-image/app-image.component';
 import { HighchartComponent } from './component/highchart/highchart.component';
-import { ChartModule } from 'angular-highcharts';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import * as more from 'highcharts/highcharts-more.src';
+import * as exporting from 'highcharts/modules/exporting.src'
 import { SimpleServerFilterComponent } from './component/simple-server-filter/simple-server-filter.component';
 import { AppIframeComponent } from './component/app-iframe/app-iframe.component';
 import { SafePipe } from './shared/safe.pipe';
@@ -196,7 +198,10 @@ import { SupportDialogComponent } from './component/support-dialog/support-dialo
     JsonFormsModule,
     JsonFormsAngularMaterialModule,
   ],
-  providers: [CookieService, {provide:HTTP_INTERCEPTORS, useClass: PostInterceptor,multi: true }, CookieServiceDelete],
+  providers: [CookieService, {provide:HTTP_INTERCEPTORS, useClass: PostInterceptor,multi: true },
+    CookieServiceDelete,
+    {provide: HIGHCHARTS_MODULES, useFactory: () => [more, exporting]}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

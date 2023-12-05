@@ -1,6 +1,12 @@
 import { Chart, StockChart, MapChart } from 'angular-highcharts';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewContainerRef, AfterViewInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
+import * as Highcharts from 'highcharts';
+import Sankey from "node_modules/highcharts/modules/sankey"
+import Funnel from "node_modules/highcharts/modules/funnel"
+import Gantt from "node_modules/highcharts/modules/gantt"
+
+
 
 @Component({
   selector: 'app-highchart',
@@ -33,7 +39,7 @@ export class HighchartComponent implements OnInit {
 
 
 
-  ngOnInit(): void {
+  async ngOnInit() {
 
     this.checkFunction(this.dataService.all_input.get(this.url)?.highchart_data?.config)
 
@@ -55,6 +61,25 @@ export class HighchartComponent implements OnInit {
       );
     }
 
+    if (this.dataService.all_input.get(this.url)?.highchart_data?.type == "sankey"){
+      Sankey(Highcharts)
+      this.data = new Chart(
+        this.dataService.all_input.get(this.url)?.highchart_data?.config
+      );
+    }
+
+    if (this.dataService.all_input.get(this.url)?.highchart_data?.type == "funnel"){
+      Funnel(Highcharts)
+      this.data = new Chart(
+        this.dataService.all_input.get(this.url)?.highchart_data?.config
+      );
+    }
+    if (this.dataService.all_input.get(this.url)?.highchart_data?.type == "gantt"){
+      Gantt(Highcharts)
+      this.data = new Chart(
+        this.dataService.all_input.get(this.url)?.highchart_data?.config
+      );
+    }
 
     setTimeout(this.resize_it, 1000);
   }

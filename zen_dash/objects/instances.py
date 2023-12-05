@@ -175,6 +175,9 @@ class HighChartType(Enum):
     CHART = "chart"
     STOCK = "stock"
     MAP = "map"
+    Sankey = "sankey"
+    Funnel = "funnel"
+    Gantt = "gantt"
 
 class HighChartData(BaseUpdate):
     type: HighChartType = HighChartType.CHART
