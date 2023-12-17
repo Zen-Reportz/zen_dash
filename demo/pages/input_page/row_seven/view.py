@@ -38,10 +38,11 @@ class FileDownload(Zen):
 
     @staticmethod
     def view():
-        return i.ReturnData(type=i.InstanceType.DOWNLOAD,
+        return i.ReturnData(type=i.InstanceType.BUTTON,
                             title="Download Option",
-                            download_data=i.DownloadData(
-                                url=FileDownload.server_full_url(), name="download", label="Report")
+                            button_data=i.ButtonData(
+                                download=True,
+                                url=FileDownload.server_full_url(), name="Download Report")
                             )
 
     @staticmethod

@@ -1,3 +1,7 @@
+# 0.6.22
+- # Deperication Notice: Download is depericated in favor of Button
+- remove Zen Class warnings
+
 # 0.6.21
 - Added Funnel and Gantt chart for Highchart
 

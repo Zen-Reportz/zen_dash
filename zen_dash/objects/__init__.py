@@ -7,31 +7,31 @@ from zen_dash.objects.page import Page
 class Zen:
 
     @staticmethod
-    def full_url() -> str:
+    def full_url(*args, **kwargs) -> str:
         raise Exception("Not Implimented")
 
     @staticmethod
-    def url() -> str:
+    def url(*args, **kwargs) -> str:
         raise Exception("Not Implimented")
 
     @staticmethod
-    def view():
+    def view(*args, **kwargs):
         raise Exception("Not Implimented")
 
     @staticmethod
-    def server_full_url() -> str:
+    def server_full_url(*args, **kwargs) -> str:
         raise Exception("Not Implimented")
 
     @staticmethod
-    def server_url() -> str:
+    def server_url(*args, **kwargs) -> str:
         raise Exception("Not Implimented")
 
     @staticmethod
-    def server_view():
+    def server_view(*args, **kwargs):
         raise Exception("Not Implimented")
 
     @staticmethod
-    def server():
+    def server(*args, **kwargs):
         raise Exception("Not Implimented")
 
 

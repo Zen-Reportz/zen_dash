@@ -57,6 +57,7 @@ export class AppDownloadComponent implements OnInit {
     if (this.downloadCall !== undefined) {
       this.downloadCall.unsubscribe();
     }
+
     let p = this.callService.call_response(this.data?.url as string, {
       responseType: 'blob',
       observe: 'response',

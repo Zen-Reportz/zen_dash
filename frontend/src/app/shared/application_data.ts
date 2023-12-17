@@ -263,6 +263,7 @@ export class ButtonData {
   url!: string
   name!: string
   redirect!: boolean
+  download!: boolean
   target_attribute!: string
   color!: string
   style: string | undefined

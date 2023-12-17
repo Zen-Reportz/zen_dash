@@ -1,6 +1,7 @@
 from enum import Enum, unique
 import json
 from json import JSONEncoder
+import warnings
 from pydantic import BaseConfig, ValidationError, root_validator, validator
 from typing import List, Optional, Dict, Union
 from zen_dash.support.encoder import JsonEncoder
@@ -228,6 +229,7 @@ class ButtonData(BaseUpdate):
     url: str
     name: str
     redirect: bool = False
+    download: bool = False
     target_attribute:TargetAttribute = TargetAttribute.Blank
     color: ButtonColor = ButtonColor.PRIMARY
     button_type: ButtonType = ButtonType.RAISED
@@ -331,6 +333,11 @@ class ReturnData(BaseUpdate):
 
     @root_validator
     def validator_type_match(cls, field_values):
+        
+        # Deprication List
+        if (field_values["type"] == InstanceType.DOWNLOAD):
+            warnings.warn("Download has been depericate in favor of Button") 
+
         if (field_values["type"] == InstanceType.BOX) and (field_values["box_data"] is None):
             raise ValueError("You have selected InstanceType.BOX, and box_data is missing")
         elif (field_values["type"] == InstanceType.DATE) and (field_values["date_data"] is None):
@@ -363,7 +370,10 @@ class ReturnData(BaseUpdate):
             raise ValueError("You have selected InstanceType.MULTI_EXPAND, and multi_data is missing")
         elif (field_values["type"] == InstanceType.INPUT) and (field_values["input_data"] is None):
             raise ValueError("You have selected InstanceType.INPUT, and input_data is missing")
+        
         elif (field_values["type"] == InstanceType.DOWNLOAD) and (field_values["download_data"] is None):
+            
+            
             raise ValueError("You have selected InstanceType.DOWNLOAD, and download_data is missing")
         elif (field_values["type"] == InstanceType.UPLOAD) and (field_values["upload_data"] is None):
             raise ValueError("You have selected InstanceType.UPLOAD, and upload_data is missing")
@@ -382,7 +392,9 @@ class ReturnData(BaseUpdate):
                 raise ValueError("ICON is not supported for selected button style")   
             if ((field_values["button_data"].button_type in (ButtonType.FAB, ButtonType.MINIFAB, ButtonType.ICON)) &
                (field_values["button_data"].icon is None)):
-                raise ValueError("ICON is need for selected button style")   
+                raise ValueError("ICON is need for selected button style")  
+            if (field_values["button_data"].redirect and  field_values["button_data"].download):
+                raise ValueError("Redirect and download can be true at same time")  
         elif (field_values["type"] == InstanceType.BUTTON) and (field_values["button_data"] is None):
             
             raise ValueError("You have selected InstanceType.BUTTON, and button_data is missing")
@@ -462,14 +474,10 @@ class UpdateReturnData(BaseUpdate):
                 raise ValueError("You have selected UpdateInstanceType.SIMPLE_FILTER, and display_dialog is not supported")
             if (field_values["display"] is not None):
                 raise ValueError("You have selected UpdateInstanceType.SIMPLE_FILTER, and display is not supported")
-
-        # elif (field_values["type"] == UpdateInstanceType.BUTTON_RESULT) and (field_values["display"] is None):
-        #     raise ValueError("You have selected UpdateInstanceType.BUTTON_RESULT, and display is missing")
-
-        # elif (field_values["type"] == UpdateInstanceType.FORM):
-        #     if (field_values["response_form_data"] is None):
-        #         raise ValueError("You have selected UpdateInstanceType.FORM, and response_form_data is missing")
-        
+        elif (field_values["type"] == UpdateInstanceType.BUTTON_RESULT):
+            if field_values["button_data"] is not None:
+                if (field_values["button_data"].redirect and  field_values["button_data"].download):
+                    raise ValueError("Redirect and download can be true at same time")  
         return field_values
 
     def json(self):
