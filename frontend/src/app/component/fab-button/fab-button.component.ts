@@ -124,7 +124,6 @@ export class FabButtonComponent implements OnInit {
               status: tt.display?.status,
             },
           });
-          this.reactiveity('success');
           this.show = false;
 
           if (tt.display_dialog !== undefined){
@@ -133,6 +132,7 @@ export class FabButtonComponent implements OnInit {
           if (tt.ui_data !== undefined){
             this.api_call_service.saveUIData(tt.ui_data)
           }
+          this.reactiveity('success');
 
           if (tt.button_data !== undefined) {
             if (tt.button_data.redirect) {

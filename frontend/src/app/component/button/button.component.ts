@@ -155,7 +155,6 @@ export class ButtonComponent implements OnInit {
             duration: (tt.display?.duration as number) * 1000,
             data: { message: tt.display?.message, status: tt.display?.status },
           });
-          this.reactiveity('success');
           this.show = false;
 
 
@@ -166,6 +165,8 @@ export class ButtonComponent implements OnInit {
           if (tt.ui_data !== undefined) {
             this.api_call_service.saveUIData(tt.ui_data);
           }
+          this.reactiveity('success');
+
 
           if (tt.button_data !== undefined) {
             if (tt.button_data.redirect) {

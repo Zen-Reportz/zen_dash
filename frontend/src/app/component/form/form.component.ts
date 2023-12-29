@@ -89,7 +89,6 @@ export class FormComponent implements OnInit {
       (res) => {
         // console.log(res)
         let r = res as UpdateReturnData
-        this.reactiveity("success")
         let duration = r.display?.duration as number
         let isMessage = !((r.display?.message === undefined) ||(r.display?.message === null))
         let message = 'API called Sucessfully '
@@ -108,6 +107,7 @@ export class FormComponent implements OnInit {
         if (r.ui_data !== undefined){
           this.api_call_service.saveUIData(r.ui_data)
         }
+        this.reactiveity("success")
 
         if (r.response_form_data != undefined){
           // window.open(r.response_form_data.redirect_url);

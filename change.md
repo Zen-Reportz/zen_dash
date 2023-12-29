@@ -1,3 +1,6 @@
+# 0.6.23
+- move reactivity moved to end, so data access is upto date
+
 # 0.6.22
 - # Deperication Notice: Download is depericated in favor of Button
 - remove Zen Class warnings
