@@ -116,14 +116,13 @@ export class ButtonComponent implements OnInit {
 
   trigger() {
     this.reactiveity('triggered');
-
+    this.show = true
 
     if (this.downloadCall !== undefined) {
       this.downloadCall.unsubscribe();
     }
 
     if (this.data.download){
-      console.log("hi")
       this.download_data()
       return
     }

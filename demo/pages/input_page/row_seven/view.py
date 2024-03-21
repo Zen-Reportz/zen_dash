@@ -154,6 +154,8 @@ class Button(Zen):
 
     @staticmethod
     def server() -> str:
+        import time 
+        time.sleep(10)
         return i.UpdateReturnData(
             title="button data",
             type=i.UpdateInstanceType.BUTTON_RESULT,
