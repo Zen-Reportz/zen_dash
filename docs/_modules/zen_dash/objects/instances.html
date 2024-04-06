@@ -404,7 +404,7 @@
         
         <span class="c1"># Deprication List</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">DOWNLOAD</span><span class="p">):</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Download has been depericate in favor of Button&quot;</span><span class="p">)</span> 
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Download has been depericate in favor of Button, DOWNLOAD will be removed 0.7&quot;</span><span class="p">)</span> 
 
         <span class="k">if</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">InstanceType</span><span class="o">.</span><span class="n">BOX</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">field_values</span><span class="p">[</span><span class="s2">&quot;box_data&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;You have selected InstanceType.BOX, and box_data is missing&quot;</span><span class="p">)</span>

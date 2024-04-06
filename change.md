@@ -1,3 +1,5 @@
+# 0.6.25
+- sidebar supports 
 # 0.6.24
 - fix issue with submit button not showing progress bar
 # 0.6.23

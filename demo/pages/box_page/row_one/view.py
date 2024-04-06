@@ -27,16 +27,13 @@ class FirstBox(Zen):
     async def view(b: BoxInput):
         r = uuid4()
         r1 = randint(20, 30)
-        print(f"sleeping {r}, sleeping {r1}")
         await asyncio.sleep(r1)
-        print(f"sleeping done {r}")
         dialog_data = i.DialogBox(
             url=FirstBoxDialog.full_url(), height="70%", width="70%")
         
         import random
         name = random.choice(["Users", "Spent", "Duration"])
         Value = random.choice(["5009", "200", "50", "20"])
-        print(f"selected value is {name} {Value} {r}")
         return i.ReturnData(type=i.InstanceType.BOX,
                             box_data=i.BoxData(
                                 icon="person",

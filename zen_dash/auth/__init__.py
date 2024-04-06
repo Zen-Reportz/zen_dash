@@ -31,15 +31,11 @@ async def auth_required(auth_token:str =  Cookie(None)):
 
     x = HTTPException( status_code=401, detail="UnAuthorized")
     if not auth_token:
-        print("User is Not logged in")
         raise x
     try:
         jw = jwt.decode(auth_token,key=secret_key, algorithms=algorithm)
         if datetime.fromtimestamp(int(jw.get("exp"))) < datetime.utcnow():
-            print("Token Expired")
             raise x
 
     except Exception as e:
-        print("cant parsed JWT")
-        print(e)
         raise x

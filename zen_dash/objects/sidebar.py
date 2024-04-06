@@ -1,14 +1,16 @@
 from typing import Optional, List, Union
 from zen_dash.objects import ZenPage
-
+import warnings
 from zen_dash.support import BaseUpdate
 from importlib.metadata import version
-from pydantic import validator
+from pydantic import root_validator, validator
 
 class SidebarTab(BaseUpdate):
     label: str
     icon: Optional[str] = 'Home'
     custom_url: Optional[str]
+
+    
 
 class SidebarGroup(BaseUpdate):
     name: str
@@ -64,35 +66,33 @@ def get_page_dict(pages: List[ZenPage]):
     return page_dict
 
 def RenderTabs(sidebar_list: SidebarList):
-    len_ = len(sidebar_list.pages)
-    len_ += len(sidebar_list.groupSidebar)
-    
-    tabs = [None for i in range(len_)]
+    tabs = []
     
     for p in sidebar_list.pages:
-        page_index = p.tab_number
-        tabs[page_index] = SidebarTab(label=p.name, icon=p.icon, custom_url=p.custom_url)
+        if p.subtab_number:
+            raise Exception("Sidetab can't have subtab_number")
+        
+        if p.custom_url:
+            url = p.custom_url
+        else:
+            url = f"page_{p.tab_number}"
+        
+        tabs.append(SidebarTab(label=p.name, icon=p.icon, custom_url=url))
     
     for subtab in sidebar_list.groupSidebar:
-        sub_tab = [None for i in range(len(subtab.sub_pages))] 
+        sub_tab = []
         for sub_page in subtab.sub_pages:
             if sub_page.subtab_number is None:
                 raise Exception(f"Please provde subpage for {sub_page.name}")
-            sub_page_index = sub_page.subtab_number
-            sub_tab[sub_page_index] = SidebarTab(label=sub_page.name, icon=sub_page.icon, custom_url=sub_page.custom_url)
-        page_index = sub_page.tab_number
-        tabs[page_index] = SidebarGroup(name= subtab.name, subtabs=sub_tab)
+            if sub_page.custom_url:
+                url = sub_page.custom_url
+            else:
+                url = f"page_{sub_page.tab_number}_{sub_page.subtab_number}"
+            
+            sub_tab.append(SidebarTab(label=sub_page.name, icon=sub_page.icon, custom_url=url))
+        
+        tabs.append(SidebarGroup(name= subtab.name, subtabs=sub_tab))
 
-    for i in tabs:
-        if isinstance(i, SidebarTab):
-            pass
-        elif isinstance(i, SidebarGroup):
-            i: SidebarGroup
-            for index, j in enumerate(i.subtabs):
-                if j is None:
-                    raise Exception(f"{i.name} tab doesn't have define subtab_number {index}")
-        else:
-            raise Exception("Missing Tab")
     return tabs
 
 

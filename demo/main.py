@@ -152,7 +152,7 @@ async def sidebar():
 @app.get("/backend/sidebar2", response_model=s.Sidebar)
 async def sidebar():
     return s.Sidebar(tabs=[
-        s.SidebarTab(label=INPUTZENPAGE.name, icon=INPUTZENPAGE.icon, custom_url=INPUTZENPAGE.custom_url ),
+        s.SidebarTab(label=INPUTZENPAGE.name, icon=INPUTZENPAGE.icon, url=INPUTZENPAGE.custom_url ),
     ],
         filters=[
         s.FilterInfo(url=fv.SingleFilterGlobal.full_url()),

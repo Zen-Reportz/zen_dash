@@ -32,6 +32,7 @@ export class SidebarTab {
   label!: string;
   icon!: string;
   custom_url: string | undefined
+  url: string | undefined
 }
 
 export class Filter {

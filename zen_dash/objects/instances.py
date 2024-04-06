@@ -336,7 +336,7 @@ class ReturnData(BaseUpdate):
         
         # Deprication List
         if (field_values["type"] == InstanceType.DOWNLOAD):
-            warnings.warn("Download has been depericate in favor of Button") 
+            warnings.warn("Download has been depericate in favor of Button, DOWNLOAD will be removed 0.7") 
 
         if (field_values["type"] == InstanceType.BOX) and (field_values["box_data"] is None):
             raise ValueError("You have selected InstanceType.BOX, and box_data is missing")

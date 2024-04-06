@@ -7,7 +7,7 @@
           <ng-template #thenBlock2>
             <mat-list-option [selected]="'page_' + i === page">
               <a mat-list-item [routerLink]="'.'"
-                [queryParams]="get_page_url(i, tab.custom_url)" type="button" [style.height]="'45px'">
+                [queryParams]="get_page_url(i, tab.custom_url, tab.url)" type="button" [style.height]="'45px'">
                 <mat-icon>{{tab.icon}} </mat-icon> {{tab.label}}
               </a>
             </mat-list-option>
@@ -20,7 +20,7 @@
               <mat-nav-list>
                 <mat-list-option [selected]="'page_' + i + '_' + j === page"
                   *ngFor="let subtab of tab.subtabs let j = index">
-                  <a mat-list-item [routerLink]="'.'" [queryParams]="get_subpage_url(i, j, subtab.custom_url)" type="button"
+                  <a mat-list-item [routerLink]="'.'" [queryParams]="get_subpage_url(i, j, subtab.custom_url, subtab.url)" type="button"
                     [style.height]="'45px'">
                     <mat-icon>{{subtab.icon}} </mat-icon> {{subtab.label}}
                   </a>

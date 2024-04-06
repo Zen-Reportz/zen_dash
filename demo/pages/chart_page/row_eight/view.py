@@ -106,7 +106,6 @@ class HighchartMap(Zen):
     @staticmethod
     def view():
         import json
-        # print(json.dumps(HighChartMapConfig))
         rd =  i.ReturnData(
         type=i.InstanceType.HIGHCHART,
         highchart_data=i.HighChartData(
@@ -114,7 +113,6 @@ class HighchartMap(Zen):
             config=HighChartMapConfig
         ), flex=i.FlexData(fxFlex="50%", fxFlex_md="50%", fxFlex_sm="100%", fxFlex_xs="100%"))
 
-        # print(rd)
         return rd
     
 

@@ -72,8 +72,10 @@ export class SidebarComponent implements OnInit {
     this.reactivityData.set(url, reactiveData)
   }
 
-  get_subpage_url(i:Number, j:Number, custom_url:string){
-    if (custom_url){
+  get_subpage_url(i:Number, j:Number, custom_url:string, url: string){
+    if (url){
+      return {'page': url}
+    }else if (custom_url){
       return {'page': custom_url}
     } else {
       return {'page': 'page_' + i + '_' + j}
@@ -81,8 +83,10 @@ export class SidebarComponent implements OnInit {
 
   }
 
-  get_page_url(i: Number, custom_url: string){
-    if (custom_url){
+  get_page_url(i: Number, custom_url: string, url: string){
+    if (url){
+      return {'page': url}
+    }else if (custom_url){
       return {'page': custom_url}
     } else {
       return {'page': 'page_' + i}
