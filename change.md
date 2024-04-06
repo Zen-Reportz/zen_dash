@@ -1,5 +1,5 @@
 # 0.6.25
-- sidebar supports 
+- Sidebar page url and location is now independent (Fixed: https://github.com/Zen-Reportz/zen_dash/issues/60) 
 # 0.6.24
 - fix issue with submit button not showing progress bar
 # 0.6.23
