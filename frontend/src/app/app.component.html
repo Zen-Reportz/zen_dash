@@ -42,7 +42,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div layout="row" ng-cloak>
+    <!-- <div layout="row" ng-cloak>
       <div layout="row" style="width: 100%; z-index: 5">
         <div flex>
           <div style="float: right">
@@ -53,7 +53,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <span *ngIf="((call.config.auth.SSO || call.config.auth.UP_Login) && auth.not_logged()); else withoutLogin">
       <app-login></app-login>

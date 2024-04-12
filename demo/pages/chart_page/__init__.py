@@ -21,7 +21,8 @@ chart_page = p.Page(
             ]),
 
 
-        ])
+        ],
+    show_refresh_button=False)
 
 
 CHARTPAGE = ZenPage(

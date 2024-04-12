@@ -17,3 +17,4 @@ class FABURL(BaseUpdate):
 class Page(BaseUpdate):
     rows: List[Row]
     floating_button_url: List[FABURL] = []
+    show_refresh_button: bool = True

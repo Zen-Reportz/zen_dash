@@ -1,3 +1,7 @@
+# 0.6.26
+- move page refresh to individual page
+- allow to show or hid refresh per page
+
 # 0.6.25
 - Sidebar page url and location is now independent (Fixed: https://github.com/Zen-Reportz/zen_dash/issues/60) 
 # 0.6.24

@@ -82,6 +82,7 @@ export class FloatingButtonURLs{
 export class Page{
   rows!: Row[]
   floating_button_url!: FloatingButtonURLs[]
+  show_refresh_button!: boolean
 }
 
 
