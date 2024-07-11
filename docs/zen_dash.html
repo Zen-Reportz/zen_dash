@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>zen_dash package &mdash; zen-dash  documentation</title>
@@ -16,6 +16,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -28,11 +29,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> zen-dash
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            zen-dash
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -54,7 +59,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-zen_dash.flex_data">zen_dash.flex_data module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-zen_dash.instances">zen_dash.instances module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-zen_dash.page">zen_dash.page module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-zen_dash.page">zen_dash.page module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#zen_dash.page.RenderPage"><code class="docutils literal notranslate"><span class="pre">RenderPage()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#zen_dash.page.get_page_dict"><code class="docutils literal notranslate"><span class="pre">get_page_dict()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-zen_dash.route">zen_dash.route module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-zen_dash.scripts">zen_dash.scripts module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-zen_dash.sidebar">zen_dash.sidebar module</a></li>
@@ -78,9 +87,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="modules.html">zen_dash</a> &raquo;</li>
-      <li>zen_dash package</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">zen_dash</a></li>
+      <li class="breadcrumb-item active">zen_dash package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/zen_dash.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -97,7 +106,11 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="zen_dash.auth.html">zen_dash.auth package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="zen_dash.auth.html#module-zen_dash.auth">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zen_dash.auth.html#module-zen_dash.auth">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.auth.html#zen_dash.auth.auth_required"><code class="docutils literal notranslate"><span class="pre">auth_required()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.auth.html#zen_dash.auth.login_support"><code class="docutils literal notranslate"><span class="pre">login_support()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="zen_dash.cli.html">zen_dash.cli package</a><ul>
@@ -108,24 +121,592 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="zen_dash.objects.html">zen_dash.objects package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="zen_dash.objects.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="zen_dash.objects.html#module-zen_dash.objects.flex_data">zen_dash.objects.flex_data module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="zen_dash.objects.html#module-zen_dash.objects.instances">zen_dash.objects.instances module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="zen_dash.objects.html#module-zen_dash.objects.page">zen_dash.objects.page module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="zen_dash.objects.html#module-zen_dash.objects.scripts">zen_dash.objects.scripts module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="zen_dash.objects.html#module-zen_dash.objects.sidebar">zen_dash.objects.sidebar module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="zen_dash.objects.html#module-zen_dash.objects">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zen_dash.objects.html#module-zen_dash.objects.flex_data">zen_dash.objects.flex_data module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.flex_data.FlexData"><code class="docutils literal notranslate"><span class="pre">FlexData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.flex_data.FlexData.Config"><code class="docutils literal notranslate"><span class="pre">FlexData.Config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.flex_data.FlexData.fxFlex"><code class="docutils literal notranslate"><span class="pre">FlexData.fxFlex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.flex_data.FlexData.fxFlex_md"><code class="docutils literal notranslate"><span class="pre">FlexData.fxFlex_md</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.flex_data.FlexData.fxFlex_sm"><code class="docutils literal notranslate"><span class="pre">FlexData.fxFlex_sm</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.flex_data.FlexData.fxFlex_xs"><code class="docutils literal notranslate"><span class="pre">FlexData.fxFlex_xs</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="zen_dash.objects.html#module-zen_dash.objects.instances">zen_dash.objects.instances module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.BoxData"><code class="docutils literal notranslate"><span class="pre">BoxData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.BoxData.icon"><code class="docutils literal notranslate"><span class="pre">BoxData.icon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.BoxData.name"><code class="docutils literal notranslate"><span class="pre">BoxData.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.BoxData.value"><code class="docutils literal notranslate"><span class="pre">BoxData.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonColor"><code class="docutils literal notranslate"><span class="pre">ButtonColor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonColor.ACCENT"><code class="docutils literal notranslate"><span class="pre">ButtonColor.ACCENT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonColor.PRIMARY"><code class="docutils literal notranslate"><span class="pre">ButtonColor.PRIMARY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonColor.WARN"><code class="docutils literal notranslate"><span class="pre">ButtonColor.WARN</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonData"><code class="docutils literal notranslate"><span class="pre">ButtonData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonData.button_type"><code class="docutils literal notranslate"><span class="pre">ButtonData.button_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonData.color"><code class="docutils literal notranslate"><span class="pre">ButtonData.color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonData.download"><code class="docutils literal notranslate"><span class="pre">ButtonData.download</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonData.icon"><code class="docutils literal notranslate"><span class="pre">ButtonData.icon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonData.name"><code class="docutils literal notranslate"><span class="pre">ButtonData.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonData.redirect"><code class="docutils literal notranslate"><span class="pre">ButtonData.redirect</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonData.style"><code class="docutils literal notranslate"><span class="pre">ButtonData.style</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonData.target_attribute"><code class="docutils literal notranslate"><span class="pre">ButtonData.target_attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonData.url"><code class="docutils literal notranslate"><span class="pre">ButtonData.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonFloating"><code class="docutils literal notranslate"><span class="pre">ButtonFloating</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonFloating.color"><code class="docutils literal notranslate"><span class="pre">ButtonFloating.color</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonFloating.fab_style"><code class="docutils literal notranslate"><span class="pre">ButtonFloating.fab_style</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonFloating.icon"><code class="docutils literal notranslate"><span class="pre">ButtonFloating.icon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonFloating.name"><code class="docutils literal notranslate"><span class="pre">ButtonFloating.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonFloating.redirect"><code class="docutils literal notranslate"><span class="pre">ButtonFloating.redirect</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonFloating.style"><code class="docutils literal notranslate"><span class="pre">ButtonFloating.style</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonFloating.target_attribute"><code class="docutils literal notranslate"><span class="pre">ButtonFloating.target_attribute</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonFloating.url"><code class="docutils literal notranslate"><span class="pre">ButtonFloating.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonToggleData"><code class="docutils literal notranslate"><span class="pre">ButtonToggleData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonToggleData.data"><code class="docutils literal notranslate"><span class="pre">ButtonToggleData.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonToggleData.multi"><code class="docutils literal notranslate"><span class="pre">ButtonToggleData.multi</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonToggleData.name"><code class="docutils literal notranslate"><span class="pre">ButtonToggleData.name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonToggleInstance"><code class="docutils literal notranslate"><span class="pre">ButtonToggleInstance</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonToggleInstance.name"><code class="docutils literal notranslate"><span class="pre">ButtonToggleInstance.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonToggleInstance.selected"><code class="docutils literal notranslate"><span class="pre">ButtonToggleInstance.selected</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonType"><code class="docutils literal notranslate"><span class="pre">ButtonType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonType.BASIC"><code class="docutils literal notranslate"><span class="pre">ButtonType.BASIC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonType.FAB"><code class="docutils literal notranslate"><span class="pre">ButtonType.FAB</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonType.FLAT"><code class="docutils literal notranslate"><span class="pre">ButtonType.FLAT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonType.ICON"><code class="docutils literal notranslate"><span class="pre">ButtonType.ICON</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonType.MINIFAB"><code class="docutils literal notranslate"><span class="pre">ButtonType.MINIFAB</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonType.RAISED"><code class="docutils literal notranslate"><span class="pre">ButtonType.RAISED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ButtonType.STROKED"><code class="docutils literal notranslate"><span class="pre">ButtonType.STROKED</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ChartData"><code class="docutils literal notranslate"><span class="pre">ChartData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ChartData.data"><code class="docutils literal notranslate"><span class="pre">ChartData.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ChartData.name"><code class="docutils literal notranslate"><span class="pre">ChartData.name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.CheckBoxData"><code class="docutils literal notranslate"><span class="pre">CheckBoxData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.CheckBoxData.data"><code class="docutils literal notranslate"><span class="pre">CheckBoxData.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.CheckBoxData.name"><code class="docutils literal notranslate"><span class="pre">CheckBoxData.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.CheckBoxData.style"><code class="docutils literal notranslate"><span class="pre">CheckBoxData.style</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.CheckBoxInstance"><code class="docutils literal notranslate"><span class="pre">CheckBoxInstance</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.CheckBoxInstance.name"><code class="docutils literal notranslate"><span class="pre">CheckBoxInstance.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.CheckBoxInstance.selected"><code class="docutils literal notranslate"><span class="pre">CheckBoxInstance.selected</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.CustomHTML"><code class="docutils literal notranslate"><span class="pre">CustomHTML</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.CustomHTML.full_custom"><code class="docutils literal notranslate"><span class="pre">CustomHTML.full_custom</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.CustomHTML.html"><code class="docutils literal notranslate"><span class="pre">CustomHTML.html</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.CustomHTML.name"><code class="docutils literal notranslate"><span class="pre">CustomHTML.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.CustomHTML.script"><code class="docutils literal notranslate"><span class="pre">CustomHTML.script</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DateTimeData"><code class="docutils literal notranslate"><span class="pre">DateTimeData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DateTimeData.first_date"><code class="docutils literal notranslate"><span class="pre">DateTimeData.first_date</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DateTimeData.name"><code class="docutils literal notranslate"><span class="pre">DateTimeData.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DateTimeData.second_date"><code class="docutils literal notranslate"><span class="pre">DateTimeData.second_date</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DialogBox"><code class="docutils literal notranslate"><span class="pre">DialogBox</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DialogBox.height"><code class="docutils literal notranslate"><span class="pre">DialogBox.height</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DialogBox.url"><code class="docutils literal notranslate"><span class="pre">DialogBox.url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DialogBox.width"><code class="docutils literal notranslate"><span class="pre">DialogBox.width</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.Display"><code class="docutils literal notranslate"><span class="pre">Display</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.Display.duration"><code class="docutils literal notranslate"><span class="pre">Display.duration</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.Display.message"><code class="docutils literal notranslate"><span class="pre">Display.message</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.Display.status"><code class="docutils literal notranslate"><span class="pre">Display.status</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DisplayDialog"><code class="docutils literal notranslate"><span class="pre">DisplayDialog</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DisplayDialog.custom_message"><code class="docutils literal notranslate"><span class="pre">DisplayDialog.custom_message</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DisplayDialog.height"><code class="docutils literal notranslate"><span class="pre">DisplayDialog.height</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DisplayDialog.width"><code class="docutils literal notranslate"><span class="pre">DisplayDialog.width</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DisplayStatus"><code class="docutils literal notranslate"><span class="pre">DisplayStatus</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DisplayStatus.ERROR"><code class="docutils literal notranslate"><span class="pre">DisplayStatus.ERROR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DisplayStatus.SUCCESS"><code class="docutils literal notranslate"><span class="pre">DisplayStatus.SUCCESS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DisplayStatus.WARN"><code class="docutils literal notranslate"><span class="pre">DisplayStatus.WARN</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DownloadData"><code class="docutils literal notranslate"><span class="pre">DownloadData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DownloadData.label"><code class="docutils literal notranslate"><span class="pre">DownloadData.label</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DownloadData.name"><code class="docutils literal notranslate"><span class="pre">DownloadData.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.DownloadData.url"><code class="docutils literal notranslate"><span class="pre">DownloadData.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.FABColor"><code class="docutils literal notranslate"><span class="pre">FABColor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.FABColor.ACCENT"><code class="docutils literal notranslate"><span class="pre">FABColor.ACCENT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.FABColor.PRIMARY"><code class="docutils literal notranslate"><span class="pre">FABColor.PRIMARY</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.FABColor.WARN"><code class="docutils literal notranslate"><span class="pre">FABColor.WARN</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.FABStyle"><code class="docutils literal notranslate"><span class="pre">FABStyle</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.FABStyle.FAB"><code class="docutils literal notranslate"><span class="pre">FABStyle.FAB</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.FABStyle.ICON"><code class="docutils literal notranslate"><span class="pre">FABStyle.ICON</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.FABStyle.MINIFAB"><code class="docutils literal notranslate"><span class="pre">FABStyle.MINIFAB</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.FormData"><code class="docutils literal notranslate"><span class="pre">FormData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.FormData.data"><code class="docutils literal notranslate"><span class="pre">FormData.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.FormData.form_schema"><code class="docutils literal notranslate"><span class="pre">FormData.form_schema</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.FormData.name"><code class="docutils literal notranslate"><span class="pre">FormData.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.FormData.submit_info"><code class="docutils literal notranslate"><span class="pre">FormData.submit_info</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.FormData.ui_schema"><code class="docutils literal notranslate"><span class="pre">FormData.ui_schema</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.GroupedFilterData"><code class="docutils literal notranslate"><span class="pre">GroupedFilterData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.GroupedFilterData.data"><code class="docutils literal notranslate"><span class="pre">GroupedFilterData.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.GroupedFilterData.multi"><code class="docutils literal notranslate"><span class="pre">GroupedFilterData.multi</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.GroupedFilterData.name"><code class="docutils literal notranslate"><span class="pre">GroupedFilterData.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.GroupedFilterData.selected"><code class="docutils literal notranslate"><span class="pre">GroupedFilterData.selected</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.GroupedFilterData.url"><code class="docutils literal notranslate"><span class="pre">GroupedFilterData.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.GroupedFilterDataInstance"><code class="docutils literal notranslate"><span class="pre">GroupedFilterDataInstance</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.GroupedFilterDataInstance.group_data"><code class="docutils literal notranslate"><span class="pre">GroupedFilterDataInstance.group_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.GroupedFilterDataInstance.group_name"><code class="docutils literal notranslate"><span class="pre">GroupedFilterDataInstance.group_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.HighChartData"><code class="docutils literal notranslate"><span class="pre">HighChartData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.HighChartData.config"><code class="docutils literal notranslate"><span class="pre">HighChartData.config</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.HighChartData.type"><code class="docutils literal notranslate"><span class="pre">HighChartData.type</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.HighChartType"><code class="docutils literal notranslate"><span class="pre">HighChartType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.HighChartType.CHART"><code class="docutils literal notranslate"><span class="pre">HighChartType.CHART</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.HighChartType.Funnel"><code class="docutils literal notranslate"><span class="pre">HighChartType.Funnel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.HighChartType.Gantt"><code class="docutils literal notranslate"><span class="pre">HighChartType.Gantt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.HighChartType.MAP"><code class="docutils literal notranslate"><span class="pre">HighChartType.MAP</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.HighChartType.STOCK"><code class="docutils literal notranslate"><span class="pre">HighChartType.STOCK</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.HighChartType.Sankey"><code class="docutils literal notranslate"><span class="pre">HighChartType.Sankey</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.IframeData"><code class="docutils literal notranslate"><span class="pre">IframeData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.IframeData.height"><code class="docutils literal notranslate"><span class="pre">IframeData.height</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.IframeData.url"><code class="docutils literal notranslate"><span class="pre">IframeData.url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.IframeData.width"><code class="docutils literal notranslate"><span class="pre">IframeData.width</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ImageData"><code class="docutils literal notranslate"><span class="pre">ImageData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ImageData.height"><code class="docutils literal notranslate"><span class="pre">ImageData.height</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ImageData.url"><code class="docutils literal notranslate"><span class="pre">ImageData.url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ImageData.width"><code class="docutils literal notranslate"><span class="pre">ImageData.width</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InputData"><code class="docutils literal notranslate"><span class="pre">InputData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InputData.label"><code class="docutils literal notranslate"><span class="pre">InputData.label</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InputData.name"><code class="docutils literal notranslate"><span class="pre">InputData.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InputData.value"><code class="docutils literal notranslate"><span class="pre">InputData.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType"><code class="docutils literal notranslate"><span class="pre">InstanceType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.BOX"><code class="docutils literal notranslate"><span class="pre">InstanceType.BOX</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.BUTTON"><code class="docutils literal notranslate"><span class="pre">InstanceType.BUTTON</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.BUTTON_TOGGLE"><code class="docutils literal notranslate"><span class="pre">InstanceType.BUTTON_TOGGLE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.CHART"><code class="docutils literal notranslate"><span class="pre">InstanceType.CHART</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.CHECKBOX"><code class="docutils literal notranslate"><span class="pre">InstanceType.CHECKBOX</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.CUSTOM_HTML"><code class="docutils literal notranslate"><span class="pre">InstanceType.CUSTOM_HTML</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.DATE"><code class="docutils literal notranslate"><span class="pre">InstanceType.DATE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.DOWNLOAD"><code class="docutils literal notranslate"><span class="pre">InstanceType.DOWNLOAD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.FLOATING_BUTTON"><code class="docutils literal notranslate"><span class="pre">InstanceType.FLOATING_BUTTON</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.FORM"><code class="docutils literal notranslate"><span class="pre">InstanceType.FORM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.GROUP_FILTER"><code class="docutils literal notranslate"><span class="pre">InstanceType.GROUP_FILTER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.HIGHCHART"><code class="docutils literal notranslate"><span class="pre">InstanceType.HIGHCHART</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.IFRAME"><code class="docutils literal notranslate"><span class="pre">InstanceType.IFRAME</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.IMAGE"><code class="docutils literal notranslate"><span class="pre">InstanceType.IMAGE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.INPUT"><code class="docutils literal notranslate"><span class="pre">InstanceType.INPUT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.MULTI_EXPAND"><code class="docutils literal notranslate"><span class="pre">InstanceType.MULTI_EXPAND</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.MULTI_LIST"><code class="docutils literal notranslate"><span class="pre">InstanceType.MULTI_LIST</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.MULTI_TABS"><code class="docutils literal notranslate"><span class="pre">InstanceType.MULTI_TABS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.RADIO"><code class="docutils literal notranslate"><span class="pre">InstanceType.RADIO</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.SIMPLE_FILTER"><code class="docutils literal notranslate"><span class="pre">InstanceType.SIMPLE_FILTER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.SIMPLE_SERVER_FILTER"><code class="docutils literal notranslate"><span class="pre">InstanceType.SIMPLE_SERVER_FILTER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.SLIDER"><code class="docutils literal notranslate"><span class="pre">InstanceType.SLIDER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.TABLE"><code class="docutils literal notranslate"><span class="pre">InstanceType.TABLE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.TOGGLE"><code class="docutils literal notranslate"><span class="pre">InstanceType.TOGGLE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.InstanceType.UPLOAD"><code class="docutils literal notranslate"><span class="pre">InstanceType.UPLOAD</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.MultiData"><code class="docutils literal notranslate"><span class="pre">MultiData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.MultiData.urls"><code class="docutils literal notranslate"><span class="pre">MultiData.urls</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.MultiURLInfo"><code class="docutils literal notranslate"><span class="pre">MultiURLInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.MultiURLInfo.name"><code class="docutils literal notranslate"><span class="pre">MultiURLInfo.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.MultiURLInfo.url"><code class="docutils literal notranslate"><span class="pre">MultiURLInfo.url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.MultiURLInfo.with_card"><code class="docutils literal notranslate"><span class="pre">MultiURLInfo.with_card</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.RadioData"><code class="docutils literal notranslate"><span class="pre">RadioData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.RadioData.data"><code class="docutils literal notranslate"><span class="pre">RadioData.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.RadioData.name"><code class="docutils literal notranslate"><span class="pre">RadioData.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.RadioData.selected"><code class="docutils literal notranslate"><span class="pre">RadioData.selected</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.RadioData.style"><code class="docutils literal notranslate"><span class="pre">RadioData.style</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReactiveData"><code class="docutils literal notranslate"><span class="pre">ReactiveData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReactiveData.full_rective"><code class="docutils literal notranslate"><span class="pre">ReactiveData.full_rective</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReactiveData.hidden"><code class="docutils literal notranslate"><span class="pre">ReactiveData.hidden</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReactiveData.reactive_ids"><code class="docutils literal notranslate"><span class="pre">ReactiveData.reactive_ids</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ResponseFormData"><code class="docutils literal notranslate"><span class="pre">ResponseFormData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ResponseFormData.redirect_url"><code class="docutils literal notranslate"><span class="pre">ResponseFormData.redirect_url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData"><code class="docutils literal notranslate"><span class="pre">ReturnData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.box_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.box_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.button_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.button_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.button_toggle_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.button_toggle_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.chart_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.chart_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.checkbox_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.checkbox_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.custom_html_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.custom_html_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.date_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.date_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.dialog_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.dialog_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.download_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.download_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.flex"><code class="docutils literal notranslate"><span class="pre">ReturnData.flex</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.floating_button_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.floating_button_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.footer"><code class="docutils literal notranslate"><span class="pre">ReturnData.footer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.form_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.form_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.group_filter_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.group_filter_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.highchart_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.highchart_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.iframe_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.iframe_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.image_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.image_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.input_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.input_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.multi_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.multi_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.radio_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.radio_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.reactive"><code class="docutils literal notranslate"><span class="pre">ReturnData.reactive</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.simple_filter_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.simple_filter_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.simple_server_filter_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.simple_server_filter_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.slider_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.slider_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.table_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.table_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.title"><code class="docutils literal notranslate"><span class="pre">ReturnData.title</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.toggle_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.toggle_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.tooltip_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.tooltip_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.type"><code class="docutils literal notranslate"><span class="pre">ReturnData.type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.ui_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.ui_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.upload_data"><code class="docutils literal notranslate"><span class="pre">ReturnData.upload_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ReturnData.validator_type_match"><code class="docutils literal notranslate"><span class="pre">ReturnData.validator_type_match()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SimpleFilterData"><code class="docutils literal notranslate"><span class="pre">SimpleFilterData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SimpleFilterData.data"><code class="docutils literal notranslate"><span class="pre">SimpleFilterData.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SimpleFilterData.multi"><code class="docutils literal notranslate"><span class="pre">SimpleFilterData.multi</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SimpleFilterData.name"><code class="docutils literal notranslate"><span class="pre">SimpleFilterData.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SimpleFilterData.selected"><code class="docutils literal notranslate"><span class="pre">SimpleFilterData.selected</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SimpleServerSideFilterData"><code class="docutils literal notranslate"><span class="pre">SimpleServerSideFilterData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SimpleServerSideFilterData.url"><code class="docutils literal notranslate"><span class="pre">SimpleServerSideFilterData.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SliderData"><code class="docutils literal notranslate"><span class="pre">SliderData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SliderData.invert"><code class="docutils literal notranslate"><span class="pre">SliderData.invert</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SliderData.max"><code class="docutils literal notranslate"><span class="pre">SliderData.max</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SliderData.min"><code class="docutils literal notranslate"><span class="pre">SliderData.min</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SliderData.name"><code class="docutils literal notranslate"><span class="pre">SliderData.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SliderData.step"><code class="docutils literal notranslate"><span class="pre">SliderData.step</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SliderData.thumbLabel"><code class="docutils literal notranslate"><span class="pre">SliderData.thumbLabel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SliderData.value"><code class="docutils literal notranslate"><span class="pre">SliderData.value</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SliderData.vertical"><code class="docutils literal notranslate"><span class="pre">SliderData.vertical</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.Style"><code class="docutils literal notranslate"><span class="pre">Style</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.Style.horizontal"><code class="docutils literal notranslate"><span class="pre">Style.horizontal</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.Style.vertical"><code class="docutils literal notranslate"><span class="pre">Style.vertical</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SubmitFormData"><code class="docutils literal notranslate"><span class="pre">SubmitFormData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SubmitFormData.name"><code class="docutils literal notranslate"><span class="pre">SubmitFormData.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.SubmitFormData.url"><code class="docutils literal notranslate"><span class="pre">SubmitFormData.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TableColumn"><code class="docutils literal notranslate"><span class="pre">TableColumn</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TableColumn.columnDef"><code class="docutils literal notranslate"><span class="pre">TableColumn.columnDef</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TableColumn.header"><code class="docutils literal notranslate"><span class="pre">TableColumn.header</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TableData"><code class="docutils literal notranslate"><span class="pre">TableData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TableData.allow_download"><code class="docutils literal notranslate"><span class="pre">TableData.allow_download</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TableData.columns"><code class="docutils literal notranslate"><span class="pre">TableData.columns</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TableData.data"><code class="docutils literal notranslate"><span class="pre">TableData.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TableData.items_per_page"><code class="docutils literal notranslate"><span class="pre">TableData.items_per_page</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TableData.items_per_page_options"><code class="docutils literal notranslate"><span class="pre">TableData.items_per_page_options</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TableData.name"><code class="docutils literal notranslate"><span class="pre">TableData.name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TargetAttribute"><code class="docutils literal notranslate"><span class="pre">TargetAttribute</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TargetAttribute.Blank"><code class="docutils literal notranslate"><span class="pre">TargetAttribute.Blank</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TargetAttribute.PARENT"><code class="docutils literal notranslate"><span class="pre">TargetAttribute.PARENT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TargetAttribute.SELF"><code class="docutils literal notranslate"><span class="pre">TargetAttribute.SELF</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.TargetAttribute.TOP"><code class="docutils literal notranslate"><span class="pre">TargetAttribute.TOP</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ToggleData"><code class="docutils literal notranslate"><span class="pre">ToggleData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ToggleData.checked"><code class="docutils literal notranslate"><span class="pre">ToggleData.checked</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ToggleData.name"><code class="docutils literal notranslate"><span class="pre">ToggleData.name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ToolTipData"><code class="docutils literal notranslate"><span class="pre">ToolTipData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.ToolTipData.label"><code class="docutils literal notranslate"><span class="pre">ToolTipData.label</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UIAction"><code class="docutils literal notranslate"><span class="pre">UIAction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UIAction.ADD"><code class="docutils literal notranslate"><span class="pre">UIAction.ADD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UIAction.DELETE"><code class="docutils literal notranslate"><span class="pre">UIAction.DELETE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UIData"><code class="docutils literal notranslate"><span class="pre">UIData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UIData.action"><code class="docutils literal notranslate"><span class="pre">UIData.action</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UIData.key"><code class="docutils literal notranslate"><span class="pre">UIData.key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UIData.type"><code class="docutils literal notranslate"><span class="pre">UIData.type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UIData.value"><code class="docutils literal notranslate"><span class="pre">UIData.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UIType"><code class="docutils literal notranslate"><span class="pre">UIType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UIType.LOCALSTORAGE"><code class="docutils literal notranslate"><span class="pre">UIType.LOCALSTORAGE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UIType.SESSION"><code class="docutils literal notranslate"><span class="pre">UIType.SESSION</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateInstanceType"><code class="docutils literal notranslate"><span class="pre">UpdateInstanceType</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateInstanceType.BOX"><code class="docutils literal notranslate"><span class="pre">UpdateInstanceType.BOX</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateInstanceType.BUTTON_RESULT"><code class="docutils literal notranslate"><span class="pre">UpdateInstanceType.BUTTON_RESULT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateInstanceType.FORM"><code class="docutils literal notranslate"><span class="pre">UpdateInstanceType.FORM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateInstanceType.SIMPLE_FILTER"><code class="docutils literal notranslate"><span class="pre">UpdateInstanceType.SIMPLE_FILTER</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData"><code class="docutils literal notranslate"><span class="pre">UpdateReturnData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData.box_data"><code class="docutils literal notranslate"><span class="pre">UpdateReturnData.box_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData.button_data"><code class="docutils literal notranslate"><span class="pre">UpdateReturnData.button_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData.display"><code class="docutils literal notranslate"><span class="pre">UpdateReturnData.display</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData.display_dialog"><code class="docutils literal notranslate"><span class="pre">UpdateReturnData.display_dialog</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData.json"><code class="docutils literal notranslate"><span class="pre">UpdateReturnData.json()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData.response_form_data"><code class="docutils literal notranslate"><span class="pre">UpdateReturnData.response_form_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData.simple_fitler_data"><code class="docutils literal notranslate"><span class="pre">UpdateReturnData.simple_fitler_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData.type"><code class="docutils literal notranslate"><span class="pre">UpdateReturnData.type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData.ui_data"><code class="docutils literal notranslate"><span class="pre">UpdateReturnData.ui_data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UpdateReturnData.validator_type_match"><code class="docutils literal notranslate"><span class="pre">UpdateReturnData.validator_type_match()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UploadData"><code class="docutils literal notranslate"><span class="pre">UploadData</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UploadData.multi"><code class="docutils literal notranslate"><span class="pre">UploadData.multi</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UploadData.name"><code class="docutils literal notranslate"><span class="pre">UploadData.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.instances.UploadData.url"><code class="docutils literal notranslate"><span class="pre">UploadData.url</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="zen_dash.objects.html#module-zen_dash.objects.page">zen_dash.objects.page module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.page.FABURL"><code class="docutils literal notranslate"><span class="pre">FABURL</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.page.FABURL.url"><code class="docutils literal notranslate"><span class="pre">FABURL.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.page.Instance"><code class="docutils literal notranslate"><span class="pre">Instance</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.page.Instance.url"><code class="docutils literal notranslate"><span class="pre">Instance.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.page.Page"><code class="docutils literal notranslate"><span class="pre">Page</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.page.Page.floating_button_url"><code class="docutils literal notranslate"><span class="pre">Page.floating_button_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.page.Page.rows"><code class="docutils literal notranslate"><span class="pre">Page.rows</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.page.Page.show_refresh_button"><code class="docutils literal notranslate"><span class="pre">Page.show_refresh_button</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.page.Row"><code class="docutils literal notranslate"><span class="pre">Row</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.page.Row.data"><code class="docutils literal notranslate"><span class="pre">Row.data</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.page.Row.layoutGap"><code class="docutils literal notranslate"><span class="pre">Row.layoutGap</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="zen_dash.objects.html#module-zen_dash.objects.scripts">zen_dash.objects.scripts module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.CustomScript"><code class="docutils literal notranslate"><span class="pre">CustomScript</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.CustomScript.aysnc"><code class="docutils literal notranslate"><span class="pre">CustomScript.aysnc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.CustomScript.custom"><code class="docutils literal notranslate"><span class="pre">CustomScript.custom</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.CustomScript.defer"><code class="docutils literal notranslate"><span class="pre">CustomScript.defer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.CustomScript.rel"><code class="docutils literal notranslate"><span class="pre">CustomScript.rel</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.CustomScript.text"><code class="docutils literal notranslate"><span class="pre">CustomScript.text</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.CustomScript.type"><code class="docutils literal notranslate"><span class="pre">CustomScript.type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.CustomScript.url"><code class="docutils literal notranslate"><span class="pre">CustomScript.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.CustomScripts"><code class="docutils literal notranslate"><span class="pre">CustomScripts</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.CustomScripts.scripts"><code class="docutils literal notranslate"><span class="pre">CustomScripts.scripts</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel"><code class="docutils literal notranslate"><span class="pre">Rel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.ALTERNATE"><code class="docutils literal notranslate"><span class="pre">Rel.ALTERNATE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.AUTHOR"><code class="docutils literal notranslate"><span class="pre">Rel.AUTHOR</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.DNS_PREFETCH"><code class="docutils literal notranslate"><span class="pre">Rel.DNS_PREFETCH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.HELP"><code class="docutils literal notranslate"><span class="pre">Rel.HELP</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.ICON"><code class="docutils literal notranslate"><span class="pre">Rel.ICON</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.LICENSE"><code class="docutils literal notranslate"><span class="pre">Rel.LICENSE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.NEXT"><code class="docutils literal notranslate"><span class="pre">Rel.NEXT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.PINGBACK"><code class="docutils literal notranslate"><span class="pre">Rel.PINGBACK</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.PRECONNECT"><code class="docutils literal notranslate"><span class="pre">Rel.PRECONNECT</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.PREFETCH"><code class="docutils literal notranslate"><span class="pre">Rel.PREFETCH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.PRELOAD"><code class="docutils literal notranslate"><span class="pre">Rel.PRELOAD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.PRERENDER"><code class="docutils literal notranslate"><span class="pre">Rel.PRERENDER</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.PREV"><code class="docutils literal notranslate"><span class="pre">Rel.PREV</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.SEARCH"><code class="docutils literal notranslate"><span class="pre">Rel.SEARCH</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Rel.STYLESHEET"><code class="docutils literal notranslate"><span class="pre">Rel.STYLESHEET</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Style"><code class="docutils literal notranslate"><span class="pre">Style</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Style.JS"><code class="docutils literal notranslate"><span class="pre">Style.JS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.scripts.Style.LINK"><code class="docutils literal notranslate"><span class="pre">Style.LINK</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="zen_dash.objects.html#module-zen_dash.objects.sidebar">zen_dash.objects.sidebar module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.FilterInfo"><code class="docutils literal notranslate"><span class="pre">FilterInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.FilterInfo.url"><code class="docutils literal notranslate"><span class="pre">FilterInfo.url</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.GroupSidebarList"><code class="docutils literal notranslate"><span class="pre">GroupSidebarList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.GroupSidebarList.name"><code class="docutils literal notranslate"><span class="pre">GroupSidebarList.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.GroupSidebarList.sub_pages"><code class="docutils literal notranslate"><span class="pre">GroupSidebarList.sub_pages</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.RenderTabs"><code class="docutils literal notranslate"><span class="pre">RenderTabs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.Sidebar"><code class="docutils literal notranslate"><span class="pre">Sidebar</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.Sidebar.filters"><code class="docutils literal notranslate"><span class="pre">Sidebar.filters</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.Sidebar.first_cant_be_group"><code class="docutils literal notranslate"><span class="pre">Sidebar.first_cant_be_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.Sidebar.library_version"><code class="docutils literal notranslate"><span class="pre">Sidebar.library_version</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.Sidebar.size"><code class="docutils literal notranslate"><span class="pre">Sidebar.size</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.Sidebar.tabs"><code class="docutils literal notranslate"><span class="pre">Sidebar.tabs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.SidebarGroup"><code class="docutils literal notranslate"><span class="pre">SidebarGroup</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.SidebarGroup.name"><code class="docutils literal notranslate"><span class="pre">SidebarGroup.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.SidebarGroup.subtabs"><code class="docutils literal notranslate"><span class="pre">SidebarGroup.subtabs</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.SidebarList"><code class="docutils literal notranslate"><span class="pre">SidebarList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.SidebarList.groupSidebar"><code class="docutils literal notranslate"><span class="pre">SidebarList.groupSidebar</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.SidebarList.pages"><code class="docutils literal notranslate"><span class="pre">SidebarList.pages</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.SidebarTab"><code class="docutils literal notranslate"><span class="pre">SidebarTab</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.SidebarTab.custom_url"><code class="docutils literal notranslate"><span class="pre">SidebarTab.custom_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.SidebarTab.icon"><code class="docutils literal notranslate"><span class="pre">SidebarTab.icon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.SidebarTab.label"><code class="docutils literal notranslate"><span class="pre">SidebarTab.label</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.sidebar.get_page_dict"><code class="docutils literal notranslate"><span class="pre">get_page_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="zen_dash.objects.html#module-zen_dash.objects">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Auth"><code class="docutils literal notranslate"><span class="pre">Auth</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Auth.SSO"><code class="docutils literal notranslate"><span class="pre">Auth.SSO</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Auth.UP_Login"><code class="docutils literal notranslate"><span class="pre">Auth.UP_Login</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Configuration"><code class="docutils literal notranslate"><span class="pre">Configuration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Configuration.auth"><code class="docutils literal notranslate"><span class="pre">Configuration.auth</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Configuration.refresh"><code class="docutils literal notranslate"><span class="pre">Configuration.refresh</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Configuration.retry_count"><code class="docutils literal notranslate"><span class="pre">Configuration.retry_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Configuration.show_right_sidebar"><code class="docutils literal notranslate"><span class="pre">Configuration.show_right_sidebar</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Configuration.websocket"><code class="docutils literal notranslate"><span class="pre">Configuration.websocket</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.RefreshInfo"><code class="docutils literal notranslate"><span class="pre">RefreshInfo</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.RefreshInfo.rate_in_seconds"><code class="docutils literal notranslate"><span class="pre">RefreshInfo.rate_in_seconds</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.RefreshInfo.refresh"><code class="docutils literal notranslate"><span class="pre">RefreshInfo.refresh</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.WebSocketConfig"><code class="docutils literal notranslate"><span class="pre">WebSocketConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.WebSocketConfig.active"><code class="docutils literal notranslate"><span class="pre">WebSocketConfig.active</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Zen"><code class="docutils literal notranslate"><span class="pre">Zen</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Zen.full_url"><code class="docutils literal notranslate"><span class="pre">Zen.full_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Zen.server"><code class="docutils literal notranslate"><span class="pre">Zen.server()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Zen.server_full_url"><code class="docutils literal notranslate"><span class="pre">Zen.server_full_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Zen.server_url"><code class="docutils literal notranslate"><span class="pre">Zen.server_url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Zen.server_view"><code class="docutils literal notranslate"><span class="pre">Zen.server_view()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Zen.url"><code class="docutils literal notranslate"><span class="pre">Zen.url()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.Zen.view"><code class="docutils literal notranslate"><span class="pre">Zen.view()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.ZenPage"><code class="docutils literal notranslate"><span class="pre">ZenPage</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.ZenPage.custom_url"><code class="docutils literal notranslate"><span class="pre">ZenPage.custom_url</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.ZenPage.icon"><code class="docutils literal notranslate"><span class="pre">ZenPage.icon</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.ZenPage.name"><code class="docutils literal notranslate"><span class="pre">ZenPage.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.ZenPage.page"><code class="docutils literal notranslate"><span class="pre">ZenPage.page</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.ZenPage.pydantic_class"><code class="docutils literal notranslate"><span class="pre">ZenPage.pydantic_class</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.ZenPage.subtab_number"><code class="docutils literal notranslate"><span class="pre">ZenPage.subtab_number</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.ZenPage.tab_number"><code class="docutils literal notranslate"><span class="pre">ZenPage.tab_number</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.objects.html#zen_dash.objects.ZenPage.websocket_calls"><code class="docutils literal notranslate"><span class="pre">ZenPage.websocket_calls</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="zen_dash.support.html">zen_dash.support package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="zen_dash.support.html#module-zen_dash.support">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zen_dash.support.html#module-zen_dash.support">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.support.html#zen_dash.support.BaseUpdate"><code class="docutils literal notranslate"><span class="pre">BaseUpdate</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.support.html#zen_dash.support.BaseUpdate.dict"><code class="docutils literal notranslate"><span class="pre">BaseUpdate.dict()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="zen_dash.tag.html">zen_dash.tag package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="zen_dash.tag.html#module-zen_dash.tag">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zen_dash.tag.html#module-zen_dash.tag">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.A"><code class="docutils literal notranslate"><span class="pre">A</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.B"><code class="docutils literal notranslate"><span class="pre">B</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.CENTER"><code class="docutils literal notranslate"><span class="pre">CENTER</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.DIV"><code class="docutils literal notranslate"><span class="pre">DIV</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.EM"><code class="docutils literal notranslate"><span class="pre">EM</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.H1"><code class="docutils literal notranslate"><span class="pre">H1</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.H2"><code class="docutils literal notranslate"><span class="pre">H2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.H3"><code class="docutils literal notranslate"><span class="pre">H3</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.H4"><code class="docutils literal notranslate"><span class="pre">H4</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.H5"><code class="docutils literal notranslate"><span class="pre">H5</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.H6"><code class="docutils literal notranslate"><span class="pre">H6</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.I"><code class="docutils literal notranslate"><span class="pre">I</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.LI"><code class="docutils literal notranslate"><span class="pre">LI</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.OL"><code class="docutils literal notranslate"><span class="pre">OL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.P"><code class="docutils literal notranslate"><span class="pre">P</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.SPAN"><code class="docutils literal notranslate"><span class="pre">SPAN</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.SUB"><code class="docutils literal notranslate"><span class="pre">SUB</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.SUP"><code class="docutils literal notranslate"><span class="pre">SUP</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.TAG"><code class="docutils literal notranslate"><span class="pre">TAG</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.TAG.compile"><code class="docutils literal notranslate"><span class="pre">TAG.compile()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.TAG.get_id"><code class="docutils literal notranslate"><span class="pre">TAG.get_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.TITLE"><code class="docutils literal notranslate"><span class="pre">TITLE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.U"><code class="docutils literal notranslate"><span class="pre">U</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.tag.html#zen_dash.tag.UL"><code class="docutils literal notranslate"><span class="pre">UL</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="zen_dash.websocket.html">zen_dash.websocket package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="zen_dash.websocket.html#module-zen_dash.websocket">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zen_dash.websocket.html#module-zen_dash.websocket">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.websocket.html#zen_dash.websocket.run_func"><code class="docutils literal notranslate"><span class="pre">run_func()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.websocket.html#zen_dash.websocket.run_websocket_data"><code class="docutils literal notranslate"><span class="pre">run_websocket_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="zen_dash.websocket.html#zen_dash.websocket.send_data"><code class="docutils literal notranslate"><span class="pre">send_data()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

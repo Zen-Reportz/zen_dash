@@ -15,6 +15,7 @@
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -25,11 +26,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> zen-dash
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            zen-dash
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -53,10 +58,10 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-          <li><a href="../objects.html">zen_dash.objects</a> &raquo;</li>
-      <li>zen_dash.objects.instances</li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../objects.html">zen_dash.objects</a></li>
+      <li class="breadcrumb-item active">zen_dash.objects.instances</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -79,7 +84,7 @@
 <span class="n">BaseConfig</span><span class="o">.</span><span class="n">arbitrary_types_allowed</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># change #1</span>
 
 <div class="viewcode-block" id="InstanceType"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.InstanceType">[docs]</a><span class="k">class</span> <span class="nc">InstanceType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Docstring for class InstanceType</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Docstring for class InstanceType</span>
 <span class="sd">    Instance Type required for ReturnData</span>
 
 <span class="sd">    :return: Instance Type for Enum</span>
@@ -354,7 +359,7 @@
       <span class="n">key</span><span class="p">:</span> <span class="nb">str</span></div>
 
 <div class="viewcode-block" id="ReturnData"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.ReturnData">[docs]</a><span class="k">class</span> <span class="nc">ReturnData</span><span class="p">(</span><span class="n">BaseUpdate</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main return object use for everything except /backend/page_detail, /backend/sidebar, and /backend/title</span>
 <span class="sd">    depdning upon which type (InstanceType) you select, you have to select corsponding return value </span>
 
@@ -482,7 +487,7 @@
 
 <div class="viewcode-block" id="UpdateInstanceType"><a class="viewcode-back" href="../../../zen_dash.objects.html#zen_dash.objects.instances.UpdateInstanceType">[docs]</a><span class="nd">@unique</span>
 <span class="k">class</span> <span class="nc">UpdateInstanceType</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Docstring for class UpdateInstanceType</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Docstring for class UpdateInstanceType</span>
 <span class="sd">    Instance Type required for UpdateReturnData</span>
 
 <span class="sd">    :return: Update Instance Type for Enum</span>
