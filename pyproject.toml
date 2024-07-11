@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "zen_dash"
-version = "0.6.26"
+version = "0.6.27"
 license = "MIT"
 description = "Simple yet scable and production ready python dashboard that is better than shiny application for business."
 readme = "README.md"
@@ -18,7 +18,7 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.12"
 Jinja2 = "^3.1.1"
 sphinx-rtd-theme = "^1.0.0"
 python-multipart = "^0.0.5"

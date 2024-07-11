@@ -34,17 +34,13 @@ export class ButtonComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public _dialog: MatDialog,
     public api_call_service: ApiCallService,
-    private fileSaverService: FileSaverService,
-
+    private fileSaverService: FileSaverService
   ) {}
 
   reactiveity(type: string, value: string = '') {
     let m = new MEData();
     m.page = this.ds.dataLookup(false);
-    m.key =
-      (this.data.name as string) +
-      '_' +
-      type;
+    m.key = (this.data.name as string) + '_' + type;
 
     if (value === '') {
       m.value = this.ds.makeid(2);
@@ -72,10 +68,9 @@ export class ButtonComponent implements OnInit {
     });
   }
 
-  get_type(){
-    return this.data.button_type
+  get_type() {
+    return this.data.button_type;
   }
-
 
   get_color() {
     return this.data.color;
@@ -89,14 +84,13 @@ export class ButtonComponent implements OnInit {
     return this.data?.icon;
   }
 
-
   getFileName(disposition: string): any {
     let utf8FilenameRegex = /filename\*=UTF-8''([\w%\-\.]+)(?:; ?|$)/i;
     let asciiFilenameRegex = /^filename=(["']?)(.*?[^\\])\1(?:; ?|$)/i;
 
     let fileName: any = null;
     if (utf8FilenameRegex.test(disposition)) {
-      let p = utf8FilenameRegex.exec(disposition) as any
+      let p = utf8FilenameRegex.exec(disposition) as any;
       fileName = decodeURIComponent(p[1]);
     } else {
       // prevent ReDos attacks by anchoring the ascii regex to string start and
@@ -104,33 +98,34 @@ export class ButtonComponent implements OnInit {
       const filenameStart = disposition.toLowerCase().indexOf('filename=');
       if (filenameStart >= 0) {
         const partialDisposition = disposition.slice(filenameStart);
-        const matches = asciiFilenameRegex.exec(partialDisposition );
+        const matches = asciiFilenameRegex.exec(partialDisposition);
         if (matches != null && matches[2]) {
           fileName = matches[2];
         }
       }
     }
     return fileName;
-}
-
+  }
 
   trigger() {
     this.reactiveity('triggered');
-    this.show = true
+    this.show = true;
 
     if (this.downloadCall !== undefined) {
       this.downloadCall.unsubscribe();
     }
 
-    if (this.data.download){
-      this.download_data()
-      return
+    if (this.data.download) {
+      this.download_data();
+      return;
     }
 
     if (this.data.redirect) {
       // console.log(this.data.url)
       window.open(this.data.url, this.data.target_attribute);
-      return
+      this.show = false;
+
+      return;
     } else {
       if (this.second_call !== undefined) {
         this.second_call.unsubscribe();
@@ -143,7 +138,7 @@ export class ButtonComponent implements OnInit {
       ''
     );
     this.second_call = p.subscribe(
-      (res) => {
+      (res: any) => {
         try {
           var tt = res as UpdateReturnData;
           if (tt.button_data !== undefined) {
@@ -156,7 +151,6 @@ export class ButtonComponent implements OnInit {
           });
           this.show = false;
 
-
           if (tt.display_dialog !== undefined) {
             this.open_dialog(tt);
           }
@@ -165,7 +159,6 @@ export class ButtonComponent implements OnInit {
             this.api_call_service.saveUIData(tt.ui_data);
           }
           this.reactiveity('success');
-
 
           if (tt.button_data !== undefined) {
             if (tt.button_data.redirect) {
@@ -180,7 +173,7 @@ export class ButtonComponent implements OnInit {
           });
         }
       },
-      (error) => {
+      (error: any) => {
         this.show = false;
         this.reactiveity('failed');
         this._snackBar.openFromComponent(LoadingComponent, {
@@ -191,31 +184,38 @@ export class ButtonComponent implements OnInit {
     );
   }
 
-  download_data(){
-
-    let p = this.callService.call_response(this.data?.url as string, {
-      responseType: 'blob',
-      observe: 'response',
-    }, undefined) as Observable<HttpResponse<Blob>>;
+  download_data() {
+    let p = this.callService.call_response(
+      this.data?.url as string,
+      {
+        responseType: 'blob',
+        observe: 'response',
+      },
+      undefined
+    ) as Observable<HttpResponse<Blob>>;
 
     let m = new MEData();
 
-    this.downloadCall = p.subscribe((res) => {
-      this.reactiveity('download', "success");
-      this.ds.data_setter.emit(m);
-      let contentDisposition = res.headers.get('content-disposition') as string
-      let filename = this.getFileName(contentDisposition)
-      this.fileSaverService.save(res.body, filename);
-      this.show = false
-    }, (error) => {
-      this.reactiveity('download', "failed");
-      this.show = false
-      this.ds.data_setter.emit(m);
-      this._snackBar.openFromComponent(LoadingComponent, {
-        duration: 5 * 1000,
-        data: { message: 'Failed download', status: 'error' },
-
-      });
-    });
+    this.downloadCall = p.subscribe(
+      (res: any) => {
+        this.reactiveity('download', 'success');
+        this.ds.data_setter.emit(m);
+        let contentDisposition = res.headers.get(
+          'content-disposition'
+        ) as string;
+        let filename = this.getFileName(contentDisposition);
+        this.fileSaverService.save(res.body, filename);
+        this.show = false;
+      },
+      (error: any) => {
+        this.reactiveity('download', 'failed');
+        this.show = false;
+        this.ds.data_setter.emit(m);
+        this._snackBar.openFromComponent(LoadingComponent, {
+          duration: 5 * 1000,
+          data: { message: 'Failed download', status: 'error' },
+        });
+      }
+    );
   }
 }
